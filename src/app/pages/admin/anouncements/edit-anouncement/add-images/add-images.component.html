@@ -1,0 +1,51 @@
+<main>
+    <div class="o-images">
+        @for(oImage of oImages;track $index; let i = $index){
+        <div class="o-image">
+            <img [src]="oImage.imagePath"
+                alt="">
+            <section class="bottom">
+
+                <div class="buttons">
+
+                    <button mat-icon-button
+                        class="delete"
+                        (click)="onDelete(oImage)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+                <div class="photographer">
+                    <div class="photographerName">&copy;{{oImage.photographerName}}</div>
+                    <button mat-icon-button
+                        class="edit"
+                        (click)="onEditPhotographerName(i)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
+            </section>
+        </div>
+        }
+    </div>
+    <form [formGroup]="oImageForm">
+        <mat-form-field>
+            <mat-label>name photographer</mat-label>
+            <input type="text"
+                matInput
+                formControlName="photographerName">
+        </mat-form-field>
+        <input type="file"
+            style="display: none;"
+            #fileInput
+            (change)="onFileInputChange($event)">
+        <div class="buttons">
+            @if(updatingPhotographerName) {
+            <button mat-raised-button
+                (click)="onUpdatePhotographerName()">update photographer name</button>
+            }
+            <button mat-raised-button
+                (click)="fileInput.click()">select image</button>
+            <button mat-raised-button
+                (click)="onCancel()">cancel</button>
+        </div>
+    </form>
+</main>

@@ -1,0 +1,12 @@
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+
+    .bands {
+        .band {
+            border: 1px solid var(--o-black);
+            padding: 1rem;
+        }
+    }
+}

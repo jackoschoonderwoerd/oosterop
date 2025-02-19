@@ -1,0 +1,110 @@
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Musician } from '../../../../../shared/models/musician.model';
+import { FirestoreService } from '../../../../../services/firestore.service';
+import { take } from 'rxjs';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MusicianSelectorComponent } from '../../../../../shared/musician-selector/musician-selector.component';
+import { FirebaseError } from '@angular/fire/app';
+import { SnackbarService } from '../../../../../services/snackbar.service';
+import { MusicianComponent } from '../../../../../shared/musician/musician.component';
+import { OImage } from '../../../../../shared/models/o_image.model';
+
+@Component({
+    selector: 'app-band-members',
+    imports: [MatMenuModule, MatButtonModule, MatIconModule, MusicianSelectorComponent, MusicianComponent],
+    templateUrl: './band-members.component.html',
+    styleUrl: './band-members.component.scss'
+})
+export class BandMembersComponent implements OnInit {
+    route = inject(ActivatedRoute);
+    fs = inject(FirestoreService)
+    bandId: string;
+    bandMemberIds: string[] = [];
+
+    router = inject(Router);
+    sb = inject(SnackbarService);
+    bandMembers: Musician[] = [];
+    oImages: OImage[] = []
+
+    ngOnInit(): void {
+        this.bandId = this.route.snapshot.paramMap.get('bandId')
+        const path = `bands/${this.bandId}`
+        this.fs.getFieldInDocument(path, 'bandMemberIds')
+            .then((bandMemberIds: string[]) => {
+                this.bandMemberIds = bandMemberIds;
+                this.getBandMembers()
+                console.log(this.bandMemberIds)
+            })
+        // this.getMusicians()
+        //     .pipe(take(1))
+        //     .subscribe((musicians: Musician[]) => {
+        //         this.musicians = musicians
+        //     })
+    }
+
+    getBandMembers() {
+        this.bandMemberIds.forEach((id: string) => {
+            const path = `musicians/${id}`
+            this.fs.getDoc(path)
+                .pipe(take(1))
+                .subscribe((bandMember: Musician) => {
+                    this.bandMembers.push(bandMember)
+                })
+        })
+    }
+
+    musicianIdSelected(musicianId: string) {
+        console.log(musicianId)
+        const path = `bands/${this.bandId}`
+        this.fs.addElementToArray(path, 'bandMemberIds', musicianId)
+            .then((res: any) => {
+                console.log(res)
+                this.getBandMemberIds()
+                    .then((bandmemberIds: string[]) => {
+                        this.bandMemberIds = bandmemberIds
+                        this.bandMembers = [];
+                        this.getBandMembers();
+                    })
+            })
+
+            .catch((err: FirebaseError) => {
+                console.log(err);
+                this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+            })
+
+    }
+    getBandMemberIds() {
+        const path = `bands/${this.bandId}`
+        return this.fs.getFieldInDocument(path, 'bandMemberIds')
+
+    }
+
+    removeBandMember(memberId: string) {
+        console.log(memberId)
+        const path = `bands/${this.bandId}`
+        this.fs.removeElementFromArray(path, 'bandMemberIds', memberId)
+            .then((res: any) => {
+                console.log(res)
+                this.bandMembers = [];
+                this.getBandMemberIds()
+                    .then((bandMemberIds: string[]) => {
+                        this.bandMemberIds = bandMemberIds
+                        this.getBandMembers();
+
+                    })
+            })
+            .catch((err: FirebaseError) => {
+                console.log(err);
+                this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+            })
+
+    }
+
+
+    onCancel() {
+        this.router.navigate(['band', { bandId: this.bandId }])
+    }
+}

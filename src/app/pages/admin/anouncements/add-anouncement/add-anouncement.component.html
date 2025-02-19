@@ -1,0 +1,40 @@
+<main>
+    <div class="new-anouncement">
+        <div class="header"></div>
+        <form [formGroup]="primaryDataForm">
+            <mat-form-field>
+                <mat-label>id</mat-label>
+                <input type="text"
+                    matInput
+                    formControlName="id">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>title</mat-label>
+                <input type="text"
+                    matInput
+                    formControlName="header"
+                    required="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>sequential number</mat-label>
+                <input type="number"
+                    matInput
+                    formControlName="seqNr"
+                    required="true">
+            </mat-form-field>
+            <mat-checkbox matInput
+                formControlName="visible">visible to the public</mat-checkbox>
+            <div class="buttons">
+                <button mat-raised-button
+                    [disabled]="primaryDataForm.invalid"
+                    (click)="onAddOrUpdatePrimaryData()">{{!editmode?'add':'update'}}&nbsp;anouncement</button>
+                <button mat-raised-button
+                    (click)="onCancel()">cancel</button>
+            </div>
+        </form>
+
+    </div>
+
+
+
+</main>

@@ -1,0 +1,6 @@
+<input type="file"
+    #fileInput
+    style="display: none;"
+    (change)="onFileInputChange($event)">
+<button mat-raised-button
+    (click)="fileInput.click()">select image</button>

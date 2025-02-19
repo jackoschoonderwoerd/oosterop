@@ -1,0 +1,12 @@
+.musician {
+    padding: 0.2rem;
+    border-bottom: 1px solid var(--o-black);
+    .name {
+        font-weight: bold;
+        .instruments {
+            .instrument {
+                font-style: italic;
+            }
+        }
+    }
+}

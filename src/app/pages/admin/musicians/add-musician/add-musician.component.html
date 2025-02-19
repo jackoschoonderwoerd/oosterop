@@ -1,0 +1,34 @@
+<main>
+    <form [formGroup]="musiciansForm">
+        <mat-form-field>
+            <mat-label>name</mat-label>
+            <input type="text"
+                matInput
+                formControlName="name">
+        </mat-form-field>
+        <div class="instruments"
+            formArrayName="instruments">
+            @for(instrumentsControl of musiciansForm.get('instruments')?.controls;track instrumentsControl; let i = $index) {
+            <div class="instrument">
+                <mat-form-field>
+                    <mat-label>instrument</mat-label>
+                    <input type="text"
+                        matInput
+                        [formControlName]="i">
+                </mat-form-field>
+                <mat-icon (click)="onRemoveInstrument(i)">delete</mat-icon>
+            </div>
+
+            }
+            <button color="warn"
+                mat-raised-button
+                type="button"
+                (click)="onAddInstrument()">add instrument
+            </button>
+
+        </div>
+    </form>
+    <button mat-raised-button
+        [disabled]="musiciansForm.invalid"
+        (click)="onAddMusician()">{{!editmode ? 'add musician': 'update musician'}}</button>
+</main>

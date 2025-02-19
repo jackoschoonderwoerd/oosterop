@@ -1,0 +1,12 @@
+mat-sidenav-container {
+    mat-sidenav {
+        background-color: var(--o-red);
+    }
+    mat-sidenav-content {
+        main {
+            .router-container {
+                padding: 1rem;
+            }
+        }
+    }
+}

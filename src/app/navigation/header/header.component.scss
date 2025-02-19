@@ -1,0 +1,40 @@
+mat-toolbar {
+    background-color: var(--o-red);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    .left {
+        .list-item-menu {
+            display: flex;
+            @media (min-width: 900px) {
+                display: none;
+            }
+        }
+        .list-item-home {
+            display: flex;
+            @media (max-width: 899px) {
+                display: none;
+            }
+        }
+    }
+    .right {
+        display: flex;
+        gap: 1rem;
+        .visitor-menu-items {
+            display: flex;
+            gap: 1rem;
+            a {
+                color: var(--o-black);
+            }
+        }
+        .admin-menu-items {
+            display: flex;
+            gap: 1rem;
+            a {
+                color: var(--o-white);
+            }
+        }
+        .login {
+        }
+    }
+}

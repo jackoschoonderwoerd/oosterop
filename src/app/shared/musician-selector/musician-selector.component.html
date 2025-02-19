@@ -1,0 +1,14 @@
+<button mat-button
+    mat-raised-button
+    color="primary"
+    [matMenuTriggerFor]="menu">add&nbsp;{{musicianType ? musicianType: ' musician'}} </button>
+<!-- <button mat-raised-button
+        color="primary"
+        (click)="onCancel()">cancel</button> -->
+
+<mat-menu #menu="matMenu">
+    @for(musician of musicians; track musician.id){
+    <button (click)="onMusicianIdSelected(musician.id)"
+        mat-menu-item>{{musician.name}}</button>
+    }
+</mat-menu>

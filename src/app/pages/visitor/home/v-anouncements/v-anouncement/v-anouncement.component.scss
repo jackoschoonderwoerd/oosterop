@@ -1,0 +1,42 @@
+main {
+    border: 1px solid red;
+    padding: 1rem;
+    .header {
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+    .body {
+    }
+    .o-images {
+        .o-image {
+            img {
+                width: 100%;
+            }
+        }
+    }
+    .participants {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        .participant {
+            .name {
+                font-weight: bold;
+                text-transform: capitalize;
+            }
+            .instruments {
+                display: flex;
+                flex-direction: column;
+                .instrument {
+                    font-style: italic;
+                }
+            }
+        }
+    }
+    .reviews {
+        .review {
+            .body {
+                font-style: italic;
+            }
+        }
+    }
+}

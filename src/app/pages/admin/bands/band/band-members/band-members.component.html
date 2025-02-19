@@ -1,0 +1,26 @@
+<main>
+    <div class="left">
+        <button mat-raised-button
+            color="primary"
+            (click)="onCancel()">cancel</button>
+        <app-musician-selector [musicianType]="'band member'"
+            (musicianIdSelected)="musicianIdSelected($event)"></app-musician-selector>
+    </div>
+
+    <div class="band-members">
+        @for(member of bandMembers; track member.id) {
+        <app-musician [musician]="member"
+            (removeMusician)="removeBandMember($event)"
+            [editmode]="true"></app-musician>
+        }
+    </div>
+    <div class="band-images">
+        @for(oImage of oImages; track oImage.filename) {
+        <div class="o-image">
+            <img [src]="oImage.filePath"
+                alt="">
+            <div class="photographer">{{oImage.photographerName}}</div>
+        </div>
+        }
+    </div>
+</main>

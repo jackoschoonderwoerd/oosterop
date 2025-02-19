@@ -1,0 +1,39 @@
+<mat-toolbar>
+    <ul class="left">
+        <li class="list-item-menu">
+            <mat-icon (click)="onToggleSidenav()">menu</mat-icon>
+        </li>
+        <li routerLink="home"
+            class="list-item-home">
+            <mat-icon>home</mat-icon>
+        </li>
+    </ul>
+    <div class="right">
+        {{authStore.isLoggedIn()}}
+        <ul class="visitor-menu-items">
+            @for(menuItem of visitorMenuItems;track menuItem) {
+            <li class="menuItem"><a [routerLink]="menuItem">{{menuItem}}</a></li>
+            }
+        </ul>
+        <ul class="admin-menu-items">
+            @for(menuItem of adminMenuItems; track menuItem) {
+            <li class="menuItem"><a [routerLink]="menuItem">{{menuItem}}</a></li>
+            }
+        </ul>
+
+        <ul class="login">
+            @if(!authStore.isLoggedIn()) {
+            <li routerLink="login"
+                class="list-item-home">
+                <mat-icon>login</mat-icon>
+            </li>
+            }
+            @if(authStore.isLoggedIn()) {
+            <li (click)="onLogout()"
+                class="list-item-home">
+                <mat-icon>logout</mat-icon>
+            </li>
+            }
+        </ul>
+    </div>
+</mat-toolbar>

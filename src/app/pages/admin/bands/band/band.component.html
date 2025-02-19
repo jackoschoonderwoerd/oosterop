@@ -1,0 +1,42 @@
+<main>
+    <div class="primary band-property">
+        <div class="seq-nr">{{band?.seqNr}}</div>
+        <div class="name">{{band?.name}}</div>
+        <button mat-raised-button
+            class="primary-btn"
+            (click)="onPrimary()">primary
+        </button>
+    </div>
+    <div class="band-members band-property">
+        <!-- @for(member of band?.bandMemberIds;track member) {
+        <div class="member">
+            <div class="member-name">{{member.name}}</div>
+            <div class="instruments">
+                @for(instrument of member.instruments; track instrument) {
+                <div class="instrument">{{instrument}}</div>
+                }
+            </div>
+        </div>
+        } -->
+        <button class="band-members-btn"
+            mat-raised-button
+            (click)="onBandMembers()">band members</button>
+    </div>
+    <div class="o-images band-property">
+        <button mat-raised-button
+            (click)="onOImages()">images</button>
+    </div>
+    <button class="cancel"
+        mat-raised-button
+        (click)="onCancel()">cancel</button>
+
+    <!-- <div class="buttons band-property">
+        <button mat-raised-button
+            class="primary-btn"
+            (click)="onPrimary()">primary
+        </button>
+        <button class="band-members-btn"
+            mat-raised-button
+            (click)="onBandMembers()">band members</button>
+    </div> -->
+</main>

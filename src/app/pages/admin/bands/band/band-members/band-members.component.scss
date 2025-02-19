@@ -1,0 +1,16 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    .left {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .band-members {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+        gap: 1rem;
+    }
+}

@@ -1,0 +1,30 @@
+<main>
+    <div class="bands">
+
+
+
+        @for(band of bands; track band.id){
+        <div class="band">
+            <div class="name">{{band.name}}</div>
+            <div class="id">{{band.id}}</div>
+            <div class="seq-nr">{{band.seqNr}}</div>
+            <div class="buttons">
+                <button mat-icon-button
+                    class="edit"
+                    (click)="onEdit(band.id)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button
+                    class="delete"
+                    (click)="onDelete(band.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+        }
+
+
+    </div>
+    <button mat-raised-button
+        (click)="onAddBand()">add band</button>
+</main>

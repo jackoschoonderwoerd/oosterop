@@ -1,0 +1,20 @@
+<form [formGroup]="bandForm">
+    <mat-form-field>
+        <mat-label>sequential number</mat-label>
+        <input type="number"
+            formControlName="seqNr"
+            matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>band name</mat-label>
+        <input type="text"
+            matInput
+            formControlName="name">
+    </mat-form-field>
+    <div class="buttons">
+        <button mat-raised-button
+            (click)="onAddOrUpdateBand()">{{!editmode ? 'add':'update'}}&nbsp;band</button>
+        <button mat-raised-button
+            (click)="onCancel()">cancel</button>
+    </div>
+</form>

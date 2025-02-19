@@ -1,0 +1,18 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .image {
+    }
+    form {
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+}

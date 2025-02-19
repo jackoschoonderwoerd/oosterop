@@ -1,0 +1,22 @@
+<main>
+    <div class="image">
+        <img [src]="oImage?.imagePath"
+            alt="">
+        <div class="photgrapher-name">{{oImage?.photographerName}}</div>
+    </div>
+    <form [formGroup]="oImageForm">
+        <mat-form-field>
+            <mat-label>photographer name</mat-label>
+            <input type="text"
+                matInput
+                formControlName="photographerName">
+        </mat-form-field>
+        <div class="buttons">
+            <button mat-raised-button
+                (click)="onUpdateOImage()">update image</button>
+            <button class="cancel"
+                (click)="onCancel()"
+                mat-raised-button>cancel</button>
+        </div>
+    </form>
+</main>

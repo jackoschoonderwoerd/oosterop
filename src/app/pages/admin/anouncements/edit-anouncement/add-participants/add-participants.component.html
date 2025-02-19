@@ -1,0 +1,28 @@
+<main>
+    <div class="buttons">
+        <app-musician-selector [musicianType]="'participant'"
+            (musicianIdSelected)="musicianIdSelected($event)"></app-musician-selector>
+        <button mat-raised-button
+            color="primary"
+            (click)="onCancel()">cancel
+        </button>
+    </div>
+
+
+    <div class="participants">
+        @for(participant of participants;track participant.id;let index = $index) {
+        <div class="participant">
+            <div class="participant-details">
+                <div class="name">{{participant.name}}</div>
+                <div class="instruments">
+                    @for(instrument of participant.instruments;track instrument) {
+                    <div class="instrument">{{instrument}}</div>
+                    }
+                </div>
+            </div>
+            <mat-icon (click)="removeParticipant(participant.id, index)">delete</mat-icon>
+        </div>
+        }
+    </div>
+
+</main>

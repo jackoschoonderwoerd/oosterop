@@ -1,0 +1,75 @@
+<main>
+    <div class="reviews">
+
+        <!-- @if(reviews && reviews.length > 0){ -->
+
+        @for(review of reviews; track review; let index = $index){
+        <div class="review">
+            <!-- {{review|json}} -->
+            <div class="review-properties">
+                {{review.datePublished.seconds}}
+                <div class="published-by"><span>published by:&nbsp;</span>{{review.publishedBy}}</div>
+                <div class="author">author:&nbsp;{{review.author}}</div>
+                @if(review.datePublished.seconds > 0) {
+                <div class="seconds"><span>date:&nbsp;</span>{{review.datePublished.seconds*1000|date}}</div>
+                <!-- <div class="date"><span>date published:&nbsp;</span>{{review.datePublished.seconds*1000|date}}</div> -->
+                }
+                <div class="body"
+                    [innerHTML]="review.body"></div>
+            </div>
+            <div class="review-buttons">
+                <button mat-mini-fab
+                    (click)="onEdit(review, index)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-mini-fab
+                    (click)="onDelete(review, index)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+        }
+
+    </div>
+    <div class="selected-review">
+
+        <form [formGroup]="reviewForm">
+            <mat-form-field>
+                <mat-label>published by</mat-label>
+                <input type="text"
+                    matInput
+                    formControlName="publishedBy">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>author</mat-label>
+                <input type="text"
+                    matInput
+                    formControlName="author">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>date published</mat-label>
+                <input matInput
+                    [matDatepicker]="picker"
+                    formControlName="datePublished">
+                <mat-datepicker-toggle matIconSuffix
+                    [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+        </form>
+
+
+        <div class="editor-container">
+            <app-quill-text-editor (htmlChanged)="htmlChanged($event)"
+                [initialHtml]="initialValue"></app-quill-text-editor>
+        </div>
+        <div class="buttons">
+            <button mat-raised-button
+                class="add"
+                (click)="onAddReview()">{{editmode ? 'update':'add'}}&nbsp;review</button>
+            <button mat-raised-button
+                class="cancel"
+                (click)="onCancel()">cancel</button>
+        </div>
+    </div>
+</main>

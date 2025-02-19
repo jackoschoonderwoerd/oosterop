@@ -1,0 +1,63 @@
+<main>
+    <div class="header-container">
+        <div class="header">{{anouncement?.header}}</div>
+        <button mat-raised-button
+            (click)="onPrimary()">primary</button>
+    </div>
+    <div class="body-container">
+        <div class="body"
+            [innerHTML]="anouncement?.body">
+        </div>
+        <button mat-raised-button
+            (click)="onBody()">body</button>
+
+    </div>
+    <div class="o-images">
+        @for(oImage of anouncement?.oImages; track oImage){
+        <div class="o-image">
+            <img [src]="oImage.imagePath"
+                alt="">
+            <div class="photographer-name">{{oImage.photographerName}}</div>
+        </div>
+        }
+        <button mat-raised-button
+            (click)="onImages()">images</button>
+    </div>
+    <div class="participants">
+        @for(participant of participants; track participant) {
+        <app-musician [musician]="participant"></app-musician>
+        <!-- <div class="participant">
+            <div class="name">{{participant.name}}</div>
+        </div> -->
+        }
+        <button mat-raised-button
+            (click)="onParticipants()">participants</button>
+    </div>
+    <div class="reviews">
+        @for(review of anouncement?.reviews; track review) {
+        <div class="review">
+            <div class="body"
+                [innerHTML]="review.body"></div>
+            <div class="author">{{review.author}}</div>
+            <div class="published-by">{{review.publishedBy}}</div>
+        </div>
+        }
+        <button mat-raised-button
+            (click)="onReviews()">reviews</button>
+    </div>
+    <div class="buttons">
+        <button mat-raised-button
+            (click)="onPrimary()">primary</button>
+        <button mat-raised-button
+            (click)="onBody()">body</button>
+        <button mat-raised-button
+            (click)="onParticipants()">participants</button>
+        <button mat-raised-button
+            (click)="onReviews()">reviews</button>
+        <button mat-raised-button
+            (click)="onImages()">images</button>
+        <button class="cancel"
+            mat-raised-button
+            (click)="onCancel()">back to anouncements</button>
+    </div>
+</main>

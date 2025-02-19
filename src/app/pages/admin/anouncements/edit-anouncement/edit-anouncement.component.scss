@@ -1,0 +1,50 @@
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 1rem;
+
+    .header-container,
+    .body-container,
+    .o-images,
+    .participants,
+    .reviews,
+    .buttons {
+        border: 1px solid var(--o-black);
+        padding: 1rem;
+        align-self: self-start;
+    }
+
+    .header-container {
+    }
+    .body-container {
+    }
+    .o-images {
+        .o-image {
+            img {
+                width: 100%;
+            }
+        }
+    }
+    .participants {
+        display: flex;
+        flex-direction: column;
+    }
+    .reviews {
+    }
+    .buttons {
+        display: flex;
+        flex-direction: column;
+
+        button {
+            border: 3px solid var(--o-red);
+        }
+        .cancel {
+            background-color: var(--o-red);
+            color: var(--o-white);
+        }
+    }
+}
+button {
+    margin-top: 1rem;
+    border: 3px solid var(--o-red);
+}

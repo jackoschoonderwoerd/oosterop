@@ -1,0 +1,30 @@
+<main>
+    <!-- <app-add-musician></app-add-musician> -->
+    <div class="musicians">
+        @for(musician of musicians; track musician.id) {
+        <div class="musician">
+            <div class="musician-details">
+                <div class="name">{{musician.name}}</div>
+                <div class="instruments">
+
+                    @for(instrument of musician.instruments; track instrument) {
+                    <div class="instrument">{{instrument}}</div>
+                    }
+                </div>
+            </div>
+            <div class="buttons">
+                <button mat-mini-fab
+                    (click)="onEdit(musician.id)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-mini-fab
+                    (click)="onDelete(musician.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+        }
+        <button mat-raised-button
+            (click)="onAddMusician()">add musician</button>
+    </div>
+</main>

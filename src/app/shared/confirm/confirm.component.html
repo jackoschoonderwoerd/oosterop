@@ -1,0 +1,18 @@
+<div mat-dialog-title
+    class="title">Confirm</div>
+
+<mat-dialog-content>
+    <p>You are about to delete</p>
+    <p>
+        <!-- {{data|json}} -->
+        <strong>{{data.doomedElement}}</strong>
+    </p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button
+        [mat-dialog-close]="true">confirm</button>
+    <button mat-raised-button
+        [mat-dialog-close]="false">abort</button>
+
+</mat-dialog-actions>

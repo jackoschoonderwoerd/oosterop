@@ -1,0 +1,18 @@
+<main>
+
+    <!-- <app-text-editor (htmlChanged)="htmlChanged($event)"></app-text-editor> -->
+    <app-quill-text-editor (htmlChanged)="htmlChanged($event)"
+        [initialHtml]="body"></app-quill-text-editor>
+    <!-- <div class="preview"
+        [innerHTML]="body">
+
+    </div> -->
+    <h3 class="header">app-quill-text-editor</h3>
+    <div class="buttons">
+
+        <button mat-raised-button
+            (click)="onUpdateBody()">{{!editmode ? 'add':'update'}}&nbsp;body</button>
+        <button mat-raised-button
+            (click)="onCancel()">cancel</button>
+    </div>
+</main>
