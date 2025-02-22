@@ -1,4 +1,5 @@
 <mat-toolbar>
+    <!-- {{bands$|async}} -->
     <ul class="left">
         <li class="list-item-menu">
             <mat-icon (click)="onToggleSidenav()">menu</mat-icon>
@@ -9,6 +10,31 @@
         </li>
     </ul>
     <div class="right">
+
+        <button mat-button
+            [matMenuTriggerFor]="bandsMenu">bands</button>
+        <mat-menu #bandsMenu="matMenu">
+            @for(band of bands$|async; track band.id){
+            @if(band.visible) {
+
+            <button mat-menu-item
+                (click)="onBandSelected(band.id)">{{band.name}}</button>
+            }
+            }
+        </mat-menu>
+
+        <button mat-button
+            [matMenuTriggerFor]="anouncementsMenu">anouncements</button>
+        <mat-menu #anouncementsMenu="matMenu">
+            @for(anouncement of anouncements$|async; track anouncement.id){
+            @if(anouncement.visible) {
+
+            <button mat-menu-item
+                (click)="onAnouncementSelected(anouncement.id)">{{anouncement.header}}</button>
+            }
+            }
+        </mat-menu>
+
         {{authStore.isLoggedIn()}}
         <ul class="visitor-menu-items">
             @for(menuItem of visitorMenuItems;track menuItem) {
@@ -20,6 +46,7 @@
             <li class="menuItem"><a [routerLink]="menuItem">{{menuItem}}</a></li>
             }
         </ul>
+
 
         <ul class="login">
             @if(!authStore.isLoggedIn()) {

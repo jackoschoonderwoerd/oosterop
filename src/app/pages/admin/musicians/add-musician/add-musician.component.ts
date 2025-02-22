@@ -53,7 +53,7 @@ export class AddMusicianComponent implements OnInit {
 
     initForm() {
         this.musiciansForm = this.fb.group({
-            name: new FormControl('jacko', [Validators.required]),
+            name: new FormControl(null, [Validators.required]),
             instruments: new FormArray([])
         })
     }

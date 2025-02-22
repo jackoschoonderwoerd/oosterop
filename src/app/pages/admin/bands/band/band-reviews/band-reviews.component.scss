@@ -1,0 +1,37 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1rem;
+    .reviews {
+        .review {
+            border: 1px solid var(--o-black);
+            padding: 1rem;
+            .published-by {
+            }
+            .date-published {
+            }
+            .author {
+            }
+            .body {
+                max-height: 100px;
+                overflow-y: scroll;
+            }
+            .buttons {
+                display: flex;
+                justify-content: end;
+            }
+        }
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            button {
+                border: 3px solid var(--o-red);
+            }
+        }
+    }
+}

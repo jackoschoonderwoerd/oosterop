@@ -1,0 +1,68 @@
+<main>
+    <div class="band">
+
+        <div class="name">{{band?.name}}</div>
+
+        <div class="musicians_images">
+            <div class="images">
+                @for(oImage of band?.oImages; track oImage) {
+                <div class="image">
+                    <img [src]="oImage.imagePath"
+                        alt="">
+                </div>
+                <div class="photographer-name">&copy;{{oImage.photographerName}}</div>
+                }
+            </div>
+            <div class="musicians">
+                @for(musician of musicians;track musician) {
+                <div class="musician">
+
+                    <div class="musician-name">{{musician.name}}</div>
+                    <div class="instruments">
+                        @for(instrument of musician.instruments; track instrument) {
+                        <div class="instrument">{{instrument}}</div>
+                        }
+                    </div>
+                </div>
+
+                }
+            </div>
+        </div>
+        <div class="body"
+            [innerHTML]="band?.body"></div>
+        <div class="links">
+            @for(link of band?.links; track link) {
+            <div class="link">
+                <a target="_blank"
+                    [href]="link.url">{{link.title}}</a>
+            </div>
+            }
+        </div>
+        <div class="reviews">
+            <div class="header">reviews</div>
+            @for(review of band?.reviews;track review){
+            <div class="review">
+                <div class="review-body"
+                    [innerHTML]="review.body"></div>
+                <div class="published-by">{{review.publishedBy}}</div>
+                <div class="author">{{review.author}}</div>
+
+            </div>
+            }
+        </div>
+        <div class="recordings">
+            <div class="header">discography</div>
+            @for(recording of band?.recordings; track recording) {
+            <div class="recording">
+
+                <div class="year">{{recording.year}}</div>
+                <div class="title_label">
+                    <div class="title">{{recording.title}}</div>
+                    <div class="label">{{recording.label}}</div>
+                </div>
+
+            </div>
+            }
+        </div>
+    </div>
+</main>

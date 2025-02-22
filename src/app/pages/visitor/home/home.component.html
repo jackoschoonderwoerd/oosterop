@@ -1,6 +1,37 @@
 <main>
+    <div class="header">
+        <div class="title"> Danielle oosterop</div>
+        <div class="sub-title">music management</div>
+    </div>
 
-    <app-v-anouncements>
+    <!-- <mat-toolbar>
+        <ul>
+            <li> <button mat-button>home</button> </li>
+            <li> <button mat-button>anouncements</button> </li>
+            <li> <button mat-button
+                    [matMenuTriggerFor]="bands">bands</button>
+                <mat-menu #bands="matMenu">
+                    @for(band of bands$|async;track band.id){
+                    <button mat-menu-item
+                        (click)="onBandSelected(band.id)">{{band.name}}</button>
+                    }
+                </mat-menu>
+            </li>
+            <li> <button mat-button>tour periods</button> </li>
+            <li> <button mat-button>contact</button> </li>
+            @if(!authStore.isLoggedIn()){
+            <li>
+                <button mat-icon-button
+                    (click)="onLogin()">
+                    <mat-icon>login</mat-icon>
+                </button>
 
-    </app-v-anouncements>
+            </li>
+            }
+        </ul>
+    </mat-toolbar> -->
+    <!-- <router-outlet></router-outlet> -->
+    <!-- <app-v-anouncements>
+
+    </app-v-anouncements> -->
 </main>

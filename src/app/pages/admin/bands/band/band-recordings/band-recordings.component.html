@@ -1,0 +1,50 @@
+<main>
+    <div class="recordings">
+        @for( recording of recordings; track recording.title; let index = $index){
+        <div class="recording">
+            <div class="title">{{recording.title}}</div>
+            <div class="year">{{recording.year}}</div>
+            <div class="label">{{recording.label}}</div>
+            <div class="recording-buttons">
+                <button class="edit"
+                    mat-icon-button
+                    (click)="onEdit(index)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button class="delete"
+                    mat-icon-button
+                    (click)="onDelete(index)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+        }
+    </div>
+    <form [formGroup]="recordingForm">
+        <mat-form-field>
+            <mat-label>title</mat-label>
+            <input type="text"
+                matInput
+                formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>year</mat-label>
+            <input type="text"
+                matInput
+                formControlName="year">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>title</mat-label>
+            <input type="text"
+                matInput
+                formControlName="label">
+        </mat-form-field>
+        <div class="form-buttons">
+            <button [disabled]="recordingForm.invalid"
+                mat-raised-button
+                (click)="onAddOrUpdateRecording()">{{!editmode ? 'add': 'update'}}&nbsp;recording</button>
+            <button mat-raised-button
+                (click)="onCancel()">cancel</button>
+        </div>
+    </form>
+</main>

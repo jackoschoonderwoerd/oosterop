@@ -1,12 +1,24 @@
 main {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: 1rem;
 
     .bands {
         .band {
             border: 1px solid var(--o-black);
             padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            .left {
+                display: flex;
+                flex-direction: column;
+            }
+            .buttons {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                // flex-direction: column;
+            }
         }
     }
 }

@@ -1,0 +1,97 @@
+main {
+    .band {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 700px;
+        .name {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--o-red);
+            text-transform: capitalize;
+        }
+        .musicians_images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            @media (max-width: 600px) {
+                display: flex;
+                flex-direction: column;
+            }
+            .images {
+                margin-right: 1rem;
+                .image {
+                    img {
+                        width: 100%;
+                    }
+                }
+                .photographer-name {
+                    display: flex;
+                    justify-content: end;
+                }
+            }
+
+            .musicians {
+                .musician {
+                    // display: flex;
+                    // gap: 1rem;
+                    justify-content: start;
+                    .musician-name {
+                        font-weight: bold;
+                    }
+                    .instruments {
+                        display: flex;
+                        gap: 1rem;
+                    }
+                }
+            }
+        }
+        .body {
+            padding: 0.5rem;
+            background-color: var(--o-lightgray);
+        }
+        .reviews {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            .review {
+                padding: 0.5rem;
+                background-color: var(--o-lightgray);
+                .review-body {
+                    font-style: italic;
+                }
+            }
+        }
+        .recordings {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            .recording {
+                // border: 1px solid var(--o-black);
+                padding: 0.5rem;
+                background-color: var(--o-lightgray);
+
+                display: flex;
+                gap: 1rem;
+                .year {
+                }
+                .title_label {
+                    .title {
+                        font-weight: 600;
+                    }
+
+                    .label {
+                        font-style: italic;
+                        // border: 1px solid green;
+                        align-items: end;
+                    }
+                }
+            }
+        }
+    }
+}
+.header {
+    font-weight: bold;
+    text-transform: capitalize;
+}

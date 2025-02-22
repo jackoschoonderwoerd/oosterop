@@ -1,11 +1,13 @@
 <div class="musician">
-    <div class="name">{{musician.name}}</div>
-    <div class="instruments">
-        @for(instrument of musician.instruments;track instrument) {
-        <div class="instrument">{{instrument}}</div>
-        }
+    <div class="left">
+        <div class="name">{{musician.name}}</div>
+        <div class="instruments">
+            @for(instrument of musician.instruments;track instrument) {
+            <div class="instrument">{{instrument}}</div>
+            }
+        </div>
     </div>
-    @if(auth.isLoggedIn()) {
+    @if(showDelete) {
     <button class="remove"
         mat-icon-button
         (click)="onRemoveMusician(musician.id)">

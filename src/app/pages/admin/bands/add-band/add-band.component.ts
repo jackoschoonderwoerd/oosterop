@@ -9,10 +9,14 @@ import { Band } from '../../../../shared/models/band.model';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseError } from '@angular/fire/app';
+import { DocumentReference } from '@angular/fire/firestore';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 interface FormValue {
     seqNr: number;
     name: string;
+    visible: boolean
 }
 
 @Component({
@@ -22,7 +26,8 @@ interface FormValue {
         MatFormFieldModule,
         MatButtonModule,
         MatIconModule,
-        MatInput
+        MatInput,
+        MatCheckboxModule
     ],
     templateUrl: './add-band.component.html',
     styleUrl: './add-band.component.scss'
@@ -57,13 +62,15 @@ export class AddBandComponent implements OnInit {
     initBandForm() {
         this.bandForm = this.fb.group({
             seqNr: new FormControl(null, [Validators.required]),
-            name: new FormControl(null, [Validators.required])
+            name: new FormControl(null, [Validators.required]),
+            visible: new FormControl(true, [Validators.required])
         })
     }
 
     patchForm(band: Band) {
         this.bandForm.patchValue({
-            ...band
+            ...band,
+            visible: band.visible ? band.visible : true
         })
     }
 
@@ -83,9 +90,14 @@ export class AddBandComponent implements OnInit {
     addBand(band: Band) {
         const path = `bands`
         this.fs.addDoc(path, band)
-            .then((res: any) => {
-                console.log(res);
-                this.onCancel()
+            .then((docRef: DocumentReference) => {
+                console.log(docRef.id);
+                // const bandMenuItem: BandMenuItem = {
+                //     name: band.name,
+                //     id: docRef.id
+                // }
+                // this.addBandMenuItems(bandMenuItem)
+                this.onCancel();
             })
             .catch((err: FirebaseError) => {
                 console.log(err)
@@ -98,18 +110,22 @@ export class AddBandComponent implements OnInit {
             .then((res: any) => console.log(res))
             .catch((err: FirebaseError) => {
                 console.log(err)
-                this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+                this.sb.openSnackbar(`operation failed due to: ${err.message}`);
             })
             .then(() => {
-                return this.fs.updateField(path, 'seqNr', band.seqNr)
+                return this.fs.updateField(path, 'seqNr', band.seqNr);
+            })
+            .then(() => {
+                return this.fs.updateField(path, 'visible', band.visible);
             })
             .catch((err: FirebaseError) => {
                 console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
             .then(() => {
-                this.router.navigateByUrl('bands')
+                this.router.navigateByUrl('bands');
             })
+
     }
 
 
@@ -121,4 +137,15 @@ export class AddBandComponent implements OnInit {
             this.router.navigateByUrl('bands')
         }
     }
+    // addBandMenuItems(bandMenuItem: BandMenuItem) {
+    //     const path = `bandMenuItems`;
+    //     this.fs.addDoc(path, bandMenuItem)
+    //         .then((docRef: DocumentReference) => {
+    //             console.log(docRef.id)
+    //         })
+    //         .catch((err: FirebaseError) => {
+    //             console.log(err);
+    //             this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+    //         })
+    // }
 }

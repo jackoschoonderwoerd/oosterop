@@ -1,12 +1,19 @@
 .musician {
-    padding: 0.2rem;
-    border-bottom: 1px solid var(--o-black);
-    .name {
-        font-weight: bold;
+    padding: 0.5rem;
+    border: 1px solid var(--o-black);
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    .left {
+        .name {
+            font-weight: bold;
+        }
         .instruments {
             .instrument {
                 font-style: italic;
             }
         }
+    }
+    button {
     }
 }

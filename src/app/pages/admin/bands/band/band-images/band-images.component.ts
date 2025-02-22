@@ -7,6 +7,7 @@ import { FirebaseError } from '@angular/fire/app';
 import { SnackbarService } from '../../../../../services/snackbar.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { StorageService } from '../../../../../services/storage.service';
 
 @Component({
     selector: 'app-band-images',
@@ -23,11 +24,16 @@ export class BandImagesComponent implements OnInit {
     fs = inject(FirestoreService);
     sb = inject(SnackbarService);
     router = inject(Router)
+    collectionName = 'bands';
+    documentId: string;
+    storage = inject(StorageService)
+
 
 
     ngOnInit(): void {
         this.bandId = this.route.snapshot.paramMap.get('bandId')
         console.log(this.bandId)
+        this.documentId = this.bandId
         this.path = `bands/${this.bandId}`
         this.getOImages();
 
@@ -65,7 +71,44 @@ export class BandImagesComponent implements OnInit {
             })
 
     }
-    onEditOImage(index) {
-        this.router.navigate(['edit-o-image', { path: this.path, index }])
+    onEdit(index) {
+        this.router.navigate(['edit-o-image',
+            {
+                collectionName: this.collectionName,
+                documentId: this.documentId,
+                index
+            }
+        ])
+    }
+    onDelete(index) {
+        // console.log(this.oImages[index])
+        const doomedOImage: OImage = this.oImages[index]
+
+        const path = `${this.path}/${doomedOImage.filename}`
+        this.removeFileFromStorage(path)
+            .then((res: any) => {
+                console.log(res);
+                this.removeImagePathFromArray(doomedOImage)
+            })
+            .then((res: any) => {
+                console.log(res)
+                this.getOImages();
+            })
+            .catch((err: FirebaseError) => {
+                console.log(err);
+                this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+            })
+    }
+
+    removeFileFromStorage(path) {
+        console.log(path);
+        return this.storage.deleteFile(path)
+    }
+
+    removeImagePathFromArray(doomedImage: OImage) {
+        return this.fs.removeElementFromArray(this.path, 'oImages', doomedImage)
+    }
+    onCancel() {
+        this.router.navigate(['band', { bandId: this.bandId }])
     }
 }

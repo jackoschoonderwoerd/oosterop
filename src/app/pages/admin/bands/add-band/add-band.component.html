@@ -11,6 +11,13 @@
             matInput
             formControlName="name">
     </mat-form-field>
+
+
+    <mat-label>Visible</mat-label>
+    <mat-checkbox matInput
+        formControlName="visible">Is visible</mat-checkbox>
+
+
     <div class="buttons">
         <button mat-raised-button
             (click)="onAddOrUpdateBand()">{{!editmode ? 'add':'update'}}&nbsp;band</button>

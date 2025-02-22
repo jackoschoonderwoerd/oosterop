@@ -1,11 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OImage } from '../models/o_image.model';
 import { FirestoreService } from '../../services/firestore.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FirebaseError } from '@angular/fire/app';
+import { SnackbarService } from '../../services/snackbar.service';
+
+interface OImageMetaDateFormValue {
+    photographerName: string
+}
 
 @Component({
     selector: 'app-edit-o-image',
@@ -14,19 +20,26 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     styleUrl: './edit-o-image.component.scss'
 })
 export class EditOImageComponent implements OnInit {
-    oImageForm: FormGroup;
+    oImageMetaDatForm: FormGroup;
     fb = inject(FormBuilder)
     route = inject(ActivatedRoute)
+    collectionName: string;
+    documentId: string
     path: string;
     index: number;
     oImage: OImage;
-    fs = inject(FirestoreService)
+    fs = inject(FirestoreService);
+    router = inject(Router);
+    sb = inject(SnackbarService)
 
     ngOnInit(): void {
         this.initForm()
-        this.path = this.route.snapshot.paramMap.get('path')
+
+        this.collectionName = this.route.snapshot.paramMap.get('collectionName');
+        this.documentId = this.route.snapshot.paramMap.get('documentId');
+        this.path = `${this.collectionName}/${this.documentId}`
         this.index = parseInt(this.route.snapshot.paramMap.get('index'))
-        this.getOImage()
+        this.getOImages()
             .then((oImages: OImage[]) => {
                 this.oImage = oImages[this.index]
                 this.patchForm(this.oImage)
@@ -35,25 +48,45 @@ export class EditOImageComponent implements OnInit {
     }
 
     initForm() {
-        this.oImageForm = this.fb.group({
+        this.oImageMetaDatForm = this.fb.group({
             photographerName: new FormControl(null)
         })
     }
 
-    getOImage() {
+    getOImages() {
+        console.log(this.path)
         return this.fs.getFieldInDocument(this.path, 'oImages')
 
     }
     patchForm(oImage: OImage) {
-        this.oImageForm.patchValue({
+        this.oImageMetaDatForm.patchValue({
             photographerName: oImage.photographerName
         })
     }
     onUpdateOImage() {
-        console.log(this.oImageForm.value)
-
+        console.log(this.oImageMetaDatForm.value)
+        const formValue: OImageMetaDateFormValue = this.oImageMetaDatForm.value;
+        this.oImage.photographerName = formValue.photographerName;
+        this.getOImages()
+            .then((oImages: OImage[]) => {
+                oImages[this.index].photographerName = formValue.photographerName;
+                return oImages
+            })
+            .then((oImages: OImage[]) => {
+                return this.fs.updateField(this.path, 'oImages', oImages)
+            })
+            .then((res: any) => {
+                this.router.navigate(['band-images', { bandId: this.documentId }])
+            })
+            .catch((err: FirebaseError) => {
+                console.log(err)
+                this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+            })
     }
-    onCancel() {
 
+
+
+    onCancel() {
+        this.router.navigate(['band-images', { bandId: this.documentId }])
     }
 }

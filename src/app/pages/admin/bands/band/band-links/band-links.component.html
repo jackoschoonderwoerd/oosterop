@@ -1,0 +1,84 @@
+<main>
+    <div class="links">
+
+        @for(link of links;track link.url; let index = $index) {
+        <div class="link">
+            <div class="title">{{link.title}}</div>
+            <div class="url">{{link.url}}</div>
+            <div class="buttons">
+                <button mat-icon-button
+                    (click)="onEdit(index)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button
+                    (click)="onDelete(index)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        }
+    </div>
+    <form [formGroup]="linkForm">
+        <mat-form-field>
+            <mat-label>title</mat-label>
+            <input type="text"
+                matInput
+                formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>url</mat-label>
+            <input type="text"
+                matInput
+                formControlName="url">
+        </mat-form-field>
+        <div class="buttons">
+            <button class="add-link"
+                mat-raised-button
+                [disabled]="linkForm.invalid"
+                (click)="onAddOrUpdateLink()">{{!editmode? 'add': 'update'}}&nbsp;link</button>
+            <button class="cancel"
+                mat-raised-button
+                (click)="onCancel()">cancel</button>
+        </div>
+    </form>
+
+    <!-- <form [formGroup]="linksForm"
+        (ngSubmit)="onSubmit()">
+        <div class="form-array"
+            formArrayName="links">
+            <div class="form-fields_delete-icon"
+                *ngFor="let link of links.controls; let i = index"
+                [formGroupName]="i">
+
+                <mat-form-field>
+                    <mat-label>title</mat-label>
+                    <input matInput
+                        type="text"
+                        formControlName="title">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>url</mat-label>
+                    <input matInput
+                        type="text"
+                        formControlName="url">
+                </mat-form-field>
+
+                <button type="button"
+                    mat-icon-button
+                    (click)="removeLink(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <button type="button"
+            mat-raised-button
+            (click)="addLink()">add link</button>
+        <button type="submit"
+            mat-raised-button
+            [disabled]="linksForm.invalid">Submit</button>
+    </form> -->
+
+</main>

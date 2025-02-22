@@ -57,7 +57,7 @@ export class AddBodyComponent implements OnInit {
             })
     }
     setContent(body) {
-        this.textEditorService.passBody(body)
+        this.textEditorService.passBodyToEditor(body)
     }
 
     htmlChanged(body: string) {

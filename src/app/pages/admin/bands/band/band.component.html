@@ -1,30 +1,85 @@
 <main>
     <div class="primary band-property">
-        <div class="seq-nr">{{band?.seqNr}}</div>
-        <div class="name">{{band?.name}}</div>
         <button mat-raised-button
             class="primary-btn"
             (click)="onPrimary()">primary
         </button>
+        <div class="seq-nr"><span>Seq. nr:&nbsp;</span>{{band?.seqNr}}</div>
+        <div class="name"><span>name:&nbsp;</span>{{band?.name}}</div>
+        <div class="visible"><span>visible:&nbsp;</span>{{band?.visible}}</div>
     </div>
     <div class="band-members band-property">
-        <!-- @for(member of band?.bandMemberIds;track member) {
-        <div class="member">
-            <div class="member-name">{{member.name}}</div>
-            <div class="instruments">
-                @for(instrument of member.instruments; track instrument) {
-                <div class="instrument">{{instrument}}</div>
-                }
-            </div>
-        </div>
-        } -->
         <button class="band-members-btn"
             mat-raised-button
             (click)="onBandMembers()">band members</button>
+        @for(bandMember of bandMembers;track bandMember.name) {
+        <div class="band-member">
+            <app-musician [musician]="bandMember"></app-musician>
+            <!-- <div class="member-name">{{bandMember.name}}</div>
+            <div class="instruments">
+                @for(instrument of bandMember.instruments; track instrument) {
+                <div class="instrument">{{instrument}}</div>
+                }
+            </div> -->
+        </div>
+        }
     </div>
     <div class="o-images band-property">
         <button mat-raised-button
             (click)="onOImages()">images</button>
+        <div class="images">
+            @for(oImage of band?.oImages;track oImage.filename) {
+            <img [src]="oImage.imagePath"
+                alt="">
+            <div class="photgrapher-name">{{oImage.photographerName}}</div>
+            }
+        </div>
+    </div>
+
+    <div class="body-container band-property">
+        <button mat-raised-button
+            (click)="onBody()">body</button>
+        <div class="body"
+            [innerHTML]="band?.body"></div>
+    </div>
+
+    <div class="links-container band-property">
+
+        <button mat-raised-button
+            (click)="onLinks()">links</button>
+        <div class="links">
+            @for(link of band?.links;track link.url) {
+            <div class="title"><span>title:&nbsp;</span>{{link.title}}</div>
+            <div class="url"><span>url:&nbsp;</span>{{link.url}}</div>
+            }
+        </div>
+    </div>
+    <div class="reviews-container band-property">
+        <button mat-raised-button
+            (click)="onReviews()">reviews</button>
+        <div class="reviews">
+            @for(review of band?.reviews; track review.body) {
+            <div class="published-by">{{review.publishedBy}}</div>
+            <div class="author">{{review.author}}</div>
+            <div class="date-published">{{review.datePublised}}</div>
+            <div class="body"
+                [innerHTML]="review.body"></div>
+            <hr>
+            }
+        </div>
+    </div>
+    <div class="recordings-container band-property">
+
+        <button mat-raised-button
+            (click)="onRecordings()">recordings</button>
+        <div class="recordings">
+            @for(recording of band?.recordings; track recording.title){
+            <div class="title">{{recording.title}}</div>
+            <div class="year">{{recording.year}}</div>
+            <div class="label">{{recording.label}}</div>
+            <hr>
+            }
+        </div>
     </div>
     <button class="cancel"
         mat-raised-button

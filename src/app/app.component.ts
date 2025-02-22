@@ -8,6 +8,7 @@ import { FooterComponent } from './navigation/footer/footer.component';
 import { User as FirebaseUser } from "@angular/fire/auth";
 import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { AuthStore } from './auth/auth.store';
+import { VisitorComponent } from './pages/visitor/visitor.component';
 
 @Component({
     selector: 'app-root',
@@ -16,7 +17,8 @@ import { AuthStore } from './auth/auth.store';
         MatSidenavModule,
         SidenavComponent,
         HeaderComponent,
-        FooterComponent
+        FooterComponent,
+        VisitorComponent
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'

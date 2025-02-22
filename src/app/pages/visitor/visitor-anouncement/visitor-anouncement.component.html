@@ -1,0 +1,40 @@
+<main>
+    <div class="header">{{anouncement?.header}}</div>
+    <div class="o-images">
+        @for(oImage of anouncement?.oImages; track oImage){
+        <div class="o-image">
+            <img [src]="oImage.imagePath"
+                alt="">
+            <div class="photographer-name">{{oImage.photographerName}}</div>
+        </div>
+        }
+    </div>
+    <div class="body"
+        [innerHTML]="anouncement?.body"></div>
+    <div class="band-members">
+        <div class="bandMembers">
+            @for(bandMember of bandMembers;track bandMember) {
+            <div class="bandMember">
+
+                <div class="bandMember-name">{{bandMember.name}}</div>
+                <div class="instruments">
+                    @for(instrument of bandMember.instruments; track instrument) {
+                    <div class="instrument">{{instrument}}</div>
+                    }
+                </div>
+            </div>
+
+            }
+        </div>
+    </div>
+    <div class="reviews">
+        @for(review of anouncement?.reviews; track review) {
+        <div class="review">
+            <div class="review-body"
+                [innerHTML]="review.body"></div>
+            <div class="review published-by">{{review.publishedBy}}</div>
+            <div class="author">{{review.author}}</div>
+        </div>
+        }
+    </div>
+</main>

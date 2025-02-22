@@ -9,11 +9,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { FirebaseError, FirebaseServerApp } from '@angular/fire/app';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { JsonPipe } from '@angular/common';
+import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
+import { MatDialog } from '@angular/material/dialog';
 ;
 
 @Component({
     selector: 'app-bands',
-    imports: [MatButtonModule, MatIconModule, JsonPipe],
+    imports: [MatButtonModule, MatIconModule, JsonPipe, ConfirmComponent],
     templateUrl: './bands.component.html',
     styleUrl: './bands.component.scss'
 })
@@ -24,6 +26,7 @@ export class BandsComponent {
     fs = inject(FirestoreService);
     bands: Band[] = [];
     sb = inject(SnackbarService);
+    dialog = inject(MatDialog)
 
     private bandsSubject = new BehaviorSubject<Band[]>(null);
     bands$: Observable<Band[]> = this.bandsSubject.asObservable()
@@ -33,7 +36,7 @@ export class BandsComponent {
 
     ngOnInit(): void {
         const path = `bands`
-        this.fs.collection(path)
+        this.fs.sortedCollection(path, 'seqNr', 'asc')
             .subscribe((bands: Band[]) => {
                 console.log(bands.length)
                 this.bandsSubject.next(bands)
@@ -60,17 +63,29 @@ export class BandsComponent {
     onEdit(bandId: string) {
         this.router.navigate(['band', { bandId }])
     }
-    onDelete(id: string) {
-        const path = `bands/${id}`
-        this.fs.deleteDoc(path)
-            .then((res: any) => {
-                console.log(res)
-                this.getBands();
-            })
-            .catch((err: FirebaseError) => {
-                console.log(err)
-                this.sb.openSnackbar(`operation failed due to: ${err.message}`)
-            })
+    onDelete(id: string, name: string) {
+        const dialogRef = this.dialog.open(ConfirmComponent, {
+            data: {
+                doomedElement: name
+            }
+        })
+        dialogRef.afterClosed().subscribe((res: boolean) => {
+            if (res) {
+
+                const path = `bands/${id}`
+                this.fs.deleteDoc(path)
+                    .then((res: any) => {
+                        console.log(res)
+                        this.getBands();
+                    })
+                    .catch((err: FirebaseError) => {
+                        console.log(err)
+                        this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+                    })
+            } else {
+                this.sb.openSnackbar(`operation aborted by user`)
+            }
+        })
     }
 
 }

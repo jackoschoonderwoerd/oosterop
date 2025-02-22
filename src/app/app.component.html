@@ -6,9 +6,12 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <div #header>
+            <!-- @if(authStore.isLoggedIn()){ -->
             <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+            <!-- } -->
         </div>
         <main>
+            <!-- <app-visitor></app-visitor> -->
             <div class="router-container">
                 <router-outlet></router-outlet>
             </div>

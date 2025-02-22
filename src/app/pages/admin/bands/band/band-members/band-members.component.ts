@@ -38,11 +38,7 @@ export class BandMembersComponent implements OnInit {
                 this.getBandMembers()
                 console.log(this.bandMemberIds)
             })
-        // this.getMusicians()
-        //     .pipe(take(1))
-        //     .subscribe((musicians: Musician[]) => {
-        //         this.musicians = musicians
-        //     })
+
     }
 
     getBandMembers() {

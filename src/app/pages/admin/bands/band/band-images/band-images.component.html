@@ -1,22 +1,35 @@
-<div class="o-images">
-    @for(oImage of oImages;track oImage.imagePath; let index = $index) {
-    <div class="o-image">
-        <img [src]="oImage.imagePath"
-            alt="">
-        <div class="photographer-name">
-            <div class="name">{{oImage.photographerName}}</div>
-            <div class="edit-btn"
-                mat-icon-button
-                (click)="onEditOImage(index)">
-                <mat-icon>edit</mat-icon>
+<main>
+    <div class="o-images">
+        @for(oImage of oImages;track oImage.imagePath; let index = $index) {
+        <div class="o-image">
+            <img [src]="oImage.imagePath"
+                alt="">
+            <div class="photographer-name_buttons">
+                <div class="name">{{oImage.photographerName}}</div>
+                <div class="buttons">
+                    <button class="edit-btn"
+                        mat-icon-button
+                        (click)="onEdit(index)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button class="delete-btn"
+                        mat-icon-button
+                        (click)="onDelete(index)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
             </div>
         </div>
+        }
     </div>
-    }
     <app-add-image (filePathChanged)="filePathReady($event)"
         [path]="path"></app-add-image>
     <div class="image">
         <img [src]="filePath"
             alt="">
     </div>
-</div>
+    <button class="cancel"
+        mat-raised-button
+        (click)="onCancel()">cancel</button>
+
+</main>

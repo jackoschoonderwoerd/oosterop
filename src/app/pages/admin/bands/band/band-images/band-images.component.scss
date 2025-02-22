@@ -1,0 +1,26 @@
+main {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    gap: 1rem;
+    .o-images {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 1rem;
+        .o-image {
+            border: 1px solid var(--o-black);
+            padding: 1rem;
+            img {
+                width: 100%;
+            }
+            .photographer-name_buttons {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .buttons {
+                    display: flex;
+                    gap: 1rem;
+                }
+            }
+        }
+    }
+}

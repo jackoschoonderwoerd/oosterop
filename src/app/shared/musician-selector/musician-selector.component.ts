@@ -24,6 +24,7 @@ export class MusicianSelectorComponent implements OnInit {
         const path = `musicians`
         this.fs.collection(path)
             .subscribe((musicians: Musician[]) => {
+                musicians = musicians.sort((a: Musician, b: Musician) => a.name.localeCompare(b.name))
                 this.musicians = musicians
             })
     }

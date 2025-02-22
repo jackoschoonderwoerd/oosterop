@@ -85,9 +85,39 @@ export const routes: Routes = [
                 .then(c => c.BandImagesComponent)
     },
     {
+        path: 'band-body', loadComponent:
+            () => import('./pages/admin/bands/band/band-body/band-body.component')
+                .then(c => c.BandBodyComponent)
+    },
+    {
+        path: 'band-links', loadComponent:
+            () => import('./pages/admin/bands/band/band-links/band-links.component')
+                .then(c => c.BandLinksComponent)
+    },
+    {
+        path: 'band-reviews', loadComponent:
+            () => import('./pages/admin/bands/band/band-reviews/band-reviews.component')
+                .then(c => c.BandReviewsComponent)
+    },
+    {
+        path: 'band-recordings', loadComponent:
+            () => import('./pages/admin/bands/band/band-recordings/band-recordings.component')
+                .then(c => c.BandRecordingsComponent)
+    },
+    {
         path: 'edit-o-image', loadComponent:
             () => import('./shared/edit-o-image/edit-o-image.component')
                 .then(c => c.EditOImageComponent)
+    },
+    {
+        path: 'visitor-band', loadComponent:
+            () => import('./pages/visitor/visitor-band/visitor-band.component')
+                .then(c => c.VisitorBandComponent)
+    },
+    {
+        path: 'visitor-anouncement', loadComponent:
+            () => import('./pages/visitor/visitor-anouncement/visitor-anouncement.component')
+                .then(c => c.VisitorAnouncementComponent)
     },
     {
         path: '**', redirectTo: 'home', pathMatch: 'full'
