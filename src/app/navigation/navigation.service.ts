@@ -14,8 +14,8 @@ export class NavigationService {
     bands$: any = this.bandsSubject.asObservable();
 
 
-    visitorMenuItems: string[] = ['anouncements', 'tour-periods', 'contact'];
-    adminMenuItems: string[] = ['anouncements', 'musicians', 'bands']
+    visitorMenuItems: string[] = ['contact'];
+    adminMenuItems: string[] = ['anouncements', 'musicians', 'bands', 'tour-periods']
 
     getAdminMenuItems() {
         return this.adminMenuItems;

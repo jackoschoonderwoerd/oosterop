@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path: '', redirectTo: 'home', pathMatch: 'full'
+        path: '', redirectTo: 'visitor-anouncement', pathMatch: 'full'
     },
     {
         path: 'login', loadComponent:
@@ -105,6 +105,21 @@ export const routes: Routes = [
                 .then(c => c.BandRecordingsComponent)
     },
     {
+        path: 'band-quotes', loadComponent:
+            () => import('./pages/admin/bands/band/band-quotes/band-quotes.component')
+                .then(c => c.BandQuotesComponent)
+    },
+    {
+        path: 'band-audio', loadComponent:
+            () => import('./pages/admin/bands/band/band-audio/band-audio.component')
+                .then(c => c.BandAudioComponent)
+    },
+    {
+        path: 'band-concerts', loadComponent:
+            () => import('./pages/admin/bands/band/band-concerts/band-concerts.component')
+                .then(c => c.BandConcertsComponent)
+    },
+    {
         path: 'edit-o-image', loadComponent:
             () => import('./shared/edit-o-image/edit-o-image.component')
                 .then(c => c.EditOImageComponent)
@@ -115,11 +130,31 @@ export const routes: Routes = [
                 .then(c => c.VisitorBandComponent)
     },
     {
+        path: 'visitor-band-reviews', loadComponent:
+            () => import('./pages/visitor/visitor-band/visitor-band-reviews/visitor-band-reviews.component')
+                .then(c => c.VisitorBandReviewsComponent)
+    },
+    {
+        path: 'visitor-band-audios', loadComponent:
+            () => import('./pages/visitor/visitor-band/visitor-band-audios/visitor-band-audios.component')
+                .then(c => c.VisitorBandAudiosComponent)
+    },
+    {
+        path: 'visitor-concerts', loadComponent:
+            () => import('./pages/visitor/visitor-band/visitor-band-concerts/visitor-band-concerts.component')
+                .then(c => c.VisitorBandConcertsComponent)
+    },
+    {
         path: 'visitor-anouncement', loadComponent:
             () => import('./pages/visitor/visitor-anouncement/visitor-anouncement.component')
                 .then(c => c.VisitorAnouncementComponent)
     },
     {
-        path: '**', redirectTo: 'home', pathMatch: 'full'
+        path: 'tour-periods', loadComponent:
+            () => import('./pages/admin/tour-periods/tour-periods.component')
+                .then(c => c.TourPeriodsComponent)
+    },
+    {
+        path: '**', redirectTo: 'visitor-anouncement', pathMatch: 'full'
     }
 ];

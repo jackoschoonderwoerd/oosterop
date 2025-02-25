@@ -5,7 +5,8 @@
             (closeSidenav)="sidenav.close()"></app-sidenav>
     </mat-sidenav>
     <mat-sidenav-content>
-        <div #header>
+        <div #header
+            class="header-container">
             <!-- @if(authStore.isLoggedIn()){ -->
             <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
             <!-- } -->
@@ -16,8 +17,8 @@
                 <router-outlet></router-outlet>
             </div>
 
-            <app-footer></app-footer>
 
         </main>
+        <app-footer></app-footer>
     </mat-sidenav-content>
 </mat-sidenav-container>

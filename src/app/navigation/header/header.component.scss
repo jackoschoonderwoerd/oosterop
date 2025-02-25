@@ -1,40 +1,72 @@
 mat-toolbar {
-    background-color: var(--o-red);
+    background-color: var(--o-purple);
+    color: var(--o-white);
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    .left {
-        .list-item-menu {
-            display: flex;
-            @media (min-width: 900px) {
-                display: none;
-            }
-        }
-        .list-item-home {
-            display: flex;
-            @media (max-width: 899px) {
-                display: none;
-            }
-        }
-    }
-    .right {
+    // .left {
+    //     .list-item-menu {
+    //         display: flex;
+    //         @media (min-width: 900px) {
+    //             display: none;
+    //         }
+    //     }
+    //     .list-item-home {
+    //         display: flex;
+    //         @media (max-width: 899px) {
+    //             display: none;
+    //         }
+    //     }
+    // }
+    .visitor-menu {
+        width: 100%;
+        max-width: 500px;
         display: flex;
-        gap: 1rem;
-        .visitor-menu-items {
-            display: flex;
-            gap: 1rem;
-            a {
-                color: var(--o-black);
-            }
+        // gap: 1rem;
+        justify-content: space-between;
+        align-items: center;
+        margin: auto;
+
+        button {
+            // border: 1px solid white;
+            text-transform: uppercase;
+            color: var(--o-orange);
         }
+
         .admin-menu-items {
             display: flex;
             gap: 1rem;
             a {
-                color: var(--o-white);
+                color: var(---o-orange);
             }
         }
         .login {
+        }
+    }
+    .admin-menu {
+        border: 3px solid yellow;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+        @media (max-width: 899px) {
+            display: none;
+        }
+        .admin-menu-items {
+            display: flex;
+            gap: 1rem;
+            .menu-item {
+                a {
+                    color: yellow;
+                }
+            }
+        }
+        .logout,
+        .login {
+            button {
+                mat-icon {
+                    color: yellow;
+                }
+            }
         }
     }
 }

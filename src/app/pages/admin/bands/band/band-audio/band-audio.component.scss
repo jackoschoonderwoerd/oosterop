@@ -1,0 +1,38 @@
+main {
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 3fr 1fr;
+    .o-audios {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        .o-audio {
+            border: 1px solid var(--o-black);
+            padding: 1rem;
+            align-self: flex-start;
+            .title_visible {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .buttons {
+                display: flex;
+                justify-content: end;
+                gap: 1rem;
+            }
+        }
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            button {
+                border: 3px solid var(--o-red);
+            }
+        }
+    }
+}

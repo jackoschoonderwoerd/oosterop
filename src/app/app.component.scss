@@ -1,12 +1,32 @@
 mat-sidenav-container {
+    height: 100%;
     mat-sidenav {
         background-color: var(--o-red);
     }
     mat-sidenav-content {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            "header"
+            "main"
+            "footer";
+        height: 100%;
+        .header-container {
+            grid-area: header;
+        }
         main {
+            width: 100%;
+            overflow: auto;
+            grid-area: main;
+            margin-right: auto;
+            margin-left: auto;
             .router-container {
-                padding: 1rem;
+                // padding: 1rem;
             }
+        }
+        app-footer {
+            grid-area: footer;
+            background-color: var(--o-purple);
         }
     }
 }

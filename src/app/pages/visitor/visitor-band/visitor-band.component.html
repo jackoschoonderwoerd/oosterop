@@ -1,6 +1,6 @@
+<app-icon-submenu></app-icon-submenu>
 <main>
     <div class="band">
-
         <div class="name">{{band?.name}}</div>
 
         <div class="musicians_images">
@@ -39,13 +39,13 @@
             }
         </div>
         <div class="reviews">
-            <div class="header">reviews</div>
-            @for(review of band?.reviews;track review){
+            <div class="header">quotes</div>
+            @for(quote of band?.quotes;track quote){
             <div class="review">
                 <div class="review-body"
-                    [innerHTML]="review.body"></div>
-                <div class="published-by">{{review.publishedBy}}</div>
-                <div class="author">{{review.author}}</div>
+                    [innerHTML]="quote.body"></div>
+                <div class="published-by">{{quote.publishedBy}}</div>
+                <div class="author">{{quote.author}}</div>
 
             </div>
             }

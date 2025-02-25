@@ -20,9 +20,22 @@ export class VisitorAnouncementComponent implements OnInit {
     ngOnInit(): void {
         this.route.paramMap.subscribe((params: any) => {
             const anouncementId = params.get('anouncementId')
-            this.getAnouncement(anouncementId)
+            if (!anouncementId) {
+                this.getFirstAnouncement()
 
+            } else {
+
+                this.getAnouncement(anouncementId)
+            }
         })
+    }
+
+    getFirstAnouncement() {
+        this.fs.findDoc('anouncements', 'seqNr', 1)
+            .subscribe((anouncements: Anouncement[]) => {
+                console.log(anouncements[0])
+                this.anouncement = anouncements[0]
+            })
     }
 
     getAnouncement(anouncementId: string) {

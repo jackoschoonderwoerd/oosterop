@@ -24,6 +24,8 @@ interface ReviewFormValue {
     publishedBy: string;
     author: string;
     datePublished: string;
+    visible: boolean;
+    type: 'review' | 'review'
 
 }
 
@@ -80,6 +82,8 @@ export class AddReviewComponent implements OnInit {
             publishedBy: new FormControl(null),
             datePublished: new FormControl(null),
             author: new FormControl(null),
+            type: new FormControl(),
+            visible: new FormControl
         })
     }
 
@@ -100,19 +104,21 @@ export class AddReviewComponent implements OnInit {
 
 
 
-    onAddReview() {
+    onAddreview() {
         const formValue: ReviewFormValue = this.reviewForm.value;
         console.log(formValue.datePublished)
-        const newReview: Review = {
+        const newreview: Review = {
             publishedBy: formValue.publishedBy,
             author: formValue.author,
             datePublished: new Date(formValue.datePublished),
+            visible: formValue.visible,
+            type: formValue.type,
             body: this.html
         }
         if (!this.editmode) {
-            this.addReview(newReview)
+            this.addreview(newreview)
         } else {
-            this.updateReview(newReview)
+            this.updatereview(newreview)
         }
     }
 
@@ -134,7 +140,7 @@ export class AddReviewComponent implements OnInit {
         this.router.navigate(['edit-anouncement', { anouncementId: this.anouncementId }])
     }
 
-    addReview(review) {
+    addreview(review) {
         console.log(review);
 
         const path = `anouncements/${this.anouncementId}`
@@ -161,10 +167,10 @@ export class AddReviewComponent implements OnInit {
             })
     }
 
-    updateReview(selectedReview: Review) {
-        console.log(selectedReview);
+    updatereview(selectedreview: Review) {
+        console.log(selectedreview);
 
-        this.reviews[this.reviewIndex] = selectedReview;
+        this.reviews[this.reviewIndex] = selectedreview;
         const path = `anouncements/${this.anouncementId}`
         this.fs.updateField(path, 'reviews', this.reviews)
             .then((res: any) => {

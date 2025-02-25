@@ -1,6 +1,6 @@
 <mat-toolbar>
     <!-- {{bands$|async}} -->
-    <ul class="left">
+    <!-- <ul class="left">
         <li class="list-item-menu">
             <mat-icon (click)="onToggleSidenav()">menu</mat-icon>
         </li>
@@ -8,8 +8,22 @@
             class="list-item-home">
             <mat-icon>home</mat-icon>
         </li>
-    </ul>
-    <div class="right">
+    </ul> -->
+    <div class="visitor-menu">
+
+        <button mat-icon-button>
+            <mat-icon [matMenuTriggerFor]="anouncementsMenu">home</mat-icon>
+        </button>
+
+        <mat-menu #anouncementsMenu="matMenu">
+            @for(anouncement of anouncements$|async; track anouncement.id){
+            @if(anouncement.visible) {
+
+            <button mat-menu-item
+                (click)="onAnouncementSelected(anouncement.id)">{{anouncement.header}}</button>
+            }
+            }
+        </mat-menu>
 
         <button mat-button
             [matMenuTriggerFor]="bandsMenu">bands</button>
@@ -23,7 +37,15 @@
             }
         </mat-menu>
 
-        <button mat-button
+        <button mat-button>tour periods</button>
+
+        <button mat-icon-button>
+            <mat-icon> contact_mail</mat-icon>
+        </button>
+
+
+
+        <!-- <button mat-button
             [matMenuTriggerFor]="anouncementsMenu">anouncements</button>
         <mat-menu #anouncementsMenu="matMenu">
             @for(anouncement of anouncements$|async; track anouncement.id){
@@ -33,34 +55,43 @@
                 (click)="onAnouncementSelected(anouncement.id)">{{anouncement.header}}</button>
             }
             }
-        </mat-menu>
+        </mat-menu> -->
 
-        {{authStore.isLoggedIn()}}
-        <ul class="visitor-menu-items">
+
+        <!-- <ul class="visitor-menu-items">
             @for(menuItem of visitorMenuItems;track menuItem) {
             <li class="menuItem"><a [routerLink]="menuItem">{{menuItem}}</a></li>
             }
-        </ul>
-        <ul class="admin-menu-items">
+        </ul> -->
+
+    </div>
+    <div class="admin-menu">
+        @if(authStore.isLoggedIn()) {
+        <div class="admin-menu-items">
             @for(menuItem of adminMenuItems; track menuItem) {
-            <li class="menuItem"><a [routerLink]="menuItem">{{menuItem}}</a></li>
+            <div class="menu-item"><a [routerLink]="menuItem">{{menuItem}}</a></div>
             }
-        </ul>
-
-
-        <ul class="login">
-            @if(!authStore.isLoggedIn()) {
-            <li routerLink="login"
-                class="list-item-home">
-                <mat-icon>login</mat-icon>
-            </li>
-            }
-            @if(authStore.isLoggedIn()) {
-            <li (click)="onLogout()"
-                class="list-item-home">
+        </div>
+        }
+        @if(authStore.isLoggedIn()) {
+        <div (click)="onLogout()"
+            class="logout">
+            <button mat-icon-button>
                 <mat-icon>logout</mat-icon>
-            </li>
-            }
-        </ul>
+            </button>
+        </div>
+        }
+        @if(!authStore.isLoggedIn()) {
+        <div routerLink="login"
+            class="login">
+            <button mat-icon-button>
+
+                <mat-icon>login</mat-icon>
+            </button>
+        </div>
+        }
+
+
+
     </div>
 </mat-toolbar>

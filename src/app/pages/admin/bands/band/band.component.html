@@ -69,7 +69,6 @@
         </div>
     </div>
     <div class="recordings-container band-property">
-
         <button mat-raised-button
             (click)="onRecordings()">recordings</button>
         <div class="recordings">
@@ -81,17 +80,69 @@
             }
         </div>
     </div>
+
+    <div class="quotes-container band-property">
+        <button mat-raised-button
+            (click)="onQuotes()">quotes</button>
+        <div class="quotes">
+            @for(quote of band?.quotes;track quote){
+            <div class="quote">
+                <div class="published-by">{{quote.publishedBy}}</div>
+                <div class="author">{{quote.author}}</div>
+                <div class="date-published">{{quote.datePublised}}</div>
+                <div class="body"></div>
+            </div>
+            <hr>
+            }
+        </div>
+    </div>
+
+    <div class="o-audios-container band-property">
+        <button mat-raised-button
+            (click)="onOAudio()">audio</button>
+        <div class="o-audios">
+            @for(oAudio of band?.oAudios;track oAudio){
+            <div class="o-audio">
+                <div class="published-by">{{oAudio.title}}</div>
+                <div class="author">{{oAudio.comments}}</div>
+                <div class="date-published">{{oAudio.code}}</div>
+                <div class="body"></div>
+            </div>
+            <hr>
+            }
+        </div>
+    </div>
+    <div class="concerts-container band-property">
+        <!-- {{band?.concerts|json}} -->
+        <button mat-raised-button
+            (click)="onConcerts()">concerts</button>
+        @if(band?.concerts && band?.concerts?.length> 0 ) {
+        <div class="concerts">
+            @for(concert of band?.concerts;track concert){
+            <div class="concert">
+                <div class="left">
+                    <div class="date">{{concert?.date.seconds*1000|date}}</div>
+                    <div class="venueName">{{concert?.venueName}}</div>
+                    <div class="city">{{concert?.city}}</div>
+                    <div class="country">{{concert?.country}}</div>
+                </div>
+                <div class="visible">
+                    @if(concert?.visible) {
+                    <mat-icon>visibility</mat-icon>
+                    } @else {
+                    <mat-icon>visibility_off</mat-icon>
+                    }
+                </div>
+            </div>
+            <hr>
+            }
+        </div>
+        }
+    </div>
+
     <button class="cancel"
         mat-raised-button
         (click)="onCancel()">cancel</button>
 
-    <!-- <div class="buttons band-property">
-        <button mat-raised-button
-            class="primary-btn"
-            (click)="onPrimary()">primary
-        </button>
-        <button class="band-members-btn"
-            mat-raised-button
-            (click)="onBandMembers()">band members</button>
-    </div> -->
+
 </main>

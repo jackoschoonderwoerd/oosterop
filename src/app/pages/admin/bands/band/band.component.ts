@@ -6,10 +6,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { Musician } from '../../../../shared/models/musician.model';
 import { take } from 'rxjs';
 import { MusicianComponent } from '../../../../shared/musician/musician.component';
+import { DatePipe, JsonPipe } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
     selector: 'app-band',
-    imports: [MatButtonModule, MusicianComponent],
+    imports: [
+        MatButtonModule,
+        MusicianComponent,
+        DatePipe,
+        JsonPipe,
+        MatIconModule
+    ],
     templateUrl: './band.component.html',
     styleUrl: './band.component.scss'
 })
@@ -37,14 +45,16 @@ export class BandComponent implements OnInit {
     }
 
     getBandMembers() {
-        this.band.bandMemberIds.forEach((bandMemberId: string) => {
-            const path = `musicians/${bandMemberId}`
-            this.fs.getDoc(path)
-                .pipe(take(1))
-                .subscribe((bandMember: Musician) => {
-                    this.bandMembers.push(bandMember)
-                })
-        })
+        if (this.band.bandMemberIds) {
+            this.band.bandMemberIds.forEach((bandMemberId: string) => {
+                const path = `musicians/${bandMemberId}`
+                this.fs.getDoc(path)
+                    .pipe(take(1))
+                    .subscribe((bandMember: Musician) => {
+                        this.bandMembers.push(bandMember)
+                    })
+            })
+        }
     }
 
 
@@ -69,6 +79,16 @@ export class BandComponent implements OnInit {
     onRecordings() {
         this.router.navigate(['band-recordings', { bandId: this.bandId }])
     }
+    onQuotes() {
+        this.router.navigate(['band-quotes', { bandId: this.bandId }])
+    }
+    onOAudio() {
+        this.router.navigate(['band-audio', { bandId: this.bandId }])
+    }
+    onConcerts() {
+        this.router.navigate(['band-concerts', { bandId: this.bandId }])
+    }
+
     onCancel() {
         this.router.navigateByUrl('bands')
     }

@@ -1,10 +1,23 @@
+.custom-toolbar {
+    // background-color: var(--o-black);
+    // color: white;
+    border-bottom: 3px solid var(--o-red);
+    .sub-menu-items {
+        width: 100%;
+        max-width: 400px;
+        border: 3px solid green;
+        display: flex;
+        justify-content: space-around;
+    }
+}
 main {
+    padding: 1rem;
     .band {
         display: flex;
         flex-direction: column;
         gap: 1rem;
         width: 100%;
-        max-width: 700px;
+
         .name {
             font-size: 2rem;
             font-weight: bold;
@@ -14,13 +27,15 @@ main {
         .musicians_images {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            gap: 1rem;
             @media (max-width: 600px) {
                 display: flex;
                 flex-direction: column;
             }
             .images {
-                margin-right: 1rem;
+                // margin-right: 1rem;
                 .image {
+                    // border: 1px solid red;
                     img {
                         width: 100%;
                     }
@@ -33,13 +48,15 @@ main {
 
             .musicians {
                 .musician {
-                    // display: flex;
-                    // gap: 1rem;
+                    display: flex;
+                    gap: 1rem;
                     justify-content: start;
                     .musician-name {
                         font-weight: bold;
+                        text-transform: capitalize;
                     }
                     .instruments {
+                        font-style: italic;
                         display: flex;
                         gap: 1rem;
                     }

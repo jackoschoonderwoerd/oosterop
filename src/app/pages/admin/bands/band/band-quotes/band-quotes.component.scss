@@ -1,0 +1,41 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1rem;
+    .quotes {
+        .quote {
+            border: 1px solid var(--o-black);
+            padding: 1rem;
+            .published-by {
+            }
+            .date-published {
+            }
+            .author {
+            }
+            .body {
+                max-height: 100px;
+                overflow-y: scroll;
+            }
+            .buttons {
+                display: flex;
+                justify-content: space-between;
+                gap: 1rem;
+                align-items: center;
+            }
+        }
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+
+        .form-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            button {
+                border: 3px solid var(--o-red);
+            }
+        }
+    }
+}

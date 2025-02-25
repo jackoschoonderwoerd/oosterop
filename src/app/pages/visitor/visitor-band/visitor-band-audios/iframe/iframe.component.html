@@ -1,0 +1,22 @@
+<!-- <p>iframe works!</p>
+
+<iframe [src]="href"
+    (load)="onIframeLoad()"
+    frameborder="0"></iframe> -->
+
+<div class="iframe-container">
+    <!-- Show spinner when isLoading is true -->
+    @if(isLoading){
+    <div class="spinner-overlay">
+        <div class="spinner">
+            <mat-spinner></mat-spinner>
+
+        </div>
+    </div>
+    }
+
+    <!-- Iframe with (load) event -->
+    <iframe [src]="href"
+        (load)="onIframeLoad()"
+        width="100%"></iframe>
+</div>

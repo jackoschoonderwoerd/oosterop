@@ -1,0 +1,26 @@
+main {
+    padding: 1rem;
+    .concerts {
+        margin: auto;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        .concert {
+            background-color: var(--o-lightgray);
+            display: flex;
+            flex-direction: column;
+            padding: 0.2rem 0.5rem;
+            border: 1px solid var(--o-gray);
+            .date_visibility {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .city_country {
+                display: flex;
+                gap: 1rem;
+            }
+        }
+    }
+}

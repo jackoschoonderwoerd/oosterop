@@ -1,0 +1,62 @@
+<main>
+
+    <div class="o-audios">
+        @for(oAudio of oAudios;track oAudio; let index = $index){
+        <div class="o-audio">
+            <div class="title_visible">
+                <div class="title">{{oAudio.title}}</div>
+                <div class="visible">
+                    @if(oAudio.visible) {
+                    <mat-icon>visibility</mat-icon>
+                    }
+                    @if(!oAudio.visible){
+                    <mat-icon>visibility_off</mat-icon>
+                    }
+                </div>
+            </div>
+            <div class="comments">{{oAudio.comments}}</div>
+            <div class="code"
+                [innerHTML]="oAudio.code"></div>
+            <div class="buttons">
+
+                <button mat-icon-button
+                    (click)="onEdit(index)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button
+                    (click)="onDelete(index)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+        }
+    </div>
+    <form [formGroup]="oAudioForm">
+        <mat-form-field>
+            <mat-label>title</mat-label>
+            <input type="text"
+                matInput
+                formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>comments</mat-label>
+            <textarea formControlName="comments"
+                rows="8"
+                matInput></textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>code</mat-label>
+            <textarea matInput
+                rows="8"
+                formControlName="code"></textarea>
+        </mat-form-field>
+        <mat-checkbox formControlName="visible">visible</mat-checkbox>
+        <div class="buttons">
+            <button mat-raised-button
+                (click)="onAddOrEditAudio()"
+                [disabled]="oAudioForm.invalid">{{!editmode ?'add': 'update' }}&nbsp;audio</button>
+            <button mat-raised-button
+                (click)="onCancel()">cancel</button>
+        </div>
+    </form>
+</main>

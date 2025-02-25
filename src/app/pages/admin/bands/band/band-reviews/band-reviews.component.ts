@@ -16,11 +16,14 @@ import { TextEditorService } from '../../../../../services/text-editor.service';
 import { DatePipe } from '@angular/common';
 import { ConfirmComponent } from '../../../../../shared/confirm/confirm.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 interface FormValue {
     publishedBy: string,
     datePublished: Date,
     author: string;
+    visible: boolean;
 }
 
 @Component({
@@ -36,6 +39,7 @@ interface FormValue {
         MatIconModule,
         MatInput,
         DatePipe,
+        MatCheckboxModule
     ],
     templateUrl: './band-reviews.component.html',
     styleUrl: './band-reviews.component.scss'
@@ -54,7 +58,9 @@ export class BandReviewsComponent implements OnInit {
     editmode: boolean;
     body: string = '<p>enter your text here</p>';;
     activeIndex: number;
-    dialog = inject(MatDialog)
+    dialog = inject(MatDialog);
+
+
 
     ngOnInit(): void {
         this.initForm()
@@ -66,7 +72,9 @@ export class BandReviewsComponent implements OnInit {
         this.reviewForm = this.fb.group({
             publishedBy: new FormControl(null),
             datePublished: new FormControl(null),
-            author: new FormControl(null)
+            author: new FormControl(null),
+            visible: new FormControl(true)
+
         })
     }
 
@@ -78,33 +86,39 @@ export class BandReviewsComponent implements OnInit {
     }
 
     htmlChanged(body: string) {
-        console.log(body)
         this.body = body
     }
+
     onAddOrUpdateReview() {
         const review: Review = {
             ...this.reviewForm.value,
             body: this.body
         }
         console.log(review)
+        const arrayName = review.type
         if (!this.editmode) {
             this.addReview(review)
         } else {
             this.updateReview(review)
         }
     }
+
     addReview(review: Review) {
+
         this.fs.addElementToArray(this.path, 'reviews', review)
             .then((res: any) => {
                 console.log(res);
                 this.textEditorService.passBodyToEditor('')
                 this.getReviews();
+                this.reviewForm.reset();
             })
             .catch((err: FirebaseError) => {
                 console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
+
+
 
     onDelete(index: number) {
         const dialogRef = this.dialog.open(ConfirmComponent, {

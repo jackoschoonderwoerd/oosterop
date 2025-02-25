@@ -1,0 +1,57 @@
+<div class="main">
+    <div class="tour-periods">
+        @for(tourPeriod of tourPeriods; track tourPeriod){
+        <div class="tour-period">
+            <div class="left">
+                <div class="band-name">{{tourPeriod?.bandName}}</div>
+                <div class="dates">
+                    <div class="start-date">{{tourPeriod.startDate.seconds*1000|date}}</div>
+                    <span>-</span>
+                    <div class="end-date">{{tourPeriod.endDate.seconds*1000|date}}</div>
+                </div>
+            </div>
+            <div class="buttons">
+                <button mat-icon-button
+                    (click)="onEdit(tourPeriod.id)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button
+                    (click)="onDelete(tourPeriod.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+        }
+    </div>
+    <form [formGroup]="tourPeriodForm">
+        <mat-form-field>
+            <label>band name</label>
+            <input type="text"
+                matInput
+                formControlName="bandName">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [formGroup]="tourPeriodForm"
+                [rangePicker]="picker">
+                <input matStartDate
+                    formControlName="startDate"
+                    placeholder="Start date">
+                <input matEndDate
+                    formControlName="endDate"
+                    placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix
+                [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+        <mat-checkbox formControlName="visible">visible</mat-checkbox>
+        <div class="buttons">
+            <button mat-raised-button
+                (click)="onAddOrUpdateTourPeriod()">{{!editmode ? 'add':'update'}}</button>
+            <button mat-raised-button
+                (click)="onCancel()">cancel</button>
+        </div>
+    </form>
+</div>

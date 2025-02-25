@@ -1,0 +1,20 @@
+main {
+    display: flex;
+    justify-content: center;
+    padding: 0.3rem;
+    .content {
+        display: flex;
+        flex-direction: column;
+        .d-o {
+            font-size: 1.2rem;
+            color: var(--o-orange);
+            text-transform: capitalize;
+            margin: auto;
+        }
+        .m-m {
+            color: var(--o-orange);
+
+            margin: auto;
+        }
+    }
+}

@@ -15,7 +15,14 @@ import { Anouncement } from '../../shared/models/anouncement.model';
 
 @Component({
     selector: 'app-header',
-    imports: [MatToolbarModule, RouterModule, MatIconModule, AsyncPipe, MatMenuModule, MatButtonModule],
+    imports: [
+        MatToolbarModule,
+        RouterModule,
+        MatIconModule,
+        AsyncPipe,
+        MatMenuModule,
+        MatButtonModule
+    ],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
 })
@@ -33,7 +40,8 @@ export class HeaderComponent implements OnInit {
     authStore = inject(AuthStore);
     adminMenuItems: string[] = [];
     visitorMenuItems: string[] = [];
-    router = inject(Router)
+    router = inject(Router);
+    subMenuItems: string[] = []
     // bands$: Observable<Band[]>
 
     @Output() sidenavToggle = new EventEmitter<void>();
@@ -41,10 +49,12 @@ export class HeaderComponent implements OnInit {
 
 
     ngOnInit(): void {
+
         this.visitorMenuItems = this.navigationService.getVisitorMenuItems();
         this.adminMenuItems = this.navigationService.getAdminMenuItems();
         this.getBands();
         this.getAnouncements();
+
     }
     getBands() {
         this.fs.sortedCollection('bands', 'seqNr', 'asc')

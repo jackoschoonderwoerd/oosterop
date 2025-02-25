@@ -1,0 +1,78 @@
+* {
+    color: var(--o-orange);
+}
+
+main {
+    background-color: var(--o-orange);
+    overflow: auto; /* or overflow-y: scroll; */
+    width: 100%;
+    .anouncement {
+        background-color: var(--o-blue);
+        scrollbar-width: none; /* Firefox */
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 800px;
+        margin: auto;
+        padding: 0.5rem;
+        .header {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--o-orange);
+            text-transform: capitalize;
+        }
+        .o-images {
+            .o-image {
+                position: relative;
+                img {
+                    width: 100%;
+                }
+                .photographer-name {
+                    padding: 3px;
+                    position: absolute;
+                    right: 10px;
+                    bottom: 10px;
+                    color: var(--o-orange);
+                    background-color: var(--o-purple);
+                }
+            }
+        }
+        .body {
+            padding: 0.5rem;
+            background-color: var(--o-lightgray);
+            color: var(--o-black);
+        }
+        .band-members {
+            .band-member {
+                .band-member-name {
+                    text-transform: capitalize;
+                    font-weight: bold;
+                }
+                .instruments {
+                    display: flex;
+                    flex-direction: column;
+                    // gap: 1rem;
+                    font-style: italic;
+                }
+            }
+        }
+        .reviews {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            .review {
+                padding: 0.5rem;
+                background-color: var(--o-lightgray);
+                .review-body {
+                    color: var(--o-black);
+                    font-style: italic;
+                }
+                .author,
+                .published-by {
+                    color: var(--o-black);
+                }
+            }
+        }
+    }
+}

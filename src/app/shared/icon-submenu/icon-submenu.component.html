@@ -1,0 +1,71 @@
+<div class="sub-menu-toolbar">
+    <div class="sub-menu-items">
+        <!-- {{subMenuItems|json}} -->
+        @for(subMenuItem of uiStore.subMenuItems(); track subMenuItem ){
+        @if(subMenuItem === 'home'){
+        <button mat-icon-button
+            (click)="onSubmenuSelected('home')"
+            class="sub-menu-item-btn">
+
+            <mat-icon>
+                <mat-icon>home</mat-icon>
+            </mat-icon>
+
+        </button>
+        }
+        <!-- <div class="sub-menu-item">{{subMenuItem}}</div> -->
+        @if(subMenuItem === 'reviews') {
+        <button mat-icon-button
+            (click)="onSubmenuSelected('reviews')"
+            class="sub-menu-item-btn">
+            <mat-icon>
+                <mat-icon>library_books</mat-icon>
+            </mat-icon>
+        </button>
+        }
+        @if(subMenuItem === 'videos') {
+        <button mat-icon-button
+            (click)="onSubmenuSelected('videos')">
+
+            <mat-icon>
+                <mat-icon>
+                    <mat-icon>videocam</mat-icon>
+                </mat-icon>
+            </mat-icon>
+        </button>
+        }
+        @if(subMenuItem === 'images') {
+        <button mat-icon-button
+            (click)="onSubmenuSelected('images')">
+
+            <mat-icon>
+                <mat-icon>
+                    <mat-icon>photo_camera</mat-icon>
+                </mat-icon>
+            </mat-icon>
+        </button>
+        }
+        @if(subMenuItem === 'audio') {
+        <button mat-icon-button
+            (click)="onSubmenuSelected('o-audios')">
+
+            <mat-icon>
+                <mat-icon>
+                    <mat-icon>music_note</mat-icon>
+                </mat-icon>
+            </mat-icon>
+        </button>
+        }
+        @if(subMenuItem === 'concerts') {
+        <button mat-icon-button
+            (click)="onSubmenuSelected('concerts')">
+            <mat-icon>
+                <mat-icon>
+                    <mat-icon>list</mat-icon>
+                </mat-icon>
+            </mat-icon>
+        </button>
+        }
+        }
+    </div>
+</div>

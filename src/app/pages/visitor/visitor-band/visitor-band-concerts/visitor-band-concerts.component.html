@@ -1,0 +1,19 @@
+<app-icon-submenu></app-icon-submenu>
+<main>
+    <div class="concerts">
+        @for(concert of concerts ; track concert; let index = $index) {
+        @if(concert.visible) {
+        <div class="concert">
+            <div class="date">{{concert?.date.seconds*1000|date}}</div>
+            <div class="venue-name">{{concert?.venueName}}</div>
+            <div class="city_country">
+                <div class="city">{{concert?.city}}</div>
+                <div class="country">{{concert?.country}}</div>
+            </div>
+
+
+        </div>
+        }
+        }
+    </div>
+</main>
