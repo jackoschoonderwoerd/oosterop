@@ -66,9 +66,10 @@ export class BandConcertsComponent implements OnInit {
         this.concertForm = this.fb.group({
             date: new FormControl(null, [Validators.required]),
             venueName: new FormControl(null),
+            venueUrl: new FormControl(null),
             city: new FormControl(null),
             country: new FormControl(null),
-            visible: new FormControl(true, [Validators.required])
+            visible: new FormControl(null, [Validators.required])
         })
     }
     onAddOrUpdateConcert() {
@@ -97,11 +98,20 @@ export class BandConcertsComponent implements OnInit {
     onEdit(index: number) {
         this.editmode = true;
         this.activeIndex = index;
-        console.log(this.concerts[index])
-        this.concertForm.setValue({
-            ...this.concerts[index],
-            date: new Date(this.concerts[index].date.seconds * 1000)
+        console.log(this.concerts[index].country)
+
+        this.concertForm.patchValue({
+            date: new Date(this.concerts[index].date.seconds * 1000),
+            venueName: this.concerts[index].venueName,
+            venueUrl: this.concerts[index].venueUrl ? this.concerts[index].venueUrl : null,
+            city: this.concerts[index].city ? this.concerts[index].city : null,
+            country: this.concerts[index].country ? this.concerts[index].country : null
         })
+
+        // this.concertForm.setValue({
+        //     ...this.concerts[index],
+        //     date: new Date(this.concerts[index].date.seconds * 1000)
+        // })
     }
     updateConcert(concert: Concert) {
         this.concerts[this.activeIndex] = concert;

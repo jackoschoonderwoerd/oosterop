@@ -4,13 +4,17 @@
     border-bottom: 3px solid var(--o-red);
     .sub-menu-items {
         width: 100%;
-        max-width: 400px;
+        max-width: 800px;
         border: 3px solid green;
         display: flex;
         justify-content: space-around;
     }
 }
 main {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+
     padding: 1rem;
     .band {
         display: flex;
@@ -24,57 +28,111 @@ main {
             color: var(--o-red);
             text-transform: capitalize;
         }
-        .musicians_images {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            @media (max-width: 600px) {
-                display: flex;
-                flex-direction: column;
-            }
-            .images {
-                // margin-right: 1rem;
-                .image {
-                    // border: 1px solid red;
-                    img {
-                        width: 100%;
-                    }
+
+        .images {
+            // margin-right: 1rem;
+            .image {
+                position: relative;
+                img {
+                    width: 100%;
                 }
                 .photographer-name {
-                    display: flex;
-                    justify-content: end;
+                    padding: 3px;
+                    position: absolute;
+                    right: 10px;
+                    bottom: 10px;
+                    color: var(--o-orange);
+                    background-color: var(--o-purple);
                 }
             }
+        }
 
-            .musicians {
-                .musician {
-                    display: flex;
-                    gap: 1rem;
+        .band-members-accordion {
+            mat-expansion-panel {
+                background-color: var(--o-orange);
+                mat-expansion-panel-header {
+                    text-transform: uppercase;
+                }
+            }
+            .band-members {
+                display: flex;
+                flex-direction: column;
+                gap: 0.2rem;
+                .band-member {
+                    // display: flex;
+                    padding: 0.2rem 0.5rem;
+                    border: 1px solid var(--o-black);
+
                     justify-content: start;
-                    .musician-name {
+                    .band-member-name {
                         font-weight: bold;
                         text-transform: capitalize;
                     }
                     .instruments {
                         font-style: italic;
-                        display: flex;
+                        // display: flex;
                         gap: 1rem;
                     }
                 }
             }
         }
+        .concerts-accordion {
+            mat-expansion-panel {
+                background-color: var(--o-orange);
+                mat-expansion-panel-header {
+                    text-transform: uppercase;
+                }
+                .concerts {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.2rem;
+                    .concert {
+                        padding: 0.2rem 0.5rem;
+                        border: 1px solid var(--o-black);
+                        .date {
+                            font-weight: bold;
+                        }
+                        .location {
+                            display: flex;
+                            gap: 1rem;
+                        }
+                    }
+                }
+            }
+        }
+
         .body {
             padding: 0.5rem;
             background-color: var(--o-lightgray);
+            @media (min-width: 600px) {
+                padding: 1rem 2rem;
+            }
         }
-        .reviews {
+
+        .links {
+            .link {
+                padding: 0.5rem;
+                @media (min-width: 600px) {
+                    padding: 1rem 2rem;
+                }
+                background-color: var(--o-lightgray);
+                mat-icon {
+                    margin-right: 1rem;
+                }
+            }
+        }
+
+        .quotes {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            .review {
-                padding: 0.5rem;
+            .quote {
                 background-color: var(--o-lightgray);
-                .review-body {
+                padding: 0.5rem;
+                @media (min-width: 600px) {
+                    padding: 1rem 2rem;
+                }
+                .quote-body {
                     font-style: italic;
                 }
             }
@@ -85,8 +143,10 @@ main {
             gap: 0.5rem;
 
             .recording {
-                // border: 1px solid var(--o-black);
                 padding: 0.5rem;
+                @media (min-width: 600px) {
+                    padding: 1rem 2rem;
+                }
                 background-color: var(--o-lightgray);
 
                 display: flex;

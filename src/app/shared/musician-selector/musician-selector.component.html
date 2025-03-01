@@ -2,13 +2,25 @@
     mat-raised-button
     color="primary"
     [matMenuTriggerFor]="menu">add&nbsp;{{musicianType ? musicianType: ' musician'}} </button>
-<!-- <button mat-raised-button
-        color="primary"
-        (click)="onCancel()">cancel</button> -->
 
 <mat-menu #menu="matMenu">
     @for(musician of musicians; track musician.id){
     <button (click)="onMusicianIdSelected(musician.id)"
-        mat-menu-item>{{musician.name}}</button>
+        mat-menu-item>
+
+        <div class="name">{{musician.name}}</div>
+        @if(musician.context){
+        <div style="color: red;"
+            class="context">C:&nbsp;{{musician.context}}</div>
+        }
+    </button>
     }
 </mat-menu>
+@for(musician of musicians; track musician){
+<div class="musician">
+
+</div>
+}
+<div class="musicians">
+
+</div>

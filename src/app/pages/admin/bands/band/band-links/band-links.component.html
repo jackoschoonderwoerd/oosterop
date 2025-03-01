@@ -43,42 +43,6 @@
         </div>
     </form>
 
-    <!-- <form [formGroup]="linksForm"
-        (ngSubmit)="onSubmit()">
-        <div class="form-array"
-            formArrayName="links">
-            <div class="form-fields_delete-icon"
-                *ngFor="let link of links.controls; let i = index"
-                [formGroupName]="i">
 
-                <mat-form-field>
-                    <mat-label>title</mat-label>
-                    <input matInput
-                        type="text"
-                        formControlName="title">
-                </mat-form-field>
-
-                <mat-form-field>
-                    <mat-label>url</mat-label>
-                    <input matInput
-                        type="text"
-                        formControlName="url">
-                </mat-form-field>
-
-                <button type="button"
-                    mat-icon-button
-                    (click)="removeLink(i)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </div>
-        </div>
-
-        <button type="button"
-            mat-raised-button
-            (click)="addLink()">add link</button>
-        <button type="submit"
-            mat-raised-button
-            [disabled]="linksForm.invalid">Submit</button>
-    </form> -->
 
 </main>

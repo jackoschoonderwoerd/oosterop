@@ -1,0 +1,21 @@
+main {
+    padding: 0.5rem;
+    .tour-periods {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        .tour-period {
+            padding: 0.3rem 0.5rem;
+            border: 1px solid var(--o-black);
+            background-color: var(--o-orange);
+            .band-name {
+                font-weight: bold;
+                text-transform: capitalize;
+            }
+            .dates {
+                display: flex;
+                gap: 0.5rem;
+            }
+        }
+    }
+}

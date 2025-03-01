@@ -1,7 +1,12 @@
 main {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
     .image {
+        img {
+            width: 100%;
+        }
     }
     form {
         width: 100%;

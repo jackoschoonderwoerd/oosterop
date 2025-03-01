@@ -27,7 +27,7 @@ export class BandMembersComponent implements OnInit {
     router = inject(Router);
     sb = inject(SnackbarService);
     bandMembers: Musician[] = [];
-    oImages: OImage[] = []
+    oImages: OImage[] = [];
 
     ngOnInit(): void {
         this.bandId = this.route.snapshot.paramMap.get('bandId')
@@ -38,7 +38,6 @@ export class BandMembersComponent implements OnInit {
                 this.getBandMembers()
                 console.log(this.bandMemberIds)
             })
-
     }
 
     getBandMembers() {

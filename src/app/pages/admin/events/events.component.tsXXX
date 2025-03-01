@@ -1,0 +1,78 @@
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { EventGroup } from '../../../shared/models/event-group.model';
+import { FirestoreService } from '../../../services/firestore.service';
+import { Band } from '../../../shared/models/band.model';
+import { Concert } from '../../../shared/models/concert.model';
+import { Event } from '../../../shared/models/event.model';
+import { GroupedConcerts } from '../../../shared/models/grouped-concerts.model';
+import { DatePipe, JsonPipe } from '@angular/common';
+
+@Component({
+    selector: 'app-events',
+    imports: [
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatButtonModule,
+        MatInput,
+        JsonPipe,
+        DatePipe
+    ],
+    templateUrl: './events.component.html',
+    styleUrl: './events.component.scss'
+})
+export class EventsComponent implements OnInit {
+    bandNameForm: FormGroup;
+    eventForm: FormGroup;
+    fb = inject(FormBuilder)
+    bandEventId: string
+    fs = inject(FirestoreService)
+    editmode: boolean = false;
+    eventgroups: any;
+    collectedGroupedConcerts: GroupedConcerts[] = []
+
+
+
+    ngOnInit(): void {
+        this.getBands()
+            .then((bands: Band[]) => {
+                this.getConcertGroupedByBandname(bands)
+            })
+    }
+
+    getBands(): Promise<unknown> {
+        const promise = new Promise((resolve, reject) => {
+            this.fs.collection('bands')
+                .subscribe((bands: Band[]) => {
+                    resolve(bands)
+                })
+        })
+        return promise
+    }
+
+    getConcertGroupedByBandname(bands: Band[]) {
+        bands.forEach((band: Band) => {
+            if (band.concerts && band.concerts.length > 0) {
+                band.concerts.forEach((concert: Concert) => {
+                    // console.log(concert.date.seconds)
+                    // console.log(new Date().getTime() / 1000)
+                    console.log(concert.date.seconds > new Date().getTime() / 1000)
+                })
+                const groupedConcerts: GroupedConcerts = {
+                    bandName: band.name,
+                    concerts: band.concerts
+                }
+                groupedConcerts.concerts.sort((a: Concert, b: Concert) => b.date.seconds - a.date.seconds)
+                this.collectedGroupedConcerts.push(groupedConcerts)
+            }
+        })
+        console.log(this.collectedGroupedConcerts)
+    }
+}

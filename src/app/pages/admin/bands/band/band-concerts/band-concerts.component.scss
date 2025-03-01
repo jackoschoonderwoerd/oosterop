@@ -8,6 +8,7 @@ main {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 1rem;
         .concert {
+            background-color: var(--o-orange);
             padding: 1rem;
             border: 1px solid var(--o-black);
             align-self: start;

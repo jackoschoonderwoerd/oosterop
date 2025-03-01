@@ -1,6 +1,13 @@
 <section>
-    <p>sidenav works!</p>
-    <button mat-mini-fab
+    <ul>
+        @for(menuItem of sideNavMenuItems;track menuItem){
+        <a mat-list-item
+            (click)="onClose()"
+            [routerLink]="menuItem.link">{{menuItem.link}}</a>
+        }
+    </ul>
+    <button class="close"
+        mat-icon-button
         (click)="onClose()">
         <mat-icon>close</mat-icon>
     </button>

@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 interface FormValue {
     seqNr: number;
+    initiator: string;
     name: string;
     visible: boolean
 }
@@ -63,6 +64,7 @@ export class AddBandComponent implements OnInit {
         this.bandForm = this.fb.group({
             seqNr: new FormControl(null, [Validators.required]),
             name: new FormControl(null, [Validators.required]),
+            initiator: new FormControl(null, [Validators.required]),
             visible: new FormControl(true, [Validators.required])
         })
     }
@@ -77,7 +79,10 @@ export class AddBandComponent implements OnInit {
     onAddOrUpdateBand() {
         const formValue: FormValue = this.bandForm.value
         const band: Band = {
-            ...formValue
+            seqNr: formValue.seqNr,
+            name: (formValue.name).trim().toLowerCase(),
+            initiator: (formValue.initiator).trim().toLowerCase(),
+            visible: formValue.visible
         }
         if (!this.editmode) {
             this.addBand(band)
@@ -105,6 +110,7 @@ export class AddBandComponent implements OnInit {
             })
     }
     updateBand(band: Band) {
+        console.log(band)
         const path = `bands/${this.bandId}`
         this.fs.updateField(path, 'name', band.name)
             .then((res: any) => console.log(res))
@@ -125,7 +131,25 @@ export class AddBandComponent implements OnInit {
             .then(() => {
                 this.router.navigateByUrl('bands');
             })
-
+        this.fs.updateField(path, 'initiator', band.initiator)
+            .then((res: any) => console.log(res))
+            .catch((err: FirebaseError) => {
+                console.log(err)
+                this.sb.openSnackbar(`operation failed due to: ${err.message}`);
+            })
+            .then(() => {
+                return this.fs.updateField(path, 'seqNr', band.seqNr);
+            })
+            .then(() => {
+                return this.fs.updateField(path, 'visible', band.visible);
+            })
+            .catch((err: FirebaseError) => {
+                console.log(err)
+                this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+            })
+            .then(() => {
+                this.router.navigateByUrl('bands');
+            })
     }
 
 

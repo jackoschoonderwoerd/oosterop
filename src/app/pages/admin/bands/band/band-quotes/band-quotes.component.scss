@@ -2,6 +2,8 @@ main {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     gap: 1rem;
+    background-color: var(--o-orange);
+    padding: 1rem;
     .quotes {
         .quote {
             border: 1px solid var(--o-black);

@@ -1,0 +1,23 @@
+<main>
+    <div class="collected-grouped-concerts">
+
+        @for(groupedConcerts of collectedGroupedConcerts ; track groupedConcerts) {
+        <div class="grouped-concert">
+            <div class="band-name">{{groupedConcerts.bandName}}</div>
+            <div class="concerts">
+                @for(concert of groupedConcerts.concerts; track concert) {
+                <!-- {{concert|json}} -->
+                @if(concert.visible) {
+                <div class="concert">
+                    <div class="date">{{concert.date.seconds*1000|date}}</div>
+                    <div class="venue-name">{{concert.venueName}}</div>
+                    <div class="city">{{concert.city}}</div>
+                    <div class="country">{{concert.country}}</div>
+                </div>
+                }
+                }
+            </div>
+        </div>
+        }
+    </div>
+</main>

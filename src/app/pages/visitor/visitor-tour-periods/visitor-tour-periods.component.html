@@ -1,0 +1,15 @@
+<main>
+    <div class="tour-periods">
+        @for(tourPeriod of tourPeriods; track tourPeriod.id){
+        @if(tourPeriod.visible){
+        <div class="tour-period">
+            <div class="band-name">{{tourPeriod.bandName}}</div>
+            <div class="dates">
+                <div class="start-date">{{tourPeriod.startDate.seconds*1000|date}}</div>
+                <div class="end-date">{{tourPeriod.endDate.seconds*1000|date}}</div>
+            </div>
+        </div>
+        }
+        }
+    </div>
+</main>

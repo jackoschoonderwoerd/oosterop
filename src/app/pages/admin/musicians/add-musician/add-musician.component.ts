@@ -15,12 +15,19 @@ import { ConfirmService } from '../../../../shared/confirm/confirm.service';
 
 interface FormValue {
     name: string;
+    context: string;
     instruments: string[];
 }
 
 @Component({
     selector: 'app-add-musician',
-    imports: [ReactiveFormsModule, MatFormFieldModule, MatButtonModule, MatInput, MatIconModule],
+    imports: [
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInput,
+        MatIconModule
+    ],
     templateUrl: './add-musician.component.html',
     styleUrl: './add-musician.component.scss'
 })
@@ -34,12 +41,14 @@ export class AddMusicianComponent implements OnInit {
     editmode: boolean = false;
     route = inject(ActivatedRoute)
     id: string;
-    confirmService = inject(ConfirmService)
+    confirmService = inject(ConfirmService);
+    musicianId: string;
 
     ngOnInit(): void {
         this.initForm();
         this.id = this.route.snapshot.paramMap.get('id')
         if (this.id) {
+            this.musicianId = this.id;
             const path = `musicians/${this.id}`
             this.fs.getDoc(path).pipe(take(1))
                 .subscribe((musician: Musician) => {
@@ -54,12 +63,14 @@ export class AddMusicianComponent implements OnInit {
     initForm() {
         this.musiciansForm = this.fb.group({
             name: new FormControl(null, [Validators.required]),
+            context: new FormControl(null),
             instruments: new FormArray([])
         })
     }
     populateMusiciansForm(musician: Musician) {
         this.musiciansForm.patchValue({
-            name: musician.name
+            name: musician.name,
+            context: musician.context ? musician.context : null
         })
         musician.instruments.forEach((instrument: string) => {
             const control = new FormControl(instrument);
@@ -92,6 +103,7 @@ export class AddMusicianComponent implements OnInit {
 
         const musician: Musician = {
             name: formValue.name,
+            context: formValue.context,
             instruments: instrumentsLowerCase
         }
         if (!this.editmode) {
@@ -125,6 +137,9 @@ export class AddMusicianComponent implements OnInit {
                 console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
+    }
+    onCancel() {
+        this.router.navigateByUrl('musicians')
     }
 
 }

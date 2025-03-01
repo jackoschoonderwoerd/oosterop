@@ -6,19 +6,25 @@
         @for(band of bands; track band.id){
         <div class="band">
             <div class="left">
-                <div class="name">{{band.name}}</div>
+                <div class="name_visible">
+                    <div class="name">{{band.name}}</div>
+                    <div class="visible">
+                        @if(band.visible) {
+                        <mat-icon>visibility</mat-icon>
+                        }
+                        @if(!band.visible){
+                        <mat-icon>visibility_off</mat-icon>
+                        }
+                    </div>
+                </div>
+                @if(band.initiator) {
+                <div class="initiator">initiator:&nbsp;{{band.initiator}}</div>
+                }
                 <div class="id">{{band.id}}</div>
                 <div class="seq-nr">{{band.seqNr}}</div>
             </div>
             <div class="buttons">
-                <div class="visible">
-                    @if(band.visible) {
-                    <mat-icon>visibility</mat-icon>
-                    }
-                    @if(!band.visible){
-                    <mat-icon>visibility_off</mat-icon>
-                    }
-                </div>
+
                 <button mat-icon-button
                     class="edit"
                     (click)="onEdit(band.id)">

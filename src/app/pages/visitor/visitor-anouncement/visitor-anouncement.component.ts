@@ -4,10 +4,11 @@ import { FirestoreService } from '../../../services/firestore.service';
 import { Anouncement } from '../../../shared/models/anouncement.model';
 import { take } from 'rxjs';
 import { Musician } from '../../../shared/models/musician.model';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
     selector: 'app-visitor-anouncement',
-    imports: [],
+    imports: [MatExpansionModule],
     templateUrl: './visitor-anouncement.component.html',
     styleUrl: './visitor-anouncement.component.scss'
 })

@@ -5,6 +5,7 @@
             (click)="onPrimary()">primary
         </button>
         <div class="seq-nr"><span>Seq. nr:&nbsp;</span>{{band?.seqNr}}</div>
+        <div class="initiator"><span>initiator:</span>&nbsp;{{band.initiator}}</div>
         <div class="name"><span>name:&nbsp;</span>{{band?.name}}</div>
         <div class="visible"><span>visible:&nbsp;</span>{{band?.visible}}</div>
     </div>
@@ -90,7 +91,8 @@
                 <div class="published-by">{{quote.publishedBy}}</div>
                 <div class="author">{{quote.author}}</div>
                 <div class="date-published">{{quote.datePublised}}</div>
-                <div class="body"></div>
+                <div class="body"
+                    [innerHTML]="quote.body"></div>
             </div>
             <hr>
             }

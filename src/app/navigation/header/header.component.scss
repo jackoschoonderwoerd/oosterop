@@ -4,20 +4,20 @@ mat-toolbar {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    // .left {
-    //     .list-item-menu {
-    //         display: flex;
-    //         @media (min-width: 900px) {
-    //             display: none;
-    //         }
-    //     }
-    //     .list-item-home {
-    //         display: flex;
-    //         @media (max-width: 899px) {
-    //             display: none;
-    //         }
-    //     }
-    // }
+    .left {
+        .list-item-menu {
+            display: flex;
+            @media (min-width: 900px) {
+                display: none;
+            }
+        }
+        .list-item-home {
+            display: flex;
+            @media (max-width: 899px) {
+                display: none;
+            }
+        }
+    }
     .visitor-menu {
         width: 100%;
         max-width: 500px;
@@ -48,7 +48,7 @@ mat-toolbar {
         display: flex;
         align-items: center;
         padding: 0 1rem;
-        @media (max-width: 899px) {
+        @media (max-width: 1200px) {
             display: none;
         }
         .admin-menu-items {
@@ -56,6 +56,8 @@ mat-toolbar {
             gap: 1rem;
             .menu-item {
                 a {
+                    text-transform: uppercase;
+                    font-size: 0.9rem;
                     color: yellow;
                 }
             }

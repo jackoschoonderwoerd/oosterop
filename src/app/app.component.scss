@@ -1,7 +1,11 @@
 mat-sidenav-container {
     height: 100%;
     mat-sidenav {
-        background-color: var(--o-red);
+        background-color: var(--o-purple);
+        color: var(--o-orange);
+        padding: 1rem;
+        width: 100%;
+        max-width: 300px;
     }
     mat-sidenav-content {
         display: grid;
@@ -20,6 +24,7 @@ mat-sidenav-container {
             grid-area: main;
             margin-right: auto;
             margin-left: auto;
+            background-color: var(--o-blue);
             .router-container {
                 // padding: 1rem;
             }

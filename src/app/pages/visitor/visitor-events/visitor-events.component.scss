@@ -1,0 +1,59 @@
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--o-lightgray);
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    padding: 1rem;
+    mat-button-toggle-group {
+        width: 200px;
+        margin: auto;
+        mat-button-toggle {
+            // border: 3px solid red;
+        }
+    }
+    .events {
+        background-color: var(--o-orange);
+        .event {
+            border: 1px solid var(--o-black);
+            padding: 0.5rem;
+            .band-name {
+                text-transform: capitalize;
+                font-weight: bold;
+            }
+            .concerts {
+                .concert {
+                    .location {
+                        display: flex;
+                        gap: 1rem;
+                    }
+                }
+            }
+        }
+    }
+    mat-accordion {
+        mat-expansion-panel {
+            mat-expansion-panel-header {
+                mat-panel-title {
+                    text-transform: capitalize;
+                }
+            }
+            .concerts {
+                display: flex;
+                flex-direction: column;
+                gap: 0.2rem;
+                .concert {
+                    background-color: var(--o-orange);
+                    border: 1px solid var(--o-black);
+                    padding: 0.5rem;
+                    .location {
+                        display: flex;
+                        gap: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}

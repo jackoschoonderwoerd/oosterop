@@ -2,12 +2,14 @@ main {
     display: grid;
     grid-template-columns: 5fr 1fr;
     gap: 1rem;
+    padding: 1rem;
     .o-images {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
         gap: 1rem;
         .o-image {
             border: 1px solid var(--o-black);
+            background-color: var(--o-orange);
             padding: 1rem;
             img {
                 width: 100%;

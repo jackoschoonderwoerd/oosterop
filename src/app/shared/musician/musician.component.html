@@ -1,6 +1,9 @@
 <div class="musician">
     <div class="left">
         <div class="name">{{musician.name}}</div>
+        @if(musician.context){
+        <div class="context">{{musician.context}}</div>
+        }
         <div class="instruments">
             @for(instrument of musician.instruments;track instrument) {
             <div class="instrument">{{instrument}}</div>

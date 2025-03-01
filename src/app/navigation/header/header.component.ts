@@ -7,11 +7,16 @@ import { UiStore } from '../../services/ui.store';
 import { AuthStore } from '../../auth/auth.store';
 import { BehaviorSubject, Observable, take } from 'rxjs';
 import { Band } from '../../shared/models/band.model';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { FirestoreService } from '../../services/firestore.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { Anouncement } from '../../shared/models/anouncement.model';
+
+interface BandsByInitiator {
+    initiator: string;
+    bands: Band[]
+}
 
 @Component({
     selector: 'app-header',
@@ -21,7 +26,8 @@ import { Anouncement } from '../../shared/models/anouncement.model';
         MatIconModule,
         AsyncPipe,
         MatMenuModule,
-        MatButtonModule
+        MatButtonModule,
+        JsonPipe
     ],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
@@ -42,6 +48,7 @@ export class HeaderComponent implements OnInit {
     visitorMenuItems: string[] = [];
     router = inject(Router);
     subMenuItems: string[] = []
+    bandsByInitiatorArray: BandsByInitiator[] = []
     // bands$: Observable<Band[]>
 
     @Output() sidenavToggle = new EventEmitter<void>();
@@ -60,8 +67,10 @@ export class HeaderComponent implements OnInit {
         this.fs.sortedCollection('bands', 'seqNr', 'asc')
             .pipe(take(1))
             .subscribe((bands: Band[]) => {
+                this.sortBandsByInitiator(bands);
+                // return;
                 this.bandsSubject.next(bands)
-                this.bands$ = this.bandsSubject.asObservable()
+                this.bands$ = this.bandsSubject.asObservable();
             })
     }
     getAnouncements() {
@@ -73,11 +82,17 @@ export class HeaderComponent implements OnInit {
             })
     }
     onBandSelected(bandId: string) {
-        console.log(bandId)
+        console.log(bandId);
+        // return;
         this.router.navigate(['visitor-band', { bandId }])
+        this.uiStore.setBandId(bandId)
+
     }
     onAnouncementSelected(anouncementId: string) {
         this.router.navigate(['visitor-anouncement', { anouncementId }])
+    }
+    onVisitorTourPeriods() {
+        this.router.navigateByUrl('visitor-tour-periods');
     }
 
 
@@ -87,5 +102,35 @@ export class HeaderComponent implements OnInit {
     }
     onLogout() {
         this.authStore.logout();
+    }
+
+
+
+    sortBandsByInitiator(bands: Band[]) {
+        // let bandsByInitiatorArray: BandsByInitiator[] = []
+        // create empty arrays
+        bands.forEach((band: Band) => {
+            const bandsByInitiator: BandsByInitiator = {
+                initiator: band.initiator ? band.initiator : band.name,
+                bands: []
+            }
+            this.bandsByInitiatorArray.push(bandsByInitiator);
+        })
+        // remove duplicates
+        this.bandsByInitiatorArray = [...new Map(this.bandsByInitiatorArray.map(obj => [obj.initiator, obj])).values()];
+        console.log(this.bandsByInitiatorArray)
+
+        // add bands to initiator
+
+        bands.forEach((band: Band) => {
+            // console.log(band)
+            this.bandsByInitiatorArray.forEach((bandsByInitator: BandsByInitiator, index) => {
+                if (band.initiator === bandsByInitator.initiator) {
+                    this.bandsByInitiatorArray[index].bands.push(band)
+                }
+            })
+        })
+        console.log(this.bandsByInitiatorArray)
+
     }
 }

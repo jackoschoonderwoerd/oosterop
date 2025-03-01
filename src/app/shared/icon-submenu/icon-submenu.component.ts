@@ -24,9 +24,9 @@ export class IconSubmenuComponent implements OnInit {
         setTimeout(() => {
 
             if (this.uiStore.band()) {
-                this.bandId = this.uiStore.band().id
+                this.bandId = this.uiStore.bandId()
+                console.log(this.bandId)
             }
-            console.log(this.bandId)
         }, 1000);
     }
 

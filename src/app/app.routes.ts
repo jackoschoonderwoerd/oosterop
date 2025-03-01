@@ -120,6 +120,21 @@ export const routes: Routes = [
                 .then(c => c.BandConcertsComponent)
     },
     {
+        path: 'tour-periods', loadComponent:
+            () => import('./pages/admin/tour-periods/tour-periods.component')
+                .then(c => c.TourPeriodsComponent)
+    },
+    // {
+    //     path: 'events', loadComponent:
+    //         () => import('./pages/admin/events/events.component.tsXXX')
+    //             .then(c => c.EventsComponent)
+    // },
+    {
+        path: ('upcoming-events'), loadComponent:
+            () => import('./pages/admin/upcoming-events/upcoming-events.component')
+                .then(c => c.UpcomingEventsComponent)
+    },
+    {
         path: 'edit-o-image', loadComponent:
             () => import('./shared/edit-o-image/edit-o-image.component')
                 .then(c => c.EditOImageComponent)
@@ -150,9 +165,14 @@ export const routes: Routes = [
                 .then(c => c.VisitorAnouncementComponent)
     },
     {
-        path: 'tour-periods', loadComponent:
-            () => import('./pages/admin/tour-periods/tour-periods.component')
-                .then(c => c.TourPeriodsComponent)
+        path: 'visitor-tour-periods', loadComponent:
+            () => import('./pages/visitor/visitor-tour-periods/visitor-tour-periods.component')
+                .then(c => c.VisitorTourPeriodsComponent)
+    },
+    {
+        path: 'visitor-events', loadComponent:
+            () => import('./pages/visitor/visitor-events/visitor-events.component')
+                .then(c => c.VisitorEventsComponent)
     },
     {
         path: '**', redirectTo: 'visitor-anouncement', pathMatch: 'full'

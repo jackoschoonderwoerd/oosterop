@@ -1,0 +1,82 @@
+<main>
+
+    <mat-button-toggle-group>
+        <mat-button-toggle [checked]="seeFutureEvents"
+            (click)="onButtonToggle('upcoming')">upcoming</mat-button-toggle>
+        <mat-button-toggle (click)="onButtonToggle('past')">Past</mat-button-toggle>
+
+    </mat-button-toggle-group>
+
+
+    @if(seeFutureEvents){
+
+    <div class="events future-events">
+        @for(event of futureCollectedGroupedConcerts;track event) {
+        <div class="event">
+            <div class="band-name">{{event.bandName}}</div>
+            <div class="concerts">
+                @for(concert of event.concerts; track concert){
+                @if(concert.visible){
+                <div class="concert">
+                    <div class="date">{{concert.date.seconds*1000|date}}</div>
+                    <div class="venue-name">{{concert.venueName}}</div>
+                    <div class="location">
+                        <div class="city">{{concert.city}}</div>
+                        <div class="country">{{concert.country}}</div>
+                    </div>
+                </div>
+                }
+                }
+            </div>
+        </div>
+        }
+    </div>
+    }
+    @if(!seeFutureEvents) {
+
+    <mat-accordion>
+        @for(event of pastCollectedGroupedConcerts; track event){
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{event.bandName}} </mat-panel-title>
+
+            </mat-expansion-panel-header>
+            <div class="concerts">
+                @for(concert of event.concerts; track concert){
+                @if(concert.visible){
+                <div class="concert">
+                    <div class="date">{{concert.date.seconds*1000|date}}</div>
+                    <div class="venue-name">{{concert.venueName}}</div>
+                    <div class="location">
+                        <div class="city">{{concert.city}}</div>
+                        <div class="country">{{concert.country}}</div>
+                    </div>
+                </div>
+                }
+                }
+            </div>
+        </mat-expansion-panel>
+        }
+
+    </mat-accordion>
+    }
+</main>
+
+<!-- <div class="events past-events">
+    @for(event of pastCollectedGroupedConcerts;track event) {
+    <div class="event">
+        <div class="band-name">{{event.bandName}}</div>
+        <div class="concerts">
+            @for(concert of event.concerts; track concert){
+            <div class="concert">
+                <div class="date">{{concert.date.seconds*1000|date}}</div>
+                <div class="venue-name">{{concert.venueName}}</div>
+                <div class="city">{{concert.city}}</div>
+                <div class="country">{{concert.country}}</div>
+            </div>
+            }
+        </div>
+    </div>
+    }
+</div> -->

@@ -7,7 +7,7 @@ import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthStore } from '../../../auth/auth.store';
-import { BandMenuItem } from '../../../shared/models/band-ment-item.model';
+import { BandMenuItem } from '../../../shared/models/band-menu-item.model';
 import { BehaviorSubject, take } from 'rxjs';
 import { Band } from '../../../shared/models/band.model';
 import { MatMenuModule } from '@angular/material/menu';

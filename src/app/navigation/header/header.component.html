@@ -1,6 +1,6 @@
 <mat-toolbar>
     <!-- {{bands$|async}} -->
-    <!-- <ul class="left">
+    <ul class="left">
         <li class="list-item-menu">
             <mat-icon (click)="onToggleSidenav()">menu</mat-icon>
         </li>
@@ -8,13 +8,14 @@
             class="list-item-home">
             <mat-icon>home</mat-icon>
         </li>
-    </ul> -->
+    </ul>
     <div class="visitor-menu">
+        <div class="version">12</div>
+
 
         <button mat-icon-button>
             <mat-icon [matMenuTriggerFor]="anouncementsMenu">home</mat-icon>
         </button>
-
         <mat-menu #anouncementsMenu="matMenu">
             @for(anouncement of anouncements$|async; track anouncement.id){
             @if(anouncement.visible) {
@@ -28,41 +29,35 @@
         <button mat-button
             [matMenuTriggerFor]="bandsMenu">bands</button>
         <mat-menu #bandsMenu="matMenu">
-            @for(band of bands$|async; track band.id){
-            @if(band.visible) {
-
+            @for(bandsByInitiator of bandsByInitiatorArray; track bandsByInitiator){
+            <!-- FOR INITIATORS WITH MORE THAN ONE BAND -->
+            @if(bandsByInitiator.bands.length > 1){
             <button mat-menu-item
-                (click)="onBandSelected(band.id)">{{band.name}}</button>
+                [matMenuTriggerFor]="sub_menu">{{bandsByInitiator?.initiator}}
+
+                <mat-menu #sub_menu="matMenu">
+                    @for(band of bandsByInitiator?.bands; track bandName){
+                    <button mat-menu-item
+                        (click)="onBandSelected(band.id)">{{band.name}}</button>
+                    }
+                </mat-menu>
+
+            </button>
+
+            } @else {
+            <!-- FOR INITIATORS WITH JUST ONE BAND -->
+            <button (click)="onBandSelected(bandsByInitiator.bands[0].id)"
+                mat-menu-item>{{bandsByInitiator?.bands[0].name}}</button>
             }
             }
         </mat-menu>
 
-        <button mat-button>tour periods</button>
-
-        <button mat-icon-button>
-            <mat-icon> contact_mail</mat-icon>
-        </button>
 
 
-
-        <!-- <button mat-button
-            [matMenuTriggerFor]="anouncementsMenu">anouncements</button>
-        <mat-menu #anouncementsMenu="matMenu">
-            @for(anouncement of anouncements$|async; track anouncement.id){
-            @if(anouncement.visible) {
-
-            <button mat-menu-item
-                (click)="onAnouncementSelected(anouncement.id)">{{anouncement.header}}</button>
-            }
-            }
-        </mat-menu> -->
+        <button mat-button
+            (click)="onVisitorTourPeriods()">tour periods</button>
 
 
-        <!-- <ul class="visitor-menu-items">
-            @for(menuItem of visitorMenuItems;track menuItem) {
-            <li class="menuItem"><a [routerLink]="menuItem">{{menuItem}}</a></li>
-            }
-        </ul> -->
 
     </div>
     <div class="admin-menu">

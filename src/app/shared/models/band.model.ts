@@ -11,6 +11,7 @@ export interface Band {
     seqNr: number;
     visible: boolean;
     name: string;
+    initiator: string;
     bandMemberIds?: string[];
     oImages?: OImage[];
     body?: string;
@@ -22,5 +23,4 @@ export interface Band {
     galleryImages?: OImage[];
     oAudios?: OAudio[];
     concerts?: Concert[];
-
 }

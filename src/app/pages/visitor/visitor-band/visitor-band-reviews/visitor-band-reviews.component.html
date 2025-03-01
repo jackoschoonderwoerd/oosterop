@@ -4,9 +4,13 @@
         <mat-accordion>
             @for(review of reviews;track review){
 
-            <mat-expansion-panel hideToggle>
+            <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                    <mat-panel-title>{{review.author ? review.author: review.publishedBy}}, {{review.datePublished|date}}</mat-panel-title>
+                    <mat-panel-title>
+                        {{review.author ? review.author: review.publishedBy}}
+                        @if(review.datePublished){
+                        &nbsp;-&nbsp;{{review.datePublished|date}}
+                        }</mat-panel-title>
                     <!-- <mat-panel-description>{{review.datePublished|date}} </mat-panel-description> -->
                 </mat-expansion-panel-header>
                 <div class="body"

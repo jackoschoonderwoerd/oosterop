@@ -8,11 +8,12 @@ import { MusicianComponent } from '../../../shared/musician/musician.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NavigationService } from '../../../navigation/navigation.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { JsonPipe } from '@angular/common';
+import { DatePipe, JsonPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { IconSubmenuComponent } from '../../../shared/icon-submenu/icon-submenu.component';
 import { UiStore } from '../../../services/ui.store';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
     selector: 'app-visitor-band',
@@ -23,7 +24,9 @@ import { UiStore } from '../../../services/ui.store';
         JsonPipe,
         MatIconModule,
         MatButtonModule,
-        IconSubmenuComponent
+        IconSubmenuComponent,
+        MatExpansionModule,
+        DatePipe
     ],
     templateUrl: './visitor-band.component.html',
     styleUrl: './visitor-band.component.scss'
@@ -32,7 +35,7 @@ export class VisitorBandComponent implements OnInit {
     route = inject(ActivatedRoute)
     fs = inject(FirestoreService)
     band: Band;
-    musicians: Musician[] = [];
+    bandMembers: Musician[] = [];
     navigationService = inject(NavigationService)
     subMenuItems: string[] = [];
     uiStore = inject(UiStore)
@@ -40,6 +43,7 @@ export class VisitorBandComponent implements OnInit {
     ngOnInit(): void {
         this.route.paramMap.subscribe((params: any) => {
             const bandId = params.get('bandId')
+            this.bandMembers = [];
             this.getBand(bandId)
         })
     }
@@ -59,10 +63,10 @@ export class VisitorBandComponent implements OnInit {
     }
     getBandMembers(bandMemberIds: string[]) {
         bandMemberIds.forEach((memberId: string) => {
-            this.musicians = [];
+            this.bandMembers = [];
             const path = `musicians/${memberId}`
-            this.fs.getDoc(path).pipe(take(1)).subscribe((musician: Musician) => {
-                this.musicians.push(musician)
+            this.fs.getDoc(path).pipe(take(1)).subscribe((bandMember: Musician) => {
+                this.bandMembers.push(bandMember)
             })
         })
     }

@@ -5,6 +5,9 @@
         <div class="musician">
             <div class="musician-details">
                 <div class="name">{{musician.name}}</div>
+                @if(musician.context) {
+                <div class="context"><span>context:&nbsp;</span>{{musician.context}}</div>
+                }
                 <div class="instruments">
 
                     @for(instrument of musician.instruments; track instrument) {

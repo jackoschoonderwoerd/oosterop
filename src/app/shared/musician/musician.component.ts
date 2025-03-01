@@ -4,10 +4,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthStore } from '../../auth/auth.store';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
     selector: 'app-musician',
-    imports: [MatIconModule, MatButtonModule],
+    imports: [MatIconModule, MatButtonModule, MatExpansionModule],
     templateUrl: './musician.component.html',
     styleUrl: './musician.component.scss'
 })

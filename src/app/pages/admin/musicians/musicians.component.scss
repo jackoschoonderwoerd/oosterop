@@ -14,6 +14,7 @@ main {
             // width: 100%;
             // min-width: 300px;
             // max-width: 600px;
+            background-color: var(--o-orange);
             padding: 0.5rem;
             border: 1px solid var(--o-black);
             display: flex;
@@ -23,7 +24,11 @@ main {
                 flex-direction: column;
 
                 .name {
+                    text-transform: capitalize;
                     font-weight: bold;
+                }
+                .context {
+                    color: green;
                 }
                 .instruments {
                     font-style: italic;

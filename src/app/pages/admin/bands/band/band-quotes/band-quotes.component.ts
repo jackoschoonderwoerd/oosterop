@@ -99,6 +99,7 @@ export class BandQuotesComponent implements OnInit {
                 console.log(res);
                 this.textEditorService.passBodyToEditor('')
                 this.getQuotes();
+                this.quoteForm.reset();
             })
             .catch((err: FirebaseError) => {
                 console.log(err)
