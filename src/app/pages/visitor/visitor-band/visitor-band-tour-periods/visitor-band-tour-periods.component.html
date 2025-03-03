@@ -1,0 +1,16 @@
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>tour periods</mat-panel-title>
+    </mat-expansion-panel-header>
+    @for(period of tourPeriods;track period){
+    @if(period.visible) {
+    <div class="period">
+        <div class="dates">
+            <div class="startDate">{{period.startDate.seconds*1000|date}}</div>
+            <span>-</span>
+            <div class="endDate">{{period.endDate.seconds*1000|date}}</div>
+        </div>
+    </div>
+    }
+    }
+</mat-expansion-panel>

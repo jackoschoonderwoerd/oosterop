@@ -120,15 +120,15 @@ export const routes: Routes = [
                 .then(c => c.BandConcertsComponent)
     },
     {
+        path: 'band-tour-periods', loadComponent:
+            () => import('./pages/admin/bands/band/band-tour-periods/band-tour-periods.component')
+                .then(c => c.BandTourPeriodsComponent)
+    },
+    {
         path: 'tour-periods', loadComponent:
             () => import('./pages/admin/tour-periods/tour-periods.component')
                 .then(c => c.TourPeriodsComponent)
     },
-    // {
-    //     path: 'events', loadComponent:
-    //         () => import('./pages/admin/events/events.component.tsXXX')
-    //             .then(c => c.EventsComponent)
-    // },
     {
         path: ('upcoming-events'), loadComponent:
             () => import('./pages/admin/upcoming-events/upcoming-events.component')
@@ -149,11 +149,7 @@ export const routes: Routes = [
             () => import('./pages/visitor/visitor-band/visitor-band-reviews/visitor-band-reviews.component')
                 .then(c => c.VisitorBandReviewsComponent)
     },
-    {
-        path: 'visitor-band-audios', loadComponent:
-            () => import('./pages/visitor/visitor-band/visitor-band-audios/visitor-band-audios.component')
-                .then(c => c.VisitorBandAudiosComponent)
-    },
+
     {
         path: 'visitor-concerts', loadComponent:
             () => import('./pages/visitor/visitor-band/visitor-band-concerts/visitor-band-concerts.component')
@@ -173,6 +169,11 @@ export const routes: Routes = [
         path: 'visitor-events', loadComponent:
             () => import('./pages/visitor/visitor-events/visitor-events.component')
                 .then(c => c.VisitorEventsComponent)
+    },
+    {
+        path: 'visitor-iframe', loadComponent:
+            () => import('./pages/visitor/visitor-iframe/visitor-iframe.component')
+                .then(c => c.VisitorIframeComponent)
     },
     {
         path: '**', redirectTo: 'visitor-anouncement', pathMatch: 'full'

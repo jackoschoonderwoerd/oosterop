@@ -3,18 +3,18 @@
     <div class="o-audios">
         @for(oAudio of oAudios;track oAudio; let index = $index){
         <div class="o-audio">
-            <div class="title_visible">
-                <div class="title">{{oAudio.title}}</div>
+            <div class="left">
                 <div class="visible">
-                    @if(oAudio.visible) {
-                    <mat-icon>visibility</mat-icon>
-                    }
                     @if(!oAudio.visible){
                     <mat-icon>visibility_off</mat-icon>
                     }
+                    @if(oAudio.visible) {
+                    <mat-icon>visibility</mat-icon>
+                    }
+                    <div class="title">{{oAudio.title}}</div>
+                    <div class="comments">{{oAudio.comments}}</div>
                 </div>
             </div>
-            <div class="comments">{{oAudio.comments}}</div>
             <div class="code"
                 [innerHTML]="oAudio.code"></div>
             <div class="buttons">

@@ -69,7 +69,7 @@ export class BandConcertsComponent implements OnInit {
             venueUrl: new FormControl(null),
             city: new FormControl(null),
             country: new FormControl(null),
-            visible: new FormControl(null, [Validators.required])
+            visible: new FormControl(true, [Validators.required])
         })
     }
     onAddOrUpdateConcert() {

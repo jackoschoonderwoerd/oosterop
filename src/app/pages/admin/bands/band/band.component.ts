@@ -88,7 +88,9 @@ export class BandComponent implements OnInit {
     onConcerts() {
         this.router.navigate(['band-concerts', { bandId: this.bandId }])
     }
-
+    onTourPeriods() {
+        this.router.navigate(['band-tour-periods', { bandId: this.bandId }])
+    }
     onCancel() {
         this.router.navigateByUrl('bands')
     }

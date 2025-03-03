@@ -1,0 +1,16 @@
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title> discography </mat-panel-title>
+
+    </mat-expansion-panel-header>
+    @for(recording of recordings; track recording) {
+    <div class="recording">
+
+        <div class="year">{{recording.year}}</div>
+
+        <div class="title">{{recording.title}}</div>
+        <div class="label">{{recording.label}}</div>
+    </div>
+    <!-- <hr> -->
+    }
+</mat-expansion-panel>

@@ -1,0 +1,15 @@
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>quotes</mat-panel-title>
+    </mat-expansion-panel-header>
+    @for(quote of quotes;track quote){
+    <div class="quote">
+        <div class="quote-body"
+            [innerHTML]="quote.body"></div>
+        <div class="published-by">{{quote.publishedBy}}</div>
+        <div class="author">{{quote.author}}</div>
+
+    </div>
+    <!-- <hr> -->
+    }
+</mat-expansion-panel>

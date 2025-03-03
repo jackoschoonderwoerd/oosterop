@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from '../../../../services/firestore.service';
 import { Review } from '../../../../shared/models/review.model';
@@ -13,16 +13,18 @@ import { MatExpansionModule } from '@angular/material/expansion';
     styleUrl: './visitor-band-reviews.component.scss'
 })
 export class VisitorBandReviewsComponent implements OnInit {
+    @Input() public reviews: Review[]
     route = inject(ActivatedRoute)
     bandId: string;
     fs = inject(FirestoreService)
-    reviews: Review[]
+    // reviews: Review[]
 
     ngOnInit(): void {
-        this.bandId = this.route.snapshot.paramMap.get('bandId')
-        this.fs.getFieldInDocument(`bands/${this.bandId}`, 'reviews')
-            .then((reviews: Review[]) => {
-                this.reviews = reviews
-            })
+        console.log(this.reviews)
+        // this.bandId = this.route.snapshot.paramMap.get('bandId')
+        // this.fs.getFieldInDocument(`bands/${this.bandId}`, 'reviews')
+        //     .then((reviews: Review[]) => {
+        //         this.reviews = reviews
+        //     })
     }
 }

@@ -1,0 +1,34 @@
+// .quotes {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.5rem;
+//     .quote {
+//         background-color: var(--o-lightgray);
+//         padding: 0.5rem;
+//         @media (min-width: 600px) {
+//             padding: 1rem 2rem;
+//         }
+//         .quote-body {
+//             font-style: italic;
+//         }
+//     }
+// }
+mat-expansion-panel {
+    background-color: var(--o-orange);
+
+    mat-expansion-panel-header {
+        text-transform: uppercase;
+    }
+    .quote {
+        margin-bottom: 0.2rem;
+        background-color: var(--o-lightgray);
+        padding: 0.5rem;
+        // border-bottom: 1px solid var(--o-black);
+        // @media (min-width: 600px) {
+        //     padding: 1rem 2rem;
+        // }
+        .quote-body {
+            font-style: italic;
+        }
+    }
+}

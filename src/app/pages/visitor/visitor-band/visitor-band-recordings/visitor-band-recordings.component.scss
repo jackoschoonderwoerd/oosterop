@@ -1,0 +1,15 @@
+mat-expansion-panel {
+    background-color: var(--o-orange);
+
+    mat-expansion-panel-header {
+        text-transform: uppercase;
+    }
+    .recording {
+        background-color: var(--o-lightgray);
+        padding: 0.2rem 0.5rem;
+        margin-bottom: 0.2rem;
+        .title {
+            font-weight: bold;
+        }
+    }
+}

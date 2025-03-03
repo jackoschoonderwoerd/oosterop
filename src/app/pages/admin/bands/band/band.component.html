@@ -5,7 +5,7 @@
             (click)="onPrimary()">primary
         </button>
         <div class="seq-nr"><span>Seq. nr:&nbsp;</span>{{band?.seqNr}}</div>
-        <div class="initiator"><span>initiator:</span>&nbsp;{{band.initiator}}</div>
+        <div class="initiator"><span>initiator:</span>&nbsp;{{band?.initiator}}</div>
         <div class="name"><span>name:&nbsp;</span>{{band?.name}}</div>
         <div class="visible"><span>visible:&nbsp;</span>{{band?.visible}}</div>
     </div>
@@ -16,14 +16,9 @@
         @for(bandMember of bandMembers;track bandMember.name) {
         <div class="band-member">
             <app-musician [musician]="bandMember"></app-musician>
-            <!-- <div class="member-name">{{bandMember.name}}</div>
-            <div class="instruments">
-                @for(instrument of bandMember.instruments; track instrument) {
-                <div class="instrument">{{instrument}}</div>
-                }
-            </div> -->
         </div>
         }
+
     </div>
     <div class="o-images band-property">
         <button mat-raised-button
@@ -123,10 +118,14 @@
             @for(concert of band?.concerts;track concert){
             <div class="concert">
                 <div class="left">
-                    <div class="date">{{concert?.date.seconds*1000|date}}</div>
-                    <div class="venueName">{{concert?.venueName}}</div>
-                    <div class="city">{{concert?.city}}</div>
-                    <div class="country">{{concert?.country}}</div>
+                    <div class="date_venue-name">
+                        <div class="date">{{concert?.date.seconds*1000|date}}</div>
+                        <div class="venue-name">{{concert?.venueName}}</div>
+                    </div>
+                    <div class="city_country">
+                        <div class="city">{{concert?.city}}</div>
+                        <div class="country">{{concert?.country}}</div>
+                    </div>
                 </div>
                 <div class="visible">
                     @if(concert?.visible) {
@@ -137,6 +136,23 @@
                 </div>
             </div>
             <hr>
+            }
+        </div>
+        }
+    </div>
+    <div class="tour-periods-container band-property">
+        <button mat-raised-button
+            (click)="onTourPeriods()">tour periods</button>
+        @for(period of band?.tourPeriods; track period) {
+        <div class="period">
+            <div class="dates">
+                <div class="start-date">{{period.startDate.seconds*1000|date}}</div>
+                <div class="end-date">{{period.endDate.seconds*1000|date}}</div>
+            </div>
+            @if(period.visible) {
+            <mat-icon>visibility</mat-icon>
+            } @else {
+            <mat-icon>visibility_off</mat-icon>
             }
         </div>
         }

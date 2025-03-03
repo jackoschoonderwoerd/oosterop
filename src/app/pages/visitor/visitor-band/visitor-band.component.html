@@ -1,4 +1,3 @@
-<app-icon-submenu></app-icon-submenu>
 <main>
     <div class="band">
         <div class="name">{{band?.name}}</div>
@@ -16,102 +15,43 @@
         </div>
         }
 
-
         @if(bandMembers && bandMembers.length > 0) {
-        <mat-accordion class="band-members-accordion">
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>line up</mat-panel-title>
-                </mat-expansion-panel-header>
-                <div class="band-members">
-                    @for(bandMember of bandMembers;track bandMember){
-                    <div class="band-member">
-                        <div class="band-member-name">{{bandMember.name}}</div>
-                        <div class="instruments">
-                            @for(instrument of bandMember.instruments; track instrument) {
-                            <div class="instrument">{{instrument}}</div>
-                            }
-                        </div>
-                    </div>
-                    }
-                </div>
-            </mat-expansion-panel>
-        </mat-accordion>
+        <app-visitor-band-bandmembers [bandMembers]="bandMembers"></app-visitor-band-bandmembers>
         }
 
-        @if(band?.concerts && band?.concerts.length > 0) {
-        <mat-accordion class="concerts-accordion">
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>concerts</mat-panel-title>
-                </mat-expansion-panel-header>
-                <div class="concerts">
-                    @for(concert of band?.concerts;track concert){
-                    @if(concert.visible) {
-                    <div class="concert">
-                        <div class="date">{{concert.date.seconds*1000|date}}</div>
-                        <div class="venue-name">{{concert.venueName}}</div>
-                        <div class="location">
-                            @if(concert.city){
-                            <div class="city">{{concert.city}}</div>
-                            }
-                            @if(concert.country){
-                            <div class="coutry">{{concert.country}}</div>
-                            }
-                        </div>
-                    </div>
-                    }
-                    }
-                </div>
-            </mat-expansion-panel>
-        </mat-accordion>
-        }
+
 
         @if(band?.body && band?.body !== '') {
         <div class="body"
             [innerHTML]="band?.body"></div>
         }
 
-        <div class="links">
-            @for(link of band?.links; track link) {
-            <div class="link">
-                <mat-icon>link</mat-icon>
-                <a target="_blank"
-                    [href]="link.url">{{link.title}}</a>
-            </div>
-            }
-        </div>
-
-        @if(band?.quotes && band?.quotes.length > 0) {
-        <div class="quotes">
-            <div class="header">quotes</div>
-            @for(quote of band?.quotes;track quote){
-            <div class="quote">
-                <div class="quote-body"
-                    [innerHTML]="quote.body"></div>
-                <div class="published-by">{{quote.publishedBy}}</div>
-                <div class="author">{{quote.author}}</div>
-
-            </div>
-            }
-        </div>
+        @if(band?.quotes && band.quotes.length > 0) {
+        <app-visitor-band-quotes [quotes]="band.quotes"></app-visitor-band-quotes>
         }
 
-        @if(band?.recordings && band?.recordings.length > 0) {
-        <div class="recordings">
-            <div class="header">discography</div>
-            @for(recording of band?.recordings; track recording) {
-            <div class="recording">
+        @if(band?.concerts && band?.concerts.length > 0) {
+        <app-visitor-band-concerts [band]="band"></app-visitor-band-concerts>
+        }
 
-                <div class="year">{{recording.year}}</div>
-                <div class="title_label">
-                    <div class="title">{{recording.title}}</div>
-                    <div class="label">{{recording.label}}</div>
-                </div>
+        @if(band?.reviews && band.reviews.length > 0){
+        <app-visitor-band-reviews [reviews]="band.reviews"></app-visitor-band-reviews>
+        }
 
-            </div>
-            }
-        </div>
+        @if(band?.oAudios && band.oAudios.length > 0) {
+        <app-visitor-band-audio-video [oAudios]="band.oAudios"></app-visitor-band-audio-video>
+        }
+
+        @if(band?.links && band.links.length > 0) {
+        <app-visitor-band-links [links]="band.links"></app-visitor-band-links>
+        }
+
+        @if(band?.recordings && band.recordings.length > 0) {
+        <app-visitor-band-recordings [recordings]="band.recordings"></app-visitor-band-recordings>
+        }
+
+        @if(band?.tourPeriods && band.tourPeriods?.length > 0) {
+        <app-visitor-band-tour-periods [tourPeriods]="band.tourPeriods"></app-visitor-band-tour-periods>
         }
     </div>
 </main>

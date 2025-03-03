@@ -29,4 +29,29 @@ main {
             }
         }
     }
+    .concerts-container {
+        .concerts {
+            .concert {
+                display: flex;
+                justify-content: space-between;
+                .left {
+                    .date_venue-name,
+                    .city_country {
+                        display: flex;
+                        gap: 1rem;
+                    }
+                }
+            }
+        }
+    }
+    .tour-periods-container {
+        .period {
+            display: flex;
+            justify-content: space-between;
+            .dates {
+                display: flex;
+                gap: 1rem;
+            }
+        }
+    }
 }

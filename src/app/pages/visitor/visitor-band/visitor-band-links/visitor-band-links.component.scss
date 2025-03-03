@@ -1,0 +1,22 @@
+mat-expansion-panel {
+    background-color: var(--o-orange);
+
+    mat-expansion-panel-header {
+        text-transform: uppercase;
+    }
+
+    .link {
+        background-color: var(--o-lightgray);
+        margin-bottom: 0.2rem;
+        padding: 0.2rem 0.5rem;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        cursor: pointer;
+        // a {
+        //     display: flex;
+        //     gap: 1rem;
+        //     align-items: center;
+        // }
+    }
+}

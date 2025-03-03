@@ -1,0 +1,17 @@
+mat-expansion-panel {
+    background-color: var(--o-orange);
+    mat-expansion-panel-header {
+        mat-panel-title {
+            text-transform: uppercase;
+        }
+    }
+
+    .period {
+        padding: 0.2rem 0.5rem;
+        border: 1px solid var(--o-black);
+        .dates {
+            display: flex;
+            gap: 1rem;
+        }
+    }
+}

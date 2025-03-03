@@ -8,21 +8,26 @@ main {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 1rem;
         .concert {
+            display: flex;
+            justify-content: space-between;
             background-color: var(--o-orange);
             padding: 1rem;
             border: 1px solid var(--o-black);
             align-self: start;
-            .date_visible {
-                display: flex;
-                justify-content: space-between;
-            }
-            .city_country {
-                display: flex;
-                gap: 1rem;
+            .left {
+                .date_visible {
+                    display: flex;
+                    gap: 1rem;
+                    align-items: center;
+                }
+                .city_country {
+                    display: flex;
+                    gap: 1rem;
+                }
             }
             .buttons {
                 display: flex;
-                gap: 1rem;
+                flex-direction: column;
                 justify-content: end;
             }
         }

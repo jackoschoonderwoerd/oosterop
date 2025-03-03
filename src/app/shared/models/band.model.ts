@@ -5,6 +5,7 @@ import { Review } from "./review.model";
 import { OVideo } from "./video.model";
 import { OAudio } from "./o-audio.model";
 import { Concert } from "./concert.model";
+import { TourPeriod } from "./tour-period-model";
 
 export interface Band {
     id?: string;
@@ -23,4 +24,5 @@ export interface Band {
     galleryImages?: OImage[];
     oAudios?: OAudio[];
     concerts?: Concert[];
+    tourPeriods?: TourPeriod[];
 }

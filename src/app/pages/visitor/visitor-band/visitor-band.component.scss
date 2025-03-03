@@ -25,7 +25,7 @@ main {
         .name {
             font-size: 2rem;
             font-weight: bold;
-            color: var(--o-red);
+            color: var(--o-orange);
             text-transform: capitalize;
         }
 
@@ -37,6 +37,7 @@ main {
                     width: 100%;
                 }
                 .photographer-name {
+                    font-size: 0.8rem;
                     padding: 3px;
                     position: absolute;
                     right: 10px;
@@ -47,59 +48,80 @@ main {
             }
         }
 
-        .band-members-accordion {
-            mat-expansion-panel {
-                background-color: var(--o-orange);
-                mat-expansion-panel-header {
-                    text-transform: uppercase;
-                }
-            }
-            .band-members {
-                display: flex;
-                flex-direction: column;
-                gap: 0.2rem;
-                .band-member {
-                    // display: flex;
-                    padding: 0.2rem 0.5rem;
-                    border: 1px solid var(--o-black);
+        // .band-members-accordion {
+        //     mat-expansion-panel {
+        //         background-color: var(--o-orange);
+        //         mat-expansion-panel-header {
+        //             text-transform: uppercase;
+        //         }
+        //     }
+        //     .band-members {
+        //         display: flex;
+        //         flex-direction: column;
+        //         gap: 0.2rem;
+        //         .band-member {
+        //             // display: flex;
+        //             padding: 0.2rem 0.5rem;
+        //             border: 1px solid var(--o-black);
 
-                    justify-content: start;
-                    .band-member-name {
-                        font-weight: bold;
-                        text-transform: capitalize;
-                    }
-                    .instruments {
-                        font-style: italic;
-                        // display: flex;
-                        gap: 1rem;
-                    }
-                }
-            }
-        }
-        .concerts-accordion {
-            mat-expansion-panel {
-                background-color: var(--o-orange);
-                mat-expansion-panel-header {
-                    text-transform: uppercase;
-                }
-                .concerts {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.2rem;
-                    .concert {
-                        padding: 0.2rem 0.5rem;
-                        border: 1px solid var(--o-black);
-                        .date {
-                            font-weight: bold;
-                        }
-                        .location {
-                            display: flex;
-                            gap: 1rem;
-                        }
-                    }
-                }
-            }
-        }
+        //             justify-content: start;
+        //             .band-member-name {
+        //                 font-weight: bold;
+        //                 text-transform: capitalize;
+        //             }
+        //             .instruments {
+        //                 font-style: italic;
+        //                 // display: flex;
+        //                 gap: 1rem;
+        //             }
+        //         }
+        //     }
+        // }
+        // .concerts-accordion {
+        //     mat-expansion-panel {
+        //         background-color: var(--o-orange);
+        //         mat-expansion-panel-header {
+        //             text-transform: uppercase;
+        //         }
+        //         .concerts {
+        //             display: flex;
+        //             flex-direction: column;
+        //             gap: 0.2rem;
+        //             .concert {
+        //                 padding: 0.2rem 0.5rem;
+        //                 border: 1px solid var(--o-black);
+        //                 .date {
+        //                     font-weight: bold;
+        //                 }
+        //                 .location {
+        //                     display: flex;
+        //                     gap: 1rem;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        // .tour-periods-accordion {
+        //     mat-expansion-panel {
+        //         background-color: var(--o-orange);
+        //         mat-expansion-panel-header {
+        //             text-transform: uppercase;
+        //         }
+        //         .periods {
+        //             display: flex;
+        //             flex-direction: column;
+        //             gap: 0.2rem;
+        //             .period {
+        //                 padding: 0.2rem 0.5rem;
+        //                 border: 1px solid var(--o-black);
+        //                 .dates {
+        //                     display: flex;
+        //                     gap: 1rem;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
         .body {
             padding: 0.5rem;

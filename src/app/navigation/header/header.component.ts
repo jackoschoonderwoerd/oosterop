@@ -61,14 +61,16 @@ export class HeaderComponent implements OnInit {
         this.adminMenuItems = this.navigationService.getAdminMenuItems();
         this.getBands();
         this.getAnouncements();
+        this.navigationService.getBandsByInitiatorArray()
+            .then((bandsByInitiatorArray: BandsByInitiator[]) => {
+                this.bandsByInitiatorArray = bandsByInitiatorArray
+            })
 
     }
     getBands() {
         this.fs.sortedCollection('bands', 'seqNr', 'asc')
             .pipe(take(1))
             .subscribe((bands: Band[]) => {
-                this.sortBandsByInitiator(bands);
-                // return;
                 this.bandsSubject.next(bands)
                 this.bands$ = this.bandsSubject.asObservable();
             })
@@ -81,6 +83,7 @@ export class HeaderComponent implements OnInit {
                 this.anouncements$ = this.anouncementsSubject.asObservable()
             })
     }
+
     onBandSelected(bandId: string) {
         console.log(bandId);
         // return;
@@ -102,35 +105,5 @@ export class HeaderComponent implements OnInit {
     }
     onLogout() {
         this.authStore.logout();
-    }
-
-
-
-    sortBandsByInitiator(bands: Band[]) {
-        // let bandsByInitiatorArray: BandsByInitiator[] = []
-        // create empty arrays
-        bands.forEach((band: Band) => {
-            const bandsByInitiator: BandsByInitiator = {
-                initiator: band.initiator ? band.initiator : band.name,
-                bands: []
-            }
-            this.bandsByInitiatorArray.push(bandsByInitiator);
-        })
-        // remove duplicates
-        this.bandsByInitiatorArray = [...new Map(this.bandsByInitiatorArray.map(obj => [obj.initiator, obj])).values()];
-        console.log(this.bandsByInitiatorArray)
-
-        // add bands to initiator
-
-        bands.forEach((band: Band) => {
-            // console.log(band)
-            this.bandsByInitiatorArray.forEach((bandsByInitator: BandsByInitiator, index) => {
-                if (band.initiator === bandsByInitator.initiator) {
-                    this.bandsByInitiatorArray[index].bands.push(band)
-                }
-            })
-        })
-        console.log(this.bandsByInitiatorArray)
-
     }
 }

@@ -40,34 +40,81 @@ export class VisitorEventsComponent implements OnInit {
         return promise
     }
 
+
     getConcertGroupedByBandname(bands: Band[]) {
         bands.forEach((band: Band) => {
             if (band.concerts && band.concerts.length > 0) {
                 const futureGroupedConcerts: GroupedConcerts = {
                     bandName: band.name,
-                    concerts: band.concerts
+                    // concerts: band.concerts
+                    concerts: []
                 }
                 const pastGroupedConcerts: GroupedConcerts = {
                     bandName: band.name,
-                    concerts: band.concerts
+                    // concerts: band.concerts
+                    concerts: []
                 }
+                console.log(futureGroupedConcerts);
+                console.log(pastGroupedConcerts);
                 band.concerts.forEach((concert: Concert) => {
-                    console.log(concert.date.seconds > new Date().getTime() / 1000)
                     if (concert.date.seconds > new Date().getTime() / 1000) {
-                        this.futureCollectedGroupedConcerts.push(futureGroupedConcerts)
+                        console.log('future', concert.venueName)
+                        futureGroupedConcerts.concerts.push(concert)
+                        // this.futureCollectedGroupedConcerts.push(futureGroupedConcerts)
                     } else {
+                        console.log('past', concert.venueName)
+                        pastGroupedConcerts.concerts.push(concert)
                         this.pastCollectedGroupedConcerts.push(pastGroupedConcerts)
                     }
                 })
                 futureGroupedConcerts.concerts.sort((a: Concert, b: Concert) => b.date.seconds - a.date.seconds)
                 pastGroupedConcerts.concerts.sort((a: Concert, b: Concert) => b.date.seconds - a.date.seconds)
+                console.log('futureGroupedConcerts', futureGroupedConcerts);
+                console.log('pastGroupedConcerts', pastGroupedConcerts)
+
+                if (futureGroupedConcerts.concerts.length > 0) {
+                    this.futureCollectedGroupedConcerts.push(futureGroupedConcerts)
+                }
+                if (pastGroupedConcerts.concerts.length > 0) {
+                    this.pastCollectedGroupedConcerts.push(pastGroupedConcerts)
+                }
+
             }
         })
         this.futureCollectedGroupedConcerts = [...new Set(this.futureCollectedGroupedConcerts)]
         this.pastCollectedGroupedConcerts = [...new Set(this.pastCollectedGroupedConcerts)]
-        console.log(this.futureCollectedGroupedConcerts)
-        console.log(this.pastCollectedGroupedConcerts)
+
     }
+
+    // getConcertGroupedByBandname(bands: Band[]) {
+    //     bands.forEach((band: Band) => {
+    //         if (band.concerts && band.concerts.length > 0) {
+    //             const futureGroupedConcerts: GroupedConcerts = {
+    //                 bandName: band.name,
+    //                 concerts: band.concerts
+    //             }
+    //             const pastGroupedConcerts: GroupedConcerts = {
+    //                 bandName: band.name,
+    //                 concerts: band.concerts
+    //             }
+    //             console.log(futureGroupedConcerts);
+    //             console.log(pastGroupedConcerts);
+    //             band.concerts.forEach((concert: Concert) => {
+    //                 if (concert.date.seconds > new Date().getTime() / 1000) {
+    //                     console.log('future', concert.venueName)
+    //                     this.futureCollectedGroupedConcerts.push(futureGroupedConcerts)
+    //                 } else {
+    //                     console.log('past', concert.venueName)
+    //                     this.pastCollectedGroupedConcerts.push(pastGroupedConcerts)
+    //                 }
+    //             })
+    //             futureGroupedConcerts.concerts.sort((a: Concert, b: Concert) => b.date.seconds - a.date.seconds)
+    //             pastGroupedConcerts.concerts.sort((a: Concert, b: Concert) => b.date.seconds - a.date.seconds)
+    //         }
+    //     })
+    //     this.futureCollectedGroupedConcerts = [...new Set(this.futureCollectedGroupedConcerts)]
+    //     this.pastCollectedGroupedConcerts = [...new Set(this.pastCollectedGroupedConcerts)]
+    // }
 
     onButtonToggle(period: string) {
         if (period === 'upcoming') {

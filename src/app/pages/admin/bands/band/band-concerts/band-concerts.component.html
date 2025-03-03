@@ -2,23 +2,25 @@
     <div class="concerts">
         @for(concert of concerts;track concert; let index = $index) {
         <div class="concert">
-            <div class="date_visible">
+            <div class="left">
+                <div class="date_visible">
+                    <div class="date">{{concert.date.seconds*1000|date}}</div>
+                    <div class="venue-name">{{concert.venueName}}</div>
+                    @if(concert.visible) {
+                    <mat-icon>visibility</mat-icon>
+                    } @else {
+                    <mat-icon>visibility_off</mat-icon>
+                    }
+                </div>
+                <div class="city_country">
+                    @if(concert.city){
+                    <div class="city">{{concert.city}}</div>
+                    }
+                    @if(concert.country) {
+                    <div class="country">{{concert.country}}</div>
+                    }
+                </div>
 
-                <div class="date">{{concert.date.seconds*1000|date}}</div>
-                @if(concert.visible) {
-                <mat-icon>visibility</mat-icon>
-                } @else {
-                <mat-icon>visibility_off</mat-icon>
-                }
-            </div>
-            <div class="venue-name">{{concert.venueName}}</div>
-            <div class="city_country">
-                @if(concert.city){
-                <div class="city">{{concert.city}}</div>
-                }
-                @if(concert.country) {
-                <div class="country">{{concert.country}}</div>
-                }
             </div>
             <div class="buttons">
                 <button mat-icon-button
@@ -73,6 +75,7 @@
         <div class="buttons">
             <button class="button"
                 mat-raised-button
+                [disabled]="concertForm.invalid"
                 (click)="onAddOrUpdateConcert()">{{!editmode ? 'add': 'update'}}&nbsp;concert</button>
             <button mat-raised-button
                 (click)="onCancel()">cancel</button>

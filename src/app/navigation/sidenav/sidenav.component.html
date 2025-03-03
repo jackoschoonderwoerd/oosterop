@@ -1,11 +1,39 @@
 <section>
     <ul>
+        <button mat-button
+            [matMenuTriggerFor]="bandsMenu">visitor-bands</button>
+        <mat-menu #bandsMenu="matMenu">
+            @for(bandsByInitiator of bandsByInitiatorArray; track bandsByInitiator){
+            <!-- FOR INITIATORS WITH MORE THAN ONE BAND -->
+            @if(bandsByInitiator.bands.length > 1){
+            <button mat-menu-item
+                [matMenuTriggerFor]="sub_menu">{{bandsByInitiator?.initiator}}
+
+                <mat-menu #sub_menu="matMenu">
+                    @for(band of bandsByInitiator?.bands; track bandName){
+                    <button mat-menu-item
+                        (click)="onBandSelected(band.id)">{{band.name}}</button>
+                    }
+                </mat-menu>
+
+            </button>
+
+            } @else {
+            <!-- FOR INITIATORS WITH JUST ONE BAND -->
+            <button (click)="onBandSelected(bandsByInitiator.bands[0].id)"
+                mat-menu-item>{{bandsByInitiator?.bands[0].name}}</button>
+            }
+            }
+        </mat-menu>
         @for(menuItem of sideNavMenuItems;track menuItem){
-        <a mat-list-item
-            (click)="onClose()"
-            [routerLink]="menuItem.link">{{menuItem.link}}</a>
+        <button mat-button>
+            <a mat-list-item
+                (click)="onClose()"
+                [routerLink]="menuItem.link">{{menuItem.link}}</a>
+        </button>
         }
     </ul>
+
     <button class="close"
         mat-icon-button
         (click)="onClose()">

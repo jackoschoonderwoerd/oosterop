@@ -1,0 +1,22 @@
+mat-expansion-panel {
+    background-color: var(--o-orange);
+    mat-expansion-panel-header {
+        text-transform: uppercase;
+    }
+    .concerts {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        .concert {
+            padding: 0.2rem 0.5rem;
+            border: 1px solid var(--o-black);
+            .date {
+                font-weight: bold;
+            }
+            .location {
+                display: flex;
+                gap: 1rem;
+            }
+        }
+    }
+}
