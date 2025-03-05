@@ -4,12 +4,12 @@ main {
     gap: 1rem;
     padding: 1rem;
     .band-members {
-        // background-color: var(--o-orange);
+        // background-color: var(--o-crimson);
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 1rem;
         .band-member {
-            background-color: var(--o-orange);
+            background-color: var(--o-crimson);
         }
     }
     .right {

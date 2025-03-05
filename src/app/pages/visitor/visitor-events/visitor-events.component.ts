@@ -4,14 +4,15 @@ import { FirestoreService } from '../../../services/firestore.service';
 import { Concert } from '../../../shared/models/concert.model';
 import { GroupedConcerts } from '../../../shared/models/grouped-concerts.model';
 import { MatTabsModule } from '@angular/material/tabs';
-import { DatePipe, JsonPipe } from '@angular/common';
+import { DatePipe, JsonPipe, NgClass } from '@angular/common';
 import { take } from 'rxjs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'app-visitor-events',
-    imports: [MatTabsModule, DatePipe, MatButtonToggleModule, MatExpansionModule],
+    imports: [MatTabsModule, DatePipe, MatButtonToggleModule, MatExpansionModule, MatButtonModule, NgClass],
     templateUrl: './visitor-events.component.html',
     styleUrl: './visitor-events.component.scss'
 })
@@ -21,6 +22,7 @@ export class VisitorEventsComponent implements OnInit {
     fs = inject(FirestoreService);
     // seePastEvents: boolean = false;
     seeFutureEvents: boolean = true;
+    upcomingActive: boolean = false;
 
     ngOnInit(): void {
         this.getBands()
@@ -121,6 +123,15 @@ export class VisitorEventsComponent implements OnInit {
             this.seeFutureEvents = true;
         } else if (period === 'past') {
             this.seeFutureEvents = false
+        }
+    }
+    onPeriodSeleceted(period: string) {
+        if (period === 'upcoming') {
+            this.upcomingActive = true;
+            this.seeFutureEvents = true;
+        } else if (period === 'past') {
+            this.seeFutureEvents = false
+            this.upcomingActive = false
         }
     }
 }

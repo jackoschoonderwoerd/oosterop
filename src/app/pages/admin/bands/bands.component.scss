@@ -9,7 +9,7 @@ main {
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
         gap: 0.3rem;
         .band {
-            background-color: var(--o-orange);
+            background-color: var(--o-crimson);
             // max-width: 400px;
             border: 1px solid var(--o-black);
             padding: 0.3rem 0.5rem;

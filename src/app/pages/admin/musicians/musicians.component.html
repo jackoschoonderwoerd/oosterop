@@ -1,6 +1,8 @@
 <main>
     <!-- <app-add-musician></app-add-musician> -->
     <div class="musicians">
+        <button mat-raised-button
+            (click)="onAddMusician()">add musician</button>
         @for(musician of musicians; track musician.id) {
         <div class="musician">
             <div class="musician-details">
@@ -27,7 +29,6 @@
             </div>
         </div>
         }
-        <button mat-raised-button
-            (click)="onAddMusician()">add musician</button>
+
     </div>
 </main>

@@ -22,7 +22,7 @@ export class NavigationService {
 
 
     visitorMenuItems: string[] = ['contact'];
-    adminMenuItems: string[] = ['anouncements', 'musicians', 'bands', 'tour-periods', 'upcoming-events', 'events']
+    adminMenuItems: string[] = ['anouncements', 'musicians', 'bands']
     sideNavMenuItems: MenuItem[] = [
         {
             title: 'events',
@@ -87,5 +87,6 @@ export class NavigationService {
         })
         return promise
     }
+
 
 }

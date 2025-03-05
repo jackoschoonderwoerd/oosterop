@@ -36,7 +36,7 @@ export class BandsComponent {
 
     ngOnInit(): void {
         const path = `bands`
-        this.fs.sortedCollection(path, 'seqNr', 'asc')
+        this.fs.sortedCollection(path, 'name', 'asc')
             .subscribe((bands: Band[]) => {
                 bands.forEach((band: Band) => {
                     console.log(band.concerts, band.name)

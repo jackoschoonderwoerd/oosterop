@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseError } from '@angular/fire/app';
 import { DocumentReference } from '@angular/fire/firestore';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NavigationService } from '../../../../navigation/navigation.service';
 
 
 interface FormValue {
@@ -43,6 +44,7 @@ export class AddBandComponent implements OnInit {
     sb = inject(SnackbarService);
     router = inject(Router);
     editmode: boolean = false;
+    navigationService = inject(NavigationService)
 
     ngOnInit(): void {
         this.initBandForm();
@@ -97,6 +99,7 @@ export class AddBandComponent implements OnInit {
         this.fs.addDoc(path, band)
             .then((docRef: DocumentReference) => {
                 console.log(docRef.id);
+                this.navigationService.getBandsByInitiatorArray()
                 // const bandMenuItem: BandMenuItem = {
                 //     name: band.name,
                 //     id: docRef.id

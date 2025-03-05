@@ -1,0 +1,19 @@
+.visitor-component-container {
+    grid-area: "middle-right";
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    .band {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        mat-icon {
+            cursor: pointer;
+        }
+        .name {
+            text-transform: capitalize;
+        }
+    }
+}

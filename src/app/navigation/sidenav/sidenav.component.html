@@ -18,10 +18,13 @@
 
             </button>
 
-            } @else {
             <!-- FOR INITIATORS WITH JUST ONE BAND -->
-            <button (click)="onBandSelected(bandsByInitiator.bands[0].id)"
+            } @else {
+            @if(bandsByInitiator.bands.length > 1){
+
+            <button (click)="onBandSelected(bandsByInitiator?.bands[0].id)"
                 mat-menu-item>{{bandsByInitiator?.bands[0].name}}</button>
+            }
             }
             }
         </mat-menu>

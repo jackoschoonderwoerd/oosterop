@@ -13,6 +13,10 @@ import { Band } from '../../../shared/models/band.model';
 import { MatMenuModule } from '@angular/material/menu';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Observable } from 'tinymce';
+import { LogoComponent } from '../logo/logo.component';
+import { VisitorTourPeriodsComponent } from '../visitor-tour-periods/visitor-tour-periods.component';
+import { VisitorBandsOverviewComponent } from '../visitor-bands-overview/visitor-bands-overview.component';
+import { VisitorEventsComponent } from '../visitor-events/visitor-events.component';
 
 @Component({
     selector: 'app-home',
@@ -24,7 +28,11 @@ import { Observable } from 'tinymce';
         MatButtonModule,
         MatMenuModule,
         JsonPipe,
-        AsyncPipe
+        AsyncPipe,
+        LogoComponent,
+        VisitorTourPeriodsComponent,
+        VisitorBandsOverviewComponent,
+        VisitorEventsComponent
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'

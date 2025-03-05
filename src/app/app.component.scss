@@ -1,13 +1,14 @@
 mat-sidenav-container {
     height: 100%;
     mat-sidenav {
-        background-color: var(--o-purple);
-        color: var(--o-orange);
+        background-color: var(--o-crimson);
+        color: var(--o-crimson);
         padding: 1rem;
         width: 100%;
         max-width: 300px;
     }
     mat-sidenav-content {
+        // background-color: var(--o-gravel);
         display: grid;
         grid-template-rows: auto 1fr auto;
         grid-template-areas:
@@ -19,19 +20,24 @@ mat-sidenav-container {
             grid-area: header;
         }
         main {
+            background-image: url("./../../public//images/background/2bckgrartistsnewdec2023january2023.jpg");
+            background-position:
+                center,
+                top right;
+            background-size: cover, contain;
             width: 100%;
             overflow: auto;
             grid-area: main;
             margin-right: auto;
             margin-left: auto;
-            background-color: var(--o-blue);
+            background-color: var(--o-gravel);
             .router-container {
                 // padding: 1rem;
             }
         }
         app-footer {
             grid-area: footer;
-            background-color: var(--o-purple);
+            background-color: var(--o-crimson);
         }
     }
 }

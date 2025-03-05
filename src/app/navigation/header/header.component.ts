@@ -7,11 +7,12 @@ import { UiStore } from '../../services/ui.store';
 import { AuthStore } from '../../auth/auth.store';
 import { BehaviorSubject, Observable, take } from 'rxjs';
 import { Band } from '../../shared/models/band.model';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe, Location } from '@angular/common';
 import { FirestoreService } from '../../services/firestore.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { Anouncement } from '../../shared/models/anouncement.model';
+import { VisitorBandsMenuComponent } from '../../pages/visitor/visitor-bands-menu/visitor-bands-menu.component';
 
 interface BandsByInitiator {
     initiator: string;
@@ -27,7 +28,8 @@ interface BandsByInitiator {
         AsyncPipe,
         MatMenuModule,
         MatButtonModule,
-        JsonPipe
+        JsonPipe,
+        VisitorBandsMenuComponent
     ],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
@@ -48,7 +50,8 @@ export class HeaderComponent implements OnInit {
     visitorMenuItems: string[] = [];
     router = inject(Router);
     subMenuItems: string[] = []
-    bandsByInitiatorArray: BandsByInitiator[] = []
+    bandsByInitiatorArray: BandsByInitiator[] = [];
+    location = inject(Location)
     // bands$: Observable<Band[]>
 
     @Output() sidenavToggle = new EventEmitter<void>();
@@ -63,7 +66,11 @@ export class HeaderComponent implements OnInit {
         this.getAnouncements();
         this.navigationService.getBandsByInitiatorArray()
             .then((bandsByInitiatorArray: BandsByInitiator[]) => {
+                console.log(bandsByInitiatorArray)
                 this.bandsByInitiatorArray = bandsByInitiatorArray
+            })
+            .catch((err: any) => {
+                console.log(err);
             })
 
     }
@@ -105,5 +112,12 @@ export class HeaderComponent implements OnInit {
     }
     onLogout() {
         this.authStore.logout();
+    }
+    goToPreviousPage() {
+
+        this.location.back();
+    }
+    goToNextPage() {
+        this.location.forward();
     }
 }

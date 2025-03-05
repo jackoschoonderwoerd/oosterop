@@ -1,11 +1,17 @@
-main {
-    .header {
+.visitor-container {
+    display: grid;
+    gap: 1rem;
+    grid-template-areas:
+        "top"
+        "middle";
+    app-logo {
+        grid-area: top;
     }
-    mat-toolbar {
-        ul {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
+
+    .components {
+        grid-area: middle;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
 }

@@ -1,15 +1,24 @@
-<main>
-    <div class="tour-periods">
-        @for(tourPeriod of tourPeriods; track tourPeriod.id){
-        @if(tourPeriod.visible){
-        <div class="tour-period">
-            <div class="band-name">{{tourPeriod.bandName}}</div>
+<div class="visitor-component-container">
+    <div class="visitor-header">tour periods</div>
+    @for(period of tourPeriods; track period) {
+    <div class="tour-period">
+        <div class="left">
             <div class="dates">
-                <div class="start-date">{{tourPeriod.startDate.seconds*1000|date}}</div>
-                <div class="end-date">{{tourPeriod.endDate.seconds*1000|date}}</div>
+                <div class="start-date">{{period.startDate.seconds*1000|date}}</div>-
+                <div class="end-date">{{period.endDate.seconds*1000|date}}</div>
             </div>
+            <div class="band-name">{{period.bandName}}</div>
         </div>
-        }
-        }
+        <!-- <div class="btn-container">
+            <button mat-icon-button
+                class="info"
+                (click)="onInfo(period.bandId)">
+                <mat-icon>info</mat-icon>
+            </button>
+        </div> -->
+
+
     </div>
-</main>
+
+    }
+</div>

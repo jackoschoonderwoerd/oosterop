@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './navigation/header/header.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavComponent } from './navigation/sidenav/sidenav.component';
@@ -9,6 +9,7 @@ import { User as FirebaseUser } from "@angular/fire/auth";
 import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { AuthStore } from './auth/auth.store';
 import { VisitorComponent } from './pages/visitor/visitor.component';
+import { LogoComponent } from './pages/visitor/logo/logo.component';
 
 @Component({
     selector: 'app-root',
@@ -18,7 +19,8 @@ import { VisitorComponent } from './pages/visitor/visitor.component';
         SidenavComponent,
         HeaderComponent,
         FooterComponent,
-        VisitorComponent
+        VisitorComponent,
+        LogoComponent
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
@@ -28,6 +30,7 @@ export class AppComponent implements OnInit {
     uiStore = inject(UiStore);
     afAuth = inject(Auth);
     authStore = inject(AuthStore)
+    router = inject(Router)
 
     ngOnInit(): void {
         onAuthStateChanged(this.afAuth, (user: FirebaseUser) => {
@@ -38,5 +41,6 @@ export class AppComponent implements OnInit {
                 console.log(' no user')
             }
         })
+
     }
 }

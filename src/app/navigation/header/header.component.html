@@ -1,61 +1,34 @@
 <mat-toolbar>
-    <!-- {{bands$|async}} -->
+
     <ul class="left">
         <li class="list-item-menu">
             <mat-icon (click)="onToggleSidenav()">menu</mat-icon>
         </li>
-        <li routerLink="home"
-            class="list-item-home">
-            <mat-icon>home</mat-icon>
-        </li>
+
     </ul>
     <div class="visitor-menu">
         <div class="version">13</div>
-
-
-        <button mat-icon-button>
-            <mat-icon [matMenuTriggerFor]="anouncementsMenu">home</mat-icon>
+        <button mat-icon-button
+            (click)="goToPreviousPage()">
+            <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
-        <mat-menu #anouncementsMenu="matMenu">
-            @for(anouncement of anouncements$|async; track anouncement.id){
-            @if(anouncement.visible) {
+        <button mat-icon-button
+            (click)="goToNextPage()">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
 
-            <button mat-menu-item
-                (click)="onAnouncementSelected(anouncement.id)">{{anouncement.header}}</button>
-            }
-            }
-        </mat-menu>
+        <button mat-icon-button
+            routerLinkActive="link-active"
+            routerLink="home">
+            <mat-icon>home</mat-icon>
+        </button>
 
-        <button mat-button
-            [matMenuTriggerFor]="bandsMenu">bands</button>
-        <mat-menu #bandsMenu="matMenu">
-            @for(bandsByInitiator of bandsByInitiatorArray; track bandsByInitiator){
-            <!-- FOR INITIATORS WITH MORE THAN ONE BAND -->
-            @if(bandsByInitiator.bands.length > 1){
-            <button mat-menu-item
-                [matMenuTriggerFor]="sub_menu">{{bandsByInitiator?.initiator}}
-
-                <mat-menu #sub_menu="matMenu">
-                    @for(band of bandsByInitiator?.bands; track bandName){
-                    <button mat-menu-item
-                        (click)="onBandSelected(band.id)">{{band.name}}</button>
-                    }
-                </mat-menu>
-
-            </button>
-
-            } @else {
-            <!-- FOR INITIATORS WITH JUST ONE BAND -->
-            <button (click)="onBandSelected(bandsByInitiator.bands[0].id)"
-                mat-menu-item>{{bandsByInitiator?.bands[0].name}}</button>
-            }
-            }
-        </mat-menu>
+        <app-visitor-bands-menu></app-visitor-bands-menu>
 
 
 
-        <button mat-button
-            (click)="onVisitorTourPeriods()">tour periods</button>
+
+
 
 
 

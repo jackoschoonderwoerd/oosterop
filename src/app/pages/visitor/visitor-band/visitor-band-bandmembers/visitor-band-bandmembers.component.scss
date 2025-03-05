@@ -1,5 +1,5 @@
 mat-expansion-panel {
-    background-color: var(--o-orange);
+    background-color: var(--o-crimson);
 
     mat-expansion-panel-header {
         text-transform: uppercase;
@@ -8,7 +8,7 @@ mat-expansion-panel {
         // display: flex;
         padding: 0.2rem 0.5rem;
         margin-bottom: 0.2rem;
-        background-color: var(--o-lightgray);
+        background-color: var(--o-gravel);
 
         justify-content: start;
         .band-member-name {

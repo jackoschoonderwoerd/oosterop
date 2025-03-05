@@ -36,7 +36,7 @@
     </form>
     <button mat-raised-button
         [disabled]="musiciansForm.invalid"
-        (click)="onAddMusician()">{{!editmode ? 'add musician': 'update musician'}}</button>
+        (click)="onAddOrUpdateMusician()">{{!editmode ? 'add musician': 'update musician'}}</button>
     <button mat-raised-button
         (click)="onCancel()">cancel</button>
 </main>

@@ -9,6 +9,10 @@
                     <span>-</span>
                     <div class="end-date">{{tourPeriod.endDate.seconds*1000|date}}</div>
                 </div>
+                @if(tourPeriod.bandId) {
+
+                <div class="band-id">{{tourPeriod.bandId}}</div>
+                }
             </div>
             <div class="buttons">
                 <button mat-icon-button

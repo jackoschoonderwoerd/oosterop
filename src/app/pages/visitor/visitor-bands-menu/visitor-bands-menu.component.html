@@ -1,0 +1,35 @@
+<button mat-button
+    class="trigger-button"
+    (click)="onButtonClick()"
+    #menuButton
+    [matMenuTriggerFor]="bandsMenu">bands</button>
+<mat-menu #bandsMenu="matMenu">
+    @for(bandsByInitiator of bandsByInitiatorArray; track bandsByInitiator){
+    <!-- FOR INITIATORS WITH MORE THAN ONE BAND -->
+    @if(bandsByInitiator.bands.length > 1){
+    <!-- {{bandsByInitiator.bands.length}} -->
+    <button mat-menu-item
+        [matMenuTriggerFor]="sub_menu">{{bandsByInitiator?.initiator}}
+
+        <mat-menu #sub_menu="matMenu">
+            @for(band of bandsByInitiator?.bands; track bandName){
+            <button mat-menu-item
+                (click)="onBandSelected(band.id)">{{band.name}}</button>
+            }
+        </mat-menu>
+
+    </button>
+    <!-- @if(bandsByInitiator.bands.length < 2 ) { -->
+    <!-- FOR INITIATORS WITH JUST ONE BAND -->
+    <!-- } -->
+    } @else {
+    @if(bandsByInitiator && bandsByInitiator.bands && bandsByInitiator.bands.length){
+
+    <button (click)="onBandSelected(bandsByInitiator.bands[0].id)"
+        mat-menu-item>{{bandsByInitiator.bands[0].name}}</button>
+    }
+    <!-- {{bandsByInitiator.bands[0].name}}
+            {{bandsByInitiator.bands[0].id}} -->
+    }
+    }
+</mat-menu>

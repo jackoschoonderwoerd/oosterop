@@ -52,6 +52,7 @@ export class BandMembersComponent implements OnInit {
     }
 
     musicianIdSelected(musicianId: string) {
+
         console.log(musicianId)
         const path = `bands/${this.bandId}`
         this.fs.addElementToArray(path, 'bandMemberIds', musicianId)
@@ -74,7 +75,6 @@ export class BandMembersComponent implements OnInit {
     getBandMemberIds() {
         const path = `bands/${this.bandId}`
         return this.fs.getFieldInDocument(path, 'bandMemberIds')
-
     }
 
     removeBandMember(memberId: string) {
@@ -102,4 +102,5 @@ export class BandMembersComponent implements OnInit {
     onCancel() {
         this.router.navigate(['band', { bandId: this.bandId }])
     }
+
 }

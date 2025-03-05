@@ -26,7 +26,7 @@ interface FormValue {
         MatFormFieldModule,
         MatButtonModule,
         MatInput,
-        MatIconModule
+        MatIconModule,
     ],
     templateUrl: './add-musician.component.html',
     styleUrl: './add-musician.component.scss'
@@ -43,6 +43,8 @@ export class AddMusicianComponent implements OnInit {
     id: string;
     confirmService = inject(ConfirmService);
     musicianId: string;
+    musicians: Musician[];
+
 
     ngOnInit(): void {
         this.initForm();
@@ -95,19 +97,22 @@ export class AddMusicianComponent implements OnInit {
         const control = new FormControl(null, [Validators.required]);
         (<FormArray>this.musiciansForm.get('instruments')).push(control);
     }
-    onAddMusician() {
+    onAddOrUpdateMusician() {
         const formValue: FormValue = this.musiciansForm.value;
         formValue.name = formValue.name.toLowerCase();
         const instrumentsLowerCase = formValue.instruments.map(instrument => instrument.toLowerCase());
-
-
         const musician: Musician = {
             name: formValue.name,
             context: formValue.context,
             instruments: instrumentsLowerCase
         }
         if (!this.editmode) {
-            this.addMusician(musician)
+            if (this.checkForExistingEntry(musician)) {
+                this.addMusician(musician)
+
+            } else {
+                this.sb.openSnackbar(`operation aborted by user`);
+            }
         } else {
             this.updateMusician(musician)
         }
@@ -140,6 +145,39 @@ export class AddMusicianComponent implements OnInit {
     }
     onCancel() {
         this.router.navigateByUrl('musicians')
+    }
+
+    getMusicians() {
+        const promise = new Promise((resolve, reject) => {
+            this.fs.collection('musicians')
+                .pipe(take(1))
+                .subscribe((musicians: Musician[]) => {
+                    resolve(musicians)
+                })
+
+        })
+        return promise
+    }
+
+    checkForExistingEntry(newMusician: Musician) {
+        const promise = new Promise((resolve, reject) => {
+            this.getMusicians()
+                .then((musicians: Musician[]) => {
+                    const x = musicians.find(musician => musician.name === newMusician.name)
+
+                    console.log('X:', x)
+                    if (x) {
+                        this.confirmService.getConfirmation(
+                            `A musician with this name already exists.
+                            If you wish to continue,
+                            make sure the context form field has been filled in correctly.`)
+                            .then((res: boolean) => {
+                                resolve(res)
+                            })
+                    }
+                })
+        })
+        return promise
     }
 
 }

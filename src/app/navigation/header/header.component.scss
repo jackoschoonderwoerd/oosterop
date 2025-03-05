@@ -1,6 +1,5 @@
 mat-toolbar {
-    background-color: var(--o-purple);
-    color: var(--o-white);
+    background-color: var(--o-crimson);
     display: flex;
     justify-content: space-between;
     gap: 1rem;
@@ -30,16 +29,17 @@ mat-toolbar {
             display: none;
         }
         button {
+            color: var(--snow);
             // border: 1px solid white;
             text-transform: uppercase;
-            color: var(--o-orange);
+            // color: var(--o-crimson);
         }
 
         .admin-menu-items {
             display: flex;
             gap: 1rem;
             a {
-                color: var(---o-orange);
+                color: var(---o-crimson);
             }
         }
         .login {
@@ -73,4 +73,7 @@ mat-toolbar {
             }
         }
     }
+}
+.link-active {
+    color: white;
 }

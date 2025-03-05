@@ -1,11 +1,19 @@
-<main>
-
-    <mat-button-toggle-group>
+<div class="visitor-component-container">
+    <div class="top">
+        <div class="visitor-header">events!!</div>
+        <div class="buttons">
+            <button [ngClass]="{ 'upcomingActive': !upcomingActive }"
+                (click)="onPeriodSeleceted('past')">past</button>
+            <button [ngClass]="{'upcomingActive': upcomingActive }"
+                (click)="onPeriodSeleceted('upcoming')">upcoming</button>
+        </div>
+    </div>
+    <!-- <mat-button-toggle-group>
+        <mat-button-toggle (click)="onButtonToggle('past')">Past</mat-button-toggle>
         <mat-button-toggle [checked]="seeFutureEvents"
             (click)="onButtonToggle('upcoming')">upcoming</mat-button-toggle>
-        <mat-button-toggle (click)="onButtonToggle('past')">Past</mat-button-toggle>
 
-    </mat-button-toggle-group>
+    </mat-button-toggle-group> -->
 
 
     @if(seeFutureEvents){
@@ -61,22 +69,4 @@
 
     </mat-accordion>
     }
-</main>
-
-<!-- <div class="events past-events">
-    @for(event of pastCollectedGroupedConcerts;track event) {
-    <div class="event">
-        <div class="band-name">{{event.bandName}}</div>
-        <div class="concerts">
-            @for(concert of event.concerts; track concert){
-            <div class="concert">
-                <div class="date">{{concert.date.seconds*1000|date}}</div>
-                <div class="venue-name">{{concert.venueName}}</div>
-                <div class="city">{{concert.city}}</div>
-                <div class="country">{{concert.country}}</div>
-            </div>
-            }
-        </div>
-    </div>
-    }
-</div> -->
+</div>

@@ -20,6 +20,7 @@ import { FirestoreService } from '../../../../../services/firestore.service';
 import { SnackbarService } from '../../../../../services/snackbar.service';
 import { TourPeriod } from '../../../../../shared/models/tour-period-model';
 import { Band } from '../../../../../shared/models/band.model';
+import { NavigationService } from '../../../../../navigation/navigation.service';
 
 interface FormValue {
     bandName: string;
@@ -56,6 +57,7 @@ export class BandTourPeriodsComponent implements OnInit {
     router = inject(Router);
     dialog = inject(MatDialog)
     tourPeriods: TourPeriod[] = [];
+    navigationService = inject(NavigationService)
 
     bandId: string;
     editmode: boolean = false;
@@ -90,6 +92,10 @@ export class BandTourPeriodsComponent implements OnInit {
                     this.tourPeriods = tourPeriods
                 }
             })
+            .catch((err: FirebaseError) => {
+                console.log(err);
+                this.sb.openSnackbar(`opertion failde due to: ${err.message}`)
+            })
     }
     getBandName() {
         this.fs.getFieldInDocument(this.pathToBand, 'name')
@@ -104,6 +110,7 @@ export class BandTourPeriodsComponent implements OnInit {
     }
     getBandId() {
         this.fs.getDoc(this.pathToBand)
+            .pipe(take(1))
             .subscribe((band: Band) => {
                 if (band) {
                     console.log(band)
@@ -113,7 +120,10 @@ export class BandTourPeriodsComponent implements OnInit {
 
     onAddOrUpdateTourPeriod() {
         console.log(this.form.value)
-        const tourPeriod: TourPeriod = this.form.value
+        const tourPeriod: TourPeriod = {
+            ...this.form.value,
+            bandId: this.bandId
+        }
         if (!this.editmode) {
             this.addTourPeriod(tourPeriod)
         } else {
@@ -132,6 +142,8 @@ export class BandTourPeriodsComponent implements OnInit {
                     visible: true
                 });
                 this.getTourPeriods();
+                this.navigationService.getBandsByInitiatorArray();
+
             })
             .catch((err: FirebaseError) => {
                 console.log(err);

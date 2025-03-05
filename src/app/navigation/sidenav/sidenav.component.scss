@@ -9,11 +9,11 @@ section {
             display: flex;
             justify-content: start;
             // justify-content: start;
-            color: var(--o-orange);
+            color: var(--o-crimson);
             text-transform: uppercase;
             font-size: 1.1rem;
             a {
-                // color: var(--o-orange);
+                // color: var(--o-crimson);
             }
         }
     }
@@ -23,7 +23,7 @@ section {
         right: 20px;
         mat-icon {
             font-size: 1.5rem;
-            color: var(--o-orange);
+            color: var(--o-crimson);
         }
     }
 }

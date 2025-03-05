@@ -5,15 +5,14 @@ main {
     .content {
         display: flex;
         flex-direction: column;
+        color: var(--o-snow);
         .d-o {
             font-size: 1.2rem;
-            color: var(--o-orange);
+
             text-transform: capitalize;
             margin: auto;
         }
         .m-m {
-            color: var(--o-orange);
-
             margin: auto;
         }
     }

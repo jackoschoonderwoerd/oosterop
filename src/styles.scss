@@ -61,7 +61,7 @@ quill-editor {
 form {
     display: flex;
     flex-direction: column;
-    background-color: var(--o-lightgray);
+    background-color: var(--o-gravel);
     padding: 1rem;
     .buttons {
         display: flex;
@@ -71,4 +71,26 @@ form {
             border: 3px solid var(--o-red);
         }
     }
+}
+.visitor-container {
+    padding: 1rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+.visitor-header {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-icon-button {
+    color: white !important; /* Change text/icon color */
+    // background-color: #ff4081 !important; /* Custom button background */
+}
+.visitor-component-container {
+    background-color: var(--o-crimson);
+    padding: 1rem;
+    color: var(--o-snow);
 }
