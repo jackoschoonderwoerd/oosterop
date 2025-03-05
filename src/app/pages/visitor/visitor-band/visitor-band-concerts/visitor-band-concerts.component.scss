@@ -4,6 +4,20 @@
         mat-expansion-panel-header {
             text-transform: uppercase;
         }
+        mat-panel-description {
+            display: flex;
+            justify-content: space-around;
+            .not-selected-period {
+                background-color: var(--o-crimson);
+                color: white;
+                border: 2px solid white;
+                border-radius: 3px;
+            }
+            .selected-period {
+                background-color: var(--o-snow);
+                color: var(--o-crimson);
+            }
+        }
         .concerts {
             display: flex;
             flex-direction: column;
@@ -14,6 +28,7 @@
                 .date {
                     font-weight: bold;
                 }
+
                 .location {
                     display: flex;
                     gap: 1rem;

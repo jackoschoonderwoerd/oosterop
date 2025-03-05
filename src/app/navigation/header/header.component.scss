@@ -3,18 +3,19 @@ mat-toolbar {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
+    position: relative;
     .left {
         .list-item-menu {
             display: flex;
-            @media (min-width: 900px) {
-                display: none;
-            }
+            // @media (min-width: 900px) {
+            //     display: none;
+            // }
         }
         .list-item-home {
             display: flex;
-            @media (max-width: 899px) {
-                display: none;
-            }
+            // @media (max-width: 899px) {
+            //     display: none;
+            // }
         }
     }
     .visitor-menu {
@@ -25,9 +26,9 @@ mat-toolbar {
         justify-content: space-between;
         align-items: center;
         margin: auto;
-        @media (max-width: 899px) {
-            display: none;
-        }
+        // @media (max-width: 899px) {
+        //     display: none;
+        // }
         button {
             color: var(--snow);
             // border: 1px solid white;
@@ -46,11 +47,14 @@ mat-toolbar {
         }
     }
     .admin-menu {
+        position: absolute;
+        top: 10px;
+        right: 10px;
         border: 3px solid yellow;
         display: flex;
         align-items: center;
         padding: 0 1rem;
-        @media (max-width: 1200px) {
+        @media (max-width: 1400px) {
             display: none;
         }
         .admin-menu-items {

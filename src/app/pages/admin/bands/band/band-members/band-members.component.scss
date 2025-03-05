@@ -1,6 +1,10 @@
 main {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    // grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
     gap: 1rem;
     padding: 1rem;
     .band-members {
@@ -8,11 +12,32 @@ main {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 1rem;
+        align-items: center;
         .band-member {
+            padding: 0.5rem;
             background-color: var(--o-crimson);
+            color: var(--o-snow);
+            display: flex;
+            gap: 1rem;
+            .move {
+                display: flex;
+                flex-direction: column;
+            }
+            .name_instruments {
+                flex-grow: 1;
+                .name {
+                    font-weight: bold;
+                    text-transform: capitalize;
+                }
+                .instruments {
+                    .instrument {
+                        font-style: italic;
+                    }
+                }
+            }
         }
     }
-    .right {
+    .buttons {
         display: flex;
         flex-direction: column;
         gap: 1rem;

@@ -24,6 +24,9 @@ import { VisitorBandQuotesComponent } from './visitor-band-quotes/visitor-band-q
 import { VisitorBandRecordingsComponent } from './visitor-band-recordings/visitor-band-recordings.component';
 import { VisitorBandBandmembersComponent } from './visitor-band-bandmembers/visitor-band-bandmembers.component';
 import { VisitorBandTourPeriodsComponent } from './visitor-band-tour-periods/visitor-band-tour-periods.component';
+import { VisitorBandOImagesComponent } from './visitor-band-o-images/visitor-band-o-images.component';
+import { VisitorBandBodyComponent } from './visitor-band-body/visitor-band-body.component';
+import { LogoComponent } from '../logo/logo.component';
 
 @Component({
     selector: 'app-visitor-band',
@@ -45,7 +48,10 @@ import { VisitorBandTourPeriodsComponent } from './visitor-band-tour-periods/vis
         VisitorBandQuotesComponent,
         VisitorBandRecordingsComponent,
         VisitorBandBandmembersComponent,
-        VisitorBandTourPeriodsComponent
+        VisitorBandTourPeriodsComponent,
+        VisitorBandOImagesComponent,
+        VisitorBandBodyComponent,
+        LogoComponent
     ],
     templateUrl: './visitor-band.component.html',
     styleUrl: './visitor-band.component.scss'

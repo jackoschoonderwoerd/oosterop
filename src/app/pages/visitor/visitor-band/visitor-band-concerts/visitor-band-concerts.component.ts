@@ -3,7 +3,7 @@ import { IconSubmenuComponent } from '../../../../shared/icon-submenu/icon-subme
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirestoreService } from '../../../../services/firestore.service';
 import { Concert } from '../../../../shared/models/concert.model';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansion';
@@ -20,7 +20,8 @@ import { take } from 'rxjs';
         MatButtonModule,
         DatePipe,
         MatExpansionModule,
-        MatButtonToggleModule
+        MatButtonToggleModule,
+        NgClass
     ],
     templateUrl: './visitor-band-concerts.component.html',
     styleUrl: './visitor-band-concerts.component.scss'
@@ -34,6 +35,9 @@ export class VisitorBandConcertsComponent implements OnInit {
     currentPeriodShown: string;
     showAllConcerts: boolean = true;
     router = inject(Router)
+    showPast: boolean = false;
+    showAll: boolean = true;
+    showUpcoming: boolean = false
 
 
 
@@ -68,17 +72,20 @@ export class VisitorBandConcertsComponent implements OnInit {
         event.stopPropagation();
         this.currentPeriodShown = period
         console.log(period);
-        if (period === 'new') {
+        if (period === 'upcoming') {
             this.concerts = this.getNewConcerts()
-            this.showAllConcerts = false;
-
+            this.showAll = false;
+            this.showUpcoming = true;
+            this.showPast = false
         } else if (period === 'past') {
-
-            this.showAllConcerts = false;
+            this.showUpcoming = false
+            this.showPast = true;
+            this.showAll = false;
             this.concerts = this.getPastConcerts()
         } else if (period === 'all') {
-            this.showAllConcerts = true;
-
+            this.showAll = true;
+            this.showPast = false;
+            this.showUpcoming = false;
             this.concerts = this.getAllConcerts();
         }
     }

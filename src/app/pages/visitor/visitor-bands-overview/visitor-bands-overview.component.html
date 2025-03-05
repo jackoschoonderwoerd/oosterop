@@ -1,10 +1,22 @@
 <div class="visitor-component-container">
     <div class="visitor-header">bands</div>
     @for(band of bands; track band.id) {
+    @if(band.visible) {
     <div class="band">
-        <mat-icon (click)="onBandInfo(band.id)">info</mat-icon>
-        <div class="name">{{band.name}}</div>
-
+        <div class="icon_name">
+            <mat-icon (click)="onBandInfo(band.id)">info</mat-icon>
+            <div class="name">{{band.name}}</div>
+        </div>
+        <!-- @if(authStore.isLoggedIn()){
+        <div class="visibility">
+            @if(band.visible) {
+            <mat-icon>visibility</mat-icon>
+            } @else {
+            <mat-icon>visibility_off</mat-icon>
+            }
+        </div>
+        } -->
     </div>
+    }
     }
 </div>

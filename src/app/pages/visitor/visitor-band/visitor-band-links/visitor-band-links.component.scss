@@ -13,6 +13,9 @@ mat-expansion-panel {
         gap: 1rem;
         align-items: center;
         cursor: pointer;
+        mat-icon {
+            min-width: 1.5rem;
+        }
         // a {
         //     display: flex;
         //     gap: 1rem;

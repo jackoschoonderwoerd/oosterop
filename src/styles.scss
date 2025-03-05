@@ -87,10 +87,36 @@ form {
 .mat-mdc-outlined-button,
 .mat-mdc-icon-button {
     color: white !important; /* Change text/icon color */
-    // background-color: #ff4081 !important; /* Custom button background */
+    background-color: var(--o-crimson) !important; /* Custom button background */
 }
 .visitor-component-container {
     background-color: var(--o-crimson);
     padding: 1rem;
     color: var(--o-snow);
+}
+
+/* Change panel background and text color */
+.mat-expansion-panel {
+    background-color: var(--o-crimson) !important; /* Purple background */
+    color: white !important; /* White text */
+}
+
+/* Change the panel header (title area) */
+.mat-expansion-panel-header {
+    background-color: var(--o-crimson) !important; /* Darker purple */
+    color: #fff !important;
+}
+
+.mat-expansion-panel-header-title {
+    color: #fff !important;
+}
+
+/* Change the expansion panel content */
+.mat-expansion-panel-body {
+    font-size: 16px;
+    padding: 20px;
+    background-color: var(--o-crimson); /* Light purple */
+}
+a {
+    color: white;
 }

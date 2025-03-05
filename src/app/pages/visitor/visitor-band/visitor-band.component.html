@@ -1,18 +1,11 @@
 <main>
     <div class="band">
+        <app-logo></app-logo>
         <div class="name">{{band?.name}}</div>
 
 
         @if(band?.oImages && band?.oImages.length > 0) {
-        <div class="images">
-            @for(oImage of band?.oImages; track oImage) {
-            <div class="image">
-                <img [src]="oImage.imagePath"
-                    alt="">
-                <div class="photographer-name">&copy;{{oImage.photographerName}}</div>
-            </div>
-            }
-        </div>
+        <app-visitor-band-o-images [oImages]="band.oImages"></app-visitor-band-o-images>
         }
 
         @if(bandMembers && bandMembers.length > 0) {
@@ -22,8 +15,9 @@
 
 
         @if(band?.body && band?.body !== '') {
-        <div class="body"
-            [innerHTML]="band?.body"></div>
+        <app-visitor-band-body [body]="band.body"></app-visitor-band-body>
+
+
         }
 
         @if(band?.quotes && band.quotes.length > 0) {

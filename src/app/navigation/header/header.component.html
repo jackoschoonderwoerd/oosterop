@@ -1,13 +1,12 @@
 <mat-toolbar>
 
     <ul class="left">
-        <li class="list-item-menu">
+        <!-- <li class="list-item-menu">
             <mat-icon (click)="onToggleSidenav()">menu</mat-icon>
-        </li>
+        </li> -->
 
     </ul>
     <div class="visitor-menu">
-        <div class="version">13</div>
         <button mat-icon-button
             (click)="goToPreviousPage()">
             <mat-icon>keyboard_arrow_left</mat-icon>
@@ -16,6 +15,8 @@
             (click)="goToNextPage()">
             <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
+        <div class="version"
+            style="color:aqua">V14</div>
 
         <button mat-icon-button
             routerLinkActive="link-active"

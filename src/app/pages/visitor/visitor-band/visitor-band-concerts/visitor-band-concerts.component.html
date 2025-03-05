@@ -2,12 +2,18 @@
     <mat-expansion-panel #panel
         (click)="onPanelClicked(panel)">
         <mat-expansion-panel-header>
-            @if(!panelExpanded){
+            <!-- @if(!panelExpanded){ -->
             <mat-panel-title>concerts</mat-panel-title>
-            }
+            <!-- } -->
             @if(panelExpanded){
             <mat-panel-description>
-                <mat-button-toggle-group name="fontStyle"
+                <button [ngClass]="showPast ? 'selected-period': 'not-selected-period'"
+                    (click)="onPeriodSelected($event ,'past')">past</button>
+                <button [ngClass]="showAll ? 'selected-period': 'not-selected-period'"
+                    (click)="onPeriodSelected($event ,'all')">all</button>
+                <button [ngClass]="showUpcoming ? 'selected-period': 'not-selected-period'"
+                    (click)="onPeriodSelected($event ,'upcoming')">upcoming</button>
+                <!-- <mat-button--group name="fontStyle"
                     aria-label="Font Style">
                     <mat-button-toggle (click)="onPeriodSelected($event ,'new')"
                         value="bold">upcoming</mat-button-toggle>
@@ -16,7 +22,7 @@
                         value="bold">all</mat-button-toggle>
                     <mat-button-toggle (click)="onPeriodSelected($event, 'past')"
                         value="italic">past</mat-button-toggle>
-                </mat-button-toggle-group>
+                </mat-button-toggle-group> -->
             </mat-panel-description>
             }
         </mat-expansion-panel-header>
@@ -34,10 +40,10 @@
                 <div class="venue-name-url"><a [href]="concert.venueUrl">{{concert.venueName}}</a></div> -->
                 @if(concert.venueUrl) {
                 <div class="venue-name-url"
-                    style="color:red; cursor: poiter;"
+                    style="cursor: poiter;"
                     (click)="onUrl(concert.venueUrl)">{{concert.venueName}}</div>
                 } @else {
-                <div class="venue-name">{{concert.venueNamen}}</div>
+                <div class="venue-name">{{concert.venueName}}</div>
                 }
                 <div class="location">
                     @if(concert.city){

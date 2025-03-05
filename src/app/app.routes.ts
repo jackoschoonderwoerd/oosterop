@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path: '', redirectTo: 'visitor-anouncement', pathMatch: 'full'
+        path: '', redirectTo: 'home', pathMatch: 'full'
     },
     {
         path: 'login', loadComponent:
@@ -176,6 +176,6 @@ export const routes: Routes = [
                 .then(c => c.VisitorIframeComponent)
     },
     {
-        path: '**', redirectTo: 'visitor-anouncement', pathMatch: 'full'
+        path: '**', redirectTo: 'home', pathMatch: 'full'
     }
 ];

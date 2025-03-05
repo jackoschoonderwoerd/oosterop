@@ -11,10 +11,20 @@ import { FirebaseError } from '@angular/fire/app';
 import { SnackbarService } from '../../../../../services/snackbar.service';
 import { MusicianComponent } from '../../../../../shared/musician/musician.component';
 import { OImage } from '../../../../../shared/models/o_image.model';
+import { JsonPipe } from '@angular/common';
+import { ArrayService } from '../../../../../services/array.service copy';
 
 @Component({
     selector: 'app-band-members',
-    imports: [MatMenuModule, MatButtonModule, MatIconModule, MusicianSelectorComponent, MusicianComponent],
+    imports: [
+        MatMenuModule,
+        MatButtonModule,
+        MatIconModule,
+        MusicianSelectorComponent,
+        MusicianComponent,
+        JsonPipe,
+
+    ],
     templateUrl: './band-members.component.html',
     styleUrl: './band-members.component.scss'
 })
@@ -28,6 +38,7 @@ export class BandMembersComponent implements OnInit {
     sb = inject(SnackbarService);
     bandMembers: Musician[] = [];
     oImages: OImage[] = [];
+    arrayService = inject(ArrayService)
 
     ngOnInit(): void {
         this.bandId = this.route.snapshot.paramMap.get('bandId')
@@ -41,6 +52,7 @@ export class BandMembersComponent implements OnInit {
     }
 
     getBandMembers() {
+        console.log('getBandMembers()')
         this.bandMemberIds.forEach((id: string) => {
             const path = `musicians/${id}`
             this.fs.getDoc(path)
@@ -98,9 +110,46 @@ export class BandMembersComponent implements OnInit {
 
     }
 
+    onMove(index: number, direction: string) {
+        console.log(index, direction)
+        console.log(this.bandMemberIds)
+        if (direction === 'up') {
+            const bandMemberIds = this.arrayService.move(this.bandMemberIds, index, index - 1)
+            // this.bandMemberIds = bandMemberIds
+            this.updateBandMemers(bandMemberIds)
+        } else if (direction === 'down') {
+            const bandMemberIds = this.arrayService.move(this.bandMemberIds, index, index + 1)
+            // this.bandMemberIds = bandMemberIds
+            this.updateBandMemers(bandMemberIds)
+        }
+    }
+
+    updateBandMemers(bandMemberIds: string[]) {
+
+        this.bandMemberIds.length = 0;
+
+        this.fs.updateField(`bands/${this.bandId}`, 'bandMemberIds', bandMemberIds)
+            .then((res: any) => {
+                this.getBandMemberIds()
+                    .then((bandMemberIds: string[]) => {
+                        console.log(bandMemberIds)
+                        return bandMemberIds
+                    })
+                    .then((bandMemberIds: string[]) => {
+                        this.bandMemberIds = bandMemberIds
+                        this.getBandMembers()
+                    })
+                // console.log(res);
+                // this.bandMemberIds = bandMemberIds;
+                // this.getBandMembers();
+            })
+            .catch((err: FirebaseError) => {
+                console.log(err);
+                this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+            })
+    }
 
     onCancel() {
         this.router.navigate(['band', { bandId: this.bandId }])
     }
-
 }

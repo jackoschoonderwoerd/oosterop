@@ -22,7 +22,7 @@ export class VisitorEventsComponent implements OnInit {
     fs = inject(FirestoreService);
     // seePastEvents: boolean = false;
     seeFutureEvents: boolean = true;
-    upcomingActive: boolean = false;
+
 
     ngOnInit(): void {
         this.getBands()
@@ -56,8 +56,8 @@ export class VisitorEventsComponent implements OnInit {
                     // concerts: band.concerts
                     concerts: []
                 }
-                console.log(futureGroupedConcerts);
-                console.log(pastGroupedConcerts);
+                // console.log(futureGroupedConcerts);
+                // console.log(pastGroupedConcerts);
                 band.concerts.forEach((concert: Concert) => {
                     if (concert.date.seconds > new Date().getTime() / 1000) {
                         console.log('future', concert.venueName)
@@ -71,8 +71,8 @@ export class VisitorEventsComponent implements OnInit {
                 })
                 futureGroupedConcerts.concerts.sort((a: Concert, b: Concert) => b.date.seconds - a.date.seconds)
                 pastGroupedConcerts.concerts.sort((a: Concert, b: Concert) => b.date.seconds - a.date.seconds)
-                console.log('futureGroupedConcerts', futureGroupedConcerts);
-                console.log('pastGroupedConcerts', pastGroupedConcerts)
+                // console.log('futureGroupedConcerts', futureGroupedConcerts);
+                // console.log('pastGroupedConcerts', pastGroupedConcerts)
 
                 if (futureGroupedConcerts.concerts.length > 0) {
                     this.futureCollectedGroupedConcerts.push(futureGroupedConcerts)
@@ -118,20 +118,20 @@ export class VisitorEventsComponent implements OnInit {
     //     this.pastCollectedGroupedConcerts = [...new Set(this.pastCollectedGroupedConcerts)]
     // }
 
-    onButtonToggle(period: string) {
-        if (period === 'upcoming') {
-            this.seeFutureEvents = true;
-        } else if (period === 'past') {
-            this.seeFutureEvents = false
-        }
-    }
+    // onButtonToggle(period: string) {
+    //     if (period === 'upcoming') {
+    //         this.seeFutureEvents = true;
+    //     } else if (period === 'past') {
+    //         this.seeFutureEvents = false
+    //     }
+    // }
     onPeriodSeleceted(period: string) {
         if (period === 'upcoming') {
-            this.upcomingActive = true;
+
             this.seeFutureEvents = true;
         } else if (period === 'past') {
+
             this.seeFutureEvents = false
-            this.upcomingActive = false
         }
     }
 }

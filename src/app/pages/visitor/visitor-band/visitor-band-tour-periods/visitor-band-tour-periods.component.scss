@@ -5,13 +5,17 @@ mat-expansion-panel {
             text-transform: uppercase;
         }
     }
-
-    .period {
-        padding: 0.2rem 0.5rem;
-        border: 1px solid var(--o-black);
-        .dates {
-            display: flex;
-            gap: 1rem;
+    .periods {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        .period {
+            .dates {
+                background-color: var(--o-gravel);
+                display: flex;
+                gap: 1rem;
+                padding: 0.2rem 0.5rem;
+            }
         }
     }
 }

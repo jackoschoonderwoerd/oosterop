@@ -1,13 +1,11 @@
 <main>
     <div class="bands">
-
-
-
+        <button mat-raised-button
+            (click)="onAddBand()">add band</button>
         @for(band of bands; track band.id){
         <div class="band">
             <div class="left">
                 <div class="name_visible">
-                    <div class="name">{{band.name}}</div>
                     <div class="visible">
                         @if(band.visible) {
                         <mat-icon>visibility</mat-icon>
@@ -16,6 +14,7 @@
                         <mat-icon>visibility_off</mat-icon>
                         }
                     </div>
+                    <div class="name">{{band.name}}</div>
                 </div>
                 @if(band.initiator) {
                 <div class="initiator">initiator:&nbsp;{{band.initiator}}</div>
@@ -38,9 +37,6 @@
             </div>
         </div>
         }
-
-
     </div>
-    <button mat-raised-button
-        (click)="onAddBand()">add band</button>
+
 </main>

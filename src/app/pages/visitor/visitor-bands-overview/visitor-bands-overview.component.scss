@@ -7,13 +7,22 @@
     gap: 0.7rem;
     .band {
         display: flex;
+        justify-content: space-between;
         gap: 1rem;
         align-items: center;
-        mat-icon {
-            cursor: pointer;
+        .icon_name {
+            display: flex;
+            gap: 1rem;
+            mat-icon {
+                cursor: pointer;
+                // border: 1px solid white;
+                min-width: 1.5rem;
+            }
+            .name {
+                text-transform: uppercase;
+            }
         }
-        .name {
-            text-transform: capitalize;
+        .visibility {
         }
     }
 }

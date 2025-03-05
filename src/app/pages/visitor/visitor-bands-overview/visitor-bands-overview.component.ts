@@ -5,6 +5,7 @@ import { take } from 'rxjs';
 import { JsonPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { AuthStore } from '../../../auth/auth.store';
 
 @Component({
     selector: 'app-visitor-bands-overview',
@@ -15,7 +16,8 @@ import { Router } from '@angular/router';
 export class VisitorBandsOverviewComponent {
     fs = inject(FirestoreService);
     bands: Band[];
-    router = inject(Router)
+    router = inject(Router);
+    authStore = inject(AuthStore)
 
     constructor() {
         this.getBands()

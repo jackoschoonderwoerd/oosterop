@@ -1,16 +1,13 @@
 main {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    gap: 1rem;
     padding: 1rem;
 
     .bands {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 0.3rem;
         .band {
             background-color: var(--o-crimson);
-            // max-width: 400px;
+            color: var(--o-snow);
             border: 1px solid var(--o-black);
             padding: 0.3rem 0.5rem;
             display: flex;
@@ -24,6 +21,7 @@ main {
                     gap: 1rem;
                     .name {
                         font-weight: bold;
+                        text-transform: uppercase;
                     }
                 }
             }

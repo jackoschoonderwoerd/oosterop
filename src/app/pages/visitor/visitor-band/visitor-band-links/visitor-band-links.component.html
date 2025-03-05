@@ -8,7 +8,10 @@
     <div class="link"
         (click)="onUrl(link.url)">
         <mat-icon>link</mat-icon>
-        {{link.title}}
+        <div class="title">
+
+            {{link.title}}
+        </div>
 
         <!-- <a target="_blank"
             [href]="link.url">
