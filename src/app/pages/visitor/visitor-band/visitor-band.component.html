@@ -1,8 +1,8 @@
 <main>
+    <app-logo></app-logo>
+    <div class="name no-display-large">{{band?.name}}</div>
     <div class="band">
-        <app-logo></app-logo>
-        <div class="name">{{band?.name}}</div>
-
+        <div class="name no-display-small">{{band?.name}}</div>
 
         @if(band?.oImages && band?.oImages.length > 0) {
         <app-visitor-band-o-images [oImages]="band.oImages"></app-visitor-band-o-images>
@@ -47,5 +47,10 @@
         @if(band?.tourPeriods && band.tourPeriods?.length > 0) {
         <app-visitor-band-tour-periods [tourPeriods]="band.tourPeriods"></app-visitor-band-tour-periods>
         }
+    </div>
+    <div class="right">
+        <app-visitor-bands-overview></app-visitor-bands-overview>
+        <app-visitor-tour-periods></app-visitor-tour-periods>
+        <app-visitor-events></app-visitor-events>
     </div>
 </main>

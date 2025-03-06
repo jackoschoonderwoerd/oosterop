@@ -1,18 +1,23 @@
 <main>
 
     <div class="band-members">
-        @for(member of bandMembers; track member.id; let index = $index) {
+        @for(member of bandMembers;
+        track member.id;
+        let index = $index;
+        let first = $first;
+        let last = $last) {
         <div class="band-member">
             <div class="move">
 
+                @if(!first) {
 
                 <mat-icon (click)="onMove(index,'up')">keyboard_arrow_up</mat-icon>
-
-
-
+                }@else {
+                <mat-icon style="visibility:hidden;">home</mat-icon>
+                }
+                @if(!last){
                 <mat-icon (click)="onMove(index, 'down')">keyboard_arrow_down</mat-icon>
-
-
+                }
             </div>
             <div class="name_instruments">
                 <div class="name">{{member.name}}</div>
@@ -29,9 +34,7 @@
                 (click)="onRemoveMemer()">
                 <mat-icon>delete_forever</mat-icon>
             </button>
-            <!-- <app-musician [musician]="member"
-                (removeMusician)="removeBandMember($event)"
-                [editmode]="true"></app-musician> -->
+
         </div>
         }
 

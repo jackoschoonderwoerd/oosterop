@@ -2,7 +2,6 @@ main {
     display: grid;
     grid-template-columns: 3fr 1fr;
     padding: 1rem;
-    background-color: var(--o-crimson);
     gap: 1rem;
     .buttons {
         display: flex;

@@ -12,22 +12,34 @@
 // }
 main {
     width: 100%;
-    max-width: 800px;
+    max-width: 1200px;
     margin: auto;
-
     padding: 1rem;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem;
+    @media (max-width: 1200px) {
+        grid-template-columns: auto;
+    }
+    app-logo {
+        grid-column: 1/-1;
+        max-width: 1200px;
+    }
+    .name {
+        grid-column: 1/-1;
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--o-crimson);
+        text-transform: uppercase;
+    }
     .band {
         display: flex;
         flex-direction: column;
         gap: 1rem;
         width: 100%;
-
-        .name {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--o-crimson);
-            text-transform: uppercase;
-        }
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
 
         .body {
             padding: 0.5rem;
@@ -36,67 +48,23 @@ main {
                 padding: 1rem 2rem;
             }
         }
-
-        // .links {
-        //     .link {
-        //         padding: 0.5rem;
-        //         @media (min-width: 600px) {
-        //             padding: 1rem 2rem;
-        //         }
-        //         background-color: var(--o-gravel);
-        //         mat-icon {
-        //             margin-right: 1rem;
-        //         }
-        //     }
-        // }
-
-        // .quotes {
-        //     display: flex;
-        //     flex-direction: column;
-        //     gap: 0.5rem;
-        //     .quote {
-        //         background-color: var(--o-gravel);
-        //         padding: 0.5rem;
-        //         @media (min-width: 600px) {
-        //             padding: 1rem 2rem;
-        //         }
-        //         .quote-body {
-        //             font-style: italic;
-        //         }
-        //     }
-        // }
-        // .recordings {
-        //     display: flex;
-        //     flex-direction: column;
-        //     gap: 0.5rem;
-
-        //     .recording {
-        //         padding: 0.5rem;
-        //         @media (min-width: 600px) {
-        //             padding: 1rem 2rem;
-        //         }
-        //         background-color: var(--o-gravel);
-
-        //         display: flex;
-        //         gap: 1rem;
-        //         .year {
-        //         }
-        //         .title_label {
-        //             .title {
-        //                 font-weight: 600;
-        //             }
-
-        //             .label {
-        //                 font-style: italic;
-        //                 // border: 1px solid green;
-        //                 align-items: end;
-        //             }
-        //         }
-        //     }
-        // }
+    }
+    .right {
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 }
-.header {
-    font-weight: bold;
-    text-transform: capitalize;
+.no-display-large {
+    @media (max-width: 1200px) {
+        display: none;
+    }
+}
+.no-display-small {
+    @media (min-width: 1201px) {
+        display: none;
+    }
 }

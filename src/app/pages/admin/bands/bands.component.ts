@@ -38,9 +38,9 @@ export class BandsComponent {
         const path = `bands`
         this.fs.sortedCollection(path, 'name', 'asc')
             .subscribe((bands: Band[]) => {
-                bands.forEach((band: Band) => {
-                    console.log(band.concerts, band.name)
-                })
+                // bands.forEach((band: Band) => {
+                //     console.log(band.concerts, band.name)
+                // })
                 this.bandsSubject.next(bands)
                 this.bands = bands
             })

@@ -6,10 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
     templateUrl: './visitor-band-body.component.html',
     styleUrl: './visitor-band-body.component.scss'
 })
-export class VisitorBandBodyComponent implements OnInit {
+export class VisitorBandBodyComponent {
     @Input() public body: string
 
-    ngOnInit(): void {
-        console.log(this.body)
-    }
+
 }

@@ -111,23 +111,21 @@ export class BandMembersComponent implements OnInit {
     }
 
     onMove(index: number, direction: string) {
-        console.log(index, direction)
-        console.log(this.bandMemberIds)
+        console.log('1 onMove()')
         if (direction === 'up') {
-            const bandMemberIds = this.arrayService.move(this.bandMemberIds, index, index - 1)
-            // this.bandMemberIds = bandMemberIds
-            this.updateBandMemers(bandMemberIds)
+            const newBandMemberIds = this.arrayService.move(this.bandMemberIds, index, index - 1)
+            this.updateBandMemers(newBandMemberIds)
         } else if (direction === 'down') {
-            const bandMemberIds = this.arrayService.move(this.bandMemberIds, index, index + 1)
-            // this.bandMemberIds = bandMemberIds
-            this.updateBandMemers(bandMemberIds)
+            const newBandMemberIds = this.arrayService.move(this.bandMemberIds, index, index + 1)
+            this.updateBandMemers(newBandMemberIds)
         }
     }
 
     updateBandMemers(bandMemberIds: string[]) {
-
-        this.bandMemberIds.length = 0;
-
+        this.bandMembers = []
+        console.log('2 updateBandMembers()')
+        this.bandMemberIds = [];
+        console.log('bandMemberIds: ', this.bandMemberIds)
         this.fs.updateField(`bands/${this.bandId}`, 'bandMemberIds', bandMemberIds)
             .then((res: any) => {
                 this.getBandMemberIds()

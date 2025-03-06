@@ -8,9 +8,9 @@ main {
         flex-direction: column;
         gap: 1rem;
         .link {
-            background-color: var(--o-crimson);
-            border: 1px solid var(--o-black);
-            padding: 0.5rem;
+            background-color: var(--o-gravel);
+            color: var(--o-snow);
+            padding: 0.5rem 1rem;
             align-items: center;
             display: grid;
             grid-template-columns: 1fr 2fr 1fr;
@@ -21,21 +21,21 @@ main {
             }
         }
     }
-    form {
-        padding: 1rem;
-        background-color: var(--o-form-background);
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        width: 100%;
-        max-width: 400px;
-        .buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            button {
-                border: 3px solid var(--o-red);
-            }
-        }
-    }
+    // form {
+    //     padding: 1rem;
+    //     background-color: var(--o-form-background);
+    //     display: flex;
+    //     flex-direction: column;
+    //     gap: 1rem;
+    //     width: 100%;
+    //     max-width: 400px;
+    //     .buttons {
+    //         display: flex;
+    //         flex-direction: column;
+    //         gap: 1rem;
+    //         button {
+    //             border: 3px solid var(--o-red);
+    //         }
+    //     }
+    // }
 }

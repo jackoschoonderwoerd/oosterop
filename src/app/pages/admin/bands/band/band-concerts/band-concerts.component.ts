@@ -59,7 +59,8 @@ export class BandConcertsComponent implements OnInit {
     getConcerts() {
         this.fs.getFieldInDocument(this.path, 'concerts')
             .then((concerts: Concert[]) => {
-                this.concerts = concerts
+
+                this.concerts = concerts.sort((a: Concert, b: Concert) => a.date.seconds - b.date.seconds)
             })
     }
     initForm() {

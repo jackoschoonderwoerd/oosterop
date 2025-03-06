@@ -27,6 +27,9 @@ import { VisitorBandTourPeriodsComponent } from './visitor-band-tour-periods/vis
 import { VisitorBandOImagesComponent } from './visitor-band-o-images/visitor-band-o-images.component';
 import { VisitorBandBodyComponent } from './visitor-band-body/visitor-band-body.component';
 import { LogoComponent } from '../logo/logo.component';
+import { VisitorTourPeriodsComponent } from '../visitor-tour-periods/visitor-tour-periods.component';
+import { VisitorBandsOverviewComponent } from '../visitor-bands-overview/visitor-bands-overview.component';
+import { VisitorEventsComponent } from '../visitor-events/visitor-events.component';
 
 @Component({
     selector: 'app-visitor-band',
@@ -51,6 +54,9 @@ import { LogoComponent } from '../logo/logo.component';
         VisitorBandTourPeriodsComponent,
         VisitorBandOImagesComponent,
         VisitorBandBodyComponent,
+        VisitorTourPeriodsComponent,
+        VisitorBandsOverviewComponent,
+        VisitorEventsComponent,
         LogoComponent
     ],
     templateUrl: './visitor-band.component.html',

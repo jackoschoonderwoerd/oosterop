@@ -9,10 +9,11 @@ main {
         gap: 1rem;
         .recording {
             background-color: var(--o-crimson);
+            color: var(--o-snow);
             grid-column: 1 / 2;
             gap: 1rem;
             width: 100%;
-            border: 1px solid var(--o-black);
+
             padding: 0 0.5rem;
             align-items: center;
             align-self: self-start;
@@ -29,6 +30,7 @@ main {
     form {
         display: flex;
         flex-direction: column;
+        align-self: flex-start;
         .form-buttons {
             display: flex;
             flex-direction: column;

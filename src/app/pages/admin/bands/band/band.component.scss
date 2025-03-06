@@ -11,10 +11,14 @@ main {
         gap: 1rem;
         padding: 1rem;
         border: 1px solid var(--o-black);
-        max-height: 250px;
+        max-height: 225px;
         overflow-y: scroll;
+        position: relative;
+        background-color: var(--o-gravel);
         button {
-            border: 3px solid var(--o-gravel);
+            position: sticky;
+            top: 0;
+            // border: 3px solid var(--o-gravel);
             min-height: 2.5rem;
             text-transform: uppercase;
         }

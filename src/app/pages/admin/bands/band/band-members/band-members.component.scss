@@ -22,6 +22,7 @@ main {
             .move {
                 display: flex;
                 flex-direction: column;
+                justify-content: space-between;
             }
             .name_instruments {
                 flex-grow: 1;

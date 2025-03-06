@@ -39,7 +39,6 @@ export const UiStore = signalStore(
             },
             setSubMenuItems(band: Band) {
                 const subMenuItems: string[] = []
-                console.log(subMenuItems)
                 subMenuItems.push('home')
                 if (band.reviews && band.reviews.length > 0) {
                     subMenuItems.push('reviews')
@@ -56,7 +55,6 @@ export const UiStore = signalStore(
                 if (band.concerts && band.concerts.length > 0) {
                     subMenuItems.push('concerts')
                 }
-                console.log(subMenuItems)
                 patchState(store, { subMenuItems })
             }
 

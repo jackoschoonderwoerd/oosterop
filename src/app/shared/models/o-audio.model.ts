@@ -1,5 +1,5 @@
 export interface OAudio {
-    code: string;
+    code: string | any;
     title?: string;
     comments?: string;
 }

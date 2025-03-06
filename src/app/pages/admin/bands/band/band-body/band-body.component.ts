@@ -46,7 +46,6 @@ export class BandBodyComponent implements OnInit {
     }
 
     htmlChanged(body: string) {
-        console.log(body)
         this.body = body
     }
     onUpdateBody() {

@@ -48,14 +48,14 @@ export class VisitorBandsMenuComponent implements AfterViewInit {
     ngAfterViewInit(): void {
         this.cdr.detectChanges();
         // const menuButton = this.menuButton()
-        console.log(this.menuButton)
+        // console.log(this.menuButton)
         // console.log(this.paragraph.nativeElement)
 
         if (this.menuButton) {
 
-            console.log(typeof this.menuButton)
-            console.log(this.menuButton._elementRef)
-            console.log(this.menuButton._elementRef.nativeElement)
+            // console.log(typeof this.menuButton)
+            // console.log(this.menuButton._elementRef)
+            // console.log(this.menuButton._elementRef.nativeElement)
             // this.menuButton._elementRef.nativeElement.click()
             // this.menuButton.nativeElement.click()
         }

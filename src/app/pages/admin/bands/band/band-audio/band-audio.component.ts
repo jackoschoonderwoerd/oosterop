@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ConfirmComponent } from '../../../../../shared/confirm/confirm.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 
@@ -41,7 +42,8 @@ export class BandAudioComponent implements OnInit {
     editmode: boolean = false;
     router = inject(Router);
     activeIndex: number;
-    dialog = inject(MatDialog)
+    dialog = inject(MatDialog);
+    sanitizer = inject(DomSanitizer)
 
     ngOnInit(): void {
         this.initOAdioForm()
@@ -53,13 +55,14 @@ export class BandAudioComponent implements OnInit {
     getOAudios() {
         this.fs.getFieldInDocument(this.path, 'oAudios')
             .then((oAudios: OAudio[]) => {
+
                 this.oAudios = oAudios
             })
 
     }
     initOAdioForm() {
         this.oAudioForm = this.fb.group({
-            title: new FormControl(null),
+            title: new FormControl(null, [Validators.required]),
             comments: new FormControl(null),
             code: new FormControl(null, [Validators.required]),
             visible: new FormControl(true, [Validators.required])

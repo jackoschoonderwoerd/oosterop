@@ -56,7 +56,7 @@ export class BandReviewsComponent implements OnInit {
     bandId: string;
     path: string;
     editmode: boolean;
-    body: string = '<p>enter your text here</p>';;
+    body: string;
     activeIndex: number;
     dialog = inject(MatDialog);
 

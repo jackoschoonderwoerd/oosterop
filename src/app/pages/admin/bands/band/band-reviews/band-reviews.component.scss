@@ -4,31 +4,52 @@ main {
     grid-template-columns: 1fr 2fr 1fr;
     gap: 1rem;
     .reviews {
+        overflow: scroll;
+        max-height: 80vh;
         .review {
             border: 1px solid var(--o-black);
             padding: 1rem;
+            background-color: var(--o-crimson);
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
             .published-by {
+                color: var(--o-snow);
             }
             .date-published {
+                color: var(--o-snow);
             }
             .author {
+                color: var(--o-snow);
             }
             .body {
+                background-color: var(--o-gravel);
+                color: var(--o-snow);
                 max-height: 100px;
                 overflow-y: scroll;
+                padding: 0.5rem;
             }
             .buttons {
                 display: flex;
                 justify-content: space-between;
                 gap: 1rem;
                 align-items: center;
+                color: var(--o-snow);
             }
         }
+    }
+    .center {
+        align-self: flex-start;
     }
     form {
         display: flex;
         flex-direction: column;
-
+        align-self: flex-start;
+        .date-form-field {
+            mat-datepicker-toggle {
+                padding-right: 0.5rem;
+            }
+        }
         .form-buttons {
             display: flex;
             flex-direction: column;

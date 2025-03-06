@@ -3,6 +3,7 @@
     <div class="o-audios">
         @for(oAudio of oAudios;track oAudio; let index = $index){
         <div class="o-audio">
+
             <div class="left">
                 <div class="visible">
                     @if(!oAudio.visible){
@@ -11,14 +12,20 @@
                     @if(oAudio.visible) {
                     <mat-icon>visibility</mat-icon>
                     }
-                    <div class="title">{{oAudio.title}}</div>
-                    <div class="comments">{{oAudio.comments}}</div>
                 </div>
+                @if(oAudio.title) {
+                <div class="title">{{oAudio.title}}</div>
+                }
+                @if(oAudio.comments){
+                <div class="comments">{{oAudio.comments}}</div>
+                }
+                <!-- @if(oAudio.code){
+                <div class="code"
+                    [innerHTML]="oAudio.code">{{oAudio.code}}</div>
+                } -->
             </div>
-            <div class="code"
-                [innerHTML]="oAudio.code"></div>
-            <div class="buttons">
 
+            <div class="buttons">
                 <button mat-icon-button
                     (click)="onEdit(index)">
                     <mat-icon>edit</mat-icon>
@@ -31,6 +38,7 @@
         </div>
         }
     </div>
+
     <form [formGroup]="oAudioForm">
         <mat-form-field>
             <mat-label>title</mat-label>
@@ -56,7 +64,7 @@
                 (click)="onAddOrEditAudio()"
                 [disabled]="oAudioForm.invalid">{{!editmode ?'add': 'update' }}&nbsp;audio</button>
             <button mat-raised-button
-                (click)="onCancel()">cancel</button>
+                (click)="onCancel()">cancel (back to band)</button>
         </div>
     </form>
 </main>

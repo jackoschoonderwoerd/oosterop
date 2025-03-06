@@ -2,12 +2,19 @@ main {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     gap: 1rem;
-    background-color: var(--o-crimson);
+
     padding: 1rem;
     .quotes {
+        max-height: 80vh;
+        overflow: scroll;
         .quote {
             border: 1px solid var(--o-black);
             padding: 1rem;
+            background-color: var(--o-crimson);
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            color: var(--o-snow);
             .published-by {
             }
             .date-published {
@@ -26,9 +33,13 @@ main {
             }
         }
     }
+    .center {
+        align-self: flex-start;
+    }
     form {
         display: flex;
         flex-direction: column;
+        align-self: flex-start;
 
         .form-buttons {
             display: flex;

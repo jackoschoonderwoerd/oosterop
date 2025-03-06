@@ -66,7 +66,6 @@ export class HeaderComponent implements OnInit {
         this.getAnouncements();
         this.navigationService.getBandsByInitiatorArray()
             .then((bandsByInitiatorArray: BandsByInitiator[]) => {
-                console.log(bandsByInitiatorArray)
                 this.bandsByInitiatorArray = bandsByInitiatorArray
             })
             .catch((err: any) => {
