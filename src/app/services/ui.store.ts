@@ -12,6 +12,7 @@ type UiState = {
     subMenuItems: string[];
     band: Band;
     bandId: string;
+    showHidden: boolean;
 
 }
 const initialState: UiState = {
@@ -23,6 +24,7 @@ const initialState: UiState = {
     subMenuItems: [],
     band: null,
     bandId: null,
+    showHidden: false
 
 }
 export const UiStore = signalStore(
@@ -56,6 +58,9 @@ export const UiStore = signalStore(
                     subMenuItems.push('concerts')
                 }
                 patchState(store, { subMenuItems })
+            },
+            setShowHidden(showHidden: boolean) {
+                patchState(store, { showHidden })
             }
 
         }))

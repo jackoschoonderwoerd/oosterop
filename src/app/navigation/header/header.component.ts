@@ -119,4 +119,8 @@ export class HeaderComponent implements OnInit {
     goToNextPage() {
         this.location.forward();
     }
+    toggleHidden() {
+        console.log(this.uiStore.showHidden())
+        this.uiStore.setShowHidden(!this.uiStore.showHidden())
+    }
 }

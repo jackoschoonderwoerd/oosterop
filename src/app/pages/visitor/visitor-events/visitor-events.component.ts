@@ -60,11 +60,9 @@ export class VisitorEventsComponent implements OnInit {
                 // console.log(pastGroupedConcerts);
                 band.concerts.forEach((concert: Concert) => {
                     if (concert.date.seconds > new Date().getTime() / 1000) {
-                        console.log('future', concert.venueName)
                         futureGroupedConcerts.concerts.push(concert)
                         // this.futureCollectedGroupedConcerts.push(futureGroupedConcerts)
                     } else {
-                        console.log('past', concert.venueName)
                         pastGroupedConcerts.concerts.push(concert)
                         this.pastCollectedGroupedConcerts.push(pastGroupedConcerts)
                     }

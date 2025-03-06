@@ -1,5 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, inject, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { FirestoreService } from '../../../services/firestore.service';
 import { Band } from '../../../shared/models/band.model';
 import { take } from 'rxjs';
@@ -57,7 +57,8 @@ import { VisitorEventsComponent } from '../visitor-events/visitor-events.compone
         VisitorTourPeriodsComponent,
         VisitorBandsOverviewComponent,
         VisitorEventsComponent,
-        LogoComponent
+        LogoComponent,
+        RouterModule
     ],
     templateUrl: './visitor-band.component.html',
     styleUrl: './visitor-band.component.scss'
@@ -71,9 +72,9 @@ export class VisitorBandComponent implements OnInit {
     subMenuItems: string[] = [];
     uiStore = inject(UiStore);
     panelExpanded: boolean = false;
-    // newConcerts: Concert[] = [];
-    // pastConcerts: Concert[] = []
     concerts: Concert[] = [];
+    router = inject(Router)
+    @ViewChild('top') public target: ElementRef
 
     ngOnInit(): void {
         this.route.paramMap.subscribe((params: any) => {
@@ -82,18 +83,16 @@ export class VisitorBandComponent implements OnInit {
             this.getBand(bandId)
         })
     }
+
+
     getBand(bandId: string) {
         const path = `bands/${bandId}`
         this.fs.getDoc(path).pipe(take(1)).subscribe((band: Band) => {
             this.band = band;
-            // this.concerts = band.concerts
             const bandMemberIds: string[] = band.bandMemberIds
             this.getBandMembers(bandMemberIds);
-            // this.getSubMenuItems(band)
             this.uiStore.setSubMenuItems(band)
             this.uiStore.setBand(band)
-            // this.splitConcertsPastNew(band.concerts)
-            // this.navigationService.getSubMenuItems(this.band)
 
         })
     }
@@ -110,74 +109,11 @@ export class VisitorBandComponent implements OnInit {
             })
         }
     }
-
-    // onPeriodSelected(event: Event, period: string) {
-    //     event.stopPropagation();
-
-    //     console.log(period);
-    //     if (period === 'new') {
-    //         this.concerts = this.getNewConcerts()
-    //     } else if (period === 'past') {
-    //         this.concerts = this.getPastConcerts()
-    //     }
-    // }
-
-    // onPanelClicked(panel: MatExpansionPanel) {
-    //     this.panelExpanded = panel.expanded
-    // }
-
-    // getPastConcerts() {
-    //     let newConcerts: Concert[] = []
-    //     this.band.concerts.forEach((concert: Concert) => {
-    //         if (new Date(concert.date.seconds * 1000) < new Date) {
-    //             newConcerts.push(concert)
-    //         }
-    //     })
-    //     return newConcerts
-
-    // }
-    // getNewConcerts() {
-    //     let newConcerts: Concert[] = []
-    //     this.band.concerts.forEach((concert: Concert) => {
-    //         if (new Date(concert.date.seconds * 1000) >= new Date) {
-    //             newConcerts.push(concert)
-    //         }
-    //     })
-    //     return newConcerts
-    // }
+    scrollToTop() {
+        const targetElement = this.target.nativeElement
+        targetElement.scrollIntoView({ behavior: 'smooth' })
+    }
 
 
-
-    // splitConcertsPastNew(concerts: Concert[]) {
-    //     concerts.forEach((concert: Concert) => {
-    //         if (new Date(concert.date.seconds * 1000) > new Date) {
-    //             this.concerts.push(concert)
-    //         } else {
-    //             this.concerts.push(concert)
-    //         }
-    //     })
-    //     console.log(this.concerts)
-    //     // console.log(this.pastConcerts)
-    // }
-
-    // getSubMenuItems(band: Band) {
-
-    //     if (band.reviews && band.reviews.length > 0) {
-    //         this.subMenuItems.push('reviews')
-    //     }
-    //     if (band.galleryVideos && band.galleryVideos.length > 0) {
-    //         this.subMenuItems.push('videos')
-    //     }
-    //     if (band.galleryImages && band.galleryImages.length > 0) {
-    //         this.subMenuItems.push('images')
-    //     }
-    //     if (band.galleryAudios && band.galleryAudios.length > 0) {
-    //         this.subMenuItems.push('audio')
-    //     }
-    //     if (band.concerts && band.concerts.length > 0) {
-    //         this.subMenuItems.push('concerts')
-    //     }
-    //     console.log(this.subMenuItems)
-    // }
 
 }

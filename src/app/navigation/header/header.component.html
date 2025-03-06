@@ -16,7 +16,7 @@
             <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
         <div class="version"
-            style="color:aqua">V14</div>
+            style="color:black">V16</div>
 
         <button mat-icon-button
             routerLinkActive="link-active"
@@ -42,6 +42,7 @@
             }
         </div>
         }
+
         @if(authStore.isLoggedIn()) {
         <div (click)="onLogout()"
             class="logout">
@@ -49,6 +50,8 @@
                 <mat-icon>logout</mat-icon>
             </button>
         </div>
+        <button mat-button
+            (click)="toggleHidden()">{{uiStore.showHidden() ? 'no eyes' : 'eyes '}}</button>
         }
         @if(!authStore.isLoggedIn()) {
         <div routerLink="login"

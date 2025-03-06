@@ -1,11 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FirestoreService } from '../../../services/firestore.service';
 import { Band } from '../../../shared/models/band.model';
 import { take } from 'rxjs';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, ViewportScroller } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { AuthStore } from '../../../auth/auth.store';
+import { UiStore } from '../../../services/ui.store';
 
 @Component({
     selector: 'app-visitor-bands-overview',
@@ -18,6 +19,10 @@ export class VisitorBandsOverviewComponent {
     bands: Band[];
     router = inject(Router);
     authStore = inject(AuthStore)
+    uiStore = inject(UiStore);
+    viewportScroller = inject(ViewportScroller)
+
+    @Output() bandSelected = new EventEmitter<void>();
 
     constructor() {
         this.getBands()
@@ -32,6 +37,7 @@ export class VisitorBandsOverviewComponent {
 
     }
     onBandInfo(bandId: string) {
+        this.bandSelected.emit()
         this.router.navigate(['visitor-band', { bandId }])
     }
 }

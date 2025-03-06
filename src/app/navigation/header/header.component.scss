@@ -4,6 +4,7 @@ mat-toolbar {
     justify-content: space-between;
     gap: 1rem;
     position: relative;
+    border-bottom: 2px solid var(--o-gravel);
     .left {
         .list-item-menu {
             display: flex;

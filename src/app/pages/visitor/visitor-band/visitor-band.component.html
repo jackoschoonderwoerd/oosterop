@@ -1,4 +1,5 @@
 <main>
+    <div #top></div>
     <app-logo></app-logo>
     <div class="name no-display-large">{{band?.name}}</div>
     <div class="band">
@@ -49,8 +50,10 @@
         }
     </div>
     <div class="right">
-        <app-visitor-bands-overview></app-visitor-bands-overview>
+        <app-visitor-bands-overview (bandSelected)="scrollToTop()"></app-visitor-bands-overview>
         <app-visitor-tour-periods></app-visitor-tour-periods>
         <app-visitor-events></app-visitor-events>
     </div>
+    <button mat-button
+        (click)="scrollToTop()">top</button>
 </main>
