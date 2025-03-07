@@ -9,16 +9,26 @@
                 <mat-icon>visibility_off</mat-icon>
                 }
             </div>
+            @if(concert.date) {
 
             <div class="date">{{concert.date.seconds*1000|date}}</div>
+            } @else {
+            <div class="not-provided">
+                -
+            </div>
+            }
             <div class="venue-name">{{concert.venueName}}</div>
 
 
-            <!-- @if(concert.city){ -->
+            @if(concert.city){
             <div class="city">{{concert.city}}</div>
-            <!-- } -->
+            } @else {
+            <div class="not-provided">-</div>
+            }
             @if(concert.country) {
             <div class="country">{{concert.country}}</div>
+            } @else {
+            <div class="not-provided">-</div>
             }
 
 
@@ -36,14 +46,12 @@
         </div>
         }
     </div>
-
     <form [formGroup]="concertForm">
         <mat-form-field>
             <mat-label>Choose a date</mat-label>
             <input matInput
                 formControlName="date"
                 [matDatepicker]="picker">
-            <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix
                 [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -80,7 +88,6 @@
                 (click)="onAddOrUpdateConcert()">{{!editmode ? 'add': 'update'}}&nbsp;concert</button>
             <button mat-raised-button
                 (click)="onCancel()">cancel (back to band)</button>
-            .
         </div>
 
     </form>

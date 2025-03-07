@@ -12,13 +12,14 @@
         gap: 0.2rem;
         .tour-period {
             background-color: var(--o-crimson);
-            padding: 0.2rem 0.5rem;
+            padding: 0.5rem;
             display: flex;
             justify-content: space-between;
             gap: 1rem;
             border: 1px solid var(--o-gray);
             .left {
                 .band-name {
+                    text-transform: uppercase;
                     font-weight: bold;
                 }
                 .dates {
@@ -34,17 +35,11 @@
             }
         }
     }
-    // form {
-    //     border: 1px solid red;
-    //     display: flex;
-    //     flex-direction: column;
-    //     .buttons {
-    //         display: flex;
-    //         flex-direction: column;
-    //         gap: 1rem;
-    //         button {
-    //             border: 3px solid var(--o-red);
-    //         }
-    //     }
-    // }
+    form {
+        mat-form-field {
+            mat-datepicker-toggle {
+                margin-right: 0.5rem;
+            }
+        }
+    }
 }

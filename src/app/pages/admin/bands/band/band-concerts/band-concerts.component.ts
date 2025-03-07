@@ -43,7 +43,7 @@ export class BandConcertsComponent implements OnInit {
     router = inject(Router);
     dialog = inject(MatDialog)
 
-    concerts: Concert[]
+    concerts: Concert[] = []
     bandId: string;
     activeIndex: number;
     path: string;
@@ -53,6 +53,7 @@ export class BandConcertsComponent implements OnInit {
     ngOnInit(): void {
         this.bandId = this.route.snapshot.paramMap.get('bandId')
         this.path = `bands/${this.bandId}`
+
         this.getConcerts();
         this.initForm()
     }
@@ -60,22 +61,24 @@ export class BandConcertsComponent implements OnInit {
         this.fs.getFieldInDocument(this.path, 'concerts')
             .then((concerts: Concert[]) => {
 
-                this.concerts = concerts.sort((a: Concert, b: Concert) => a.date.seconds - b.date.seconds)
+                console.log(concerts)
+                this.concerts = concerts
+                // this.concerts = concerts.sort((a: Concert, b: Concert) => a.date.seconds - b.date.seconds)
             })
     }
     initForm() {
         this.concertForm = this.fb.group({
             date: new FormControl(null, [Validators.required]),
-            venueName: new FormControl(null),
+            venueName: new FormControl(null, [Validators.required]),
             venueUrl: new FormControl(null),
             city: new FormControl(null),
             country: new FormControl(null),
-            visible: new FormControl(true, [Validators.required])
+            visible: new FormControl(null, [Validators.required])
         })
     }
     onAddOrUpdateConcert() {
         const concert: Concert = this.concertForm.value;
-
+        console.log(concert)
         if (!this.editmode) {
             this.addConcert(concert)
         } else {
@@ -88,8 +91,10 @@ export class BandConcertsComponent implements OnInit {
         this.fs.addElementToArray(this.path, 'concerts', concert)
             .then((res: any) => {
                 console.log(res);
-                this.concertForm.reset()
+                this.concertForm.reset();
+                console.log(this.concertForm.controls['date'])
                 this.getConcerts()
+                this.router.navigate(['band', { bandId: this.bandId }])
             })
             .catch((err: FirebaseError) => {
                 console.log(err)
@@ -99,14 +104,18 @@ export class BandConcertsComponent implements OnInit {
     onEdit(index: number) {
         this.editmode = true;
         this.activeIndex = index;
-        console.log(this.concerts[index].country)
+
+        console.log(this.concerts[index].visible)
 
         this.concertForm.patchValue({
             date: new Date(this.concerts[index].date.seconds * 1000),
             venueName: this.concerts[index].venueName,
             venueUrl: this.concerts[index].venueUrl ? this.concerts[index].venueUrl : null,
             city: this.concerts[index].city ? this.concerts[index].city : null,
-            country: this.concerts[index].country ? this.concerts[index].country : null
+            country: this.concerts[index].country ? this.concerts[index].country : null,
+            visible: this.concerts[index].visible ? this.concerts[index].visible : null
+            // visible: this.concerts[index].visible
+            // visibile: false
         })
 
         // this.concertForm.setValue({
@@ -130,6 +139,7 @@ export class BandConcertsComponent implements OnInit {
     }
     onDelete(index) {
         const dialogRef = this.dialog.open(ConfirmComponent, {
+
             data: {
                 doomedElement: new Date((this.concerts[index].date.seconds) * 1000)
             }

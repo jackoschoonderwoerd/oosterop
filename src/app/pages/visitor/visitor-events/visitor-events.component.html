@@ -8,38 +8,71 @@
                 (click)="onPeriodSeleceted('upcoming')">upcoming</button>
         </div>
     </div>
-    <!-- <mat-button-toggle-group>
-        <mat-button-toggle (click)="onButtonToggle('past')">Past</mat-button-toggle>
-        <mat-button-toggle [checked]="seeFutureEvents"
-            (click)="onButtonToggle('upcoming')">upcoming</mat-button-toggle>
 
-    </mat-button-toggle-group> -->
-
-
-    @if(seeFutureEvents){
-
-    <div class="events future-events">
-        @for(event of futureCollectedGroupedConcerts;track event) {
-        <div class="event">
-            <div class="band-name">{{event.bandName}}</div>
-            <div class="concerts">
-                @for(concert of event.concerts; track concert){
-                @if(concert.visible){
-                <div class="concert">
-                    <div class="date">{{concert.date.seconds*1000|date}}</div>
-                    <div class="venue-name">{{concert.venueName}}</div>
-                    <div class="location">
-                        <div class="city">{{concert.city}}</div>
-                        <div class="country">{{concert.country}}</div>
-                    </div>
+    @if(upcomingConcerts && upcomingConcerts.length > 0 && seeFutureEvents) {
+    <div class="upcoming-concerts">
+        @for(concert of upcomingConcerts; track concert) {
+        <div class="concert">
+            <div class="date_visibility">
+                <div class="date">{{concert.date.seconds*1000|date}}</div>
+                @if(authStore.isLoggedIn() && uiStore.showHidden()){
+                <div class="visibility">
+                    @if(concert.visible) {
+                    <mat-icon>visibility</mat-icon>
+                    } @else {
+                    <mat-icon style="color:black">visibility_off</mat-icon>
+                    }
                 </div>
                 }
-                }
+
             </div>
+            <div class="band-name">{{concert.bandName}}</div>
+            <div class="venue-name">{{concert.venueName}}</div>
+            <div class="city">{{concert.city}}</div>
+            <div class="country">{{concert.country}}</div>
+
         </div>
         }
     </div>
     }
+
+
+    <!-- @if(seeFutureEvents){
+
+    <div class="future-events">
+        @for(event of futureCollectedGroupedConcerts;track event) {
+        <div class="event">
+            <div class="left">
+
+                <div class="band-name">{{event.bandName}}</div>
+                <div class="concerts">
+                    @for(concert of event.concerts; track concert){
+                    @if(concert.visible || uiStore.showHidden()){
+                    <div class="concert">
+                        <div class="date">{{concert.date.seconds*1000|date}}</div>
+                        <div class="venue-name">{{concert.venueName}}</div>
+                        <div class="location">
+                            <div class="city">{{concert.city}}</div>
+                            <div class="country">{{concert.country}}</div>
+                        </div>
+                        @if(authStore.isLoggedIn() && uiStore.showHidden()){
+                        <div class="visibility">
+                            @if(concert.visible) {
+                            <mat-icon>visibility</mat-icon>
+                            } @else {
+                            <mat-icon style="color:black">visibility_off</mat-icon>
+                            }
+                        </div>
+                        }
+                    </div>
+                    }
+                    }
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    } -->
     @if(!seeFutureEvents) {
 
     <mat-accordion>

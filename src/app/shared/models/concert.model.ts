@@ -4,5 +4,6 @@ export interface Concert {
     venueUrl?: string;
     city: string;
     country: string;
-    visible: boolean
+    visible: boolean;
+    bandName?: string;
 }

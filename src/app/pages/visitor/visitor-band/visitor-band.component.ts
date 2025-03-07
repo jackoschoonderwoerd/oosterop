@@ -74,7 +74,7 @@ export class VisitorBandComponent implements OnInit {
     panelExpanded: boolean = false;
     concerts: Concert[] = [];
     router = inject(Router)
-    @ViewChild('top') public target: ElementRef
+    @ViewChild('top') public top: ElementRef
 
     ngOnInit(): void {
         this.route.paramMap.subscribe((params: any) => {
@@ -110,10 +110,7 @@ export class VisitorBandComponent implements OnInit {
         }
     }
     scrollToTop() {
-        const targetElement = this.target.nativeElement
+        const targetElement = this.top.nativeElement
         targetElement.scrollIntoView({ behavior: 'smooth' })
     }
-
-
-
 }

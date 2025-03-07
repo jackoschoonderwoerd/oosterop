@@ -27,31 +27,49 @@
             }
         }
     }
-
-    .events {
+    .upcoming-concerts {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
-        .event {
-            margin-bottom: 0.2rem;
-
-            // padding: 0.5rem;
-            .band-name {
-                text-transform: capitalize;
-                font-weight: bold;
+        gap: 1rem;
+        .concert {
+            border-bottom: 1px solid var(--o-gravel);
+            .date_visibility {
+                align-items: center;
+                display: flex;
+                justify-content: space-between;
             }
-            .concerts {
-                .concert {
-                    border-bottom: 1px solid var(--o-gravel);
-                    .location {
-                        display: flex;
-                        gap: 1rem;
-                        margin-bottom: 0.4rem;
-                    }
-                }
+
+            .band-name {
+                text-transform: uppercase;
+                font-weight: bold;
             }
         }
     }
+    // .future-events {
+    //     display: flex;
+    //     flex-direction: column;
+    //     gap: 0.5rem;
+    //     .event {
+    //         margin-bottom: 0.2rem;
+    //         .left {
+    //             .band-name {
+    //                 text-transform: capitalize;
+    //                 font-weight: bold;
+    //                 color: var(--o-coal);
+    //             }
+    //             .concerts {
+    //                 .concert {
+    //                     border-bottom: 1px solid var(--o-gravel);
+    //                     .location {
+    //                         display: flex;
+    //                         gap: 1rem;
+    //                         margin-bottom: 0.4rem;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
     mat-accordion {
         mat-expansion-panel {
             mat-expansion-panel-header {

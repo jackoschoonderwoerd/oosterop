@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { LogoComponent } from '../logo/logo.component';
 import { VisitorBandsMenuComponent } from '../visitor-bands-menu/visitor-bands-menu.component';
+import { AuthStore } from '../../../auth/auth.store';
+import { UiStore } from '../../../services/ui.store';
 
 @Component({
     selector: 'app-visitor-tour-periods',
@@ -27,6 +29,8 @@ export class VisitorTourPeriodsComponent implements OnInit {
     fs = inject(FirestoreService)
     tourPeriods: TourPeriod[] = [];
     router = inject(Router)
+    authStore = inject(AuthStore);
+    uiStore = inject(UiStore)
 
     ngOnInit(): void {
         this.getTourPeriods()

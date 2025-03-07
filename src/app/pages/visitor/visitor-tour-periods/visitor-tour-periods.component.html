@@ -9,13 +9,16 @@
             </div>
             <div class="band-name">{{period.bandName}}</div>
         </div>
-        <!-- <div class="btn-container">
-            <button mat-icon-button
-                class="info"
-                (click)="onInfo(period.bandId)">
-                <mat-icon>info</mat-icon>
-            </button>
-        </div> -->
+
+        @if(authStore.isLoggedIn() && uiStore.showHidden()){
+        <div class="visibility">
+            @if(period.visible) {
+            <mat-icon>visibility</mat-icon>
+            } @else {
+            <mat-icon style="color:black">visibility_off</mat-icon>
+            }
+        </div>
+        }
 
 
     </div>

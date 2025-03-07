@@ -143,6 +143,7 @@ export class BandTourPeriodsComponent implements OnInit {
                 });
                 this.getTourPeriods();
                 this.navigationService.getBandsByInitiatorArray();
+                this.form.reset()
 
             })
             .catch((err: FirebaseError) => {
@@ -159,21 +160,6 @@ export class BandTourPeriodsComponent implements OnInit {
             endDate: new Date(this.tourPeriods[index].endDate.seconds * 1000),
             visible: this.tourPeriods[index].visible
         })
-        // const path = `tour-periods/${tourPeriodId}`
-        // this.fs.getDoc(path)
-        //     .subscribe((tourPeriod: TourPeriod) => {
-        //         if (tourPeriod) {
-        //             console.log(tourPeriod)
-        //             this.tourPeriodForm.patchValue({
-        //                 bandName: tourPeriod.bandName,
-        //                 startDate: new Date(tourPeriod.startDate.seconds * 1000),
-        //                 endDate: new Date(tourPeriod.endDate.seconds * 1000),
-        //                 visible: tourPeriod.visible
-        //             })
-        //         } else {
-
-        //         }
-        //     })
     }
 
     onDelete(index: number) {
@@ -186,11 +172,6 @@ export class BandTourPeriodsComponent implements OnInit {
             if (res) {
                 this.fs.removeElementFromArray(this.pathToBand, 'tourPeriods', this.tourPeriods[index])
                     .then((res: any) => {
-                        console.log(res)
-                        // this.form.patchValue({
-                        //     startDate: null,
-                        //     endDate: null
-                        // })
                         this.getTourPeriods()
                     })
                     .catch((err: FirebaseError) => {
@@ -204,6 +185,7 @@ export class BandTourPeriodsComponent implements OnInit {
     }
 
     updateTourPeriod(tourPeriod: TourPeriod) {
+        console.log(tourPeriod)
         this.tourPeriods[this.activeIndex] = tourPeriod;
         this.fs.updateField(this.pathToBand, 'tourPeriods', this.tourPeriods)
             .then((res: any) => {

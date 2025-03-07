@@ -7,6 +7,7 @@
             <mat-icon (click)="onBandInfo(band.id)">info</mat-icon>
             <div class="name">{{band.name}}</div>
         </div>
+
         @if(authStore.isLoggedIn() && uiStore.showHidden()){
         <div class="visibility">
             @if(band.visible) {
