@@ -9,13 +9,8 @@
         </div>
 
         @if(authStore.isLoggedIn() && uiStore.showHidden()){
-        <div class="visibility">
-            @if(band.visible) {
-            <mat-icon>visibility</mat-icon>
-            } @else {
-            <mat-icon style="color:black">visibility_off</mat-icon>
-            }
-        </div>
+        <app-visibility-eyes [visible]="band.visible"></app-visibility-eyes>
+
         }
     </div>
     }

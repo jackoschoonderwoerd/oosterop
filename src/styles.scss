@@ -127,3 +127,16 @@ form {
 a {
     color: white;
 }
+
+.mat-tab-label {
+    color: white !important; /* Change tab label color */
+    font-weight: bold;
+}
+
+.mat-tab-label-active {
+    color: yellow !important; /* Active tab label color */
+}
+
+.mat-tab-group {
+    background-color: #333; /* Change tab group background */
+}

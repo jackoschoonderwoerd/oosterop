@@ -6,12 +6,13 @@
 
             <div class="left">
                 <div class="visible">
-                    @if(!oAudio.visible){
+                    <app-visibility-eyes [visible]="oAudio.visible"></app-visibility-eyes>
+                    <!-- @if(!oAudio.visible){
                     <mat-icon>visibility_off</mat-icon>
                     }
                     @if(oAudio.visible) {
                     <mat-icon>visibility</mat-icon>
-                    }
+                    } -->
                 </div>
                 @if(oAudio.title) {
                 <div class="title">{{oAudio.title}}</div>

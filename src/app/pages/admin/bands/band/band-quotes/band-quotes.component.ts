@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { DatePipe } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { VisibilityEyesComponent } from '../../../../../shared/visibility-eyes/visibility-eyes.component';
 
 @Component({
     selector: 'app-band-quotes',
@@ -31,7 +32,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         MatIconModule,
         MatInput,
         DatePipe,
-        MatCheckboxModule
+        MatCheckboxModule,
+        VisibilityEyesComponent
     ],
     templateUrl: './band-quotes.component.html',
     styleUrl: './band-quotes.component.scss'
@@ -52,6 +54,7 @@ export class BandQuotesComponent implements OnInit {
     body: string;
     activeIndex: number;
     dialog = inject(MatDialog);
+    checkboxControl = new FormControl(false);
 
 
     ngOnInit(): void {
@@ -65,7 +68,7 @@ export class BandQuotesComponent implements OnInit {
             publishedBy: new FormControl(null),
             datePublished: new FormControl(null),
             author: new FormControl(null),
-            visible: new FormControl(true)
+            visible: new FormControl(null)
 
         })
     }
@@ -133,13 +136,22 @@ export class BandQuotesComponent implements OnInit {
         this.activeIndex = index;
         this.editmode = true;
         const quote: Review = this.quotes[index]
+        // console.log('quote: ', quote.visible)
+        // console.log('form value: ', this.quoteForm.controls['visible'].value)
+        // console.log('quotes at index', this.quotes[index])
         this.quoteForm.patchValue({
             publishedBy: quote.publishedBy ? quote.publishedBy : null,
             datePublished: quote.datePublished ? new Date(quote.datePublished.seconds * 1000) : null,
             author: quote.author ? quote.author : null,
-            visible: quote.visible ? quote.visible : true
+            // visible: false,
+            // visible: quote.visible ? quote.visible : null
         })
+        this.quoteForm.patchValue({
+            visible: quote.visible
+        })
+        // console.log('form value after patch: ', this.quoteForm.controls['visible'].value)
         this.textEditorService.passBodyToEditor(quote.body)
+
     }
 
     updateQuote(newQuote: Review) {
@@ -162,6 +174,10 @@ export class BandQuotesComponent implements OnInit {
         this.textEditorService.passBodyToEditor('');
         this.editmode = false;
         this.router.navigate(['band', { bandId: this.bandId }])
+    }
+
+    updateCheckbox() {
+        this.checkboxControl.patchValue(true); // Updates the checkbox to checked
     }
 
 }

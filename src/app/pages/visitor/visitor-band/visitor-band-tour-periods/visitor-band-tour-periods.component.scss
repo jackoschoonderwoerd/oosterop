@@ -10,11 +10,14 @@ mat-expansion-panel {
         flex-direction: column;
         gap: 0.2rem;
         .period {
+            background-color: var(--o-gravel);
+            display: flex;
+            gap: 1rem;
+            padding: 0.2rem 0.5rem;
+            align-items: center;
             .dates {
-                background-color: var(--o-gravel);
                 display: flex;
                 gap: 1rem;
-                padding: 0.2rem 0.5rem;
             }
         }
     }

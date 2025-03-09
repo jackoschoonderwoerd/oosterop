@@ -1,65 +1,18 @@
 <mat-accordion class="concerts-accordion">
-    <mat-expansion-panel #panel
-        (click)="onPanelClicked(panel)">
+    <mat-expansion-panel #panel>
         <mat-expansion-panel-header>
-            <!-- @if(!panelExpanded){ -->
+
             <mat-panel-title>concerts</mat-panel-title>
-            <!-- } -->
-            @if(panelExpanded){
-            <mat-panel-description>
-                <button [ngClass]="showPast ? 'selected-period': 'not-selected-period'"
-                    (click)="onPeriodSelected($event ,'past')">past</button>
-                <button [ngClass]="showAll ? 'selected-period': 'not-selected-period'"
-                    (click)="onPeriodSelected($event ,'all')">all</button>
-                <button [ngClass]="showUpcoming ? 'selected-period': 'not-selected-period'"
-                    (click)="onPeriodSelected($event ,'upcoming')">upcoming</button>
-                <!-- <mat-button--group name="fontStyle"
-                    aria-label="Font Style">
-                    <mat-button-toggle (click)="onPeriodSelected($event ,'new')"
-                        value="bold">upcoming</mat-button-toggle>
-                    <mat-button-toggle [checked]="showAllConcerts"
-                        (click)="onPeriodSelected($event ,'all')"
-                        value="bold">all</mat-button-toggle>
-                    <mat-button-toggle (click)="onPeriodSelected($event, 'past')"
-                        value="italic">past</mat-button-toggle>
-                </mat-button-toggle-group> -->
-            </mat-panel-description>
-            }
+
         </mat-expansion-panel-header>
-        @if(concerts && concerts.length > 0) {
+        <mat-tab-group [selectedIndex]="1">
+            <mat-tab label="past">
+                <app-visitor-band-concerts-past></app-visitor-band-concerts-past>
+            </mat-tab>
 
-        <div class="concerts">
-
-            @for(concert of concerts;track concert){
-            @if(concert.visible) {
-            <div class="concert">
-                <div class="date">{{concert.date.seconds*1000|date}}</div>
-
-
-                <!-- @if(concert.venueUrl) {
-                <div class="venue-name-url"><a [href]="concert.venueUrl">{{concert.venueName}}</a></div> -->
-                @if(concert.venueUrl) {
-                <div class="venue-name-url"
-                    style="cursor: poiter;"
-                    (click)="onUrl(concert.venueUrl)">{{concert.venueName}}</div>
-                } @else {
-                <div class="venue-name">{{concert.venueName}}</div>
-                }
-                <div class="location">
-                    @if(concert.city){
-                    <div class="city">{{concert.city}}</div>
-                    }
-                    @if(concert.country){
-                    <div class="coutry">{{concert.country}}</div>
-                    }
-                </div>
-            </div>
-            }
-            }
-            <!-- <hr> -->
-        </div>
-        } @else {
-        <p>no {{currentPeriodShown === 'new'? 'upcoming': 'past' }} concerts</p>
-        }
+            <mat-tab label="upcoming">
+                <app-visitor-band-concerts-upcoming></app-visitor-band-concerts-upcoming>
+            </mat-tab>
+        </mat-tab-group>
     </mat-expansion-panel>
 </mat-accordion>

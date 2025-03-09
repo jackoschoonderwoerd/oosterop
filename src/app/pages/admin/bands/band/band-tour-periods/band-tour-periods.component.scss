@@ -18,9 +18,14 @@
             gap: 1rem;
             border: 1px solid var(--o-gray);
             .left {
-                .band-name {
-                    text-transform: uppercase;
-                    font-weight: bold;
+                .visibility_band-name {
+                    display: flex;
+                    gap: 1rem;
+                    align-items: center;
+                    .band-name {
+                        text-transform: uppercase;
+                        font-weight: bold;
+                    }
                 }
                 .dates {
                     display: flex;

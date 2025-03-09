@@ -3,7 +3,11 @@
         @for(tourPeriod of tourPeriods; track tourPeriod; let index = $index){
         <div class="tour-period">
             <div class="left">
-                <div class="band-name">{{tourPeriod?.bandName}}</div>
+                <div class="visibility_band-name">
+                    <app-visibility-eyes [visible]="tourPeriod.visible"></app-visibility-eyes>
+
+                    <div class="band-name">{{tourPeriod?.bandName}}</div>
+                </div>
                 <div class="dates">
                     <div class="start-date">{{tourPeriod.startDate.seconds*1000|date}}</div>
                     <span>-</span>

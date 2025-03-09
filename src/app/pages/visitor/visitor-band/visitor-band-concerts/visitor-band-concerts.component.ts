@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { IconSubmenuComponent } from '../../../../shared/icon-submenu/icon-submenu.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirestoreService } from '../../../../services/firestore.service';
@@ -10,6 +10,14 @@ import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansi
 import { Band } from '../../../../shared/models/band.model';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { take } from 'rxjs';
+import { VisibilityEyesComponent } from '../../../../shared/visibility-eyes/visibility-eyes.component';
+import { AuthStore } from '../../../../auth/auth.store';
+import { UiStore } from '../../../../services/ui.store';
+import { VisitorBandConcertsPastComponent } from './visitor-band-concerts-past/visitor-band-concerts-past.component';
+import { VisitorBandConcertsUpcomingComponent } from './visitor-band-concerts-upcoming/visitor-band-concerts-upcoming.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { VisitorBandConcertsService } from './visitor-band-concerts.service';
+
 
 @Component({
     selector: 'app-visitor-band-concerts',
@@ -21,10 +29,16 @@ import { take } from 'rxjs';
         DatePipe,
         MatExpansionModule,
         MatButtonToggleModule,
-        NgClass
+        NgClass,
+        VisibilityEyesComponent,
+        VisitorBandConcertsPastComponent,
+        VisitorBandConcertsUpcomingComponent,
+        MatTabsModule
     ],
     templateUrl: './visitor-band-concerts.component.html',
-    styleUrl: './visitor-band-concerts.component.scss'
+    styleUrl: './visitor-band-concerts.component.scss',
+
+    encapsulation: ViewEncapsulation.None,
 })
 export class VisitorBandConcertsComponent implements OnInit {
     @Input() public band: Band;
@@ -37,106 +51,53 @@ export class VisitorBandConcertsComponent implements OnInit {
     router = inject(Router)
     showPast: boolean = false;
     showAll: boolean = true;
-    showUpcoming: boolean = false
+    showUpcoming: boolean = false;
+    authStore = inject(AuthStore);
+    uiStore = inject(UiStore)
+    upcomingConcerts: Concert[] = []
+    pastConcerts: Concert[] = []
+    visitorBandConcertsService = inject(VisitorBandConcertsService)
 
 
 
 
     ngOnInit(): void {
-        if (!this.band) {
-            console.log('no band')
-            const bandId = this.route.snapshot.paramMap.get('bandId')
-            this.getConcerts(bandId).then((concerts: Concert[]) => {
-                this.splitConcertsPastNew(concerts)
-            })
-        } else {
-            console.log('band')
-            this.splitConcertsPastNew(this.band.concerts)
-        }
-        // const bandId = this.route.snapshot.paramMap.get('bandId')
+        const bandId = this.route.snapshot.paramMap.get('bandId')
+        this.visitorBandConcertsService.getConcerts(bandId)
+
         // this.getConcerts(bandId)
+        // this.splitConcertsPastNew(this.band.concerts)
+
     }
 
     getConcerts(bandId) {
-        const promise = new Promise((resolve, reject) => {
-            const path = `bands/${bandId}`
-            this.fs.getFieldInDocument(path, 'concerts')
-                .then((concerts: Concert[]) => {
-                    resolve(concerts)
-                })
-        })
-        return promise
+        console.log(bandId)
+        // const promise = new Promise((resolve, reject) => {
+        const path = `bands/${bandId}`
+        this.fs.getFieldInDocument(path, 'concerts')
+            .then((concerts: Concert[]) => {
+                // resolve(concerts)
+                console.log(concerts)
+                this.splitConcertsPastNew(concerts)
+            })
+        // })
+        // return promise
     }
-
-    onPeriodSelected(event: Event, period: string) {
-        event.stopPropagation();
-        this.currentPeriodShown = period
-        console.log(period);
-        if (period === 'upcoming') {
-            this.concerts = this.getNewConcerts()
-            this.showAll = false;
-            this.showUpcoming = true;
-            this.showPast = false
-        } else if (period === 'past') {
-            this.showUpcoming = false
-            this.showPast = true;
-            this.showAll = false;
-            this.concerts = this.getPastConcerts()
-        } else if (period === 'all') {
-            this.showAll = true;
-            this.showPast = false;
-            this.showUpcoming = false;
-            this.concerts = this.getAllConcerts();
-        }
-    }
-
-    onPanelClicked(panel: MatExpansionPanel) {
-        this.panelExpanded = panel.expanded;
-        setTimeout(() => {
-            this.concerts = this.getAllConcerts();
-            this.showAllConcerts = true;
-
-        }, 500);
-    }
-
-    getAllConcerts() {
-        return this.band.concerts;
-    };
-
-    getPastConcerts() {
-        let newConcerts: Concert[] = []
-        this.band.concerts.forEach((concert: Concert) => {
-            if (new Date(concert.date.seconds * 1000) < new Date) {
-                newConcerts.push(concert)
-            }
-        })
-        return newConcerts
-
-    }
-    getNewConcerts() {
-        let newConcerts: Concert[] = []
-        this.band.concerts.forEach((concert: Concert) => {
-            if (new Date(concert.date.seconds * 1000) >= new Date) {
-                newConcerts.push(concert)
-            }
-        })
-        return newConcerts
-    }
-
-
 
     splitConcertsPastNew(concerts: Concert[]) {
+        console.log(concerts)
         concerts.forEach((concert: Concert) => {
             if (new Date(concert.date.seconds * 1000) > new Date) {
-                this.concerts.push(concert)
+                this.upcomingConcerts.push(concert)
             } else {
-                this.concerts.push(concert)
+                this.pastConcerts.push(concert)
             }
         })
-        console.log(this.concerts)
+        console.log('this.upcomingConcerts: ', this.upcomingConcerts)
+        console.log('this.pastConcerts: ', this.pastConcerts)
     }
-    onUrl(url: string) {
-        console.log(url);
-        this.router.navigate(['visitor-iframe', { url }])
-    }
+
+
+
+
 }

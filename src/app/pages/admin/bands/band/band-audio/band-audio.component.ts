@@ -13,6 +13,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ConfirmComponent } from '../../../../../shared/confirm/confirm.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
+import { VisibilityEyesComponent } from '../../../../../shared/visibility-eyes/visibility-eyes.component';
 
 
 
@@ -25,7 +26,8 @@ import { DomSanitizer } from '@angular/platform-browser';
         MatInput,
         MatIconModule,
         MatCheckboxModule,
-        ConfirmComponent
+        ConfirmComponent,
+        VisibilityEyesComponent
     ],
     templateUrl: './band-audio.component.html',
     styleUrl: './band-audio.component.scss'

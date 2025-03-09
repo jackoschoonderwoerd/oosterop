@@ -1,0 +1,17 @@
+.concert {
+    background-color: var(--o-gravel);
+    padding: 0.2rem 0.5rem;
+    margin-bottom: 0.2rem;
+    .date_eyes {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        .date {
+            font-weight: bold;
+        }
+    }
+    .location {
+        display: flex;
+        gap: 1rem;
+    }
+}

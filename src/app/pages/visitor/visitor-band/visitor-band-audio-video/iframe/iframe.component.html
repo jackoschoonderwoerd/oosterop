@@ -16,7 +16,7 @@
     }
 
     <!-- Iframe with (load) event -->
-    <iframe [src]="href"
+    <iframe [src]="safeUrl"
         (load)="onIframeLoad()"
         width="100%"></iframe>
 </div>

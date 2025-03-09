@@ -1,6 +1,7 @@
 <div class="visitor-component-container">
     <div class="visitor-header">tour periods</div>
     @for(period of tourPeriods; track period) {
+    @if(period.visible || uiStore.showHidden()) {
     <div class="tour-period">
         <div class="left">
             <div class="dates">
@@ -20,8 +21,8 @@
         </div>
         }
 
-
     </div>
+    }
 
     }
 </div>

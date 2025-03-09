@@ -17,12 +17,7 @@
                 [innerHTML]="review.body"></div>
             }
             <div class="buttons">
-                @if(review.visible) {
-                <mat-icon>visibility</mat-icon>
-                }
-                @if(!review.visible){
-                <mat-icon>visibility_off</mat-icon>
-                }
+                <app-visibility-eyes [visible]="review.visible"></app-visibility-eyes>
                 <div class="right">
                     <button class="edit"
                         mat-icon-button

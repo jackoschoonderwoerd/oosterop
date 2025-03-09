@@ -11,4 +11,13 @@
         .reviews {
         }
     }
+    .reviews-panel {
+        .reviews-header {
+            .reviews-title {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+            }
+        }
+    }
 }

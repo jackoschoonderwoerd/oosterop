@@ -30,11 +30,11 @@ export class QuillTextEditorComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         this.textEditorService.bodyChanged.subscribe((html: string) => {
-            console.log(html)
+            // console.log(html)
             const editorInstance = this.quillEditor.quillEditor;
             // const editorInstance = this.quillEditor.quillEditor;
             if (editorInstance) {
-                console.log('editorInstance found')
+                // console.log('editorInstance found')
                 editorInstance.clipboard.dangerouslyPasteHTML(html);
             }
         })

@@ -7,10 +7,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { AuthStore } from '../../../auth/auth.store';
 import { UiStore } from '../../../services/ui.store';
+import { VisibilityEyesComponent } from '../../../shared/visibility-eyes/visibility-eyes.component';
 
 @Component({
     selector: 'app-visitor-bands-overview',
-    imports: [JsonPipe, MatIconModule],
+    imports: [JsonPipe, MatIconModule, VisibilityEyesComponent],
     templateUrl: './visitor-bands-overview.component.html',
     styleUrl: './visitor-bands-overview.component.scss'
 })

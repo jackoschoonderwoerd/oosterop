@@ -21,6 +21,7 @@ import { SnackbarService } from '../../../../../services/snackbar.service';
 import { TourPeriod } from '../../../../../shared/models/tour-period-model';
 import { Band } from '../../../../../shared/models/band.model';
 import { NavigationService } from '../../../../../navigation/navigation.service';
+import { VisibilityEyesComponent } from '../../../../../shared/visibility-eyes/visibility-eyes.component';
 
 interface FormValue {
     bandName: string;
@@ -43,7 +44,9 @@ interface FormValue {
         DatePipe,
         MatInput,
         ConfirmComponent,
-        MatCheckboxModule],
+        MatCheckboxModule,
+        VisibilityEyesComponent
+    ],
     templateUrl: './band-tour-periods.component.html',
     styleUrl: './band-tour-periods.component.scss'
 })

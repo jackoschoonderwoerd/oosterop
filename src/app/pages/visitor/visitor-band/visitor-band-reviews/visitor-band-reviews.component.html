@@ -7,9 +7,13 @@
         </mat-expansion-panel-header>
         <mat-accordion class="reviews">
             @for(review of reviews;track review){
+            @if(review.visible || uiStore.showHidden()) {
             <mat-expansion-panel class="reviews-panel">
                 <mat-expansion-panel-header class="reviews-header">
                     <mat-panel-title class="reviews-title">
+                        @if(authStore.isLoggedIn() && uiStore.showHidden()){
+                        <app-visibility-eyes [visible]="review.visible"></app-visibility-eyes>
+                        }
                         {{review.author ? review.author: review.publishedBy}}
                         @if(review.datePublished){
                         &nbsp;-&nbsp;{{review.datePublished|date}}
@@ -19,6 +23,7 @@
                 <div class="body"
                     [innerHTML]="review.body"></div>
             </mat-expansion-panel>
+            }
             }
         </mat-accordion>
     </mat-expansion-panel>

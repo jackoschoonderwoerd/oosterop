@@ -4,8 +4,12 @@
     </mat-expansion-panel-header>
     <div class="periods">
         @for(period of tourPeriods;track period){
-        @if(period.visible) {
+
+        @if(period.visible || uiStore.showHidden()) {
         <div class="period">
+            @if(authStore.isLoggedIn() && uiStore.showHidden()) {
+            <app-visibility-eyes [visible]="period.visible"></app-visibility-eyes>
+            }
             <div class="dates">
                 <div class="startDate">{{period.startDate.seconds*1000|date}}</div>
                 <span>-</span>

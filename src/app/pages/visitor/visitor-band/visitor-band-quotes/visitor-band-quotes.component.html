@@ -3,13 +3,19 @@
         <mat-panel-title>quotes</mat-panel-title>
     </mat-expansion-panel-header>
     @for(quote of quotes;track quote){
+    @if(quote.visible || uiStore.showHidden()){
     <div class="quote">
         <div class="quote-body"
             [innerHTML]="quote.body"></div>
         <div class="published-by">{{quote.publishedBy}}</div>
         <div class="author">{{quote.author}}</div>
 
+        @if(authStore.isLoggedIn() && uiStore.showHidden()){
+        <app-visibility-eyes [visible]="quote.visible"></app-visibility-eyes>
+
+        }
     </div>
+    }
     <!-- <hr> -->
     }
 </mat-expansion-panel>

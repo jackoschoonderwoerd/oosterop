@@ -16,12 +16,13 @@
                 [innerHTML]="quote.body"></div>
             }
             <div class="buttons">
-                @if(quote.visible) {
+                <app-visibility-eyes [visible]="quote.visible"></app-visibility-eyes>
+                <!-- @if(quote.visible) {
                 <mat-icon>visibility</mat-icon>
                 }
                 @if(!quote.visible){
                 <mat-icon>visibility_off</mat-icon>
-                }
+                } -->
                 <div class="right">
                     <button class="edit"
                         mat-icon-button
@@ -81,4 +82,6 @@
                 (click)="onCancel()">cancel (back to bands)</button>
         </div>
     </form>
+    <mat-checkbox [formControl]="checkboxControl">Check me!</mat-checkbox>
+    <button (click)="updateCheckbox()">Set Checked</button>
 </main>

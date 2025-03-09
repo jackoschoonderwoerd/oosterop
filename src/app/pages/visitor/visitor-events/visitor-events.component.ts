@@ -74,7 +74,7 @@ export class VisitorEventsComponent implements OnInit {
         this.upcomingConcerts = upcomingConcerts.sort((a: Concert, b: Concert) =>
             a.date.seconds - b.date.seconds
         )
-        console.log('upcoming: ', upcomingConcerts)
+        // console.log('upcoming: ', upcomingConcerts)
         // console.log('past: ', pastConcerts)
     }
 
@@ -104,7 +104,7 @@ export class VisitorEventsComponent implements OnInit {
                 })
                 futureGroupedConcerts.concerts.sort((a: Concert, b: Concert) => b.date.seconds - a.date.seconds)
                 pastGroupedConcerts.concerts.sort((a: Concert, b: Concert) => b.date.seconds - a.date.seconds)
-                console.log('futureGroupedConcerts', futureGroupedConcerts);
+                // console.log('futureGroupedConcerts', futureGroupedConcerts);
                 // console.log('pastGroupedConcerts', pastGroupedConcerts)
 
                 if (futureGroupedConcerts.concerts.length > 0) {
@@ -118,7 +118,7 @@ export class VisitorEventsComponent implements OnInit {
         })
         this.futureCollectedGroupedConcerts = [...new Set(this.futureCollectedGroupedConcerts)]
         this.pastCollectedGroupedConcerts = [...new Set(this.pastCollectedGroupedConcerts)]
-        console.log(this.futureCollectedGroupedConcerts)
+        // console.log(this.futureCollectedGroupedConcerts)
 
     }
 

@@ -4,36 +4,17 @@
         mat-expansion-panel-header {
             text-transform: uppercase;
         }
-        mat-panel-description {
-            display: flex;
-            justify-content: space-around;
-            .not-selected-period {
-                background-color: var(--o-crimson);
-                color: white;
-                border: 2px solid white;
-                border-radius: 3px;
-            }
-            .selected-period {
-                background-color: var(--o-snow);
-                color: var(--o-crimson);
-            }
-        }
-        .concerts {
-            display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
-            .concert {
-                background-color: var(--o-gravel);
-                padding: 0.2rem 0.5rem;
-                .date {
-                    font-weight: bold;
-                }
 
-                .location {
-                    display: flex;
-                    gap: 1rem;
-                }
-            }
+        .mat-tab-label {
+            color: white !important;
+        }
+
+        .mat-tab-label-active {
+            color: yellow !important;
+        }
+
+        .mat-ink-bar {
+            background-color: red !important;
         }
     }
 }

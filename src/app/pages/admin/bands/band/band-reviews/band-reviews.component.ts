@@ -18,6 +18,7 @@ import { ConfirmComponent } from '../../../../../shared/confirm/confirm.componen
 import { MatDialog } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { VisibilityEyesComponent } from '../../../../../shared/visibility-eyes/visibility-eyes.component';
 
 interface FormValue {
     publishedBy: string,
@@ -39,7 +40,8 @@ interface FormValue {
         MatIconModule,
         MatInput,
         DatePipe,
-        MatCheckboxModule
+        MatCheckboxModule,
+        VisibilityEyesComponent
     ],
     templateUrl: './band-reviews.component.html',
     styleUrl: './band-reviews.component.scss'
@@ -151,7 +153,8 @@ export class BandReviewsComponent implements OnInit {
         this.reviewForm.patchValue({
             publishedBy: review.publishedBy ? review.publishedBy : null,
             datePublished: review.datePublished ? new Date(review.datePublished.seconds * 1000) : null,
-            author: review.author ? review.author : null
+            author: review.author ? review.author : null,
+            visible: review.visible ? review.visible : null
         })
         this.textEditorService.passBodyToEditor(review.body)
     }

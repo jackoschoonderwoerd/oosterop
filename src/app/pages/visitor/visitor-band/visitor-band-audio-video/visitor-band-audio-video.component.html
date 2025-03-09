@@ -1,12 +1,25 @@
+@if(visibleOAudios > 0 || authStore.isLoggedIn()) {
 <mat-expansion-panel>
     <mat-expansion-panel-header>
         <mat-panel-title>audio video </mat-panel-title>
-        <!-- <mat-panel-description> </mat-panel-description> -->
     </mat-expansion-panel-header>
-
     <div class="iframes">
-        @for(href of hrefs; track href) {
-        <app-iframe [href]="href"></app-iframe>
+
+        @for(oAudio of oAudios; track oAudio) {
+        @if(uiStore.showHidden() && authStore.isLoggedIn()){
+
+        <app-visibility-eyes [visible]="oAudio.visible"></app-visibility-eyes>
+        }
+
+
+
+
+        @if(authStore.isLoggedIn() || oAudio.visble){
+        <app-iframe [code]="oAudio.code"></app-iframe>
+        }
+
         }
     </div>
+
 </mat-expansion-panel>
+}

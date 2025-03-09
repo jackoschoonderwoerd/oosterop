@@ -6,7 +6,7 @@ main {
     .o-audios {
         display: grid;
         gap: 1rem;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
         .o-audio {
             background-color: var(--o-gravel);
             color: white;
@@ -14,19 +14,16 @@ main {
             // align-self: flex-start;
             display: flex;
             gap: 1rem;
+            align-self: flex-start;
             .left {
                 display: flex;
-                flex-direction: column;
-                // border: 3px solid red;
-                display: flex;
-                flex-direction: column;
-
-                flex-grow: 1;
-                overflow-wrap: break-word;
+                gap: 1rem;
+                align-items: center;
                 .visible {
                     // border: 3px solid red;
                 }
                 .title {
+                    word-break: break-word;
                     // border: 3px solid red;
                 }
                 .comments {
@@ -36,8 +33,6 @@ main {
             }
             .buttons {
                 display: flex;
-
-                flex-direction: column;
 
                 gap: 1rem;
             }
