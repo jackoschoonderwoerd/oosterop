@@ -6,7 +6,8 @@ main {
     padding: 1rem;
     .quotes {
         max-height: 80vh;
-        overflow: scroll;
+        overflow-y: scroll;
+        align-self: flex-start;
         .quote {
             border: 1px solid var(--o-black);
             padding: 1rem;
@@ -40,7 +41,11 @@ main {
         display: flex;
         flex-direction: column;
         align-self: flex-start;
-
+        mat-form-field {
+            mat-datepicker-toggle {
+                margin-right: 0.5rem;
+            }
+        }
         .form-buttons {
             display: flex;
             flex-direction: column;

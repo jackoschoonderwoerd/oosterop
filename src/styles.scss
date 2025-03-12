@@ -3,6 +3,8 @@
 @use "./styles/mixins";
 @use "./styles/oosterop";
 
+@use "@angular/material" as mat;
+
 html,
 body {
     height: 100%;
@@ -26,6 +28,10 @@ a {
 * {
     box-sizing: border-box;
     letter-spacing: 1.1px;
+    // color: var(--o-coal);
+}
+.body {
+    color: var(--o-snow);
 }
 .mat-mdc-dialog-container {
     --mdc-dialog-container-shape: 5px;
@@ -96,6 +102,12 @@ form {
     color: white !important; /* Change text/icon color */
     background-color: var(--o-crimson) !important; /* Custom button background */
 }
+// .mat-expansion-panel-header-title {
+//     min-width: 200px !important; /* Adjust as needed */
+//     overflow: hidden;
+//     white-space: nowrap;
+//     text-overflow: ellipsis;
+// }
 .visitor-component-container {
     background-color: var(--o-crimson);
     padding: 1rem;
@@ -105,17 +117,17 @@ form {
 /* Change panel background and text color */
 .mat-expansion-panel {
     background-color: var(--o-crimson) !important; /* Purple background */
-    color: white !important; /* White text */
+    color: var(--o-snow) !important; /* White text */
 }
 
 /* Change the panel header (title area) */
 .mat-expansion-panel-header {
     background-color: var(--o-crimson) !important; /* Darker purple */
-    color: #fff !important;
+    color: var(--o-snow) !important;
 }
 
 .mat-expansion-panel-header-title {
-    color: #fff !important;
+    color: var(--o-snow) !important;
 }
 
 /* Change the expansion panel content */
@@ -124,6 +136,12 @@ form {
     padding: 20px;
     background-color: var(--o-crimson); /* Light purple */
 }
+
+.mat-expansion-indicator::after {
+    color: var(--o-snow) !important; /* Change color */
+    font-size: 24px !important; /* Change size */
+}
+
 a {
     color: white;
 }
@@ -139,4 +157,8 @@ a {
 
 .mat-tab-group {
     background-color: #333; /* Change tab group background */
+}
+.custom-snackbar {
+    color: green;
+    font-weight: bold;
 }

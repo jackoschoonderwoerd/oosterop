@@ -3,6 +3,7 @@
         @for(concert of concerts;track concert; let index = $index) {
         <div class="concert">
             <div class="visible">
+                <!-- <app-visibility-eyes [visible]=""></app-visibility-eyes> -->
                 @if(concert.visible) {
                 <mat-icon>visibility</mat-icon>
                 } @else {

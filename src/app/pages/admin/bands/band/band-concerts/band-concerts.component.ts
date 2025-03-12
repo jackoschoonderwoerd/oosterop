@@ -16,6 +16,7 @@ import { DatePipe } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ConfirmComponent } from '../../../../../shared/confirm/confirm.component';
 import { MatDialog } from '@angular/material/dialog';
+import { VisibilityEyesComponent } from '../../../../../shared/visibility-eyes/visibility-eyes.component';
 
 @Component({
     selector: 'app-band-concerts',
@@ -30,7 +31,8 @@ import { MatDialog } from '@angular/material/dialog';
         IconSubmenuComponent,
         DatePipe,
         MatCheckboxModule,
-        ConfirmComponent
+        ConfirmComponent,
+        VisibilityEyesComponent
     ],
     templateUrl: './band-concerts.component.html',
     styleUrl: './band-concerts.component.scss'

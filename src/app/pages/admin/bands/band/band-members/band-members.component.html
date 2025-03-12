@@ -45,6 +45,10 @@
         <app-musician-selector [musicianType]="'band member'"
             (musicianIdSelected)="musicianIdSelected($event)"></app-musician-selector>
         <button mat-raised-button
+            (click)="onSelectBandMembers()">select bandmembers</button>
+        <button mat-raised-button
+            (click)="onBandMembersTable()">bandmembers table</button>
+        <button mat-raised-button
             color="primary"
             (click)="onCancel()">cancel (back to band)</button>
     </div>

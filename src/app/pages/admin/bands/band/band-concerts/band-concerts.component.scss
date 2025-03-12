@@ -14,7 +14,7 @@ main {
         .concert {
             display: grid;
             grid-template-columns: 1fr 6fr 10fr 10fr 3fr 5fr;
-
+            align-items: center;
             gap: 1rem;
             justify-content: space-between;
             background-color: var(--o-gravel);

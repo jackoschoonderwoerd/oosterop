@@ -40,6 +40,17 @@ export const routes: Routes = [
                 .then(c => c.AddParticipantsComponent)
     },
     {
+        path: 'select-bandmembers', loadComponent:
+            () => import('./pages/admin/bands/band/band-members/select-bandmembers/select-bandmembers.component')
+                .then(c => c.SelectBandmembersComponent)
+    },
+    {
+        path: 'bandmembers-table', loadComponent:
+            () => import('./pages/admin/bands/band/bandmembers-table/bandmembers-table.component')
+                .then(c => c.BandmembersTableComponent)
+    },
+
+    {
         path: 'add-review', loadComponent:
             () => import('./pages/admin/anouncements/edit-anouncement/add-review/add-review.component')
                 .then(c => c.AddReviewComponent)
@@ -56,7 +67,7 @@ export const routes: Routes = [
     },
     {
         path: 'add-musician', loadComponent:
-            () => import('./pages/admin/musicians/add-musician/add-musician.component')
+            () => import('./pages/admin/bands/band/bandmembers-table/add-musician/add-musician.component')
                 .then(c => c.AddMusicianComponent)
     },
     {
@@ -129,11 +140,11 @@ export const routes: Routes = [
             () => import('./pages/admin/tour-periods/tour-periods.component')
                 .then(c => c.TourPeriodsComponent)
     },
-    {
-        path: ('upcoming-events'), loadComponent:
-            () => import('./pages/admin/upcoming-events/upcoming-events.component')
-                .then(c => c.UpcomingEventsComponent)
-    },
+    // {
+    //     path: ('upcoming-events'), loadComponent:
+    //         () => import('./pages/admin/upcoming-events/upcoming-events.component')
+    //             .then(c => c.UpcomingEventsComponent)
+    // },
     {
         path: 'edit-o-image', loadComponent:
             () => import('./shared/edit-o-image/edit-o-image.component')
@@ -170,11 +181,11 @@ export const routes: Routes = [
             () => import('./pages/visitor/visitor-events/visitor-events.component')
                 .then(c => c.VisitorEventsComponent)
     },
-    {
-        path: 'visitor-iframe', loadComponent:
-            () => import('./pages/visitor/visitor-iframe/visitor-iframe.component')
-                .then(c => c.VisitorIframeComponent)
-    },
+    // {
+    //     path: 'visitor-iframe', loadComponent:
+    //         () => import('./pages/visitor/visitor-iframeXXX/visitor-iframe.component')
+    //             .then(c => c.VisitorIframeComponent)
+    // },
     {
         path: '**', redirectTo: 'home', pathMatch: 'full'
     }

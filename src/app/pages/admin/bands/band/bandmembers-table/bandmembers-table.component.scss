@@ -1,0 +1,90 @@
+main {
+    display: grid;
+    grid-template-columns: 900px 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    .table-section {
+        background-color: var(--o-gravel);
+        padding: 1rem;
+
+        height: 80vh;
+
+        min-width: 600px;
+        display: grid;
+        grid-template-rows: 100px, 1fr;
+        .filter-section {
+            display: flex;
+            gap: 1rem;
+
+            mat-form-field {
+                padding: 0;
+                margin: 0;
+                align-self: flex-start;
+            }
+            button {
+                margin-top: 0.5rem;
+            }
+        }
+
+        .table-container {
+            overflow-y: scroll;
+            table {
+                // display: flex;
+                // flex-direction: column;
+                // justify-self: flex-start;
+                .checkbox-cell {
+                    // display: flex;
+                    text-align: end;
+                    // justify-content: end;
+                    // align-self: end;
+                    // background-color: pink !important;
+                }
+            }
+            // align-self: start;
+            // height: 100%;
+        }
+    }
+    .right {
+        .bandmembers {
+            background-color: var(--o-gravel);
+            padding: 1rem;
+            .header {
+                font-style: 1.3rem;
+                text-transform: uppercase;
+                color: var(--o-snow);
+                padding: 0.5rem 0;
+                .band-name {
+                    font-weight: bold;
+                }
+            }
+            .bandmember {
+                background-color: var(--o-snow);
+                border: 1px solid var(--o-gravel);
+                padding: 0.5rem 0.7rem;
+                margin-bottom: 0.2rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .name_context {
+                    display: flex;
+                    gap: 1rem;
+                    .name {
+                        display: flex;
+                        gap: 0.5rem;
+                        align-items: center;
+                        cursor: pointer;
+                        text-transform: capitalize;
+                        font-weight: bold;
+                    }
+                    .context {
+                    }
+                }
+                .instruments {
+                    .instrument {
+                        font-style: italic;
+                    }
+                }
+            }
+        }
+    }
+}

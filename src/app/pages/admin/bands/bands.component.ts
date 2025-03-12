@@ -11,11 +11,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { JsonPipe } from '@angular/common';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { MatDialog } from '@angular/material/dialog';
+import { WarningComponent } from '../../../shared/warning/warning.component';
 ;
 
 @Component({
     selector: 'app-bands',
-    imports: [MatButtonModule, MatIconModule, JsonPipe, ConfirmComponent],
+    imports: [MatButtonModule, MatIconModule, JsonPipe, ConfirmComponent, WarningComponent],
     templateUrl: './bands.component.html',
     styleUrl: './bands.component.scss'
 })
@@ -66,6 +67,12 @@ export class BandsComponent {
         this.router.navigate(['band', { bandId }])
     }
     onDelete(id: string, name: string) {
+        this.dialog.open(WarningComponent, {
+            data: {
+                message: 'temporarily disabled'
+            }
+        })
+        return;
         const dialogRef = this.dialog.open(ConfirmComponent, {
             data: {
                 doomedElement: name

@@ -20,8 +20,8 @@ export class VisitorIframeComponent implements OnInit {
 
     ngOnInit(): void {
         const url = this.route.snapshot.paramMap.get('url');
-        this.source = this.route.snapshot.paramMap.get('source')
-        this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+        // this.source = this.route.snapshot.paramMap.get('source')
+        // this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
     }
     onBack() {
         this.router.navigateByUrl(this.source)

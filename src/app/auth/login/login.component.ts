@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInput } from '@angular/material/input'
@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
 
     initForm() {
         this.form = this.fb.group({
-            email: new FormControl('danielle@oosterop.com'),
-            password: new FormControl('123456')
+            email: new FormControl(null, [Validators.required]),
+            password: new FormControl(null, [Validators.required])
         })
     }
     onSubmit() {

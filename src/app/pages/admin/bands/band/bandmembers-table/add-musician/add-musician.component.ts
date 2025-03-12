@@ -1,17 +1,18 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
-import { FirestoreService } from '../../../../services/firestore.service';
-import { Musician } from '../../../../shared/models/musician.model';
+import { FirestoreService } from '../../../../../../services/firestore.service';
+import { Musician } from '../../../../../../shared/models/musician.model';
 import { DocumentReference } from '@angular/fire/firestore';
 import { FirebaseError } from '@angular/fire/app';
-import { SnackbarService } from '../../../../services/snackbar.service';
+import { SnackbarService } from '../../../../../../services/snackbar.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
-import { ConfirmService } from '../../../../shared/confirm/confirm.service';
+import { ConfirmService } from '../../../../../../shared/confirm/confirm.service';
+import { BandmembersService } from '../bandmembers.service';
 
 interface FormValue {
     name: string;
@@ -44,9 +45,17 @@ export class AddMusicianComponent implements OnInit {
     confirmService = inject(ConfirmService);
     musicianId: string;
     musicians: Musician[];
+    @Input() public musician: Musician
+    bMService = inject(BandmembersService)
 
 
     ngOnInit(): void {
+        this.bMService.changingMusician.subscribe((musician: Musician) => {
+            this.onClearForm();
+            this.editmode = true;
+            this.musicianId = musician.id
+            this.populateMusiciansForm(musician)
+        })
         this.initForm();
         this.id = this.route.snapshot.paramMap.get('id')
         if (this.id) {
@@ -97,13 +106,13 @@ export class AddMusicianComponent implements OnInit {
         const control = new FormControl(null, [Validators.required]);
         (<FormArray>this.musiciansForm.get('instruments')).push(control);
     }
+
     onAddOrUpdateMusician() {
         const formValue: FormValue = this.musiciansForm.value;
-        formValue.name = formValue.name.toLowerCase();
-        const instrumentsLowerCase = formValue.instruments.map(instrument => instrument.toLowerCase());
+        const instrumentsLowerCase = formValue.instruments.map(instrument => instrument.trim().toLowerCase());
         const musician: Musician = {
-            name: formValue.name,
-            context: formValue.context,
+            name: formValue.name.trim().toLowerCase(),
+            context: formValue.context ? formValue.context.trim().toLowerCase() : '',
             instruments: instrumentsLowerCase
         }
         if (!this.editmode) {
@@ -124,7 +133,7 @@ export class AddMusicianComponent implements OnInit {
             .then((docRef: DocumentReference) => {
                 console.log(docRef.id)
                 this.musiciansForm.reset();
-                this.router.navigateByUrl('musicians')
+                // this.router.navigateByUrl('musicians')
             })
             .catch((err: FirebaseError) => {
                 console.log(err)
@@ -132,16 +141,23 @@ export class AddMusicianComponent implements OnInit {
             })
     }
     updateMusician(musician: Musician) {
-        const path = `musicians/${this.id}`
+        console.log(musician);
+
+        const path = `musicians/${this.musicianId}`
         this.fs.setDoc(path, musician)
             .then((res: any) => {
                 console.log(res);
-                this.router.navigateByUrl('musicians')
+                // this.router.navigateByUrl('musicians')
             })
             .catch((err: FirebaseError) => {
                 console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
+    }
+    onClearForm() {
+        this.musiciansForm.reset()
+        const formArray = this.musiciansForm.get('instruments') as FormArray
+        formArray.clear()
     }
     onCancel() {
         this.router.navigateByUrl('musicians')
@@ -179,5 +195,4 @@ export class AddMusicianComponent implements OnInit {
         })
         return promise
     }
-
 }

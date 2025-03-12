@@ -1,0 +1,40 @@
+<button mat-raised-button
+    (click)="onSubmitSelection()">submit selection</button>
+<code>
+    <pre>
+            {{selectedValues|json}}
+        </pre>
+</code>
+<mat-accordion class="musicians">
+
+    @for(musician of musicians$|async; track musician) {
+    <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title #panelTitles
+                [style]="getBackgroundColor(musician.id)">
+                <mat-checkbox #checkboxes
+                    [class.checked]="isChecked"
+                    [value]="musician.id"
+                    [checked]="getChecked($event, musician.id)"
+                    (click)="onCheckboxClicked($event, musician.id)"
+                    class="example-margin"></mat-checkbox>
+                <div class="">{{musician.name}}</div>
+            </mat-panel-title>
+
+            <mat-panel-description>
+
+
+                {{musician.context}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="context">{{musician.context}}</div>
+        <div class="instruments">
+            @for(instrument of musician.instruments; track instrument) {
+            <div class="instrument">
+                {{instrument}}
+            </div>
+            }
+        </div>
+    </mat-expansion-panel>
+    }
+</mat-accordion>

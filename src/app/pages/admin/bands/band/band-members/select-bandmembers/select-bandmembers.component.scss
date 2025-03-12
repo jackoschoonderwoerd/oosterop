@@ -1,0 +1,35 @@
+mat-accordion {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0.3rem;
+    mat-expansion-panel {
+        align-self: start;
+        mat-expansion-panel-header {
+            mat-panel-title {
+                color: var(--o-coal);
+                text-transform: capitalize;
+                font-size: 0.8rem;
+                mat-checkbox {
+                }
+            }
+        }
+    }
+}
+.mat-expansion-panel-header-title {
+    border: 1px solid white;
+    min-width: 200px !important; /* Adjust as needed */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.mat-expansion-panel-header-description {
+    min-width: 200px !important; /* Adjust as needed */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.checked {
+    background-color: yellow !important;
+}

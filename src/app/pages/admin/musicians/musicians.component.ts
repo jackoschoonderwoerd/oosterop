@@ -3,7 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FirestoreService } from '../../../services/firestore.service';
 import { Musician } from '../../../shared/models/musician.model';
 import { Router } from '@angular/router';
-import { AddMusicianComponent } from './add-musician/add-musician.component';
+import { AddMusicianComponent } from '../bands/band/bandmembers-table/add-musician/add-musician.component';
 import { JsonPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmService } from '../../../shared/confirm/confirm.service';

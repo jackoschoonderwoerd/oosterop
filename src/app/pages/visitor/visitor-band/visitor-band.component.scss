@@ -29,8 +29,11 @@ main {
         grid-column: 1/-1;
         font-size: 2rem;
         font-weight: bold;
-        color: var(--o-crimson);
+        color: var(--o-coal);
+        background-color: (var(--o-crimson));
+        padding: 0.2rem 0.5rem;
         text-transform: uppercase;
+        justify-self: start;
     }
     .band {
         display: flex;

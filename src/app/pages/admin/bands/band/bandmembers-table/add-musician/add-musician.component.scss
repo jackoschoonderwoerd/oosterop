@@ -1,11 +1,12 @@
 main {
-    padding: 3rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    background-color: var(--o-snow);
+    padding: 1rem;
+    min-width: 350px;
     form {
         width: 100%;
-        max-width: 500px;
         margin: auto;
         border: 1px solid var(--o-black);
         padding: 1rem;
@@ -18,10 +19,12 @@ main {
             .instrument {
             }
         }
+        .add-instrument-btn {
+        }
     }
-    button {
-        width: 100%;
-        max-width: 500px;
-        margin: auto;
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 }

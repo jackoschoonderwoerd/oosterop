@@ -9,10 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MusicianSelectorComponent } from '../../../../../shared/musician-selector/musician-selector.component';
 import { FirebaseError } from '@angular/fire/app';
 import { SnackbarService } from '../../../../../services/snackbar.service';
-import { MusicianComponent } from '../../../../../shared/musician/musician.component';
 import { OImage } from '../../../../../shared/models/o_image.model';
-import { JsonPipe } from '@angular/common';
-import { ArrayService } from '../../../../../services/array.service copy';
+import { ArrayService } from '../../../../../services/array.service';
 
 @Component({
     selector: 'app-band-members',
@@ -21,8 +19,7 @@ import { ArrayService } from '../../../../../services/array.service copy';
         MatButtonModule,
         MatIconModule,
         MusicianSelectorComponent,
-        MusicianComponent,
-        JsonPipe,
+
 
     ],
     templateUrl: './band-members.component.html',
@@ -111,7 +108,6 @@ export class BandMembersComponent implements OnInit {
     }
 
     onMove(index: number, direction: string) {
-        console.log('1 onMove()')
         if (direction === 'up') {
             const newBandMemberIds = this.arrayService.move(this.bandMemberIds, index, index - 1)
             this.updateBandMemers(newBandMemberIds)
@@ -123,23 +119,20 @@ export class BandMembersComponent implements OnInit {
 
     updateBandMemers(bandMemberIds: string[]) {
         this.bandMembers = []
-        console.log('2 updateBandMembers()')
         this.bandMemberIds = [];
-        console.log('bandMemberIds: ', this.bandMemberIds)
+
         this.fs.updateField(`bands/${this.bandId}`, 'bandMemberIds', bandMemberIds)
             .then((res: any) => {
                 this.getBandMemberIds()
                     .then((bandMemberIds: string[]) => {
                         console.log(bandMemberIds)
+                        this.sb.openSnackbar('band members array updated')
                         return bandMemberIds
                     })
                     .then((bandMemberIds: string[]) => {
                         this.bandMemberIds = bandMemberIds
                         this.getBandMembers()
                     })
-                // console.log(res);
-                // this.bandMemberIds = bandMemberIds;
-                // this.getBandMembers();
             })
             .catch((err: FirebaseError) => {
                 console.log(err);
@@ -147,7 +140,14 @@ export class BandMembersComponent implements OnInit {
             })
     }
 
+    onSelectBandMembers() {
+        this.router.navigate(['select-bandmembers', { bandId: this.bandId }])
+    }
+
     onCancel() {
         this.router.navigate(['band', { bandId: this.bandId }])
+    }
+    onBandMembersTable() {
+        this.router.navigate(['bandmembers-table', { bandId: this.bandId }])
     }
 }

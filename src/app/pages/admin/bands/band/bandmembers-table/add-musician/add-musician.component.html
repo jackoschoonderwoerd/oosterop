@@ -28,15 +28,21 @@
             }
             <button color="warn"
                 mat-raised-button
+                class="add-instrument-btn"
                 type="button"
                 (click)="onAddInstrument()">add instrument
             </button>
-
         </div>
     </form>
-    <button mat-raised-button
-        [disabled]="musiciansForm.invalid"
-        (click)="onAddOrUpdateMusician()">{{!editmode ? 'add musician': 'update musician'}}</button>
-    <button mat-raised-button
-        (click)="onCancel()">cancel</button>
+    <div class="buttons">
+        <button mat-raised-button
+            color="primary"
+            (click)="onClearForm()">clear form</button>
+
+        <button mat-raised-button
+            [disabled]="musiciansForm.invalid"
+            (click)="onAddOrUpdateMusician()">{{!editmode ? 'add musician': 'update musician'}}</button>
+        <button mat-raised-button
+            (click)="onCancel()">cancel</button>
+    </div>
 </main>

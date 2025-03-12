@@ -22,14 +22,16 @@
         </div>
         }
     </div>
-    <app-add-image (filePathChanged)="filePathReady($event)"
-        [path]="path"></app-add-image>
-    <div class="image">
-        <img [src]="filePath"
-            alt="">
+    <div class="right">
+        <app-add-image (filePathChanged)="filePathReady($event)"
+            [path]="path"></app-add-image>
+        <div class="image">
+            <img [src]="filePath"
+                alt="">
+        </div>
+        <button class="cancel"
+            mat-raised-button
+            (click)="onCancel()">cancel (back to band)</button>
     </div>
-    <button class="cancel"
-        mat-raised-button
-        (click)="onCancel()">cancel (back to band)</button>
 
 </main>
