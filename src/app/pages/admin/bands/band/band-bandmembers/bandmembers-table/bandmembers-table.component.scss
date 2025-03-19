@@ -1,0 +1,43 @@
+.table-section {
+    background-color: var(--o-gravel);
+    padding: 1rem;
+
+    height: calc(100vh - 64px - 64px - 28px);
+    display: grid;
+    grid-template-rows: 60px 1fr;
+    overflow-y: scroll;
+
+    // display: grid;
+    .filter-section {
+        display: flex;
+        gap: 1rem;
+
+        mat-form-field {
+            padding: 0;
+            margin: 0;
+            align-self: flex-start;
+        }
+        button {
+            margin-top: 0.5rem;
+        }
+    }
+
+    .table-container {
+        // align-self: flex-start;
+        overflow-y: scroll;
+        table {
+            // display: flex;
+            // flex-direction: column;
+            // justify-self: flex-start;
+            .checkbox-cell {
+                // display: flex;
+                text-align: end;
+                // justify-content: end;
+                // align-self: end;
+                // background-color: pink !important;
+            }
+        }
+        // align-self: start;
+        // height: 100%;
+    }
+}

@@ -10,11 +10,15 @@ import { Musician } from '../../../../../shared/models/musician.model';
 export class BandmembersService {
 
 
-    bandMemberIdsChanged = new EventEmitter<void>()
     bandNameSubject = new BehaviorSubject<string[]>(null);
     anouncements$: any = this.bandNameSubject.asObservable();
 
-    changingMusician = new EventEmitter<Musician>()
+    bandMemberIdsChanged = new EventEmitter<void>()
+    changingMusician = new EventEmitter<Musician>();
+    changingBandmember = new EventEmitter<Musician>();
+    filterChanged = new EventEmitter<string>();
+    musicianUpdated = new EventEmitter<void>();
+    musiciansChanged = new EventEmitter<void>();
 
 
     constructor(
@@ -28,8 +32,7 @@ export class BandmembersService {
     async getBandMembers(bandMemberIds: string[]) {
         const promises = bandMemberIds.map(id => {
             const userRef = doc(this.firestore, 'musicians', id);
-            console.log(userRef)
-            return getDoc(userRef).then(snapshot => snapshot.exists() ? snapshot.data() : null);
+            return getDoc(userRef).then(snapshot => snapshot.exists() ? { id: snapshot.id, ...snapshot.data() } : null);
         });
         return Promise.all(promises);
     }
@@ -37,9 +40,4 @@ export class BandmembersService {
     async getBandName(bandId: string): Promise<any> {
         return this.fs.getFieldInDocument(`bands/${bandId}`, 'name')
     }
-
-
-    // onBandmemerIdsChanged(bandmemberIds: string[]) {
-    //     this.bandMemberIdsChanged.emit(bandmemberIds)
-    // }
 }

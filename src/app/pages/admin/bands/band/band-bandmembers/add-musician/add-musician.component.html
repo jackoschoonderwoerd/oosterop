@@ -1,17 +1,19 @@
 <main>
     <form [formGroup]="musiciansForm">
-        <mat-form-field>
+        <div class="header">adding to: <span class="band-name">{{bandName}}</span></div>
+        <mat-form-field class="name">
             <mat-label>name</mat-label>
             <input type="text"
                 matInput
                 formControlName="name">
         </mat-form-field>
-        <mat-form-field>
+        <!-- <mat-form-field>
             <mat-label>context</mat-label>
             <input type="text"
+                readonly="true"
                 matInput
                 formControlName="context">
-        </mat-form-field>
+        </mat-form-field> -->
         <div class="instruments"
             formArrayName="instruments">
             @for(instrumentsControl of musiciansForm.get('instruments')?.controls;track instrumentsControl; let i = $index) {
@@ -26,7 +28,7 @@
             </div>
 
             }
-            <button color="warn"
+            <button color="primary"
                 mat-raised-button
                 class="add-instrument-btn"
                 type="button"
@@ -43,6 +45,7 @@
             [disabled]="musiciansForm.invalid"
             (click)="onAddOrUpdateMusician()">{{!editmode ? 'add musician': 'update musician'}}</button>
         <button mat-raised-button
-            (click)="onCancel()">cancel</button>
+            class="cancel-btn"
+            (click)="onCancel()">back to&nbsp;<span class="band-name">{{bandName}}</span>&nbsp;overview</button>
     </div>
 </main>

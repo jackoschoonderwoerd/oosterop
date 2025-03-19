@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { ConfirmService } from '../../../../../../shared/confirm/confirm.service';
 import { BandmembersService } from '../bandmembers.service';
+import { Bandmember } from '../../../../../../shared/models/bandmemmber.model';
 
 interface FormValue {
     name: string;
@@ -38,24 +39,35 @@ export class AddMusicianComponent implements OnInit {
     fb = inject(FormBuilder)
     fs = inject(FirestoreService);
     sb = inject(SnackbarService);
+    route = inject(ActivatedRoute)
+
     router = inject(Router);
     editmode: boolean = false;
-    route = inject(ActivatedRoute)
     id: string;
     confirmService = inject(ConfirmService);
     musicianId: string;
+    bandmemberId: string;
     musicians: Musician[];
-    @Input() public musician: Musician
     bMService = inject(BandmembersService)
+    bandName: string;
+    bandId;
+
 
 
     ngOnInit(): void {
-        this.bMService.changingMusician.subscribe((musician: Musician) => {
-            this.onClearForm();
-            this.editmode = true;
-            this.musicianId = musician.id
-            this.populateMusiciansForm(musician)
+        this.bandId = this.route.snapshot.paramMap.get('bandId');
+        this.getBandName(this.bandId)
+        this.bMService.changingBandmember.subscribe((bandmember: Musician) => {
+            if (bandmember) {
+                console.log(bandmember)
+                this.onClearForm();
+                this.editmode = true;
+                this.musicianId = bandmember.id;
+                this.bandmemberId = bandmember.id;
+                this.populateMusiciansForm(bandmember);
+            }
         })
+
         this.initForm();
         this.id = this.route.snapshot.paramMap.get('id')
         if (this.id) {
@@ -71,10 +83,16 @@ export class AddMusicianComponent implements OnInit {
         }
     }
 
+    getBandName(bandId) {
+        this.fs.getFieldInDocument(`bands/${bandId}`, 'name')
+            .then((bandName: string) => {
+                this.bandName = bandName;
+            })
+    }
+
     initForm() {
         this.musiciansForm = this.fb.group({
             name: new FormControl(null, [Validators.required]),
-            context: new FormControl(null),
             instruments: new FormArray([])
         })
     }
@@ -110,20 +128,20 @@ export class AddMusicianComponent implements OnInit {
     onAddOrUpdateMusician() {
         const formValue: FormValue = this.musiciansForm.value;
         const instrumentsLowerCase = formValue.instruments.map(instrument => instrument.trim().toLowerCase());
-        const musician: Musician = {
+        const bandmember: Bandmember = {
             name: formValue.name.trim().toLowerCase(),
-            context: formValue.context ? formValue.context.trim().toLowerCase() : '',
+            context: this.bandName,
             instruments: instrumentsLowerCase
         }
         if (!this.editmode) {
-            if (this.checkForExistingEntry(musician)) {
-                this.addMusician(musician)
-
-            } else {
-                this.sb.openSnackbar(`operation aborted by user`);
-            }
+            // if (this.checkForExistingEntry(bandmember)) {
+            this.addMusician(bandmember)
+            this.bMService.musiciansChanged.emit();
+            // } else {
+            this.sb.openSnackbar(`operation aborted by user`);
+            // }
         } else {
-            this.updateMusician(musician)
+            this.updateMusician(bandmember)
         }
 
     }
@@ -132,7 +150,11 @@ export class AddMusicianComponent implements OnInit {
         this.fs.addDoc(path, { ...musician })
             .then((docRef: DocumentReference) => {
                 console.log(docRef.id)
-                this.musiciansForm.reset();
+                // this.musiciansForm.reset();
+                this.onClearForm();
+                this.bMService.musicianUpdated.emit();
+                this.bMService.musiciansChanged.emit();
+                this.addmusicianIdToBandmemberIds(docRef.id)
                 // this.router.navigateByUrl('musicians')
             })
             .catch((err: FirebaseError) => {
@@ -140,13 +162,31 @@ export class AddMusicianComponent implements OnInit {
                 this.sb.openSnackbar(`operation failed due to ${err.message}`)
             })
     }
-    updateMusician(musician: Musician) {
-        console.log(musician);
 
-        const path = `musicians/${this.musicianId}`
-        this.fs.setDoc(path, musician)
+    addmusicianIdToBandmemberIds(musicianId) {
+        this.fs.addElementToArray(`bands/${this.bandId}`, 'bandMemberIds', musicianId)
+            .then((res: any) => {
+                console.log(res)
+            })
+            .catch((err: FirebaseError) => {
+                console.log(err)
+                this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+            })
+    }
+
+    updateMusician(bandmember: Bandmember) {
+        bandmember.id = this.bandmemberId;
+        console.log(bandmember);
+        const path = `musicians/${this.bandmemberId}`
+        console.log(path)
+        // return;
+        this.fs.setDoc(path, bandmember)
             .then((res: any) => {
                 console.log(res);
+                this.onClearForm()
+                this.musiciansForm.reset();
+                this.bMService.musicianUpdated.emit();
+                this.bMService.musiciansChanged.emit();
                 // this.router.navigateByUrl('musicians')
             })
             .catch((err: FirebaseError) => {
@@ -156,11 +196,12 @@ export class AddMusicianComponent implements OnInit {
     }
     onClearForm() {
         this.musiciansForm.reset()
-        const formArray = this.musiciansForm.get('instruments') as FormArray
-        formArray.clear()
+        const formArray = this.musiciansForm.get('instruments') as FormArray;
+        formArray.clear();
+        this.editmode = false;
     }
     onCancel() {
-        this.router.navigateByUrl('musicians')
+        this.router.navigate(['band', { bandId: this.bandId }]);
     }
 
     getMusicians() {
@@ -175,24 +216,24 @@ export class AddMusicianComponent implements OnInit {
         return promise
     }
 
-    checkForExistingEntry(newMusician: Musician) {
-        const promise = new Promise((resolve, reject) => {
-            this.getMusicians()
-                .then((musicians: Musician[]) => {
-                    const x = musicians.find(musician => musician.name === newMusician.name)
+    checkForExistingEntry(bandMember: Bandmember) {
+        // const promise = new Promise((resolve, reject) => {
+        //     this.getMusicians()
+        //         .then((musicians: Musician[]) => {
+        //             const x = musicians.find(musician => musician.name === newMusician.name)
 
-                    console.log('X:', x)
-                    if (x) {
-                        this.confirmService.getConfirmation(
-                            `A musician with this name already exists.
-                            If you wish to continue,
-                            make sure the context form field has been filled in correctly.`)
-                            .then((res: boolean) => {
-                                resolve(res)
-                            })
-                    }
-                })
-        })
-        return promise
+        //             console.log('X:', x)
+        //             if (x) {
+        //                 this.confirmService.getConfirmation(
+        //                     `A musician with this name already exists.
+        //                     If you wish to continue,
+        //                     make sure the context form field has been filled in correctly.`)
+        //                     .then((res: boolean) => {
+        //                         resolve(res)
+        //                     })
+        //             }
+        //         })
+        // })
+        // return promise
     }
 }

@@ -1,7 +1,7 @@
 <div class="title"
     mat-dialog-title>warning</div>
-<mat-dialog-content>
-    {{data.message}}
+<mat-dialog-content [innerHTML]="data.message">
+    <!-- {{data.message}} -->
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-mini-fab

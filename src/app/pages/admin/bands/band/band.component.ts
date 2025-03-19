@@ -62,7 +62,7 @@ export class BandComponent implements OnInit {
         this.router.navigate(['add-band', { bandId: this.bandId }])
     }
     onBandMembers() {
-        this.router.navigate(['band-members', { bandId: this.bandId }])
+        this.router.navigate(['band-bandmembers', { bandId: this.bandId }])
     }
     onOImages() {
         this.router.navigate(['band-images', { bandId: this.bandId }])

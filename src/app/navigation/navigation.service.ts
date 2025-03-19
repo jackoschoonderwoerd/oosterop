@@ -22,7 +22,11 @@ export class NavigationService {
 
 
     visitorMenuItems: string[] = ['contact'];
-    adminMenuItems: string[] = ['anouncements', 'musicians', 'bands']
+    adminMenuItems: string[] = [
+        'anouncements',
+        // 'musicians',
+        'bands'
+    ]
     sideNavMenuItems: MenuItem[] = [
         {
             title: 'events',

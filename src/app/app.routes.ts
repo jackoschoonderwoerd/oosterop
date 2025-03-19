@@ -45,9 +45,9 @@ export const routes: Routes = [
                 .then(c => c.SelectBandmembersComponent)
     },
     {
-        path: 'bandmembers-table', loadComponent:
-            () => import('./pages/admin/bands/band/bandmembers-table/bandmembers-table.component')
-                .then(c => c.BandmembersTableComponent)
+        path: 'band-bandmembers', loadComponent:
+            () => import('./pages/admin/bands/band/band-bandmembers/band-bandmembers.component')
+                .then(c => c.BandBandmembersComponent)
     },
 
     {
@@ -67,7 +67,7 @@ export const routes: Routes = [
     },
     {
         path: 'add-musician', loadComponent:
-            () => import('./pages/admin/bands/band/bandmembers-table/add-musician/add-musician.component')
+            () => import('./pages/admin/bands/band/band-bandmembers/add-musician/add-musician.component')
                 .then(c => c.AddMusicianComponent)
     },
     {

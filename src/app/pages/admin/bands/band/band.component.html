@@ -1,6 +1,7 @@
 <main>
     <div class="primary band-property">
         <button mat-raised-button
+            color="primary"
             class="primary-btn"
             (click)="onPrimary()">primary
         </button>
@@ -11,6 +12,7 @@
     </div>
     <div class="band-members band-property">
         <button class="band-members-btn"
+            color="primary"
             mat-raised-button
             (click)="onBandMembers()">band members</button>
         @for(bandMember of bandMembers;track bandMember.name) {
@@ -22,6 +24,7 @@
     </div>
     <div class="o-images band-property">
         <button mat-raised-button
+            color="primary"
             (click)="onOImages()">images</button>
         <div class="images">
             @for(oImage of band?.oImages;track oImage.filename) {
@@ -34,6 +37,7 @@
 
     <div class="body-container band-property">
         <button mat-raised-button
+            color="primary"
             (click)="onBody()">body</button>
         <div class="body"
             [innerHTML]="band?.body"></div>
@@ -42,6 +46,7 @@
     <div class="links-container band-property">
 
         <button mat-raised-button
+            color="primary"
             (click)="onLinks()">links</button>
         <div class="links">
             @for(link of band?.links;track link.url) {
@@ -52,6 +57,7 @@
     </div>
     <div class="reviews-container band-property">
         <button mat-raised-button
+            color="primary"
             (click)="onReviews()">reviews</button>
         <div class="reviews">
             @for(review of band?.reviews; track review.body) {
@@ -66,6 +72,7 @@
     </div>
     <div class="recordings-container band-property">
         <button mat-raised-button
+            color="primary"
             (click)="onRecordings()">recordings</button>
         <div class="recordings">
             @for(recording of band?.recordings; track recording.title){
@@ -79,6 +86,7 @@
 
     <div class="quotes-container band-property">
         <button mat-raised-button
+            color="primary"
             (click)="onQuotes()">quotes</button>
         <div class="quotes">
             @for(quote of band?.quotes;track quote){
@@ -96,6 +104,7 @@
 
     <div class="o-audios-container band-property">
         <button mat-raised-button
+            color="primary"
             (click)="onOAudio()">audio</button>
         <div class="o-audios">
             @for(oAudio of band?.oAudios;track oAudio){
@@ -112,6 +121,7 @@
     <div class="concerts-container band-property">
         <!-- {{band?.concerts|json}} -->
         <button mat-raised-button
+            color="primary"
             (click)="onConcerts()">concerts</button>
         @if(band?.concerts && band?.concerts?.length> 0 ) {
         <div class="concerts">
@@ -142,6 +152,7 @@
     </div>
     <div class="tour-periods-container band-property">
         <button mat-raised-button
+            color="primary"
             (click)="onTourPeriods()">tour periods</button>
         @for(period of band?.tourPeriods; track period) {
         <div class="period">

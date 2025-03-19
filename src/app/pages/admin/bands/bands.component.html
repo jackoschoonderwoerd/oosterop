@@ -1,6 +1,7 @@
 <main>
     <div class="bands">
         <button mat-raised-button
+            color="primary"
             (click)="onAddBand()">add band</button>
         @for(band of bands; track band.id){
         <div class="band">

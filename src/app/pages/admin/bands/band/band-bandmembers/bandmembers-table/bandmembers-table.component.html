@@ -1,0 +1,84 @@
+<div class="table-section">
+    <div class="filter-section">
+        <mat-form-field>
+            <input matInput
+                [(ngModel)]="filterValue"
+                (keyup)="applyFilter($event)"
+                placeholder="filter">
+
+        </mat-form-field>
+        <button mat-raised-button
+            (click)="onClearFilter()">clear filter</button>
+        <button mat-raised-button
+            (click)="initDatasource()">init datasource</button>
+    </div>
+    <div class="table-container">
+
+        <table mat-table
+            matSort
+            [dataSource]="dataSource"
+            class="mat-elevation-z8">
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell
+                    start="asc"
+                    *matHeaderCellDef
+                    mat-sort-header> name </th>
+                <td mat-cell
+                    *matCellDef="let musician"> {{musician.name}}<br>{{musician.id}}</td>
+            </ng-container>
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header>edit </th>
+                <td mat-cell
+                    *matCellDef="let musician">
+                    <mat-icon (click)="onEdit(musician)">edit</mat-icon>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header>delete</th>
+                <td mat-cell
+                    *matCellDef="let musician">
+                    <mat-icon (click)="onDelete(musician.id)">delete</mat-icon>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="context">
+                <th mat-header-cell
+                    *matHeaderCellDef> context </th>
+                <td mat-cell
+                    *matCellDef="let musician"> {{musician.context}} </td>
+            </ng-container>
+            <ng-container matColumnDef="instruments">
+                <th mat-header-cell
+                    *matHeaderCellDef> instruments </th>
+                <td mat-cell
+                    *matCellDef="let musician"> @for(instrument of musician.instruments; track instrument){
+                    {{instrument}}, &nbsp;
+                    } </td>
+            </ng-container>
+            <ng-container matColumnDef="checkbox">
+                <th mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header>checkbox </th>
+                <td mat-cell
+                    class="checkbox-cell"
+                    *matCellDef="let musician">
+                    <app-bandmember-checkbox (updatingBandmemberIds)="updatingBandmemberIds()"
+                        [musicianId]="musician.id"></app-bandmember-checkbox>
+
+                </td>
+            </ng-container>
+
+
+            <!-- Header and Row Definition -->
+            <tr mat-header-row
+                *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row
+                *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+    </div>
+</div>

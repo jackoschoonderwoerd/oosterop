@@ -1,0 +1,56 @@
+main {
+    max-height: calc(100vh - 64px - 64px - 28px);
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: var(--o-gravel);
+    padding: 1rem;
+    min-width: 350px;
+    form {
+        background-color: var(--o-snow);
+        width: 100%;
+        margin: auto;
+        border: 1px solid var(--o-black);
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        .header {
+            color: white;
+            .band-name {
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+        }
+        .name {
+            border: 2px solid var(--o-gravel);
+            padding: 0.5rem;
+        }
+        .instruments {
+            display: flex;
+            flex-direction: column;
+            .instrument {
+                width: 100%;
+                border: 2px solid var(--o-gravel);
+                padding: 0.5rem;
+                margin-bottom: 0.5rem;
+                mat-form-field {
+                }
+            }
+        }
+        .add-instrument-btn {
+        }
+    }
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        .cancel-btn {
+            .band-name {
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+        }
+    }
+}

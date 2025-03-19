@@ -1,0 +1,64 @@
+<div class="bandmembers-container">
+    <div class="header">current bandmembers:&nbsp;<span class="band-name">{{bandName$|async}}</span></div>
+    @if(updatingBandmembers){
+    <div class="spinner-container">
+
+        <mat-spinner></mat-spinner>
+        <p>loading bandmembers</p>
+    </div>
+    } @else {
+    <div class="bandmembers">
+
+        @for(bandmember of bandmembers$|async; track bandmember; let index = $index; let last=$last; let first=$first){
+
+        <div class="bandmember">
+            <div class="left">
+                <button mat-icon-button
+                    (click)="onEdit(bandmember)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button
+                    (click)="onDelete(bandmember)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+            <div class="middle">
+                <div class="name_context">
+                    <div (click)="populateFilter(bandmember.name)"
+                        class="name">
+
+                        <!-- <mat-icon style="color:red">select_all</mat-icon> -->
+                        {{bandmember.name}}
+                    </div>
+                    <!-- @if(bandmember.context) {
+                    <div class="context">{{bandmember.context}}</div>
+                    } -->
+                </div>
+                <div class="instruments">
+                    @for(instrument of bandmember.instruments; track instrument){
+                    <div class="instrument">{{instrument}}</div>
+                    }
+                </div>
+            </div>
+            <div class="right">
+                @if(!first) {
+                <button (click)="onMove(index, 'up')"
+                    mat-icon-button>
+                    <mat-icon>keyboard_arrow_up</mat-icon>
+                </button>
+
+                }
+                @if(!last) {
+                <button (click)="onMove(index, 'down')"
+                    mat-icon-button>
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+
+
+                }
+            </div>
+        </div>
+        }
+    </div>
+    }
+</div>

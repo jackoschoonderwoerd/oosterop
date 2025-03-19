@@ -6,8 +6,8 @@ main {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 0.3rem;
         .band {
-            background-color: var(--o-crimson);
-            color: var(--o-snow);
+            background-color: var(--o-snow);
+            color: var(--o-coal);
             border: 1px solid var(--o-black);
             padding: 0.3rem 0.5rem;
             display: flex;

@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, EventEmitter, inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { ActivatedRoute } from '@angular/router';
-import { FirestoreService } from '../../../../../../services/firestore.service';
-import { SnackbarService } from '../../../../../../services/snackbar.service';
+import { FirestoreService } from '../../../../../../../services/firestore.service';
+import { SnackbarService } from '../../../../../../../services/snackbar.service';
 import { FirebaseError } from '@angular/fire/app';
-import { BandmembersService } from '../bandmembers.service';
+import { BandmembersService } from '../../bandmembers.service';
 
 
 @Component({
@@ -48,12 +48,13 @@ export class BandmemberCheckboxComponent implements OnInit {
         console.log(e.checked)
         if (e.checked) {
             console.log('add')
-            this.addIdToBandmemberIds()
-            // this.bMService.bandMemberIdsChanged.emit();
+            this.addIdToBandmemberIds();
+            this.bMService.bandMemberIdsChanged.emit();
 
         } else {
             console.log('remove')
-            this.removeIdFromBandmemberIds()
+            this.removeIdFromBandmemberIds();
+            this.bMService.bandMemberIdsChanged.emit();
         }
     }
 
