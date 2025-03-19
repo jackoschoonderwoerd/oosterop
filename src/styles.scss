@@ -95,19 +95,14 @@ form {
     padding-bottom: 0.2rem;
     padding-left: 0.3rem;
 }
-.mat-mdc-button,
-.mat-mdc-raised-button,
-.mat-mdc-outlined-button,
-.mat-mdc-icon-button {
-    color: white !important; /* Change text/icon color */
-    background-color: var(--o-crimson) !important; /* Custom button background */
-}
-// .mat-expansion-panel-header-title {
-//     min-width: 200px !important; /* Adjust as needed */
-//     overflow: hidden;
-//     white-space: nowrap;
-//     text-overflow: ellipsis;
+// .mat-mdc-button,
+// .mat-mdc-raised-button,
+// .mat-mdc-outlined-button,
+// .mat-mdc-icon-button {
+//     color: white !important; /* Change text/icon color */
+//     background-color: var(--o-crimson) !important; /* Custom button background */
 // }
+
 .visitor-component-container {
     background-color: var(--o-crimson);
     padding: 1rem;
