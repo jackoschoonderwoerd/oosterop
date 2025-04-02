@@ -136,6 +136,11 @@ export const routes: Routes = [
                 .then(c => c.BandTourPeriodsComponent)
     },
     {
+        path: 'news', loadComponent:
+            () => import('./pages/admin/news/news.component')
+                .then(c => c.NewsComponent)
+    },
+    {
         path: 'tour-periods', loadComponent:
             () => import('./pages/admin/tour-periods/tour-periods.component')
                 .then(c => c.TourPeriodsComponent)
@@ -181,11 +186,11 @@ export const routes: Routes = [
             () => import('./pages/visitor/visitor-events/visitor-events.component')
                 .then(c => c.VisitorEventsComponent)
     },
-    // {
-    //     path: 'visitor-iframe', loadComponent:
-    //         () => import('./pages/visitor/visitor-iframeXXX/visitor-iframe.component')
-    //             .then(c => c.VisitorIframeComponent)
-    // },
+    {
+        path: 'visitor-iframe', loadComponent:
+            () => import('./pages/visitor/visitor-iframe/visitor-iframe.component')
+                .then(c => c.VisitorIframeComponent)
+    },
     {
         path: '**', redirectTo: 'home', pathMatch: 'full'
     }

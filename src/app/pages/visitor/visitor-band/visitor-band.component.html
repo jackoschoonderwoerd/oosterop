@@ -1,6 +1,6 @@
 <main>
     <div #top></div>
-    <app-logo></app-logo>
+    <!-- <app-logo></app-logo> -->
     <div class="name no-display-large">{{band?.name}}</div>
     <div class="band">
         <div class="name no-display-small">{{band?.name}}</div>
@@ -21,17 +21,22 @@
 
         }
 
-        @if(band?.quotes && band.quotes.length > 0) {
+        <!-- @if(band?.quotes && band.quotes.length > 0) {
         <app-visitor-band-quotes [quotes]="band.quotes"></app-visitor-band-quotes>
-        }
+        } -->
 
-        @if(band?.concerts && band?.concerts.length > 0) {
-        <app-visitor-band-concerts [band]="band"></app-visitor-band-concerts>
-        }
+        <!-- {{upcomingConcerts|json}}
+        {{upcomingConcerts.length}} -->
 
+        @if(showVisitorBandConcertsComponent) {
+        <app-visitor-band-concerts [concerts]="band.concerts"
+            [upcomingConcerts]="upcomingConcerts"
+            [band]="band"></app-visitor-band-concerts>
+        }
+        <!--
         @if(band?.reviews && band.reviews.length > 0){
         <app-visitor-band-reviews [reviews]="band.reviews"></app-visitor-band-reviews>
-        }
+        } -->
 
         @if(band?.oAudios && band.oAudios.length > 0) {
         <app-visitor-band-audio-video [oAudios]="band.oAudios"></app-visitor-band-audio-video>
@@ -40,20 +45,14 @@
         @if(band?.links && band.links.length > 0) {
         <app-visitor-band-links [links]="band.links"></app-visitor-band-links>
         }
-
+        <!--
         @if(band?.recordings && band.recordings.length > 0) {
         <app-visitor-band-recordings [recordings]="band.recordings"></app-visitor-band-recordings>
-        }
+        } -->
 
         @if(band?.tourPeriods && band.tourPeriods?.length > 0) {
         <app-visitor-band-tour-periods [tourPeriods]="band.tourPeriods"></app-visitor-band-tour-periods>
         }
     </div>
-    <div class="right">
-        <app-visitor-bands-overview (bandSelected)="scrollToTop()"></app-visitor-bands-overview>
-        <!-- <app-visitor-tour-periods id="tourPeriods"></app-visitor-tour-periods> -->
-        <app-visitor-events></app-visitor-events>
-    </div>
-    <button mat-button
-        (click)="scrollToTop()">top</button>
+
 </main>

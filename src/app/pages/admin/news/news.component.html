@@ -1,0 +1,99 @@
+<main>
+    <app-articles-list></app-articles-list>
+    <!-- <div class="articles-list">
+        @for(article of articles; track article.id){
+        <div class="articles-list-item">
+            <div class="visibility">
+                @if(article.visible) {
+                <mat-icon>visibility</mat-icon>
+                } @else {
+                <mat-icon>visibility_off</mat-icon>
+                }
+            </div>
+            <div class="content">
+                @if(article.date) {
+                <div class="date">{{article.date.seconds*1000|date}}</div>
+                }
+                <div class="header">
+                    {{article.header}}
+                </div>
+
+            </div>
+            <div class="buttons">
+                <mat-icon (click)="onEdit(article.id)">edit</mat-icon>
+                <mat-icon (click)="onDelete(article.id)">delete</mat-icon>
+            </div>
+        </div>
+        }
+    </div> -->
+
+    <!-- <div class="article">
+        @if(newsStore.activeArticle() && newsStore.activeArticle().date) {
+        <div class="article-date">
+            {{newsStore.activeArticle().date.seconds*1000|date}}
+        </div>
+        }
+        @if(newsStore.activeArticle() !==null) {
+        <div class="article-header">{{newsStore.activeArticle().header}}</div>
+        }
+        @if(newsStore.activeArticle() && newsStore.activeArticle().body) {
+        <div class="article-body"
+            [innerHTML]="newsStore.activeArticle().body">
+
+        </div>
+        }
+
+        @if(newsStore.activeArticle()) {
+        <div class="bandmembers">
+            @for(bandmember of newsStore.activeArticle().bandmembers; track bandmember) {
+            <div class="bandmember">
+                <div class="name">{{bandmember.name}}</div>
+                <div class="instruments">
+                    @for(instrument of bandmember.instruments;track istrument){
+                    <div class="instrument">{{instrument}}</div>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+        }
+        @if(newsStore.activeArticle() && newsStore.activeArticle().oImage){
+        <div class="o-image">
+            <img [src]="newsStore.activeArticle().oImage.imagePath"
+                alt="">
+            <div class="photographer-name">&copy;{{newsStore.activeArticle().oImage.photographerName}}</div>
+        </div>
+        }
+
+        @if(newsStore.activeArticle() && newsStore.activeArticle().links){
+        <div class="links">
+            <div class="header">links</div>
+            @for(link of newsStore.activeArticle().links ;track link){
+            <div class="link">
+                <a [href]="link.url">{{link.title}}</a>
+            </div>
+            }
+        </div>
+        }
+
+
+    </div> -->
+
+    <div class="editors">
+        <button mat-raised-button
+            color="primary"
+            (click)="onClearForms()">clear forms (stop editmode)</button>
+        <app-news-primary (resetForm)="onClearForms()"
+            [header]="'header'"></app-news-primary>
+        @if(newsStore.activeArticle()) {
+        <app-news-visible [header]="'visible'"></app-news-visible>
+        <app-news-date [header]="'date'"></app-news-date>
+        <app-news-body [header]="'body'"></app-news-body>
+        <app-news-bandmembers [header]="'bandmembers'"></app-news-bandmembers>
+        <app-news-images [header]="'images'"></app-news-images>
+        <app-news-links [header]="'links'"></app-news-links>
+        <!-- <app-news-quotes [header]="'quotes'"></app-news-quotes>
+        <app-news-tour-periods [header]="'tour-periods'"></app-news-tour-periods> -->
+        }
+    </div>
+</main>

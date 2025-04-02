@@ -5,14 +5,49 @@
             <mat-panel-title>concerts</mat-panel-title>
 
         </mat-expansion-panel-header>
+        @for(concert of upcomingConcerts;track concert){
+        <div class="concert">
+            <div class="date_eyes">
+                @if(authStore.isLoggedIn() && uiStore.showHidden()){
+                <app-visibility-eyes [visible]="concert.visible"></app-visibility-eyes>
+                }
+                <div class="date">{{concert.date.seconds*1000|date}}</div>
+            </div>
+            @if(concert.venueUrl) {
+            <div class="venue-name-url"
+                style="cursor: poiter;"
+                (click)="onUrl(concert.venueUrl)">{{concert.venueName}}</div>
+            } @else {
+            <div class="venue-name">{{concert.venueName}}</div>
+            }
+            <div class="location">
+                @if(concert.city){
+                <div class="city">{{concert.city}}</div>
+                }
+                @if(concert.country){
+                <div class="coutry">{{concert.country}}</div>
+                }
+            </div>
+        </div>
+        }
+    </mat-expansion-panel>
+</mat-accordion>
+
+<!-- <mat-accordion class="concerts-accordion">
+    <mat-expansion-panel #panel>
+        <mat-expansion-panel-header>
+
+            <mat-panel-title>concerts</mat-panel-title>
+
+        </mat-expansion-panel-header>
         <mat-tab-group [selectedIndex]="1">
             <mat-tab label="past">
-                <app-visitor-band-concerts-past></app-visitor-band-concerts-past>
+                <app-visitor-band-concerts-past [pastConcerts]="pastConcerts"></app-visitor-band-concerts-past>
             </mat-tab>
 
             <mat-tab label="upcoming">
-                <app-visitor-band-concerts-upcoming></app-visitor-band-concerts-upcoming>
+                <app-visitor-band-concerts-upcoming [upcomingConcerts]="upcomingConcerts"></app-visitor-band-concerts-upcoming>
             </mat-tab>
         </mat-tab-group>
     </mat-expansion-panel>
-</mat-accordion>
+</mat-accordion> -->

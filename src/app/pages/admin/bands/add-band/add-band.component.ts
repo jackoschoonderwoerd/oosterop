@@ -74,7 +74,7 @@ export class AddBandComponent implements OnInit {
     patchForm(band: Band) {
         this.bandForm.patchValue({
             ...band,
-            visible: band.visible ? band.visible : true
+            // visible: band.visible ? band.visible : true
         })
     }
 
@@ -86,6 +86,8 @@ export class AddBandComponent implements OnInit {
             initiator: (formValue.initiator).trim().toLowerCase(),
             visible: formValue.visible
         }
+        console.log(band)
+
         if (!this.editmode) {
             this.addBand(band)
         } else {
@@ -152,6 +154,14 @@ export class AddBandComponent implements OnInit {
             })
             .then(() => {
                 this.router.navigateByUrl('bands');
+            })
+        this.fs.updateField(path, 'visible', band.visible)
+            .then((res: any) => {
+                this.sb.openSnackbar(`visibility updated`)
+            })
+            .catch((err: FirebaseError) => {
+                console.log(err)
+                this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
 

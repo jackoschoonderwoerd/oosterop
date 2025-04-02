@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AuthStore } from '../../../auth/auth.store';
 import { UiStore } from '../../../services/ui.store';
 import { VisibilityEyesComponent } from '../../../shared/visibility-eyes/visibility-eyes.component';
+import { UiService } from '../../../services/ui.service';
 
 @Component({
     selector: 'app-visitor-bands-overview',
@@ -21,7 +22,9 @@ export class VisitorBandsOverviewComponent {
     router = inject(Router);
     authStore = inject(AuthStore)
     uiStore = inject(UiStore);
+    uiService = inject(UiService)
     viewportScroller = inject(ViewportScroller)
+
 
     @Output() bandSelected = new EventEmitter<void>();
 
@@ -38,7 +41,8 @@ export class VisitorBandsOverviewComponent {
 
     }
     onBandInfo(bandId: string) {
-        this.bandSelected.emit()
-        this.router.navigate(['visitor-band', { bandId }])
+        this.uiService.bandIdSelected.emit(bandId)
+        // this.bandSelected.emit()
+        // this.router.navigate(['visitor-band', { bandId }])
     }
 }

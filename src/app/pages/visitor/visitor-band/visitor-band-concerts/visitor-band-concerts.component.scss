@@ -5,16 +5,33 @@
             text-transform: uppercase;
         }
 
-        .mat-tab-label {
-            color: white !important;
-        }
+        // .mat-tab-label {
+        //     color: white !important;
+        // }
 
-        .mat-tab-label-active {
-            color: yellow !important;
-        }
+        // .mat-tab-label-active {
+        //     color: yellow !important;
+        // }
 
-        .mat-ink-bar {
-            background-color: red !important;
+        // .mat-ink-bar {
+        //     background-color: red !important;
+        // }
+        .concert {
+            background-color: var(--o-gravel);
+            padding: 0.2rem 0.5rem;
+            margin-bottom: 0.2rem;
+            .date_eyes {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                .date {
+                    font-weight: bold;
+                }
+            }
+            .location {
+                display: flex;
+                gap: 1rem;
+            }
         }
     }
 }

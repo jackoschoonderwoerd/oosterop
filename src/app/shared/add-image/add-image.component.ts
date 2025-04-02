@@ -17,7 +17,8 @@ interface FileData {
     styleUrl: './add-image.component.scss'
 })
 export class AddImageComponent implements OnInit {
-    @Input() public path: string
+    @Input() public path: string;
+    @Input() public articleheader: string;
     file: File;
     storage = inject(StorageService);
     fs = inject(FirestoreService)
@@ -33,7 +34,7 @@ export class AddImageComponent implements OnInit {
     }
 
     storeFile(file: File) {
-        const path = `path/${file.name}`
+        // const path = `path/${file.name}`
         this.storage.upload(this.path, file)
             .then((filePath: string) => {
                 const fileData: FileData = {

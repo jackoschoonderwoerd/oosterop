@@ -1,0 +1,33 @@
+<div class="news-section">
+    <div class="news-section-header">{{header}}</div>
+    @if(article && !article.oImage){
+    <app-add-image [path]="'news'"
+        (filePathChanged)="filePathChanged($event)"></app-add-image>
+    }
+    @if(imagePath){
+    <img [src]="imagePath"
+        alt="">
+    }
+    <form [formGroup]="form">
+        <!-- @if(!article && !article.oImage) { -->
+        <mat-form-field>
+            <mat-label>photographer name</mat-label>
+            <input type="text"
+                matInput
+                formControlName="photographerName">
+        </mat-form-field>
+        <!-- } -->
+        <div class="buttons">
+            @if(article && article.oImage){
+            <button mat-raised-button
+                (click)="onRemoveImage()">remove image</button>
+            }
+            @if(article && !article.oImage){
+            <button mat-raised-button
+                [disabled]="form.invalid"
+                type="button"
+                (click)="onSubmitImage()">submit image</button>
+            }
+        </div>
+    </form>
+</div>

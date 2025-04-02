@@ -1,0 +1,10 @@
+<div class="news-section">
+    <div class="news-section-header">{{header}}</div>
+    <form [formGroup]="form">
+
+        <mat-checkbox formControlName="visible"
+            (change)="onCheckboxChange($event)"
+            class="example-margin">article visible</mat-checkbox>
+    </form>
+
+</div>

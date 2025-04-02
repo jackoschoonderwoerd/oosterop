@@ -1,0 +1,26 @@
+    <div class="articles-list">
+        @for(article of articles; track article.id){
+        <div class="articles-list-item">
+            <div class="visibility">
+                @if(article.visible) {
+                <mat-icon>visibility</mat-icon>
+                } @else {
+                <mat-icon>visibility_off</mat-icon>
+                }
+            </div>
+            <div class="content">
+                @if(article.date) {
+                <div class="date">{{article.date.seconds*1000|date}}</div>
+                }
+                <div class="header">
+                    {{article.header}}
+                </div>
+
+            </div>
+            <div class="buttons">
+                <mat-icon (click)="onEdit(article.id)">edit</mat-icon>
+                <mat-icon (click)="onDelete(article.id, article.title)">delete</mat-icon>
+            </div>
+        </div>
+        }
+    </div>

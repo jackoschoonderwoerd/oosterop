@@ -17,7 +17,7 @@ export class VisitorBandOImagesComponent implements OnInit {
     }
 
     onLoad() {
-        console.log('loaded')
+        // console.log('loaded')
         setTimeout(() => {
             this.isLoading = false
         }, 3000);

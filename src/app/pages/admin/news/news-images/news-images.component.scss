@@ -1,0 +1,13 @@
+.news-section {
+    img {
+        margin-top: 1rem;
+        width: 100%;
+    }
+    form {
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+}

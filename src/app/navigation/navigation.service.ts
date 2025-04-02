@@ -25,6 +25,7 @@ export class NavigationService {
     adminMenuItems: string[] = [
         'anouncements',
         // 'musicians',
+        'news',
         'bands'
     ]
     sideNavMenuItems: MenuItem[] = [

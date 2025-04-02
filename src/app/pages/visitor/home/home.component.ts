@@ -17,6 +17,11 @@ import { LogoComponent } from '../logo/logo.component';
 import { VisitorTourPeriodsComponent } from '../visitor-tour-periods/visitor-tour-periods.component';
 import { VisitorBandsOverviewComponent } from '../visitor-bands-overview/visitor-bands-overview.component';
 import { VisitorEventsComponent } from '../visitor-events/visitor-events.component';
+import { VisitorNewsComponent } from '../visitor-news/visitor-news.component';
+import { ArticlesListComponent } from '../../admin/news/articles-list/articles-list.component';
+import { VisitorBandComponent } from '../visitor-band/visitor-band.component';
+import { UiService } from '../../../services/ui.service';
+import { NewsBandsListComponent } from './news-bands-list/news-bands-list.component';
 
 @Component({
     selector: 'app-home',
@@ -32,7 +37,11 @@ import { VisitorEventsComponent } from '../visitor-events/visitor-events.compone
         LogoComponent,
         VisitorTourPeriodsComponent,
         VisitorBandsOverviewComponent,
-        VisitorEventsComponent
+        VisitorEventsComponent,
+        VisitorNewsComponent,
+        ArticlesListComponent,
+        VisitorBandComponent,
+        NewsBandsListComponent
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
@@ -42,13 +51,14 @@ export class HomeComponent implements OnInit {
     bandsSubject = new BehaviorSubject<Band[]>(null)
 
     bands$: any = this.bandsSubject.asObservable()
-
-
-
     router = inject(Router)
     authStore = inject(AuthStore);
     fs = inject(FirestoreService);
-    items: string[] = ['item 1', 'item 2']
+    items: string[] = ['item 1', 'item 2'];
+    // viewArtists: boolean = true;
+    articlesVisible: boolean = false;
+    bandsVisible: boolean = true;
+    uiService = inject(UiService)
 
     ngOnInit(): void {
         this.fs.collection(`bands`)
@@ -57,7 +67,14 @@ export class HomeComponent implements OnInit {
                 this.bandsSubject.next(bands)
                 this.bands$ = this.bandsSubject.asObservable()
             })
+        this.uiService.bandsVisible.subscribe((visible: boolean) => {
+            this.bandsVisible = visible
+        })
+        this.uiService.articlesVisible.subscribe((visible: boolean) => {
+            this.articlesVisible = visible
+        })
     }
+
     onLogin() {
         this.router.navigateByUrl('login')
     }

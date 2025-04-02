@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+    <mat-form-field>
+        <mat-label>title</mat-label>
+        <input type="text"
+            matInput
+            formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>url</mat-label>
+        <input type="text"
+            matInput
+            formControlName="url">
+    </mat-form-field>
+    <button mat-raised-button
+        color="primary"
+        (click)="onSubmit()">submit</button>
+</form>

@@ -88,6 +88,7 @@ export class BandMembersComponent implements OnInit {
 
     removeBandMember(memberId: string) {
         console.log(memberId)
+        return
         const path = `bands/${this.bandId}`
         this.fs.removeElementFromArray(path, 'bandMemberIds', memberId)
             .then((res: any) => {

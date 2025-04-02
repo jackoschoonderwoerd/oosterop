@@ -30,6 +30,8 @@ import { LogoComponent } from '../logo/logo.component';
 import { VisitorTourPeriodsComponent } from '../visitor-tour-periods/visitor-tour-periods.component';
 import { VisitorBandsOverviewComponent } from '../visitor-bands-overview/visitor-bands-overview.component';
 import { VisitorEventsComponent } from '../visitor-events/visitor-events.component';
+import { UiService } from '../../../services/ui.service';
+import { VisitorBandConcertsService } from './visitor-band-concerts/visitor-band-concerts.service';
 
 @Component({
     selector: 'app-visitor-band',
@@ -66,21 +68,51 @@ import { VisitorEventsComponent } from '../visitor-events/visitor-events.compone
 export class VisitorBandComponent implements OnInit {
     route = inject(ActivatedRoute)
     fs = inject(FirestoreService)
+    navigationService = inject(NavigationService)
+    uiStore = inject(UiStore);
+    uiService = inject(UiService)
     band: Band;
     bandMembers: Musician[] = [];
-    navigationService = inject(NavigationService)
     subMenuItems: string[] = [];
-    uiStore = inject(UiStore);
     panelExpanded: boolean = false;
     concerts: Concert[] = [];
     router = inject(Router)
+    upcomingConcerts: Concert[] = []
+    visitorBandConcertsService = inject(VisitorBandConcertsService)
+    showVisitorBandConcertsComponent: boolean = false;
+
     @ViewChild('top') public top: ElementRef
+
 
     ngOnInit(): void {
         this.route.paramMap.subscribe((params: any) => {
             const bandId = params.get('bandId')
             this.bandMembers = [];
             this.getBand(bandId)
+            this.getConcerts(bandId)
+        })
+        this.uiService.bandIdSelected.subscribe((bandId: string) => {
+            this.showVisitorBandConcertsComponent = false;
+            // this.upcomingConcerts = [];
+            console.log(bandId)
+            this.getBand(bandId)
+            this.getConcerts(bandId)
+                .then((concerts: Concert[]) => {
+                    return this.getUpcomingConcerts(concerts)
+                })
+                .then((upcomingConcerts: Concert[]) => {
+                    this.upcomingConcerts = [];
+                    console.log(this.upcomingConcerts.length)
+                    this.upcomingConcerts = upcomingConcerts
+                    if (this.upcomingConcerts.length > 0) {
+                        this.showVisitorBandConcertsComponent = true
+                    }
+                    setTimeout(() => {
+
+                        this.visitorBandConcertsService.upcomingConcerts.next(upcomingConcerts)
+                    }, 1000);
+
+                })
         })
     }
 
@@ -88,11 +120,22 @@ export class VisitorBandComponent implements OnInit {
     getBand(bandId: string) {
         const path = `bands/${bandId}`
         this.fs.getDoc(path).pipe(take(1)).subscribe((band: Band) => {
-            this.band = band;
-            const bandMemberIds: string[] = band.bandMemberIds
-            this.getBandMembers(bandMemberIds);
-            this.uiStore.setSubMenuItems(band)
-            this.uiStore.setBand(band)
+            if (band) {
+                this.band = band;
+                const bandMemberIds: string[] = band.bandMemberIds
+                this.getBandMembers(bandMemberIds);
+                // this.uiStore.setSubMenuItems(band)
+                this.uiStore.setBand(band)
+            } else {
+
+                this.fs.getFirstDocument(`bands`)
+                    .subscribe((band: Band) => {
+                        this.band = band;
+                        // console.log(band)
+                        // this.uiStore.setSubMenuItems(band)
+                        this.uiStore.setBand(band)
+                    })
+            }
 
         })
     }
@@ -109,6 +152,30 @@ export class VisitorBandComponent implements OnInit {
             })
         }
     }
+
+    getConcerts(bandId) {
+        const promise = new Promise((resolve, reject) => {
+            this.fs.getFieldInDocument(`bands/${bandId}`, 'concerts')
+                .then((concerts: Concert) => {
+
+                    resolve(concerts);
+                })
+
+        })
+        return promise
+    }
+    getUpcomingConcerts(concerts) {
+        const promise = new Promise((resolve, reject) => {
+            let upcomingConcerts: Concert[] = []
+            concerts.forEach((concert: Concert) => {
+                if (concert.date.seconds * 1000 > new Date().getTime())
+                    upcomingConcerts.push(concert)
+            })
+            resolve(upcomingConcerts)
+        })
+        return promise
+    }
+
     scrollToTop() {
         const targetElement = this.top.nativeElement
         targetElement.scrollIntoView({ behavior: 'smooth' })

@@ -19,6 +19,8 @@ import { VisitorBandConcertsService } from '../visitor-band-concerts.service';
 })
 export class VisitorBandConcertsUpcomingComponent {
 
+    @Input() public upcomingConcerts: Concert[];
+
     authStore = inject(AuthStore);
     uiStore = inject(UiStore);
     VBCService = inject(VisitorBandConcertsService)

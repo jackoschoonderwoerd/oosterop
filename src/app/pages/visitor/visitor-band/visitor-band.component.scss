@@ -14,10 +14,10 @@ main {
     width: 100%;
     max-width: 1200px;
     margin: auto;
-    padding: 1rem;
+    // padding: 1rem;
     display: grid;
     grid-template-columns: auto auto;
-    gap: 1rem;
+    // gap: 1rem;
     @media (max-width: 1200px) {
         grid-template-columns: auto;
     }
@@ -29,7 +29,7 @@ main {
         grid-column: 1/-1;
         font-size: 2rem;
         font-weight: bold;
-        color: var(--o-coal);
+        color: var(--o-snow);
         background-color: (var(--o-crimson));
         padding: 0.2rem 0.5rem;
         text-transform: uppercase;

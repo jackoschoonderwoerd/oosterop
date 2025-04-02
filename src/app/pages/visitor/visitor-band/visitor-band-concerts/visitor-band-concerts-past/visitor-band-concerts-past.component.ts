@@ -9,7 +9,7 @@ import { VisitorBandConcertsService } from '../visitor-band-concerts.service';
 @Component({
     selector: 'app-visitor-band-concerts-past',
     imports: [
-
+        JsonPipe,
         DatePipe,
         AsyncPipe,
         VisibilityEyesComponent
@@ -18,6 +18,8 @@ import { VisitorBandConcertsService } from '../visitor-band-concerts.service';
     styleUrl: './visitor-band-concerts-past.component.scss'
 })
 export class VisitorBandConcertsPastComponent {
+
+    @Input() public pastConcerts: Concert[];
     authStore = inject(AuthStore);
     uiStore = inject(UiStore);
     VBCService = inject(VisitorBandConcertsService)

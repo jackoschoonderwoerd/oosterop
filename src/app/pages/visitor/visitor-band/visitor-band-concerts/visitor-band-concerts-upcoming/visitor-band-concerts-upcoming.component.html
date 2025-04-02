@@ -1,3 +1,4 @@
+{{upcomingConcerts|json}}
 @for(concert of VBCService.upcomingConcerts$|async ;track concert){
 @if(concert.visible|| authStore.isLoggedIn()){
 <div class="concert">

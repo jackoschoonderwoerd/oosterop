@@ -1,17 +1,23 @@
 .visitor-container {
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
     grid-template-areas:
-        "top"
-        "middle";
+        "top top top"
+        "middle-left middle-right middle-right";
+    // "bottom-left bottom-middle bottom-right";
     app-logo {
         grid-area: top;
     }
 
-    .components {
-        grid-area: middle;
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    app-news-bands-list {
+        grid-area: middle-left;
+    }
+
+    app-visitor-band {
+        grid-area: middle-right;
+    }
+    app-visitor-news {
+        grid-area: middle-right;
     }
 }

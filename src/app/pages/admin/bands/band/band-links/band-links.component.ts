@@ -109,6 +109,7 @@ export class BandLinksComponent implements OnInit {
     }
 
     onDelete(index) {
+        console.log(this.links)
         const dialogRef = this.dialog.open(ConfirmComponent, {
             data: {
                 doomedElement: this.links[index].title
@@ -116,7 +117,8 @@ export class BandLinksComponent implements OnInit {
         })
         dialogRef.afterClosed().subscribe((res: boolean) => {
             if (res) {
-                this.links.splice(1, index);
+                this.links.splice(index, 1);
+                console.log(this.links)
                 this.fs.updateField(this.path, 'links', this.links)
                     .then((res: any) => {
                         this.getLinks()

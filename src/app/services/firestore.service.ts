@@ -22,9 +22,10 @@ import {
     setDoc,
     updateDoc,
     where,
-    getDocs
+    getDocs,
+    limit
 } from '@angular/fire/firestore';
-import { merge, Observable } from 'rxjs';
+import { from, map, merge, Observable } from 'rxjs';
 
 import { FirebaseError } from '@angular/fire/app';
 
@@ -178,5 +179,21 @@ export class FirestoreService {
         })
         return promise
 
+    }
+
+    getFieldValues(collectionName: string, fieldName: string): Observable<any[]> {
+        const colRef = collection(this.firestore, collectionName); // Get collection reference
+        return collectionData(colRef).pipe(
+            map(docs => docs.map(doc => doc[fieldName])) // Extract only the specific field
+        );
+    }
+
+    getFirstDocument(collectionName: string): Observable<any | null> {
+        const colRef = collection(this.firestore, collectionName);
+        const firstDocQuery = query(colRef, limit(1));
+
+        return from(getDocs(firstDocQuery)).pipe(
+            map(snapshot => snapshot.docs.length > 0 ? { id: snapshot.docs[0].id, ...snapshot.docs[0].data() } : null)
+        );
     }
 }

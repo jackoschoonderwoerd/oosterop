@@ -3,4 +3,11 @@
     background-color: var(--o-gravel);
     color: var(--o-snow);
     // border: 1px solid var(--o-coal);
+    p {
+        em {
+            a {
+                color: var(--o-crimson);
+            }
+        }
+    }
 }

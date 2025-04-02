@@ -1,8 +1,15 @@
 <div class="visitor-container">
     <app-logo></app-logo>
-    <div class="components">
-        <!-- <app-visitor-tour-periods></app-visitor-tour-periods> -->
-        <app-visitor-bands-overview></app-visitor-bands-overview>
-        <app-visitor-events></app-visitor-events>
-    </div>
+
+    <app-news-bands-list></app-news-bands-list>
+    @if(bandsVisible) {
+
+    <app-visitor-band></app-visitor-band>
+    }
+
+    @if(articlesVisible) {
+
+    <app-visitor-news></app-visitor-news>
+    }
+
 </div>

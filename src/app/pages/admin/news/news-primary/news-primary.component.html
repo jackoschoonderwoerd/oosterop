@@ -1,0 +1,21 @@
+<div class="news-section">
+    <div class="news-section-header">{{header}}</div>
+    <form [formGroup]="form">
+
+        <mat-form-field>
+            <mat-label>header</mat-label>
+            <input formControlName="header"
+                type="text"
+                matInput>
+        </mat-form-field>
+
+
+
+        <button type="button"
+            color="primary"
+            [disabled]="form.invalid"
+            mat-raised-button
+            (click)="onSaveOrUpdatePrimary()">{{!editmode ? 'save':'update'}}&nbsp;primary</button>
+    </form>
+
+</div>

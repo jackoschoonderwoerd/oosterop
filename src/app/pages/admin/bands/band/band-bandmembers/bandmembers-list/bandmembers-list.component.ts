@@ -11,6 +11,8 @@ import { SnackbarService } from '../../../../../../services/snackbar.service';
 import { FirebaseError } from '@angular/fire/app';
 import { Musician } from '../../../../../../shared/models/musician.model';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmComponent } from '../../../../../../shared/confirm/confirm.component';
 
 @Component({
     selector: 'app-bandmembers-list',
@@ -19,7 +21,8 @@ import { MatButtonModule } from '@angular/material/button';
         MatIconModule,
         MatProgressSpinnerModule,
         MatButtonModule,
-        JsonPipe
+        JsonPipe,
+        ConfirmComponent
     ],
     templateUrl: './bandmembers-list.component.html',
     styleUrl: './bandmembers-list.component.scss'
@@ -37,7 +40,8 @@ export class BandmembersListComponent implements OnInit {
     sb = inject(SnackbarService)
     updatingBandmembers: boolean = false;
     bandId: string;
-    arrayService = inject(ArrayService)
+    arrayService = inject(ArrayService);
+    dialog = inject(MatDialog)
 
     ngOnInit(): void {
         this.bandId = this.route.snapshot.paramMap.get('bandId')
@@ -96,6 +100,29 @@ export class BandmembersListComponent implements OnInit {
     }
     onDelete(bandmember: Musician) {
         console.log(bandmember)
+        const dialogRef = this.dialog.open(ConfirmComponent, {
+            data: {
+                doomedElement: bandmember.name
+            }
+        })
+        dialogRef.afterClosed().subscribe((res: boolean) => {
+            if (res) {
+                this.fs.removeElementFromArray(`bands/${this.bandId}`, 'bandMemberIds', bandmember.id)
+                    .then((res: any) => {
+                        this.sb.openSnackbar(`bandmember removed`)
+                        this.getBandmemberIds()
+                            .then((bandmemberIds: string[]) => {
+                                this.getBandmembersAsync(bandmemberIds)
+                            })
+                    })
+                    .catch((err: FirebaseError) => {
+                        console.log(err)
+                        this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+                    })
+            } else {
+                this.sb.openSnackbar(`operation aborted by user`)
+            }
+        })
     }
 
     getBandmemberIds() {

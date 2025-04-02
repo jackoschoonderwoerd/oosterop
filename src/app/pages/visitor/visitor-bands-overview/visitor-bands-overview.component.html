@@ -1,11 +1,12 @@
 <div class="visitor-component-container">
-    <div class="visitor-header">bands</div>
+    <div class="visitor-header">artists</div>
     @for(band of bands; track band.id) {
     @if(band.visible || uiStore.showHidden()) {
     <div class="band">
         <div class="icon_name">
             <mat-icon (click)="onBandInfo(band.id)">info</mat-icon>
             <div class="name">{{band.name}}</div>
+
         </div>
 
         @if(authStore.isLoggedIn() && uiStore.showHidden()){

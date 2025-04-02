@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { EventEmitter, inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Concert } from '../../../../shared/models/concert.model';
 import { FirestoreService } from '../../../../services/firestore.service';
@@ -15,6 +15,8 @@ export class VisitorBandConcertsService {
 
     private upcomingConcertsSubject = new BehaviorSubject<Concert[]>(null);
     upcomingConcerts$: any = this.upcomingConcertsSubject.asObservable();
+
+    upcomingConcerts = new EventEmitter<Concert[]>()
 
 
     constructor() { }
