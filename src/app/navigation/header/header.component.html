@@ -7,16 +7,24 @@
 
     </ul>
     <div class="visitor-menu">
-        <button mat-icon-button
-            (click)="goToPreviousPage()">
-            <mat-icon>keyboard_arrow_left</mat-icon>
-        </button>
-        <button mat-icon-button
+        <!-- <button mat-icon-button
+           >
+        </button>  -->
+        <mat-icon (click)="goToPreviousPage()">arrow_back</mat-icon>
+        <!-- <button mat-icon-button
             (click)="goToNextPage()">
-            <mat-icon>keyboard_arrow_right</mat-icon>
-        </button>
-        <div class="version"
-            style="color:black">V21</div>
+            <mat-icon>arrow_forward</mat-icon>
+        </button> -->
+        <button [ngClass]="{'news-selected': uiStore.showNews()}"
+            mat-button
+            (click)="onShowNews()">news</button>
+        <button mat-button
+            (click)="uiStore.setShowNews(false)"
+            routerLinkActive="news-selected"
+            routerLink="visitor-contact">contact</button>
+        <!-- <div class="version"
+            style="color:black">V21</div> -->
+
 
         <button mat-icon-button
             routerLinkActive="link-active"

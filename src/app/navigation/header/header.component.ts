@@ -7,12 +7,14 @@ import { UiStore } from '../../services/ui.store';
 import { AuthStore } from '../../auth/auth.store';
 import { BehaviorSubject, Observable, take } from 'rxjs';
 import { Band } from '../../shared/models/band.model';
-import { AsyncPipe, JsonPipe, Location } from '@angular/common';
+import { AsyncPipe, JsonPipe, Location, NgClass } from '@angular/common';
 import { FirestoreService } from '../../services/firestore.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { Anouncement } from '../../shared/models/anouncement.model';
 import { VisitorBandsMenuComponent } from '../../pages/visitor/visitor-bands-menu/visitor-bands-menu.component';
+import { UiService } from '../../services/ui.service';
+import { Article } from '../../shared/models/article-models/ariticle.model';
 
 interface BandsByInitiator {
     initiator: string;
@@ -22,6 +24,7 @@ interface BandsByInitiator {
 @Component({
     selector: 'app-header',
     imports: [
+        NgClass,
         MatToolbarModule,
         RouterModule,
         MatIconModule,
@@ -44,14 +47,15 @@ export class HeaderComponent implements OnInit {
 
     fs = inject(FirestoreService)
     navigationService = inject(NavigationService);
+    router = inject(Router);
     uiStore = inject(UiStore)
     authStore = inject(AuthStore);
+    location = inject(Location);
+    uiService = inject(UiService)
     adminMenuItems: string[] = [];
     visitorMenuItems: string[] = [];
-    router = inject(Router);
     subMenuItems: string[] = []
     bandsByInitiatorArray: BandsByInitiator[] = [];
-    location = inject(Location)
     // bands$: Observable<Band[]>
 
     @Output() sidenavToggle = new EventEmitter<void>();
@@ -122,5 +126,14 @@ export class HeaderComponent implements OnInit {
     toggleHidden() {
         console.log(this.uiStore.showHidden())
         this.uiStore.setShowHidden(!this.uiStore.showHidden())
+    }
+
+    onShowNews() {
+        this.uiStore.setShowNews(true)
+        this.fs.sortedCollection(`articles`, 'date', 'asc')
+            .subscribe((sortetArticles: Article[]) => {
+                this.uiStore.setArticle(sortetArticles[0])
+            })
+        this.router.navigateByUrl('home')
     }
 }

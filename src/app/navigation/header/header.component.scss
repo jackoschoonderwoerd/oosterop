@@ -30,11 +30,25 @@ mat-toolbar {
         // @media (max-width: 899px) {
         //     display: none;
         // }
+        mat-icon {
+            color: var(--o-snow);
+        }
         button {
             color: var(--snow);
             // border: 1px solid white;
             text-transform: uppercase;
             // color: var(--o-crimson);
+            a {
+                color: snow;
+            }
+        }
+
+        .news-selected {
+            background-color: var(--o-snow);
+            color: black;
+            a {
+                color: black;
+            }
         }
 
         .admin-menu-items {
@@ -80,5 +94,7 @@ mat-toolbar {
     }
 }
 .link-active {
-    color: white;
+    background-color: var(--o-snow);
+
+    color: var(--o-coal);
 }

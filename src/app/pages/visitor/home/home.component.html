@@ -2,12 +2,12 @@
     <app-logo></app-logo>
 
     <app-news-bands-list></app-news-bands-list>
-    @if(bandsVisible) {
+    @if(!uiStore.showNews()) {
 
     <app-visitor-band></app-visitor-band>
     }
 
-    @if(articlesVisible) {
+    @if(uiStore.showNews()) {
 
     <app-visitor-news></app-visitor-news>
     }

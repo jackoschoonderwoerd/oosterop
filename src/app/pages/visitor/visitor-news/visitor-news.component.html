@@ -1,5 +1,4 @@
 <div class="visitor-component-container">
-
     <div class="article">
         @if(uiStore.article() && uiStore.article().date) {
         <div class="article-date">
@@ -16,7 +15,7 @@
         </div>
         }
 
-        @if(uiStore.article()) {
+        <!-- @if(uiStore.article()) {
         <div class="bandmembers">
             @for(bandmember of uiStore.article().bandmembers; track bandmember) {
             <div class="bandmember">
@@ -29,7 +28,7 @@
             </div>
             }
         </div>
-        }
+        } -->
         @if(uiStore.article() && uiStore.article().oImage){
         <div class="o-image">
             <img [src]="uiStore.article().oImage.imagePath"
@@ -38,7 +37,7 @@
         </div>
         }
 
-        @if(uiStore.article() && uiStore.article().links){
+        <!-- @if(uiStore.article() && uiStore.article().links){
         <div class="links">
             <div class="header">links</div>
             @for(link of uiStore.article().links ;track link){
@@ -47,7 +46,7 @@
             </div>
             }
         </div>
-        }
+        } -->
 
 
     </div>

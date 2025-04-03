@@ -10,6 +10,8 @@ import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { AuthStore } from './auth/auth.store';
 import { VisitorComponent } from './pages/visitor/visitor.component';
 import { LogoComponent } from './pages/visitor/logo/logo.component';
+import { FirestoreService } from './services/firestore.service';
+import { Article } from './shared/models/article-models/ariticle.model';
 
 @Component({
     selector: 'app-root',
@@ -30,7 +32,8 @@ export class AppComponent implements OnInit {
     uiStore = inject(UiStore);
     afAuth = inject(Auth);
     authStore = inject(AuthStore)
-    router = inject(Router)
+    router = inject(Router);
+    fs = inject(FirestoreService)
 
     ngOnInit(): void {
         onAuthStateChanged(this.afAuth, (user: FirebaseUser) => {
@@ -41,6 +44,17 @@ export class AppComponent implements OnInit {
                 console.log(' no user')
             }
         })
-
+        if (this.uiStore.article()) {
+            console.log(this.uiStore.article())
+        } else {
+            this.setLatestArticle();
+            console.log('no article selected')
+        }
+    }
+    setLatestArticle() {
+        this.fs.sortedCollection(`articles`, 'date', 'asc')
+            .subscribe((articles: Article[]) => {
+                this.uiStore.setArticle(articles[0])
+            })
     }
 }

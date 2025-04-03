@@ -22,6 +22,9 @@ import { ArticlesListComponent } from '../../admin/news/articles-list/articles-l
 import { VisitorBandComponent } from '../visitor-band/visitor-band.component';
 import { UiService } from '../../../services/ui.service';
 import { NewsBandsListComponent } from './news-bands-list/news-bands-list.component';
+import { UiStore } from '../../../services/ui.store';
+
+
 
 @Component({
     selector: 'app-home',
@@ -58,7 +61,8 @@ export class HomeComponent implements OnInit {
     // viewArtists: boolean = true;
     articlesVisible: boolean = false;
     bandsVisible: boolean = true;
-    uiService = inject(UiService)
+    uiService = inject(UiService);
+    uiStore = inject(UiStore)
 
     ngOnInit(): void {
         this.fs.collection(`bands`)

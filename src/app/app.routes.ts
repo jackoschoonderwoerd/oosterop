@@ -192,6 +192,11 @@ export const routes: Routes = [
                 .then(c => c.VisitorIframeComponent)
     },
     {
+        path: 'visitor-contact', loadComponent:
+            () => import('./pages/visitor/visitor-contact/visitor-contact.component')
+                .then(c => c.VisitorContactComponent)
+    },
+    {
         path: '**', redirectTo: 'home', pathMatch: 'full'
     }
 ];

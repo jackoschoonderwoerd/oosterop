@@ -80,20 +80,27 @@
     </div> -->
 
     <div class="editors">
-        <button mat-raised-button
-            color="primary"
-            (click)="onClearForms()">clear forms (stop editmode)</button>
-        <app-news-primary (resetForm)="onClearForms()"
-            [header]="'header'"></app-news-primary>
-        @if(newsStore.activeArticle()) {
-        <app-news-visible [header]="'visible'"></app-news-visible>
-        <app-news-date [header]="'date'"></app-news-date>
-        <app-news-body [header]="'body'"></app-news-body>
-        <app-news-bandmembers [header]="'bandmembers'"></app-news-bandmembers>
-        <app-news-images [header]="'images'"></app-news-images>
-        <app-news-links [header]="'links'"></app-news-links>
-        <!-- <app-news-quotes [header]="'quotes'"></app-news-quotes>
-        <app-news-tour-periods [header]="'tour-periods'"></app-news-tour-periods> -->
+        <div class="editors-left">
+
+            <button mat-raised-button
+                color="primary"
+                (click)="onClearForms()">clear forms (stop editmode)</button>
+            <app-news-primary (resetForm)="onClearForms()"
+                [header]="'header'"></app-news-primary>
+            @if(newsStore.activeArticle()) {
+            <app-news-visible [header]="'visible'"></app-news-visible>
+            <app-news-date [header]="'date'"></app-news-date>
+            }
+        </div>
+        @if(newsStore.activeArticle()){
+        <div class="editors-right">
+            <app-news-body [header]="'body'"></app-news-body>
+            <!-- <app-news-bandmembers [header]="'bandmembers'"></app-news-bandmembers> -->
+            <app-news-images [header]="'images'"></app-news-images>
+            <!-- <app-news-links [header]="'links'"></app-news-links> -->
+            <!-- <app-news-quotes [header]="'quotes'"></app-news-quotes>
+                <app-news-tour-periods [header]="'tour-periods'"></app-news-tour-periods> -->
+        </div>
         }
     </div>
 </main>

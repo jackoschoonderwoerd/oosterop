@@ -20,13 +20,14 @@ export class NewsBandsListComponent implements OnInit {
 
     fs = inject(FirestoreService)
     uiService = inject(UiService);
+
     newStore = inject(NewsStore)
+    uiStore = inject(UiStore);
     bands: Band[];
     articles: Article[];
     listItems: any[];
     showBands: boolean = true;
     showArticles: boolean = false;
-    uiStore = inject(UiStore);
 
     selectedBandIndex: number = 0;
     selectedArticleIndex: number = 0;
@@ -50,13 +51,13 @@ export class NewsBandsListComponent implements OnInit {
         this.uiService.articlesVisible.emit(false);
 
     }
-    onShowNews() {
+    // onShowNews() {
 
-        this.showBands = false;
-        this.showArticles = true;
-        this.uiService.articlesVisible.emit(true);
-        this.uiService.bandsVisible.emit(false);
-    }
+    //     this.showBands = false;
+    //     this.showArticles = true;
+    //     this.uiService.articlesVisible.emit(true);
+    //     this.uiService.bandsVisible.emit(false);
+    // }
 
     private getBands() {
         this.fs.collection(`bands`).subscribe((bands: Band[]) => {
@@ -74,6 +75,7 @@ export class NewsBandsListComponent implements OnInit {
         this.selectedBandIndex = index;
         this.lastSelectedBandIndex = index;
         this.uiService.bandIdSelected.emit(bandId)
+        this.uiStore.setShowNews(false)
         // this.bandSelected.emit()
         // this.router.navigate(['visitor-band', { bandId }])
     }
