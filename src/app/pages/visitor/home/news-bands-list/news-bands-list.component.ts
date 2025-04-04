@@ -8,11 +8,12 @@ import { DatePipe, NgClass } from '@angular/common';
 import { UiService } from '../../../../services/ui.service';
 import { NewsStore } from '../../../admin/news/news.store';
 import { UiStore } from '../../../../services/ui.store';
-import { last } from 'rxjs';
+
+import { VisitorService } from '../../visitor.service';
 
 @Component({
     selector: 'app-news-bands-list',
-    imports: [MatButtonModule, MatIconModule, NgClass, DatePipe],
+    imports: [MatButtonModule, MatIconModule, NgClass],
     templateUrl: './news-bands-list.component.html',
     styleUrl: './news-bands-list.component.scss'
 })
@@ -23,6 +24,7 @@ export class NewsBandsListComponent implements OnInit {
 
     newStore = inject(NewsStore)
     uiStore = inject(UiStore);
+    visitorService = inject(VisitorService)
     bands: Band[];
     articles: Article[];
     listItems: any[];
@@ -41,26 +43,17 @@ export class NewsBandsListComponent implements OnInit {
     }
 
     onShowBands() {
-        // if (this.lastSelectedBandId) {
-        //     this.onBand(this.lastSelectedBandId, this.lastSelectedBandIndex)
-        // }
+
         this.selectedBandIndex = 0;
         this.showBands = true;
         this.showArticles = false;
         this.uiService.bandsVisible.emit(true);
         this.uiService.articlesVisible.emit(false);
-
     }
-    // onShowNews() {
 
-    //     this.showBands = false;
-    //     this.showArticles = true;
-    //     this.uiService.articlesVisible.emit(true);
-    //     this.uiService.bandsVisible.emit(false);
-    // }
 
     private getBands() {
-        this.fs.collection(`bands`).subscribe((bands: Band[]) => {
+        this.fs.sortedCollection(`bands`, 'seqNr', 'asc').subscribe((bands: Band[]) => {
             this.bands = bands
         })
     }
@@ -76,6 +69,7 @@ export class NewsBandsListComponent implements OnInit {
         this.lastSelectedBandIndex = index;
         this.uiService.bandIdSelected.emit(bandId)
         this.uiStore.setShowNews(false)
+        this.visitorService.scrollToTopContent.emit()
         // this.bandSelected.emit()
         // this.router.navigate(['visitor-band', { bandId }])
     }

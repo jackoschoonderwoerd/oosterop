@@ -1,8 +1,9 @@
-mat-toolbar {
+.custom-toolbar {
+    padding: 0;
     background-color: var(--o-crimson);
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
+    // gap: 1rem;
     position: relative;
     border-bottom: 2px solid var(--o-gravel);
     .left {
@@ -58,6 +59,14 @@ mat-toolbar {
                 color: var(---o-crimson);
             }
         }
+        .link-active {
+            background-color: var(--o-snow);
+
+            color: var(--o-coal);
+            mat-icon {
+                color: var(--o-coal);
+            }
+        }
         .login {
         }
     }
@@ -92,9 +101,4 @@ mat-toolbar {
             }
         }
     }
-}
-.link-active {
-    background-color: var(--o-snow);
-
-    color: var(--o-coal);
 }

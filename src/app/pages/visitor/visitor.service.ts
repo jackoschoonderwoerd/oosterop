@@ -5,7 +5,8 @@ import { EventEmitter, Injectable } from '@angular/core';
 })
 export class VisitorService {
 
-    bandChanged = new EventEmitter<void>()
+    bandChanged = new EventEmitter<void>();
+    scrollToTopContent = new EventEmitter<void>()
 
     constructor() { }
 }

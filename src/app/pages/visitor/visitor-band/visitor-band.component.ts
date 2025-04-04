@@ -167,11 +167,13 @@ export class VisitorBandComponent implements OnInit {
     getUpcomingConcerts(concerts) {
         const promise = new Promise((resolve, reject) => {
             let upcomingConcerts: Concert[] = []
-            concerts.forEach((concert: Concert) => {
-                if (concert.date.seconds * 1000 > new Date().getTime())
-                    upcomingConcerts.push(concert)
-            })
-            resolve(upcomingConcerts)
+            if (concerts) {
+                concerts.forEach((concert: Concert) => {
+                    if (concert.date.seconds * 1000 > new Date().getTime())
+                        upcomingConcerts.push(concert)
+                })
+                resolve(upcomingConcerts)
+            }
         })
         return promise
     }

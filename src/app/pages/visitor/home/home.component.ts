@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { VAnouncementsComponent } from './v-anouncements/v-anouncements.component';
 import { Anouncement } from '../../../shared/models/anouncement.model';
 import { FirestoreService } from '../../../services/firestore.service';
@@ -23,6 +23,7 @@ import { VisitorBandComponent } from '../visitor-band/visitor-band.component';
 import { UiService } from '../../../services/ui.service';
 import { NewsBandsListComponent } from './news-bands-list/news-bands-list.component';
 import { UiStore } from '../../../services/ui.store';
+import { VisitorService } from '../visitor.service';
 
 
 
@@ -52,17 +53,20 @@ import { UiStore } from '../../../services/ui.store';
 export class HomeComponent implements OnInit {
 
     bandsSubject = new BehaviorSubject<Band[]>(null)
+    @ViewChild('topContent') topContent
+    @ViewChild('top') top
 
-    bands$: any = this.bandsSubject.asObservable()
+    uiService = inject(UiService);
+    uiStore = inject(UiStore)
     router = inject(Router)
     authStore = inject(AuthStore);
     fs = inject(FirestoreService);
+    visitorService = inject(VisitorService)
+    bands$: any = this.bandsSubject.asObservable()
     items: string[] = ['item 1', 'item 2'];
     // viewArtists: boolean = true;
     articlesVisible: boolean = false;
     bandsVisible: boolean = true;
-    uiService = inject(UiService);
-    uiStore = inject(UiStore)
 
     ngOnInit(): void {
         this.fs.collection(`bands`)
@@ -77,6 +81,9 @@ export class HomeComponent implements OnInit {
         this.uiService.articlesVisible.subscribe((visible: boolean) => {
             this.articlesVisible = visible
         })
+        this.visitorService.scrollToTopContent.subscribe(() => {
+            this.scrollToTopContent();
+        })
     }
 
     onLogin() {
@@ -85,5 +92,16 @@ export class HomeComponent implements OnInit {
     onBandSelected(bandId: string) {
         console.log(bandId)
         this.router.navigate(['visitor/visitor-band', bandId])
+    }
+    onScrollToTop() {
+        const targetElement = this.top.nativeElement
+        targetElement.scrollIntoView({ behavior: 'smooth' })
+    }
+
+    scrollToTopContent() {
+        console.log('scrollToTopContent')
+        const targetElement = this.topContent.nativeElement
+        // window.scrollBy({ top: 10000, left: 100, behavior: 'smooth' });
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }

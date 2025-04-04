@@ -14,6 +14,7 @@ import { ConfirmComponent } from '../../../../../shared/confirm/confirm.componen
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { VisibilityEyesComponent } from '../../../../../shared/visibility-eyes/visibility-eyes.component';
+import { ArrayService } from '../../../../../services/array.service';
 
 
 
@@ -46,6 +47,7 @@ export class BandAudioComponent implements OnInit {
     activeIndex: number;
     dialog = inject(MatDialog);
     sanitizer = inject(DomSanitizer)
+    arrayService = inject(ArrayService)
 
     ngOnInit(): void {
         this.initOAdioForm()
@@ -114,6 +116,35 @@ export class BandAudioComponent implements OnInit {
                 console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
+    }
+
+    onMove(index: number, direction: string) {
+        if (direction === 'up') {
+            const newArray = this.arrayService.move(this.oAudios, index, index - 1)
+            this.fs.updateField(this.path, 'oAudios', newArray)
+                .then((res: any) => {
+                    this.sb.openSnackbar(`element moved up`)
+                    this.getOAudios();
+                })
+                .catch((err: FirebaseError) => {
+                    console.log(err)
+                    this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+                })
+
+
+        } else if (direction === 'down') {
+            const newArray = this.arrayService.move(this.oAudios, index, index + 1)
+            this.fs.updateField(this.path, 'oAudios', newArray)
+                .then((res: any) => {
+                    this.sb.openSnackbar(`element moved down`)
+                    this.getOAudios();
+                })
+                .catch((err: FirebaseError) => {
+                    console.log(err)
+                    this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+                })
+        }
+
     }
 
     updateOAudios() {

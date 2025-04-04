@@ -1,7 +1,6 @@
 <main>
-
     <div class="o-audios">
-        @for(oAudio of oAudios;track oAudio; let index = $index){
+        @for(oAudio of oAudios;track oAudio; let index = $index; let first = $first; let last = $last){
         <div class="o-audio">
 
             <div class="left">
@@ -14,27 +13,47 @@
                     <mat-icon>visibility</mat-icon>
                     } -->
                 </div>
-                @if(oAudio.title) {
-                <div class="title">{{oAudio.title}}</div>
-                }
-                @if(oAudio.comments){
-                <div class="comments">{{oAudio.comments}}</div>
-                }
+
+                <div class="title_comments">
+                    @if(oAudio.title) {
+                    <div class="title">{{oAudio.title}}</div>
+                    }
+                    @if(oAudio.comments){
+                    <div class="comments">{{oAudio.comments}}</div>
+                    }
+                </div>
                 <!-- @if(oAudio.code){
-                <div class="code"
+                    <div class="code"
                     [innerHTML]="oAudio.code">{{oAudio.code}}</div>
-                } -->
+                    } -->
             </div>
 
             <div class="buttons">
-                <button mat-icon-button
-                    (click)="onEdit(index)">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button
-                    (click)="onDelete(index)">
-                    <mat-icon>delete</mat-icon>
-                </button>
+                <div class="move">
+                    @if(!first) {
+                    <button mat-icon-button
+                        (click)="onMove(index, 'up')">
+
+                        <mat-icon>keyboard_arrow_up</mat-icon>
+                    </button>
+                    }
+                    @if(!last) {
+                    <button mat-icon-button
+                        (click)="onMove(index, 'down')">
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+                    </button>
+                    }
+                </div>
+                <div class="edit_delete">
+                    <button mat-icon-button
+                        (click)="onEdit(index)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button
+                        (click)="onDelete(index)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
             </div>
         </div>
         }

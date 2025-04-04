@@ -1,13 +1,23 @@
 main {
+    max-width: 1000px;
+    margin: auto;
     padding: 1rem;
     display: grid;
     gap: 1rem;
     grid-template-columns: 3fr 1fr;
+
     .o-audios {
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+        max-height: 83vh;
+
+        overflow: scroll;
+        // display: grid;
+        // gap: 1rem;
+        // grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
         .o-audio {
+            width: 100%;
             background-color: var(--o-gravel);
             color: white;
             padding: 1rem;
@@ -23,12 +33,18 @@ main {
                 .visible {
                     // border: 3px solid red;
                 }
-                .title {
-                    word-break: break-word;
-                    // border: 3px solid red;
-                }
-                .comments {
-                    // border: 3px solid red;
+                .title_comments {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+                    .title {
+                        word-break: break-word;
+                        // border: 3px solid red;
+                    }
+                    .comments {
+                        // border: 3px solid red;
+                        font-style: italic;
+                    }
                 }
                 // justify-content: space-between;
             }
@@ -36,10 +52,21 @@ main {
                 display: flex;
 
                 gap: 1rem;
+                .move {
+                    display: flex;
+                    flex-direction: column;
+                }
+                .edit_delete {
+                    display: flex;
+                    flex-direction: column;
+                }
             }
         }
     }
     form {
         min-width: 350px;
+        max-height: 83vh;
+
+        overflow: scroll;
     }
 }

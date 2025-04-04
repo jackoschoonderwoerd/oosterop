@@ -1,15 +1,29 @@
 <div class="visitor-container">
+    <div class="logo"
+        #top>
+    </div>
+
     <app-logo></app-logo>
 
-    <app-news-bands-list></app-news-bands-list>
-    @if(!uiStore.showNews()) {
+    <div class="v-middle">
 
-    <app-visitor-band></app-visitor-band>
-    }
+        <app-news-bands-list></app-news-bands-list>
 
-    @if(uiStore.showNews()) {
+        <div class="content"
+            #topContent>
+            @if(!uiStore.showNews()) {
 
-    <app-visitor-news></app-visitor-news>
-    }
+            <app-visitor-band></app-visitor-band>
+            }
 
+            @if(uiStore.showNews()) {
+
+            <app-visitor-news></app-visitor-news>
+            }
+            <div class="button-container">
+                <button mat-button
+                    (click)="onScrollToTop()">top</button>
+            </div>
+        </div>
+    </div>
 </div>
