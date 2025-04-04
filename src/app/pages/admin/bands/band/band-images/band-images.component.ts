@@ -8,6 +8,7 @@ import { SnackbarService } from '../../../../../services/snackbar.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { StorageService } from '../../../../../services/storage.service';
+import { ConfirmService } from '../../../../../shared/confirm/confirm.service';
 
 @Component({
     selector: 'app-band-images',
@@ -27,6 +28,7 @@ export class BandImagesComponent implements OnInit {
     collectionName = 'bands';
     documentId: string;
     storage = inject(StorageService)
+    confirmService = inject(ConfirmService)
 
 
 
@@ -81,23 +83,31 @@ export class BandImagesComponent implements OnInit {
         ])
     }
     onDelete(index) {
-        // console.log(this.oImages[index])
-        const doomedOImage: OImage = this.oImages[index]
+        this.confirmService.getConfirmation(index)
+            .then((confirmation: boolean) => {
+                if (confirmation) {
 
-        const path = `${this.path}/${doomedOImage.filename}`
-        this.removeFileFromStorage(path)
-            .then((res: any) => {
-                console.log(res);
-                this.removeImagePathFromArray(doomedOImage)
+                    const doomedOImage: OImage = this.oImages[index]
+
+                    const path = `${this.path}/${doomedOImage.filename}`
+                    this.removeFileFromStorage(path)
+                        .then((res: any) => {
+                            console.log(res);
+                            this.removeImagePathFromArray(doomedOImage)
+                        })
+                        .then((res: any) => {
+                            console.log(res)
+                            this.getOImages();
+                        })
+                        .catch((err: FirebaseError) => {
+                            console.log(err);
+                            this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+                        })
+                } else {
+                    this.sb.openSnackbar(`operation aborted by user`)
+                }
             })
-            .then((res: any) => {
-                console.log(res)
-                this.getOImages();
-            })
-            .catch((err: FirebaseError) => {
-                console.log(err);
-                this.sb.openSnackbar(`operation failed due to: ${err.message}`)
-            })
+
     }
 
     removeFileFromStorage(path) {

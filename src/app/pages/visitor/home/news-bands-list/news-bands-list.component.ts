@@ -64,10 +64,13 @@ export class NewsBandsListComponent implements OnInit {
     }
 
     onBand(bandId: string, index: number) {
-        console.log(index)
+        console.log(bandId, index)
         this.selectedBandIndex = index;
-        this.lastSelectedBandIndex = index;
-        this.uiService.bandIdSelected.emit(bandId)
+
+        // this.lastSelectedBandIndex = index;
+        setTimeout(() => {
+            this.uiService.bandIdSelected.emit(bandId)
+        }, 0);
         this.uiStore.setShowNews(false)
         this.visitorService.scrollToTopContent.emit()
         // this.bandSelected.emit()

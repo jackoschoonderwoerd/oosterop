@@ -1,28 +1,19 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { VAnouncementsComponent } from './v-anouncements/v-anouncements.component';
-import { Anouncement } from '../../../shared/models/anouncement.model';
-import { FirestoreService } from '../../../services/firestore.service';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { Router, RouterModule } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { AuthStore } from '../../../auth/auth.store';
-import { BandMenuItem } from '../../../shared/models/band-menu-item.model';
-import { BehaviorSubject, take } from 'rxjs';
 import { Band } from '../../../shared/models/band.model';
-import { MatMenuModule } from '@angular/material/menu';
-import { AsyncPipe, JsonPipe } from '@angular/common';
-import { Observable } from 'tinymce';
+import { BehaviorSubject, take } from 'rxjs';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { FirestoreService } from '../../../services/firestore.service';
 import { LogoComponent } from '../logo/logo.component';
-import { VisitorTourPeriodsComponent } from '../visitor-tour-periods/visitor-tour-periods.component';
-import { VisitorBandsOverviewComponent } from '../visitor-bands-overview/visitor-bands-overview.component';
-import { VisitorEventsComponent } from '../visitor-events/visitor-events.component';
-import { VisitorNewsComponent } from '../visitor-news/visitor-news.component';
-import { ArticlesListComponent } from '../../admin/news/articles-list/articles-list.component';
-import { VisitorBandComponent } from '../visitor-band/visitor-band.component';
-import { UiService } from '../../../services/ui.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { NewsBandsListComponent } from './news-bands-list/news-bands-list.component';
+import { Router, RouterModule } from '@angular/router';
+import { UiService } from '../../../services/ui.service';
 import { UiStore } from '../../../services/ui.store';
+import { VisitorBandComponent } from '../visitor-band/visitor-band.component';
+import { VisitorNewsComponent } from '../visitor-news/visitor-news.component';
 import { VisitorService } from '../visitor.service';
 
 
@@ -30,29 +21,21 @@ import { VisitorService } from '../visitor.service';
 @Component({
     selector: 'app-home',
     imports: [
-        VAnouncementsComponent,
-        MatToolbarModule,
-        RouterModule,
-        MatIconModule,
-        MatButtonModule,
-        MatMenuModule,
-        JsonPipe,
-        AsyncPipe,
         LogoComponent,
-        VisitorTourPeriodsComponent,
-        VisitorBandsOverviewComponent,
-        VisitorEventsComponent,
-        VisitorNewsComponent,
-        ArticlesListComponent,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        MatToolbarModule,
+        NewsBandsListComponent,
+        RouterModule,
         VisitorBandComponent,
-        NewsBandsListComponent
+        VisitorNewsComponent,
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
 
-    bandsSubject = new BehaviorSubject<Band[]>(null)
     @ViewChild('topContent') topContent
     @ViewChild('top') top
 
@@ -62,46 +45,29 @@ export class HomeComponent implements OnInit {
     authStore = inject(AuthStore);
     fs = inject(FirestoreService);
     visitorService = inject(VisitorService)
-    bands$: any = this.bandsSubject.asObservable()
-    items: string[] = ['item 1', 'item 2'];
-    // viewArtists: boolean = true;
     articlesVisible: boolean = false;
     bandsVisible: boolean = true;
 
     ngOnInit(): void {
-        this.fs.collection(`bands`)
-            .pipe(take(1))
-            .subscribe((bands: Band[]) => {
-                this.bandsSubject.next(bands)
-                this.bands$ = this.bandsSubject.asObservable()
-            })
+
         this.uiService.bandsVisible.subscribe((visible: boolean) => {
             this.bandsVisible = visible
         })
         this.uiService.articlesVisible.subscribe((visible: boolean) => {
-            this.articlesVisible = visible
+            this.articlesVisible = visible;
         })
         this.visitorService.scrollToTopContent.subscribe(() => {
             this.scrollToTopContent();
         })
     }
 
-    onLogin() {
-        this.router.navigateByUrl('login')
-    }
-    onBandSelected(bandId: string) {
-        console.log(bandId)
-        this.router.navigate(['visitor/visitor-band', bandId])
-    }
     onScrollToTop() {
         const targetElement = this.top.nativeElement
         targetElement.scrollIntoView({ behavior: 'smooth' })
     }
 
     scrollToTopContent() {
-        console.log('scrollToTopContent')
         const targetElement = this.topContent.nativeElement
-        // window.scrollBy({ top: 10000, left: 100, behavior: 'smooth' });
         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }

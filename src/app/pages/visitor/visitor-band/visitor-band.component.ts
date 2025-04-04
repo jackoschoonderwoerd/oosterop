@@ -1,100 +1,74 @@
-import { Component, inject, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
-import { FirestoreService } from '../../../services/firestore.service';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Band } from '../../../shared/models/band.model';
-import { take } from 'rxjs';
-import { Musician } from '../../../shared/models/musician.model';
-import { MusicianComponent } from '../../../shared/musician/musician.component';
-import { MatTabsModule } from '@angular/material/tabs';
-import { NavigationService } from '../../../navigation/navigation.service';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { DatePipe, JsonPipe } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { IconSubmenuComponent } from '../../../shared/icon-submenu/icon-submenu.component';
-import { UiStore } from '../../../services/ui.store';
-import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansion';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { Component, inject, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Concert } from '../../../shared/models/concert.model';
-import { VisitorBandConcertsComponent } from './visitor-band-concerts/visitor-band-concerts.component';
-import { VisitorBandReviewsComponent } from './visitor-band-reviews/visitor-band-reviews.component';
-import { VisitorBandAudioVideoComponent } from './visitor-band-audio-video/visitor-band-audio-video.component';
-import { VisitorBandLinksComponent } from './visitor-band-links/visitor-band-links.component';
-import { VisitorBandQuotesComponent } from './visitor-band-quotes/visitor-band-quotes.component';
-import { VisitorBandRecordingsComponent } from './visitor-band-recordings/visitor-band-recordings.component';
-import { VisitorBandBandmembersComponent } from './visitor-band-bandmembers/visitor-band-bandmembers.component';
-import { VisitorBandTourPeriodsComponent } from './visitor-band-tour-periods/visitor-band-tour-periods.component';
-import { VisitorBandOImagesComponent } from './visitor-band-o-images/visitor-band-o-images.component';
-import { VisitorBandBodyComponent } from './visitor-band-body/visitor-band-body.component';
-import { LogoComponent } from '../logo/logo.component';
-import { VisitorTourPeriodsComponent } from '../visitor-tour-periods/visitor-tour-periods.component';
-import { VisitorBandsOverviewComponent } from '../visitor-bands-overview/visitor-bands-overview.component';
-import { VisitorEventsComponent } from '../visitor-events/visitor-events.component';
+import { FirestoreService } from '../../../services/firestore.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { Musician } from '../../../shared/models/musician.model';
+import { NavigationService } from '../../../navigation/navigation.service';
+import { take } from 'rxjs';
 import { UiService } from '../../../services/ui.service';
+import { UiStore } from '../../../services/ui.store';
+import { VisitorBandAudioVideoComponent } from './visitor-band-audio-video/visitor-band-audio-video.component';
+import { VisitorBandBandmembersComponent } from './visitor-band-bandmembers/visitor-band-bandmembers.component';
+import { VisitorBandBodyComponent } from './visitor-band-body/visitor-band-body.component';
+import { VisitorBandConcertsComponent } from './visitor-band-concerts/visitor-band-concerts.component';
 import { VisitorBandConcertsService } from './visitor-band-concerts/visitor-band-concerts.service';
+import { VisitorBandLinksComponent } from './visitor-band-links/visitor-band-links.component';
+import { VisitorBandOImagesComponent } from './visitor-band-o-images/visitor-band-o-images.component';
+import { VisitorBandTourPeriodsComponent } from './visitor-band-tour-periods/visitor-band-tour-periods.component';
+import { SnackbarService } from '../../../services/snackbar.service';
 
 @Component({
     selector: 'app-visitor-band',
     imports: [
-        MusicianComponent,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatExpansionModule,
+        MatIconModule,
         MatTabsModule,
         MatToolbarModule,
-        JsonPipe,
-        MatIconModule,
-        MatButtonModule,
-        IconSubmenuComponent,
-        MatExpansionModule,
-        DatePipe,
-        MatButtonToggleModule,
-        VisitorBandConcertsComponent,
-        VisitorBandReviewsComponent,
+        RouterModule,
         VisitorBandAudioVideoComponent,
-        VisitorBandLinksComponent,
-        VisitorBandQuotesComponent,
-        VisitorBandRecordingsComponent,
         VisitorBandBandmembersComponent,
-        VisitorBandTourPeriodsComponent,
-        VisitorBandOImagesComponent,
         VisitorBandBodyComponent,
-        VisitorTourPeriodsComponent,
-        VisitorBandsOverviewComponent,
-        VisitorEventsComponent,
-        LogoComponent,
-        RouterModule
+        VisitorBandConcertsComponent,
+        VisitorBandLinksComponent,
+        VisitorBandOImagesComponent,
+        VisitorBandTourPeriodsComponent,
     ],
     templateUrl: './visitor-band.component.html',
     styleUrl: './visitor-band.component.scss'
 })
 export class VisitorBandComponent implements OnInit {
-    route = inject(ActivatedRoute)
     fs = inject(FirestoreService)
     navigationService = inject(NavigationService)
-    uiStore = inject(UiStore);
+    route = inject(ActivatedRoute)
+    router = inject(Router)
+    sb = inject(SnackbarService)
     uiService = inject(UiService)
+    uiStore = inject(UiStore);
+    visitorBandConcertsService = inject(VisitorBandConcertsService)
     band: Band;
     bandMembers: Musician[] = [];
-    subMenuItems: string[] = [];
-    panelExpanded: boolean = false;
     concerts: Concert[] = [];
-    router = inject(Router)
-    upcomingConcerts: Concert[] = []
-    visitorBandConcertsService = inject(VisitorBandConcertsService)
+    panelExpanded: boolean = false;
     showVisitorBandConcertsComponent: boolean = false;
+    subMenuItems: string[] = [];
+    upcomingConcerts: Concert[] = []
 
     @ViewChild('top') public top: ElementRef
 
 
     ngOnInit(): void {
-        this.route.paramMap.subscribe((params: any) => {
-            const bandId = params.get('bandId')
-            this.bandMembers = [];
-            this.getBand(bandId)
-            this.getConcerts(bandId)
-        })
         this.uiService.bandIdSelected.subscribe((bandId: string) => {
+            console.log(bandId);
             this.showVisitorBandConcertsComponent = false;
-            // this.upcomingConcerts = [];
-            console.log(bandId)
             this.getBand(bandId)
             this.getConcerts(bandId)
                 .then((concerts: Concert[]) => {
@@ -102,13 +76,11 @@ export class VisitorBandComponent implements OnInit {
                 })
                 .then((upcomingConcerts: Concert[]) => {
                     this.upcomingConcerts = [];
-                    console.log(this.upcomingConcerts.length)
                     this.upcomingConcerts = upcomingConcerts
                     if (this.upcomingConcerts.length > 0) {
                         this.showVisitorBandConcertsComponent = true
                     }
                     setTimeout(() => {
-
                         this.visitorBandConcertsService.upcomingConcerts.next(upcomingConcerts)
                     }, 1000);
 
@@ -117,23 +89,22 @@ export class VisitorBandComponent implements OnInit {
     }
 
 
+
     getBand(bandId: string) {
+        console.log('getBand()', bandId)
         const path = `bands/${bandId}`
         this.fs.getDoc(path).pipe(take(1)).subscribe((band: Band) => {
             if (band) {
                 this.band = band;
                 const bandMemberIds: string[] = band.bandMemberIds
                 this.getBandMembers(bandMemberIds);
-                // this.uiStore.setSubMenuItems(band)
                 this.uiStore.setBand(band)
             } else {
-
                 this.fs.getFirstDocument(`bands`)
                     .subscribe((band: Band) => {
                         this.band = band;
-                        // console.log(band)
-                        // this.uiStore.setSubMenuItems(band)
                         this.uiStore.setBand(band)
+                        this.sb.openSnackbar(`selected band not available`)
                     })
             }
 

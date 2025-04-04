@@ -1,31 +1,5 @@
 <div class="list-container">
-    <!-- <div class="buttons">
-        <button [ngClass]="{ 'btn-active': showBands, 'btn-passive': showArticles }"
-            mat-button
-            (click)="onShowBands()">bands</button>
-        <button [ngClass]="{ 'btn-active': showArticles, 'btn-passive': showBands }"
-            mat-button
-            (click)="uiStore()">news</button>
-    </div>
-    @if(showArticles) {
-    <ul class="articles">
-        @for(article of articles;track article; let index = $index) {
-        <li (click)="onArticle(article.id, index)"
-            class="article"
-            [ngClass]="{'selected-list-item': index === selectedArticleIndex }">
 
-            <mat-icon>info</mat-icon>
-
-            <div class="content">
-                <div class="date">{{article.date.seconds*1000|date}}</div>
-                <div class="header">
-                    {{article.header}}
-                </div>
-            </div>
-        </li>
-        }
-    </ul>
-    } -->
 
     @if(showBands|| uiStore.showHidden()) {
     <ul class="bands">
