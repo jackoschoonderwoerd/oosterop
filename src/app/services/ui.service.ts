@@ -6,6 +6,10 @@ import { EventEmitter, Injectable } from '@angular/core';
 })
 export class UiService {
 
+    bandChanged = new EventEmitter<void>();
+
+    scrollToTopContent = new EventEmitter<void>()
+
     bandIdSelected = new EventEmitter<string>();
     articleIdSelected = new EventEmitter<string>()
 

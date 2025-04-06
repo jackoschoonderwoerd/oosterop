@@ -1,7 +1,7 @@
 <section>
     <ul>
         <button mat-button
-            [matMenuTriggerFor]="bandsMenu">visitor-bands</button>
+            [matMenuTriggerFor]="bandsMenu">bands</button>
         <mat-menu #bandsMenu="matMenu">
             @for(bandsByInitiator of bandsByInitiatorArray; track bandsByInitiator){
             <!-- FOR INITIATORS WITH MORE THAN ONE BAND -->
@@ -9,10 +9,13 @@
             <button mat-menu-item
                 [matMenuTriggerFor]="sub_menu">{{bandsByInitiator?.initiator}}
 
+
                 <mat-menu #sub_menu="matMenu">
                     @for(band of bandsByInitiator?.bands; track bandName){
+                    @if(band.visible) {
                     <button mat-menu-item
                         (click)="onBandSelected(band.id)">{{band.name}}</button>
+                    }
                     }
                 </mat-menu>
 
@@ -20,7 +23,7 @@
 
             <!-- FOR INITIATORS WITH JUST ONE BAND -->
             } @else {
-            @if(bandsByInitiator.bands.length > 1){
+            @if(bandsByInitiator.bands.length === 1 && bandsByInitiator?.bands[0].visible){
 
             <button (click)="onBandSelected(bandsByInitiator?.bands[0].id)"
                 mat-menu-item>{{bandsByInitiator?.bands[0].name}}</button>
@@ -28,13 +31,20 @@
             }
             }
         </mat-menu>
-        @for(menuItem of sideNavMenuItems;track menuItem){
-        <button mat-button>
-            <a mat-list-item
-                (click)="onClose()"
-                [routerLink]="menuItem.link">{{menuItem.link}}</a>
+
+        <button mat-button
+            (click)="onClose()"
+            routerLink="visitor-tour-periods">
+            tour periods
         </button>
-        }
+        <button mat-button
+            (click)="onClose()"
+            routerLink="visitor-contact">
+            contact
+        </button>
+        <button mat-button
+            (click)="onHome()">home</button>
+
     </ul>
 
     <button class="close"

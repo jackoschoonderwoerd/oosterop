@@ -20,11 +20,7 @@ type UiState = {
 
 
 const initialState: UiState = {
-    // isLoading: false,
-    // selectedLanguage: 'nl',
-    // showBanner: false,
-    // imageSliderActive: false,
-    // sidenavOpen: false,
+
     subMenuItems: [],
     band: null,
     bandId: null,
@@ -49,7 +45,7 @@ export const UiStore = signalStore(
                 // console.log(bandId)
                 patchState(store, { bandId })
             },
-            setShowNews(status: boolean) {
+            setHomeSelected(status: boolean) {
                 patchState(store, { showNews: status })
             },
             setShowHidden(showHidden: boolean) {

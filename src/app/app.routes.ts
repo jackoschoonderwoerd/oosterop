@@ -14,31 +14,7 @@ export const routes: Routes = [
             () => import('./pages/visitor/home/home.component')
                 .then(c => c.HomeComponent)
     },
-    {
-        path: 'anouncements', loadComponent:
-            () => import('./pages/admin/anouncements/anouncements.component')
-                .then(c => c.AnouncementsComponent)
-    },
-    {
-        path: 'add-anouncement', loadComponent:
-            () => import('./pages/admin/anouncements/add-anouncement/add-anouncement.component')
-                .then(c => c.AddAnouncementComponent)
-    },
-    {
-        path: 'edit-anouncement', loadComponent:
-            () => import('./pages/admin/anouncements/edit-anouncement/edit-anouncement.component')
-                .then(c => c.EditAnouncementComponent)
-    },
-    {
-        path: 'add-body', loadComponent:
-            () => import('./pages/admin/anouncements/edit-anouncement/add-body/add-body.component')
-                .then(c => c.AddBodyComponent)
-    },
-    {
-        path: 'add-participants', loadComponent:
-            () => import('./pages/admin/anouncements/edit-anouncement/add-participants/add-participants.component')
-                .then(c => c.AddParticipantsComponent)
-    },
+
     {
         path: 'select-bandmembers', loadComponent:
             () => import('./pages/admin/bands/band/band-members/select-bandmembers/select-bandmembers.component')
@@ -50,16 +26,7 @@ export const routes: Routes = [
                 .then(c => c.BandBandmembersComponent)
     },
 
-    {
-        path: 'add-review', loadComponent:
-            () => import('./pages/admin/anouncements/edit-anouncement/add-review/add-review.component')
-                .then(c => c.AddReviewComponent)
-    },
-    {
-        path: 'add-images', loadComponent:
-            () => import('./pages/admin/anouncements/edit-anouncement/add-images/add-images.component')
-                .then(c => c.AddImagesComponent)
-    },
+
     {
         path: 'musicians', loadComponent:
             () => import('./pages/admin/musicians/musicians.component')
@@ -140,16 +107,8 @@ export const routes: Routes = [
             () => import('./pages/admin/news/news.component')
                 .then(c => c.NewsComponent)
     },
-    {
-        path: 'tour-periods', loadComponent:
-            () => import('./pages/admin/tour-periods/tour-periods.component')
-                .then(c => c.TourPeriodsComponent)
-    },
-    // {
-    //     path: ('upcoming-events'), loadComponent:
-    //         () => import('./pages/admin/upcoming-events/upcoming-events.component')
-    //             .then(c => c.UpcomingEventsComponent)
-    // },
+
+
     {
         path: 'edit-o-image', loadComponent:
             () => import('./shared/edit-o-image/edit-o-image.component')
@@ -170,11 +129,6 @@ export const routes: Routes = [
         path: 'visitor-concerts', loadComponent:
             () => import('./pages/visitor/visitor-band/visitor-band-concerts/visitor-band-concerts.component')
                 .then(c => c.VisitorBandConcertsComponent)
-    },
-    {
-        path: 'visitor-anouncement', loadComponent:
-            () => import('./pages/visitor/visitor-anouncement/visitor-anouncement.component')
-                .then(c => c.VisitorAnouncementComponent)
     },
     {
         path: 'visitor-tour-periods', loadComponent:

@@ -1,20 +1,26 @@
 {
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
-  "hosting": {
-    "public": "dist/oosterop/browser",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
+    "firestore": {
+        "rules": "firestore.rules",
+        "indexes": "firestore.indexes.json",
+        "headers": [{
+            "source": "/",
+            "headers": [{
+                "key": "Content-Security-Policy",
+                "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';"
+            }]
+        }]
+
+    },
+    "hosting": {
+        "public": "dist/oosterop/browser",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "rewrites": [{
+            "source": "**",
+            "destination": "/index.html"
+        }]
+    }
 }

@@ -17,54 +17,14 @@ export class NavigationService {
 
     fs = inject(FirestoreService)
 
-    private bandsSubject = new BehaviorSubject<Band[]>(null);
-    bands$: any = this.bandsSubject.asObservable();
 
-
-    visitorMenuItems: string[] = ['contact'];
-    adminMenuItems: string[] = [
-        'anouncements',
-        // 'musicians',
-        'news',
-        'bands'
-    ]
-    sideNavMenuItems: MenuItem[] = [
-        {
-            title: 'events',
-            link: 'visitor-events'
-        },
-        {
-            title: 'tour periods',
-            link: 'visitor-tour-periods'
-        }
-    ]
-
-    getAdminMenuItems() {
-        return this.adminMenuItems;
-    }
-    getVisitorMenuItems() {
-        return this.visitorMenuItems
-    }
-    getBandsObservable() {
-        return this.fs.collection(`bands`)
-            .pipe(take(1))
-            .subscribe((bands: Band[]) => {
-                this.bandsSubject.next(bands)
-                this.bands$ = this.bandsSubject.asObservable()
-            })
-    }
-    getSideNavMenuItems() {
-        return this.sideNavMenuItems
-    }
 
     getBandsByInitiatorArray() {
         const promise = new Promise((resolve, reject) => {
             let bandsByInitiatorArray: BandsByInitiator[] = []
 
-            this.fs.collection(`bands`)
+            this.fs.collection(`bands`).pipe(take(1))
                 .subscribe((bands: Band[]) => {
-                    // let bandsByInitiatorArray: BandsByInitiator[] = []
-                    // create empty arrays
                     bands.forEach((band: Band) => {
                         const bandsByInitiator: BandsByInitiator = {
                             initiator: band.initiator ? band.initiator : band.name,

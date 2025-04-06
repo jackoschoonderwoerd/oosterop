@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
     selector: 'app-warning',
-    imports: [JsonPipe, MatDialogModule, MatButtonModule, MatIconModule],
+    imports: [MatDialogModule, MatButtonModule, MatIconModule],
     templateUrl: './warning.component.html',
     styleUrl: './warning.component.scss'
 })

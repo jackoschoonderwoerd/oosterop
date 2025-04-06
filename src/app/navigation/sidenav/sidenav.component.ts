@@ -8,10 +8,14 @@ import { Router, RouterModule } from '@angular/router';
 import { Band } from '../../shared/models/band.model';
 import { MatMenuModule } from '@angular/material/menu';
 import { UiStore } from '../../services/ui.store';
+import { UiService } from '../../services/ui.service';
+import { FirestoreService } from '../../services/firestore.service';
+import { Article } from '../../shared/models/article-models/ariticle.model';
 
 interface BandsByInitiator {
     initiator: string;
-    bands: Band[]
+    bands: Band[];
+
 }
 
 @Component({
@@ -23,14 +27,16 @@ interface BandsByInitiator {
 export class SidenavComponent implements OnInit {
     navigationService = inject(NavigationService)
     bandsByInitiatorArray: BandsByInitiator[] = []
+
     router = inject(Router)
-    uiStore = inject(UiStore)
+    uiStore = inject(UiStore);
+    uiService = inject(UiService);
+    fs = inject(FirestoreService)
     @Output() closeSidenav = new EventEmitter<void>();
 
-    sideNavMenuItems: MenuItem[];
 
     ngOnInit(): void {
-        this.sideNavMenuItems = this.navigationService.getSideNavMenuItems();
+
         // this.bandsByInitiatorArray = this.navigationService.getBandsByInitiatorArray
         this.navigationService.getBandsByInitiatorArray().then((bandsByInitiatorArray: BandsByInitiator[]) => {
             this.bandsByInitiatorArray = bandsByInitiatorArray
@@ -42,10 +48,25 @@ export class SidenavComponent implements OnInit {
     }
     onBandSelected(bandId: string) {
         console.log(bandId);
+        this.router.navigateByUrl('home');
+        this.uiService.bandsVisible.emit();
+        this.uiStore.setHomeSelected(false);
         // return;
-        this.router.navigate(['visitor-band', { bandId }])
-        this.uiStore.setBandId(bandId)
+        setTimeout(() => {
+            this.uiService.bandIdSelected.emit(bandId);
+        }, 0);
+        // this.uiStore.setBandId(bandId)
         this.onClose()
 
+
+    }
+    onHome() {
+        this.uiStore.setHomeSelected(true)
+        this.fs.sortedCollection(`articles`, 'date', 'asc')
+            .subscribe((sortetArticles: Article[]) => {
+                this.uiStore.setArticle(sortetArticles[0])
+            })
+        this.router.navigateByUrl('home')
+        this.onClose()
     }
 }

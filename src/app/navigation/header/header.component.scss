@@ -1,38 +1,42 @@
 .custom-toolbar {
-    padding: 0;
     background-color: var(--o-crimson);
     display: flex;
+    align-items: center;
     justify-content: space-between;
     // gap: 1rem;
     position: relative;
     border-bottom: 2px solid var(--o-gravel);
-    .left {
-        .list-item-menu {
-            display: flex;
-            // @media (min-width: 900px) {
-            //     display: none;
-            // }
-        }
-        .list-item-home {
-            display: flex;
-            // @media (max-width: 899px) {
-            //     display: none;
-            // }
-        }
-    }
+
     .visitor-menu {
         width: 100%;
         max-width: 500px;
-        display: flex;
-        // gap: 1rem;
+
         justify-content: space-between;
         align-items: center;
         margin: auto;
-        // @media (max-width: 899px) {
-        //     display: none;
-        // }
-        mat-icon {
-            color: var(--o-snow);
+        .small-screen {
+            display: flex;
+            align-items: center;
+            @media (min-width: 600px) {
+                display: none;
+            }
+            .menu {
+                color: var(--o-snow);
+            }
+            mat-icon {
+                color: var(--o-snow);
+            }
+        }
+        .large-screen {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            mat-icon {
+                color: var(--o-snow);
+            }
+            @media (max-width: 600px) {
+                display: none;
+            }
         }
         button {
             color: var(--snow);
@@ -44,22 +48,8 @@
             }
         }
 
-        .news-selected {
-            background-color: var(--o-snow);
-            color: black;
-            a {
-                color: black;
-            }
-        }
-
-        .admin-menu-items {
-            display: flex;
-            gap: 1rem;
-            a {
-                color: var(---o-crimson);
-            }
-        }
-        .link-active {
+        .link-active,
+        .home-selected {
             background-color: var(--o-snow);
 
             color: var(--o-coal);
@@ -72,9 +62,9 @@
     }
     .admin-menu {
         position: absolute;
-        top: 10px;
+        top: 5px;
         right: 10px;
-        border: 3px solid yellow;
+        // border: 3px solid yellow;
         display: flex;
         align-items: center;
         padding: 0 1rem;
@@ -96,7 +86,7 @@
         .login {
             button {
                 mat-icon {
-                    color: yellow;
+                    color: var(--o-coal);
                 }
             }
         }

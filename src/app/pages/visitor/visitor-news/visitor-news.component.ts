@@ -6,10 +6,11 @@ import { NewsService } from '../../admin/news/news.service';
 import { UiService } from '../../../services/ui.service';
 import { FirestoreService } from '../../../services/firestore.service';
 import { UiStore } from '../../../services/ui.store';
+import { VisitorEventsComponent } from '../visitor-events/visitor-events.component';
 
 @Component({
     selector: 'app-visitor-news',
-    imports: [DatePipe, JsonPipe],
+    imports: [DatePipe, VisitorEventsComponent],
     templateUrl: './visitor-news.component.html',
     styleUrl: './visitor-news.component.scss'
 })
@@ -22,19 +23,7 @@ export class VisitorNewsComponent implements OnInit {
     uiStore = inject(UiStore)
 
     ngOnInit(): void {
-        // this.uiService.articleIdSelected.subscribe((articleId: string) => {
-        //     this.getArticle(articleId)
-        // })
+
     }
-    // getArticle(articleId) {
-    //     const path = `articles/${articleId}`
-    //     this.fs.getDoc(path)
-    //         .subscribe((article: Article) => {
-    //             if (article) {
-    //                 this.article = article
-    //                 this.uiStore.setArticle(article)
-    //             }
-    //         })
-    // }
 
 }

@@ -28,11 +28,8 @@ interface BandsByInitiator {
         MatToolbarModule,
         RouterModule,
         MatIconModule,
-        AsyncPipe,
         MatMenuModule,
         MatButtonModule,
-        JsonPipe,
-        VisitorBandsMenuComponent
     ],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
@@ -52,8 +49,8 @@ export class HeaderComponent implements OnInit {
     authStore = inject(AuthStore);
     location = inject(Location);
     uiService = inject(UiService)
-    adminMenuItems: string[] = [];
-    visitorMenuItems: string[] = [];
+
+
     subMenuItems: string[] = []
     bandsByInitiatorArray: BandsByInitiator[] = [];
     // bands$: Observable<Band[]>
@@ -64,10 +61,7 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.visitorMenuItems = this.navigationService.getVisitorMenuItems();
-        this.adminMenuItems = this.navigationService.getAdminMenuItems();
-        this.getBands();
-        this.getAnouncements();
+
         this.navigationService.getBandsByInitiatorArray()
             .then((bandsByInitiatorArray: BandsByInitiator[]) => {
                 this.bandsByInitiatorArray = bandsByInitiatorArray
@@ -77,36 +71,8 @@ export class HeaderComponent implements OnInit {
             })
 
     }
-    getBands() {
-        this.fs.sortedCollection('bands', 'seqNr', 'asc')
-            .pipe(take(1))
-            .subscribe((bands: Band[]) => {
-                this.bandsSubject.next(bands)
-                this.bands$ = this.bandsSubject.asObservable();
-            })
-    }
-    getAnouncements() {
-        this.fs.sortedCollection('anouncements', 'seqNr', 'asc')
-            .pipe(take(1))
-            .subscribe((anouncements: Anouncement[]) => {
-                this.anouncementsSubject.next(anouncements)
-                this.anouncements$ = this.anouncementsSubject.asObservable()
-            })
-    }
 
-    onBandSelected(bandId: string) {
-        console.log(bandId);
-        // return;
-        this.router.navigate(['visitor-band', { bandId }])
-        this.uiStore.setBandId(bandId)
 
-    }
-    onAnouncementSelected(anouncementId: string) {
-        this.router.navigate(['visitor-anouncement', { anouncementId }])
-    }
-    onVisitorTourPeriods() {
-        this.router.navigateByUrl('visitor-tour-periods');
-    }
 
 
     onToggleSidenav() {
@@ -128,12 +94,39 @@ export class HeaderComponent implements OnInit {
         this.uiStore.setShowHidden(!this.uiStore.showHidden())
     }
 
-    onShowNews() {
-        this.uiStore.setShowNews(true)
+    onHome() {
+        this.uiStore.setHomeSelected(true)
         this.fs.sortedCollection(`articles`, 'date', 'asc')
             .subscribe((sortetArticles: Article[]) => {
                 this.uiStore.setArticle(sortetArticles[0])
             })
         this.router.navigateByUrl('home')
     }
+    // getBands() {
+    //     this.fs.sortedCollection('bands', 'seqNr', 'asc')
+    //         .pipe(take(1))
+    //         .subscribe((bands: Band[]) => {
+    //             this.bandsSubject.next(bands)
+    //             this.bands$ = this.bandsSubject.asObservable();
+    //         })
+    // }
+    // getAnouncements() {
+    //     this.fs.sortedCollection('anouncements', 'seqNr', 'asc')
+    //         .pipe(take(1))
+    //         .subscribe((anouncements: Anouncement[]) => {
+    //             this.anouncementsSubject.next(anouncements)
+    //             this.anouncements$ = this.anouncementsSubject.asObservable()
+    //         })
+    // }
+
+    // onBandSelected(bandId: string) {
+    //     console.log(bandId);
+    //     // return;
+    //     this.router.navigate(['visitor-band', { bandId }])
+    //     this.uiStore.setBandId(bandId)
+
+    // }
+    // onAnouncementSelected(anouncementId: string) {
+    //     this.router.navigate(['visitor-anouncement', { anouncementId }])
+    // }
 }

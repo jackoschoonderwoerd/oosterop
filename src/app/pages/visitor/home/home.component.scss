@@ -1,30 +1,60 @@
-.visitor-container {
-    .v-middle {
-        display: grid;
-
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        // grid-template-columns: 350px 1fr;
-        gap: 1rem;
-        app-news-band-list {
-            // min-width: 350px;
-        }
-        .content {
-            grid-column: span 2;
-            // border: 3px solid yellow;
-            app-visitor-band {
-                width: 100%;
-            }
-            app-visitor-news {
-            }
-        }
+.landing-page {
+    max-width: 1500px;
+    margin: auto;
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 10rem auto;
+    grid-template-areas:
+        "logo logo content content"
+        "tours bands content content";
+    // align-items: start;
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 15rem auto;
+        grid-template-areas:
+            "logo logo logo"
+            "bands content content"
+            "tours content content";
     }
-    .button-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 1rem;
-        button {
-            background-color: var(--o-crimson);
-            width: 6rem;
-        }
+    @media (max-width: 800px) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 10rem auto;
+        grid-template-areas:
+            "logo logo "
+            "content content"
+            "bands tours";
+    }
+    @media (max-width: 600px) {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: 4.6rem auto;
+        grid-template-areas:
+            "logo"
+            "content"
+            "bands"
+            "tours";
+    }
+    app-logo {
+        // max-height: 100px;
+        grid-area: logo;
+    }
+    .content {
+        grid-area: content;
+    }
+    app-visitor-tour-periods {
+        grid-area: tours;
+    }
+    app-bands-list {
+        grid-area: bands;
+    }
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    button {
+        background-color: var(--o-crimson);
+        width: 6rem;
     }
 }

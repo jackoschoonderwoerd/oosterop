@@ -4,27 +4,27 @@ import { FirestoreService } from '../../../../services/firestore.service';
 import { Band } from '../../../../shared/models/band.model';
 import { Article } from '../../../../shared/models/article-models/ariticle.model';
 import { MatIconModule } from '@angular/material/icon';
-import { DatePipe, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { UiService } from '../../../../services/ui.service';
 import { NewsStore } from '../../../admin/news/news.store';
 import { UiStore } from '../../../../services/ui.store';
 
-import { VisitorService } from '../../visitor.service';
+
 
 @Component({
-    selector: 'app-news-bands-list',
+    selector: 'app-bands-list',
     imports: [MatButtonModule, MatIconModule, NgClass],
-    templateUrl: './news-bands-list.component.html',
-    styleUrl: './news-bands-list.component.scss'
+    templateUrl: './bands-list.component.html',
+    styleUrl: './bands-list.component.scss'
 })
-export class NewsBandsListComponent implements OnInit {
+export class BandsListComponent implements OnInit {
 
     fs = inject(FirestoreService)
     uiService = inject(UiService);
 
     newStore = inject(NewsStore)
     uiStore = inject(UiStore);
-    visitorService = inject(VisitorService)
+
     bands: Band[];
     articles: Article[];
     listItems: any[];
@@ -71,8 +71,8 @@ export class NewsBandsListComponent implements OnInit {
         setTimeout(() => {
             this.uiService.bandIdSelected.emit(bandId)
         }, 0);
-        this.uiStore.setShowNews(false)
-        this.visitorService.scrollToTopContent.emit()
+        this.uiStore.setHomeSelected(false)
+        this.uiService.scrollToTopContent.emit()
         // this.bandSelected.emit()
         // this.router.navigate(['visitor-band', { bandId }])
     }

@@ -1,63 +1,37 @@
 <mat-toolbar class="custom-toolbar">
-
-    <ul class="left">
-        <!-- <li class="list-item-menu">
-            <mat-icon (click)="onToggleSidenav()">menu</mat-icon>
-        </li> -->
-
-    </ul>
     <div class="visitor-menu">
-        <!-- <button mat-icon-button
-           >
-        </button>  -->
-        <mat-icon (click)="goToPreviousPage()">arrow_back</mat-icon>
-        <!-- <button mat-icon-button
-            (click)="goToNextPage()">
-            <mat-icon>arrow_forward</mat-icon>
-        </button> -->
-        <button [ngClass]="{'news-selected': uiStore.showNews()}"
-            mat-button
-            (click)="onShowNews()">news</button>
-        <button mat-button
-            (click)="uiStore.setShowNews(false)"
-            routerLinkActive="news-selected"
-            routerLink="visitor-contact">contact</button>
-        <!-- <div class="version"
-            style="color:black">V21</div> -->
+        <div class="small-screen">
 
-
-        <button mat-icon-button
-            routerLinkActive="link-active"
-            routerLink="home">
-            <mat-icon>home</mat-icon>
-        </button>
-        <button mat-button
-            routerLinkActive="link-active"
-            routerLink="visitor-tour-periods">
-            tour periods
-
-        </button>
-
-        <!-- <app-visitor-bands-menu></app-visitor-bands-menu> -->
-
-
-
-
-
-
-
-
+            <mat-icon class="menu"
+                (click)="onToggleSidenav()">menu</mat-icon>
+        </div>
+        <div class="large-screen">
+            <mat-icon (click)="goToPreviousPage()">arrow_back</mat-icon>
+            <button [ngClass]="{'home-selected': uiStore.showNews()}"
+                mat-button
+                (click)="onHome()">home</button>
+            <button mat-button
+                (click)="uiStore.setHomeSelected(false)"
+                routerLinkActive="link-active"
+                routerLink="visitor-contact">contact</button>
+            <button mat-button
+                (click)="uiStore.setHomeSelected(false)"
+                routerLinkActive="link-active"
+                routerLink="visitor-tour-periods">
+                tour periods
+            </button>
+            <mat-icon (click)="goToNextPage()">arrow_forward</mat-icon>
+        </div>
     </div>
+
     <div class="admin-menu">
+
+
         @if(authStore.isLoggedIn()) {
         <div class="admin-menu-items">
-            @for(menuItem of adminMenuItems; track menuItem) {
-            <div class="menu-item"><a [routerLink]="menuItem">{{menuItem}}</a></div>
-            }
+            <div class="menu-item"><a routerLink="news">news</a></div>
+            <div class="menu-item"><a routerLink="bands">bands</a></div>
         </div>
-        }
-
-        @if(authStore.isLoggedIn()) {
         <div (click)="onLogout()"
             class="logout">
             <button mat-icon-button>
@@ -67,6 +41,8 @@
         <button mat-button
             (click)="toggleHidden()">{{uiStore.showHidden() ? 'no eyes' : 'eyes '}}</button>
         }
+
+
         @if(!authStore.isLoggedIn()) {
         <div routerLink="login"
             class="login">
@@ -76,8 +52,5 @@
             </button>
         </div>
         }
-
-
-
     </div>
 </mat-toolbar>

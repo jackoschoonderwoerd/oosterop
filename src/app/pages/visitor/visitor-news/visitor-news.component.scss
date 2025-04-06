@@ -1,5 +1,11 @@
-.visitor-component-container {
+.visitor-component {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     .article {
+        background-color: var(--o-crimson);
+        padding: 1rem;
+        color: var(--o-snow);
         .article-date {
             margin-bottom: 1rem;
         }

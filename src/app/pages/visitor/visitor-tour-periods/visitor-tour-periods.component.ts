@@ -1,14 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FirestoreService } from '../../../services/firestore.service';
 import { TourPeriod } from '../../../shared/models/tour-period-model';
-import { DatePipe, JsonPipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { take } from 'rxjs';
 import { Band } from '../../../shared/models/band.model';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { LogoComponent } from '../logo/logo.component';
-import { VisitorBandsMenuComponent } from '../visitor-bands-menu/visitor-bands-menu.component';
+
 import { AuthStore } from '../../../auth/auth.store';
 import { UiStore } from '../../../services/ui.store';
 
@@ -16,11 +15,9 @@ import { UiStore } from '../../../services/ui.store';
     selector: 'app-visitor-tour-periods',
     imports: [
         DatePipe,
-        JsonPipe,
         MatIconModule,
         MatButtonModule,
-        LogoComponent,
-        VisitorBandsMenuComponent
+
     ],
     templateUrl: './visitor-tour-periods.component.html',
     styleUrl: './visitor-tour-periods.component.scss'

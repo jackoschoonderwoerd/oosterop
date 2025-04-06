@@ -8,13 +8,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NewsBandsListComponent } from './news-bands-list/news-bands-list.component';
+
 import { Router, RouterModule } from '@angular/router';
 import { UiService } from '../../../services/ui.service';
 import { UiStore } from '../../../services/ui.store';
 import { VisitorBandComponent } from '../visitor-band/visitor-band.component';
 import { VisitorNewsComponent } from '../visitor-news/visitor-news.component';
-import { VisitorService } from '../visitor.service';
+
+import { VisitorTourPeriodsComponent } from '../visitor-tour-periods/visitor-tour-periods.component';
+import { BandsListComponent } from './bands-list/bands-list.component';
+import { VisitorEventsComponent } from '../visitor-events/visitor-events.component';
 
 
 
@@ -26,10 +29,11 @@ import { VisitorService } from '../visitor.service';
         MatIconModule,
         MatMenuModule,
         MatToolbarModule,
-        NewsBandsListComponent,
+        BandsListComponent,
         RouterModule,
         VisitorBandComponent,
         VisitorNewsComponent,
+        VisitorTourPeriodsComponent,
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
@@ -44,7 +48,7 @@ export class HomeComponent implements OnInit {
     router = inject(Router)
     authStore = inject(AuthStore);
     fs = inject(FirestoreService);
-    visitorService = inject(VisitorService)
+
     articlesVisible: boolean = false;
     bandsVisible: boolean = true;
 
@@ -56,14 +60,14 @@ export class HomeComponent implements OnInit {
         this.uiService.articlesVisible.subscribe((visible: boolean) => {
             this.articlesVisible = visible;
         })
-        this.visitorService.scrollToTopContent.subscribe(() => {
+        this.uiService.scrollToTopContent.subscribe(() => {
             this.scrollToTopContent();
         })
     }
 
     onScrollToTop() {
         const targetElement = this.top.nativeElement
-        targetElement.scrollIntoView({ behavior: 'smooth' })
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
 
     scrollToTopContent() {

@@ -1,4 +1,4 @@
-<div class="visitor-component-container">
+<div class="visitor-component">
     <div class="article">
         @if(uiStore.article() && uiStore.article().date) {
         <div class="article-date">
@@ -15,20 +15,6 @@
         </div>
         }
 
-        <!-- @if(uiStore.article()) {
-        <div class="bandmembers">
-            @for(bandmember of uiStore.article().bandmembers; track bandmember) {
-            <div class="bandmember">
-                <div class="name">{{bandmember.name}}</div>
-                <div class="instruments">
-                    @for(instrument of bandmember.instruments;track istrument){
-                    <div class="instrument">{{instrument}}</div>
-                    }
-                </div>
-            </div>
-            }
-        </div>
-        } -->
         @if(uiStore.article() && uiStore.article().oImage){
         <div class="o-image">
             <img [src]="uiStore.article().oImage.imagePath"
@@ -37,17 +23,8 @@
         </div>
         }
 
-        <!-- @if(uiStore.article() && uiStore.article().links){
-        <div class="links">
-            <div class="header">links</div>
-            @for(link of uiStore.article().links ;track link){
-            <div class="link">
-                <a [href]="link.url">{{link.title}}</a>
-            </div>
-            }
-        </div>
-        } -->
-
-
     </div>
+
+    <app-visitor-events></app-visitor-events>
+
 </div>
