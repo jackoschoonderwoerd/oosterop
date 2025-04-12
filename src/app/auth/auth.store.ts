@@ -36,7 +36,7 @@ export const AuthStore = signalStore(
     withMethods(
         (store, auth = inject(Auth), sb = inject(SnackbarService), router = inject(Router)) => ({
             async login(email: string, password: string) {
-                console.log(email)
+                // console.log(email)
                 // auth.setPersistence(browserLocalPersistence).then(() => {
                 signInWithEmailAndPassword(auth, email, password)
                     .then((userCredential: UserCredential) => {
@@ -46,7 +46,7 @@ export const AuthStore = signalStore(
                     })
                     .catch((err: AuthError) => {
                         sb.openSnackbar(`login failed due to: ${err.message}`)
-                        console.log(err.message)
+                        // console.log(err.message)
                         patchState(store, { isLoggedIn: false })
                     })
             },

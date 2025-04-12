@@ -52,8 +52,8 @@ export class NewsPrimaryComponent implements OnInit {
 
     ngOnInit(): void {
         this.initForm();
-        this.newsService.articleActivated.subscribe((article: Article) => {
-            // console.log(article)
+        this.newsService.articleChanged.subscribe((article: Article) => {
+            // // console.log(article)
             if (article) {
                 this.articleId = article.id;
                 this.editmode = true;
@@ -98,7 +98,7 @@ export class NewsPrimaryComponent implements OnInit {
     addPrimary(article: Article) {
         this.fs.addDoc(`articles`, article)
             .then((docRef: DocumentReference) => {
-                // console.log(docRef.id)
+                // // console.log(docRef.id)
                 const articleId = docRef.id
                 this.articleId = docRef.id
                 this.sb.openSnackbar(`article added`)
@@ -115,11 +115,11 @@ export class NewsPrimaryComponent implements OnInit {
                 return promise
             })
             .then((article: Article) => {
-                console.log(article)
+                // console.log(article)
                 this.newsStore.setArticle(article)
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
@@ -135,13 +135,13 @@ export class NewsPrimaryComponent implements OnInit {
                 }, 1000);
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
 
     private resetPrimaryForm() {
-        console.log('resetPrimaryForm()');
+        // console.log('resetPrimaryForm()');
         setTimeout(() => {
             this.form.reset()
         }, 1000);

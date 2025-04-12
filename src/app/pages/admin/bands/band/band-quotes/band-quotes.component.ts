@@ -87,7 +87,7 @@ export class BandQuotesComponent implements OnInit {
             ...this.quoteForm.value,
             body: this.body
         }
-        console.log(quote)
+        // console.log(quote)
 
         if (!this.editmode) {
             this.addQuote(quote)
@@ -96,16 +96,16 @@ export class BandQuotesComponent implements OnInit {
         }
     }
     addQuote(quote: Review) {
-        console.log(this.path, quote)
+        // console.log(this.path, quote)
         this.fs.addElementToArray(this.path, 'quotes', quote)
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.textEditorService.passBodyToEditor('')
                 this.getQuotes();
                 this.quoteForm.reset();
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
@@ -119,11 +119,11 @@ export class BandQuotesComponent implements OnInit {
             if (res) {
                 this.fs.removeElementFromArray(this.path, 'quotes', this.quotes[index])
                     .then((res: any) => {
-                        console.log(res);
+                        // console.log(res);
                         this.getQuotes();
                     })
                     .catch((err: FirebaseError) => {
-                        console.log(err)
+                        // console.log(err)
                         this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                     })
             } else {
@@ -136,9 +136,9 @@ export class BandQuotesComponent implements OnInit {
         this.activeIndex = index;
         this.editmode = true;
         const quote: Review = this.quotes[index]
-        // console.log('quote: ', quote.visible)
-        // console.log('form value: ', this.quoteForm.controls['visible'].value)
-        // console.log('quotes at index', this.quotes[index])
+        // // console.log('quote: ', quote.visible)
+        // // console.log('form value: ', this.quoteForm.controls['visible'].value)
+        // // console.log('quotes at index', this.quotes[index])
         this.quoteForm.patchValue({
             publishedBy: quote.publishedBy ? quote.publishedBy : null,
             datePublished: quote.datePublished ? new Date(quote.datePublished.seconds * 1000) : null,
@@ -149,7 +149,7 @@ export class BandQuotesComponent implements OnInit {
         this.quoteForm.patchValue({
             visible: quote.visible
         })
-        // console.log('form value after patch: ', this.quoteForm.controls['visible'].value)
+        // // console.log('form value after patch: ', this.quoteForm.controls['visible'].value)
         this.textEditorService.passBodyToEditor(quote.body)
 
     }
@@ -158,14 +158,14 @@ export class BandQuotesComponent implements OnInit {
         this.quotes[this.activeIndex] = newQuote;
         this.fs.updateField(this.path, 'quotes', this.quotes)
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.getQuotes();
                 this.quoteForm.reset();
                 this.textEditorService.passBodyToEditor('');
                 this.editmode = false;
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }

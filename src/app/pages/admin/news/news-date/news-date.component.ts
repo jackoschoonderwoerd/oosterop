@@ -40,9 +40,9 @@ export class NewsDateComponent implements OnInit {
 
     ngOnInit(): void {
         this.initForm()
-        this.newsService.articleActivated.subscribe((article: Article) => {
+        this.newsService.articleChanged.subscribe((article: Article) => {
             this.article = article
-            // console.log(this.article)
+            // // console.log(this.article)
             if (this.article && this.article.date) {
                 this.patchForm(article.date)
             }
@@ -55,17 +55,17 @@ export class NewsDateComponent implements OnInit {
     }
 
     onDateChange(event: MatDatepickerInputEvent<Date>) {
-        console.log(event.value)
+        // console.log(event.value)
         const date: Date = event.value
         // return;
-        // console.log(this.form.value.date)
+        // // console.log(this.form.value.date)
         // const date = this.form.value.date
         this.fs.updateField(`articles/${this.article.id}`, 'date', date)
             .then((res: any) => {
                 this.sb.openSnackbar(`date updated`)
             })
             .catch((err: | FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
@@ -76,6 +76,6 @@ export class NewsDateComponent implements OnInit {
         })
     }
     // onDateChange(event: MatDatepickerInputEvent<Date>) {
-    //     console.log(event.value)
+    //     // console.log(event.value)
     // }
 }

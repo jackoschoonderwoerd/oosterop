@@ -67,10 +67,10 @@ export class VisitorBandConcertsComponent implements OnInit {
 
 
     ngOnInit(): void {
-        console.log('this.upcomingConcerts: ', this.upcomingConcerts)
-        console.log('visitor-band-concerts');
-        // console.log(this.band.id)
-        // console.log(this.concerts)
+        // console.log('this.upcomingConcerts: ', this.upcomingConcerts)
+        // console.log('visitor-band-concerts');
+        // // console.log(this.band.id)
+        // // console.log(this.concerts)
         const bandId = this.route.snapshot.paramMap.get('bandId')
         // this.visitorBandConcertsService.getConcerts(bandId)
 
@@ -79,25 +79,25 @@ export class VisitorBandConcertsComponent implements OnInit {
         //     this.upcomingConcerts = [];
         //     this.concerts = [];
         //     this.pastConcerts = [];
-        //     // console.log(bandId)
+        //     // // console.log(bandId)
         //     this.getConcerts(bandId)
         // })
         this.visitorBandConcertsService.upcomingConcerts.subscribe((upcomingConcerts: Concert[]) => {
             this.upcomingConcerts = upcomingConcerts;
-            console.log(this.upcomingConcerts)
+            // // console.log(this.upcomingConcerts)
         })
         // this.splitConcertsPastNew(this.band.concerts)
 
     }
 
     getConcerts(bandId) {
-        // console.log(bandId)
+        // // console.log(bandId)
         // const promise = new Promise((resolve, reject) => {
         const path = `bands/${this.band.id}`
         this.fs.getFieldInDocument(path, 'concerts')
             .then((concerts: Concert[]) => {
                 // resolve(concerts)
-                // console.log(concerts)
+                // // console.log(concerts)
                 this.splitConcertsPastNew(concerts)
             })
         // })
@@ -105,7 +105,7 @@ export class VisitorBandConcertsComponent implements OnInit {
     }
 
     splitConcertsPastNew(concerts: Concert[]) {
-        // console.log(concerts)
+        // // console.log(concerts)
         concerts.forEach((concert: Concert) => {
             if (new Date(concert.date.seconds * 1000) > new Date) {
                 this.upcomingConcerts.push(concert)
@@ -113,8 +113,8 @@ export class VisitorBandConcertsComponent implements OnInit {
                 this.pastConcerts.push(concert)
             }
         })
-        // console.log('this.upcomingConcerts: ', this.upcomingConcerts)
-        // console.log('this.pastConcerts: ', this.pastConcerts)
+        // // console.log('this.upcomingConcerts: ', this.upcomingConcerts)
+        // // console.log('this.pastConcerts: ', this.pastConcerts)
     }
 
 

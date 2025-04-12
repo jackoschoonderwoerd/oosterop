@@ -41,6 +41,7 @@ export class VisitorBandsOverviewComponent {
 
     }
     onBandInfo(bandId: string) {
+
         this.uiService.bandIdSelected.emit(bandId)
         // this.bandSelected.emit()
         // this.router.navigate(['visitor-band', { bandId }])

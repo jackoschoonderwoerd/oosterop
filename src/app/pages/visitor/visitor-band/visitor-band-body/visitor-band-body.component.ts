@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { UiStore } from '../../../../services/ui.store';
 
 @Component({
     selector: 'app-visitor-band-body',
@@ -7,7 +8,5 @@ import { Component, Input, OnInit } from '@angular/core';
     styleUrl: './visitor-band-body.component.scss'
 })
 export class VisitorBandBodyComponent {
-    @Input() public body: string
-
-
+    uiStore = inject(UiStore)
 }

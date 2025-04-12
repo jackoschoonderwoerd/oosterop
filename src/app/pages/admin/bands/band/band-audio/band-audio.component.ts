@@ -108,12 +108,12 @@ export class BandAudioComponent implements OnInit {
     addOAudio(oAudio: OAudio) {
         this.fs.addElementToArray(this.path, 'oAudios', oAudio)
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.getOAudios();
                 this.oAudioForm.reset()
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
@@ -127,7 +127,7 @@ export class BandAudioComponent implements OnInit {
                     this.getOAudios();
                 })
                 .catch((err: FirebaseError) => {
-                    console.log(err)
+                    // console.log(err)
                     this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                 })
 
@@ -140,7 +140,7 @@ export class BandAudioComponent implements OnInit {
                     this.getOAudios();
                 })
                 .catch((err: FirebaseError) => {
-                    console.log(err)
+                    // console.log(err)
                     this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                 })
         }
@@ -150,13 +150,13 @@ export class BandAudioComponent implements OnInit {
     updateOAudios() {
         this.fs.updateField(this.path, 'oAudios', this.oAudios)
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.editmode = false;
                 this.oAudioForm.reset();
                 this.getOAudios();
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }

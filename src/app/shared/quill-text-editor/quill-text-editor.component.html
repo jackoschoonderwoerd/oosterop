@@ -1,4 +1,5 @@
 <quill-editor class="ql-editor"
+    (onEditorCreated)="onEditorCreated($event)"
     #quillEditor
     [modules]="quillModules"
     (onContentChanged)="onContentChanged($event.html)"></quill-editor>

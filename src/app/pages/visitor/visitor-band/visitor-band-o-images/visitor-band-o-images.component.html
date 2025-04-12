@@ -1,17 +1,26 @@
 <div class="images">
-    @if(isLoading) {
-    <!-- <div class="loading-container">
+    <!-- @if(isLoading) {
+    <div class="loading-container">
         <app-loading-indicator></app-loading-indicator>
-    </div> -->
+    </div>
+    } -->
+
+
+    @for(oImage of uiStore.oImages(); track oImage) {
+    <div class="image">
+        <img [src]="oImage.imagePath"
+            alt="">
+        <div class="photographer-name">&copy;{{oImage.photographerName}}</div>
+    </div>
     }
 
-    @for(oImage of oImages; track oImage) {
+    <!-- @for(oImage of oImages; track oImage) {
     <div class="image">
         <img [src]="oImage.imagePath"
             alt=""
             (load)="onLoad()">
         <div class="photographer-name">&copy;{{oImage.photographerName}}</div>
     </div>
-    }
+    } -->
 
 </div>

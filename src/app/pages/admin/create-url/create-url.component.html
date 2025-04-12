@@ -1,0 +1,21 @@
+<main>
+    <div class="header">
+        Select an artist to create a url.
+    </div>
+    <div class="buttons">
+        @for(band of bands; track band.id) {
+        <button mat-button
+            (click)="onBandSelected(band.id)">{{band.name}}</button>
+        }
+    </div>
+
+    @if(url !== '') {
+    <div class="url_button">
+        <div #createdUrl
+            class="url">{{url}}</div>
+        <button mat-button
+            [disabled]="!urlAvailable"
+            (click)="onCopyUrl(createdUrl)">copy url</button>
+    </div>
+    }
+</main>

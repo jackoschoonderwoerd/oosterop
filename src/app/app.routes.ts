@@ -151,6 +151,11 @@ export const routes: Routes = [
                 .then(c => c.VisitorContactComponent)
     },
     {
+        path: 'create-url', loadComponent:
+            () => import('./pages/admin/create-url/create-url.component')
+                .then(c => c.CreateUrlComponent)
+    },
+    {
         path: '**', redirectTo: 'home', pathMatch: 'full'
     }
 ];

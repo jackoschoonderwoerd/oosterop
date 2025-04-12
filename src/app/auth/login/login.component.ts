@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         })
     }
     onSubmit() {
-        console.log(this.form.value)
+        // console.log(this.form.value)
         const formValue = this.form.value
         this.authStore.login(formValue.email, formValue.password);
     }

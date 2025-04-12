@@ -5,7 +5,7 @@
             <mat-panel-title>concerts</mat-panel-title>
 
         </mat-expansion-panel-header>
-        @for(concert of upcomingConcerts;track concert){
+        @for(concert of uiStore.upcomingConcerts();track concert){
         <div class="concert">
             <div class="date_eyes">
                 @if(authStore.isLoggedIn() && uiStore.showHidden()){

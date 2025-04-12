@@ -3,11 +3,11 @@
         <mat-panel-title style="color:white">line up</mat-panel-title>
     </mat-expansion-panel-header>
 
-    @for(bandMember of bandMembers;track bandMember){
+    @for(bandmember of uiStore.bandmembers();track bandmember){
     <div class="band-member">
-        <div class="band-member-name">{{bandMember.name}}</div>
+        <div class="band-member-name">{{bandmember.name}}</div>
         <div class="instruments">
-            @for(instrument of bandMember.instruments; track instrument) {
+            @for(instrument of bandmember.instruments; track instrument) {
             <div class="instrument">{{instrument}}</div>
             }
         </div>

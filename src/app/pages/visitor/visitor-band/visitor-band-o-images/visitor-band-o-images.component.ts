@@ -1,25 +1,29 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { OImage } from '../../../../shared/models/o_image.model';
-import { LoadingIndicatorComponent } from '../../../../shared/loading-indicator/loading-indicator.component';
+import { UiStore } from '../../../../services/ui.store';
+
 
 @Component({
     selector: 'app-visitor-band-o-images',
-    imports: [LoadingIndicatorComponent],
+    imports: [],
     templateUrl: './visitor-band-o-images.component.html',
     styleUrl: './visitor-band-o-images.component.scss'
 })
 export class VisitorBandOImagesComponent implements OnInit {
     @Input() public oImages: OImage[];
     isLoading: boolean = true
+    uiStore = inject(UiStore)
 
     ngOnInit(): void {
-        console.log(this.oImages)
+        // console.log(this.uiStore.oImages())
     }
 
-    onLoad() {
-        // console.log('loaded')
-        setTimeout(() => {
-            this.isLoading = false
-        }, 3000);
-    }
+
+
+    // onLoad() {
+    //     // // console.log('loaded')
+    //     setTimeout(() => {
+    //         this.isLoading = false
+    //     }, 3000);
+    // }
 }

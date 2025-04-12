@@ -1,6 +1,28 @@
 <main>
+    <div class="auth">
+        @if(authStore.isLoggedIn()){
+        <div (click)="onLogout()"
+            class="logout">
+            <button mat-icon-button>
+                <mat-icon>logout</mat-icon>
+            </button>
+        </div>
+        }
+        @if(!authStore.isLoggedIn()) {
+        <div routerLink="login"
+            class="login">
+            <button mat-icon-button>
+
+                <mat-icon>login</mat-icon>
+            </button>
+        </div>
+        }
+    </div>
     <div class="content">
         <div class="d-o">danielle oosterop</div>
         <div class="m-m">music management</div>
     </div>
+    @if(authStore.isLoggedIn()){
+    <div class="version">V 37</div>
+    }
 </main>

@@ -10,7 +10,7 @@ export class TextEditorService {
     constructor() { }
 
     passBodyToEditor(body) {
-        // console.log('text editor service')
+        // // console.log('text editor service')
         this.bodyChanged.emit(body);
     }
 

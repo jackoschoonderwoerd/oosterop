@@ -24,7 +24,7 @@
     </div>
     <div class="right">
         <app-add-image (filePathChanged)="filePathReady($event)"
-            [path]="path"></app-add-image>
+            [pathToFolder]="pathToFolder"></app-add-image>
         <div class="image">
             <img [src]="filePath"
                 alt="">

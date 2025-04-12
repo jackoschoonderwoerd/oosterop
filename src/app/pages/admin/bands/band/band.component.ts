@@ -32,7 +32,7 @@ export class BandComponent implements OnInit {
 
     ngOnInit(): void {
         this.bandId = this.route.snapshot.paramMap.get('bandId')
-        console.log(this.bandId)
+        // console.log(this.bandId)
         this.getBand()
             .subscribe((band: Band) => {
                 this.band = band;

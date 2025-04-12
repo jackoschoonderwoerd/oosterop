@@ -44,7 +44,7 @@ export class EditOImageComponent implements OnInit {
                 this.oImage = oImages[this.index]
                 this.patchForm(this.oImage)
             })
-        console.log(this.path, this.index);
+        // console.log(this.path, this.index);
     }
 
     initForm() {
@@ -54,7 +54,7 @@ export class EditOImageComponent implements OnInit {
     }
 
     getOImages() {
-        console.log(this.path)
+        // console.log(this.path)
         return this.fs.getFieldInDocument(this.path, 'oImages')
 
     }
@@ -64,7 +64,7 @@ export class EditOImageComponent implements OnInit {
         })
     }
     onUpdateOImage() {
-        console.log(this.oImageMetaDatForm.value)
+        // console.log(this.oImageMetaDatForm.value)
         const formValue: OImageMetaDateFormValue = this.oImageMetaDatForm.value;
         this.oImage.photographerName = formValue.photographerName;
         this.getOImages()
@@ -79,7 +79,7 @@ export class EditOImageComponent implements OnInit {
                 this.router.navigate(['band-images', { bandId: this.documentId }])
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }

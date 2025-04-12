@@ -7,6 +7,7 @@ import { Article } from '../../../../shared/models/article-models/ariticle.model
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { FirebaseError } from '@angular/fire/app';
 import { TextEditorService } from '../../../../services/text-editor.service';
+import { NewsStore } from '../news.store';
 
 @Component({
     selector: 'app-news-body',
@@ -25,15 +26,16 @@ export class NewsBodyComponent implements OnInit {
     article: Article;
     sb = inject(SnackbarService)
     textEditorService = inject(TextEditorService)
+    newsStore = inject(NewsStore)
 
     ngOnInit(): void {
-        this.newsService.articleActivated.subscribe((article: Article) => {
+        this.newsService.articleChanged.subscribe((article: Article) => {
             if (article) {
                 this.article = article;
-                // console.log(article)
                 if (this.article.body) {
-
-                    this.textEditorService.passBodyToEditor(article.body)
+                    setTimeout(() => {
+                        this.textEditorService.passBodyToEditor(article.body)
+                    }, 500);
                 } else {
 
                     this.textEditorService.passBodyToEditor('')
@@ -43,9 +45,9 @@ export class NewsBodyComponent implements OnInit {
     }
 
 
-    htmlChanged(e: any) {
-        this.body = e;
-        // console.log(this.body)
+    htmlChanged(html: string) {
+        this.body = html;
+        console.log(this.body)
     }
     onSubmitText() {
         this.fs.updateField(`articles/${this.article.id}`, 'body', this.body)
@@ -53,7 +55,7 @@ export class NewsBodyComponent implements OnInit {
                 this.sb.openSnackbar(`body updated`)
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }

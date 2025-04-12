@@ -44,12 +44,12 @@ export class BandMembersComponent implements OnInit {
             .then((bandMemberIds: string[]) => {
                 this.bandMemberIds = bandMemberIds;
                 this.getBandMembers()
-                console.log(this.bandMemberIds)
+                // console.log(this.bandMemberIds)
             })
     }
 
     getBandMembers() {
-        console.log('getBandMembers()')
+        // console.log('getBandMembers()')
         this.bandMemberIds.forEach((id: string) => {
             const path = `musicians/${id}`
             this.fs.getDoc(path)
@@ -62,11 +62,11 @@ export class BandMembersComponent implements OnInit {
 
     musicianIdSelected(musicianId: string) {
 
-        console.log(musicianId)
+        // console.log(musicianId)
         const path = `bands/${this.bandId}`
         this.fs.addElementToArray(path, 'bandMemberIds', musicianId)
             .then((res: any) => {
-                console.log(res)
+                // console.log(res)
                 this.getBandMemberIds()
                     .then((bandmemberIds: string[]) => {
                         this.bandMemberIds = bandmemberIds
@@ -76,7 +76,7 @@ export class BandMembersComponent implements OnInit {
             })
 
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
 
@@ -87,12 +87,12 @@ export class BandMembersComponent implements OnInit {
     }
 
     removeBandMember(memberId: string) {
-        console.log(memberId)
+        // console.log(memberId)
         return
         const path = `bands/${this.bandId}`
         this.fs.removeElementFromArray(path, 'bandMemberIds', memberId)
             .then((res: any) => {
-                console.log(res)
+                // console.log(res)
                 this.bandMembers = [];
                 this.getBandMemberIds()
                     .then((bandMemberIds: string[]) => {
@@ -102,7 +102,7 @@ export class BandMembersComponent implements OnInit {
                     })
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
 
@@ -126,7 +126,7 @@ export class BandMembersComponent implements OnInit {
             .then((res: any) => {
                 this.getBandMemberIds()
                     .then((bandMemberIds: string[]) => {
-                        console.log(bandMemberIds)
+                        // console.log(bandMemberIds)
                         this.sb.openSnackbar('band members array updated')
                         return bandMemberIds
                     })
@@ -136,7 +136,7 @@ export class BandMembersComponent implements OnInit {
                     })
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }

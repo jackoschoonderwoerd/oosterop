@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UiService } from '../../../services/ui.service';
 import { UiStore } from '../../../services/ui.store';
 import { VisitorBandComponent } from '../visitor-band/visitor-band.component';
@@ -51,9 +51,17 @@ export class HomeComponent implements OnInit {
 
     articlesVisible: boolean = false;
     bandsVisible: boolean = true;
+    route = inject(ActivatedRoute)
 
     ngOnInit(): void {
-
+        this.route.params.subscribe((params: any) => {
+            console.log(params)
+            console.log(params['bandId'])
+            const bandId = params['bandId']
+            if (bandId) {
+                this.uiService.getBand(bandId)
+            }
+        })
         this.uiService.bandsVisible.subscribe((visible: boolean) => {
             this.bandsVisible = visible
         })
@@ -62,16 +70,21 @@ export class HomeComponent implements OnInit {
         })
         this.uiService.scrollToTopContent.subscribe(() => {
             this.scrollToTopContent();
+            // this.onScrollToTop()
         })
     }
 
     onScrollToTop() {
+        // console.log('onScrollToTop')
         const targetElement = this.top.nativeElement
         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
 
     scrollToTopContent() {
+        // console.log('onScrollToTopContent')
         const targetElement = this.topContent.nativeElement
         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+
+
 }

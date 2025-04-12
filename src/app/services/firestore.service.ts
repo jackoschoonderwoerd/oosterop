@@ -129,7 +129,7 @@ export class FirestoreService {
         })
     }
     addElementToArray(pathToDocument: string, arrayName: string, value: object | string): Promise<void> {
-        // console.log(arrayName)
+        // // console.log(arrayName)
         const docRef = doc(this.firestore, pathToDocument);
         return updateDoc(docRef, {
             // spiritsArray: arrayUnion(spirit)
@@ -137,8 +137,8 @@ export class FirestoreService {
         })
     }
     addElementToArrayF(pathToDocument: string, arrayName: string, value: object): Promise<void> {
-        // console.log(pathToDocument)
-        // console.log(arrayName)
+        // // console.log(pathToDocument)
+        // // console.log(arrayName)
         const docRef = doc(this.firestore, pathToDocument);
         return setDoc(
             docRef,
@@ -172,7 +172,7 @@ export class FirestoreService {
             onSnapshot(docRef, (docSnapshots) => {
                 if (docSnapshots.exists()) {
                     const data = docSnapshots.data()
-                    // console.log('Field value', data[fieldName])
+                    // // console.log('Field value', data[fieldName])
                     resolve(data[fieldName])
                 }
             })

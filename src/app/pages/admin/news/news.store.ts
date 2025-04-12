@@ -3,16 +3,21 @@ import { signalStore, patchState, withMethods, withState } from "@ngrx/signals";
 import { Article } from "../../../shared/models/article-models/ariticle.model";
 import { inject } from "@angular/core";
 import { FirestoreService } from "../../../services/firestore.service";
+import { OImage } from "../../../shared/models/o_image.model";
 
 
 type NewsState = {
     activeArticle: Article;
     toShow: string;
+    newsOImage: OImage;
+    newsBody: string;
 
 }
 const initialState: NewsState = {
     activeArticle: null,
-    toShow: 'news'
+    toShow: 'news',
+    newsOImage: null,
+    newsBody: null
 
 }
 export const NewsStore = signalStore(
@@ -22,7 +27,7 @@ export const NewsStore = signalStore(
     withMethods(
         ((store) => ({
             setArticle(article: Article) {
-                console.log(article)
+                // console.log(article)
                 if (article) {
                     patchState(store, { activeArticle: article })
                 } else {
@@ -35,6 +40,14 @@ export const NewsStore = signalStore(
                 } else {
                     toShow === 'news'
                 }
+            },
+            setNewsOImage(newsOImage: OImage) {
+                // console.log(newsOImage)
+                patchState(store, { newsOImage })
+            },
+            setNewsBody(newsBody: string) {
+                // console.log(newsBody)
+                patchState(store, { newsBody })
             }
         }))
     ),

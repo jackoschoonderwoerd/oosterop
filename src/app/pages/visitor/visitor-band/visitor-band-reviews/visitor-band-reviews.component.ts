@@ -31,7 +31,7 @@ export class VisitorBandReviewsComponent implements OnInit {
     // reviews: Review[]
 
     ngOnInit(): void {
-        console.log(this.reviews)
+        // console.log(this.reviews)
         // this.bandId = this.route.snapshot.paramMap.get('bandId')
         // this.fs.getFieldInDocument(`bands/${this.bandId}`, 'reviews')
         //     .then((reviews: Review[]) => {

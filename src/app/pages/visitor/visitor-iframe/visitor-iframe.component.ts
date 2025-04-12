@@ -26,7 +26,11 @@ export class VisitorIframeComponent implements OnInit {
     onBack() {
         this.router.navigateByUrl(this.source)
     }
-    onIframeLoad() {
+    onIframeLoad(e) {
+        // console.log('onIframeLoad()', e)
         this.isLoading = false
+    }
+    onIframeError() {
+        // console.log('onIframeError()')
     }
 }

@@ -59,7 +59,7 @@ export class AddMusicianComponent implements OnInit {
         this.getBandName(this.bandId)
         this.bMService.changingBandmember.subscribe((bandmember: Musician) => {
             if (bandmember) {
-                console.log(bandmember)
+                // console.log(bandmember)
                 this.onClearForm();
                 this.editmode = true;
                 this.musicianId = bandmember.id;
@@ -149,7 +149,7 @@ export class AddMusicianComponent implements OnInit {
         const path = `musicians`
         this.fs.addDoc(path, { ...musician })
             .then((docRef: DocumentReference) => {
-                console.log(docRef.id)
+                // console.log(docRef.id)
                 // this.musiciansForm.reset();
                 this.onClearForm();
                 this.bMService.musicianUpdated.emit();
@@ -158,7 +158,7 @@ export class AddMusicianComponent implements OnInit {
                 // this.router.navigateByUrl('musicians')
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to ${err.message}`)
             })
     }
@@ -166,23 +166,23 @@ export class AddMusicianComponent implements OnInit {
     addmusicianIdToBandmemberIds(musicianId) {
         this.fs.addElementToArray(`bands/${this.bandId}`, 'bandMemberIds', musicianId)
             .then((res: any) => {
-                console.log(res)
+                // console.log(res)
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
 
     updateMusician(bandmember: Bandmember) {
         bandmember.id = this.bandmemberId;
-        console.log(bandmember);
+        // console.log(bandmember);
         const path = `musicians/${this.bandmemberId}`
-        console.log(path)
+        // console.log(path)
         // return;
         this.fs.setDoc(path, bandmember)
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.onClearForm()
                 this.musiciansForm.reset();
                 this.bMService.musicianUpdated.emit();
@@ -190,7 +190,7 @@ export class AddMusicianComponent implements OnInit {
                 // this.router.navigateByUrl('musicians')
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
@@ -222,7 +222,7 @@ export class AddMusicianComponent implements OnInit {
         //         .then((musicians: Musician[]) => {
         //             const x = musicians.find(musician => musician.name === newMusician.name)
 
-        //             console.log('X:', x)
+        //             // console.log('X:', x)
         //             if (x) {
         //                 this.confirmService.getConfirmation(
         //                     `A musician with this name already exists.

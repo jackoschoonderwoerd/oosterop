@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Band } from '../../../shared/models/band.model';
-import { Component, inject, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, inject, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Concert } from '../../../shared/models/concert.model';
 import { FirestoreService } from '../../../services/firestore.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -45,7 +45,7 @@ import { SnackbarService } from '../../../services/snackbar.service';
     templateUrl: './visitor-band.component.html',
     styleUrl: './visitor-band.component.scss'
 })
-export class VisitorBandComponent implements OnInit {
+export class VisitorBandComponent implements OnInit, AfterViewInit {
     fs = inject(FirestoreService)
     navigationService = inject(NavigationService)
     route = inject(ActivatedRoute)
@@ -66,39 +66,48 @@ export class VisitorBandComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.uiService.bandIdSelected.subscribe((bandId: string) => {
-            console.log(bandId);
-            this.showVisitorBandConcertsComponent = false;
-            this.getBand(bandId)
-            this.getConcerts(bandId)
-                .then((concerts: Concert[]) => {
-                    return this.getUpcomingConcerts(concerts)
-                })
-                .then((upcomingConcerts: Concert[]) => {
-                    this.upcomingConcerts = [];
-                    this.upcomingConcerts = upcomingConcerts
-                    if (this.upcomingConcerts.length > 0) {
-                        this.showVisitorBandConcertsComponent = true
-                    }
-                    setTimeout(() => {
-                        this.visitorBandConcertsService.upcomingConcerts.next(upcomingConcerts)
-                    }, 1000);
+        // this.uiService.bandIdSelected.subscribe((bandId: string) => {
+        //     this.showVisitorBandConcertsComponent = false;
+        //     this.getBand(bandId)
+        //     this.getConcerts(bandId)
+        //         .then((concerts: Concert[]) => {
+        //             return this.getUpcomingConcerts(concerts)
+        //         })
+        //         .then((upcomingConcerts: Concert[]) => {
+        //             // this.upcomingConcerts = [];
+        //             // this.upcomingConcerts = upcomingConcerts;
 
-                })
-        })
+        //             if (upcomingConcerts.length > 0) {
+        //                 this.uiStore.setUpcomingConcerts(upcomingConcerts)
+        //                 // this.showVisitorBandConcertsComponent = true
+        //             } else {
+        //                 this.uiStore.setUpcomingConcerts([])
+        //             }
+        //             setTimeout(() => {
+        //                 this.visitorBandConcertsService.upcomingConcerts.next(upcomingConcerts)
+        //             }, 1000);
+
+        //         })
+        // })
+    }
+    ngAfterViewInit(): void {
+        // this.uiService.visitorBandComponentReady.emit()
     }
 
 
 
     getBand(bandId: string) {
-        console.log('getBand()', bandId)
         const path = `bands/${bandId}`
         this.fs.getDoc(path).pipe(take(1)).subscribe((band: Band) => {
             if (band) {
                 this.band = band;
-                const bandMemberIds: string[] = band.bandMemberIds
-                this.getBandMembers(bandMemberIds);
+                this.getBandmembers(band.bandMemberIds)
+                    .then((bandmembers: Musician[]) => {
+                        // this.bandMembers = bandmembers
+                        this.uiStore.setBandMembers(bandmembers)
+                    })
                 this.uiStore.setBand(band)
+                this.uiStore.setOImages(band.oImages)
             } else {
                 this.fs.getFirstDocument(`bands`)
                     .subscribe((band: Band) => {
@@ -110,18 +119,24 @@ export class VisitorBandComponent implements OnInit {
 
         })
     }
-    getBandMembers(bandMemberIds: string[]) {
-        if (bandMemberIds) {
-            bandMemberIds.forEach((memberId: string) => {
-                this.bandMembers = [];
-                const path = `musicians/${memberId}`
-                this.fs.getDoc(path).pipe(take(1)).subscribe((bandMember: Musician) => {
-                    if (bandMember) {
-                        this.bandMembers.push(bandMember)
-                    }
+
+    getBandmembers(bandmemberIds) {
+        const bandmembers: Musician[] = []
+        const promise = new Promise((resolve, reject) => {
+            if (bandmemberIds) {
+                bandmemberIds.forEach((memberId: string) => {
+                    this.bandMembers = [];
+                    const path = `musicians/${memberId}`
+                    this.fs.getDoc(path).pipe(take(1)).subscribe((bandMember: Musician) => {
+                        if (bandMember) {
+                            bandmembers.push(bandMember)
+                        }
+                    })
                 })
-            })
-        }
+            }
+            resolve(bandmembers)
+        })
+        return promise
     }
 
     getConcerts(bandId) {

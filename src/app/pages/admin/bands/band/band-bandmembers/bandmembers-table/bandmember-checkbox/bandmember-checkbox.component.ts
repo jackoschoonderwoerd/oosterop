@@ -33,7 +33,7 @@ export class BandmemberCheckboxComponent implements OnInit {
 
         this.fs.getFieldInDocument(`bands/${this.bandId}`, 'bandMemberIds')
             .then((bandMemberIds: string[]) => {
-                // console.log(bandMemberIds)
+                // // console.log(bandMemberIds)
                 this.bandmemberIndex = bandMemberIds.findIndex(((bandmemberId: string) => {
                     return bandmemberId === this.musicianId
                 }))
@@ -44,15 +44,15 @@ export class BandmemberCheckboxComponent implements OnInit {
     }
     onCheckboxChange(e: MatCheckboxChange) {
         this.updatingBandmemberIds.emit()
-        console.log(e);
-        console.log(e.checked)
+        // console.log(e);
+        // console.log(e.checked)
         if (e.checked) {
-            console.log('add')
+            // console.log('add')
             this.addIdToBandmemberIds();
             this.bMService.bandMemberIdsChanged.emit();
 
         } else {
-            console.log('remove')
+            // console.log('remove')
             this.removeIdFromBandmemberIds();
             this.bMService.bandMemberIdsChanged.emit();
         }
@@ -65,7 +65,7 @@ export class BandmemberCheckboxComponent implements OnInit {
                 this.bMService.bandMemberIdsChanged.emit();
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
@@ -77,7 +77,7 @@ export class BandmemberCheckboxComponent implements OnInit {
                 this.bMService.bandMemberIdsChanged.emit();
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }

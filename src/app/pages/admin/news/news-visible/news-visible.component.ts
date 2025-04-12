@@ -31,8 +31,8 @@ export class NewsVisibleComponent implements OnInit {
 
     ngOnInit(): void {
         this.initForm();
-        this.newsService.articleActivated.subscribe((article: Article) => {
-            // console.log(article)
+        this.newsService.articleChanged.subscribe((article: Article) => {
+            // // console.log(article)
             this.article = article
             if (this.article && this.article.visible != undefined) {
                 this.patchForm(this.article.visible)
@@ -46,19 +46,19 @@ export class NewsVisibleComponent implements OnInit {
         })
     }
     patchForm(articleVisible: boolean) {
-        // console.log(articleVisible)
+        // // console.log(articleVisible)
         this.form.setValue({
             visible: articleVisible
         })
     }
     onCheckboxChange(event: MatCheckboxChange) {
-        // console.log(event.checked)
+        // // console.log(event.checked)
         this.fs.updateField(`articles/${this.article.id}`, 'visible', event.checked)
             .then((res: any) => {
                 this.sb.openSnackbar(`visibility updated`)
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
 

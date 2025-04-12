@@ -20,7 +20,7 @@ export class BandImagesComponent implements OnInit {
     oImages: OImage[] = [];
     route = inject(ActivatedRoute)
     bandId: string;
-    path: string;
+    pathToFolder: string;
     filePath: string;
     fs = inject(FirestoreService);
     sb = inject(SnackbarService);
@@ -34,41 +34,41 @@ export class BandImagesComponent implements OnInit {
 
     ngOnInit(): void {
         this.bandId = this.route.snapshot.paramMap.get('bandId')
-        console.log(this.bandId)
+        // console.log(this.bandId)
         this.documentId = this.bandId
-        this.path = `bands/${this.bandId}`
+        this.pathToFolder = `bands/${this.bandId}`
         this.getOImages();
 
     }
 
     getOImages() {
-        this.fs.getFieldInDocument(this.path, 'oImages')
+        this.fs.getFieldInDocument(this.pathToFolder, 'oImages')
             .then((oImages: OImage[]) => {
                 this.oImages = oImages
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
 
     filePathReady(fileData: any) {
-        console.log(fileData)
+        // console.log(fileData)
         const filePath = fileData.filePath
         const oImage: OImage = {
             imagePath: filePath,
             filename: fileData.filename,
             photographerName: null
         }
-        console.log(oImage)
-        this.fs.addElementToArray(this.path, 'oImages', oImage)
+        // console.log(oImage)
+        this.fs.addElementToArray(this.pathToFolder, 'oImages', oImage)
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.oImages = [];
                 this.getOImages();
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
 
@@ -89,18 +89,18 @@ export class BandImagesComponent implements OnInit {
 
                     const doomedOImage: OImage = this.oImages[index]
 
-                    const path = `${this.path}/${doomedOImage.filename}`
-                    this.removeFileFromStorage(path)
+                    const pathToFile = `${this.pathToFolder}/${doomedOImage.filename}`
+                    this.removeFileFromStorage(pathToFile)
                         .then((res: any) => {
-                            console.log(res);
+                            // console.log(res);
                             this.removeImagePathFromArray(doomedOImage)
                         })
                         .then((res: any) => {
-                            console.log(res)
+                            // console.log(res)
                             this.getOImages();
                         })
                         .catch((err: FirebaseError) => {
-                            console.log(err);
+                            // console.log(err);
                             this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                         })
                 } else {
@@ -111,14 +111,16 @@ export class BandImagesComponent implements OnInit {
     }
 
     removeFileFromStorage(path) {
-        console.log(path);
+        // console.log(path);
         return this.storage.deleteFile(path)
     }
 
     removeImagePathFromArray(doomedImage: OImage) {
-        return this.fs.removeElementFromArray(this.path, 'oImages', doomedImage)
+        return this.fs.removeElementFromArray(this.pathToFolder, 'oImages', doomedImage)
     }
     onCancel() {
         this.router.navigate(['band', { bandId: this.bandId }])
     }
 }
+// `David-Murray-4tet-by-Laurent-Elie-Badessi-FINAL_CROPPED_SML-2048x1441_900_X_900.jpeg`
+//     `David-Murray-4tet-by-Laurent-Elie-Badessi-FINAL_CROPPED_SML-2048x1441_900_X_900.jpeg`

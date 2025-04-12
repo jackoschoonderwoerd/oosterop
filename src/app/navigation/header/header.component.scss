@@ -10,10 +10,19 @@
     .visitor-menu {
         width: 100%;
         max-width: 500px;
-
+        display: flex;
         justify-content: space-between;
         align-items: center;
         margin: auto;
+        .arrow-back {
+            @media (max-width: 600px) {
+                flex-grow: 1;
+            }
+        }
+        .arrow-back,
+        .arrow-forward {
+            color: var(--o-snow);
+        }
         .small-screen {
             display: flex;
             align-items: center;

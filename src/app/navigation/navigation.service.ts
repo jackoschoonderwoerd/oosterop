@@ -34,19 +34,19 @@ export class NavigationService {
                     })
                     // remove duplicates
                     bandsByInitiatorArray = [...new Map(bandsByInitiatorArray.map(obj => [obj.initiator, obj])).values()];
-                    // console.log(this.bandsByInitiatorArray)
+                    // // console.log(this.bandsByInitiatorArray)
 
                     // add bands to initiator
 
                     bands.forEach((band: Band) => {
-                        // console.log(band)
+                        // // console.log(band)
                         bandsByInitiatorArray.forEach((bandsByInitator: BandsByInitiator, index) => {
                             if (band.initiator === bandsByInitator.initiator) {
                                 bandsByInitiatorArray[index].bands.push(band)
                             }
                         })
                     })
-                    // console.log(this.bandsByInitiatorArray)
+                    // // console.log(this.bandsByInitiatorArray)
                     resolve(bandsByInitiatorArray)
                 })
         })

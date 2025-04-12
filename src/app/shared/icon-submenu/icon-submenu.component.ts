@@ -19,19 +19,19 @@ export class IconSubmenuComponent implements OnInit {
 
     ngOnInit() {
         this.submenuItems = this.uiStore.subMenuItems();
-        console.log(this.submenuItems)
-        // console.log(this.bandId)
+        // console.log(this.submenuItems)
+        // // console.log(this.bandId)
         setTimeout(() => {
 
             if (this.uiStore.band()) {
                 this.bandId = this.uiStore.bandId()
-                console.log(this.bandId)
+                // console.log(this.bandId)
             }
         }, 1000);
     }
 
     onSubmenuSelected(subMenuItem: string) {
-        console.log(subMenuItem)
+        // console.log(subMenuItem)
         switch (subMenuItem) {
             case 'home':
                 this.router.navigate(['visitor-band', { bandId: this.bandId }]);

@@ -40,7 +40,7 @@ export class BandsComponent {
         this.fs.sortedCollection(path, 'name', 'asc')
             .subscribe((bands: Band[]) => {
                 // bands.forEach((band: Band) => {
-                //     console.log(band.concerts, band.name)
+                //     // console.log(band.concerts, band.name)
                 // })
                 this.bandsSubject.next(bands)
                 this.bands = bands
@@ -51,7 +51,7 @@ export class BandsComponent {
         const path = `bands`
         this.fs.sortedCollection(path, 'seqNr', 'asc')
             .subscribe((bands: Band[]) => {
-                console.log(bands.length)
+                // console.log(bands.length)
                 if (bands.length) {
                     this.bands = bands
                 } else {
@@ -84,11 +84,11 @@ export class BandsComponent {
                 const path = `bands/${id}`
                 this.fs.deleteDoc(path)
                     .then((res: any) => {
-                        console.log(res)
+                        // console.log(res)
                         this.getBands();
                     })
                     .catch((err: FirebaseError) => {
-                        console.log(err)
+                        // console.log(err)
                         this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                     })
             } else {

@@ -3,7 +3,7 @@
         <mat-panel-title>tour periods</mat-panel-title>
     </mat-expansion-panel-header>
     <div class="periods">
-        @for(period of tourPeriods;track period){
+        @for(period of uiStore.bandTourPeriods();track period){
 
         @if(period.visible || uiStore.showHidden()) {
         <div class="period">

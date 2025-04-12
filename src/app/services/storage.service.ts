@@ -58,7 +58,7 @@ export class StorageService {
             files.map(file => {
                 return new Promise((resolve, reject) => {
                     this.upload(folderName, file).then((downloadUrl: string) => {
-                        console.log(downloadUrl)
+                        // console.log(downloadUrl)
 
                         downloadUrls.push(downloadUrl)
                         resolve('')

@@ -20,6 +20,6 @@ export class VisitorBandTourPeriodsComponent {
     @Input() public tourPeriods: TourPeriod[]
 
     constructor() {
-        console.log(this.tourPeriods)
+        // console.log(this.tourPeriods)
     }
 }

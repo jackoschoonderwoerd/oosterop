@@ -4,7 +4,7 @@
     </mat-expansion-panel-header>
 
 
-    @for(link of links; track link) {
+    @for(link of uiStore.bandLinks(); track link) {
     <div class="link"
         (click)="onUrl(link.url)">
         <mat-icon>link</mat-icon>

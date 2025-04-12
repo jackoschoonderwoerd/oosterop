@@ -13,5 +13,6 @@
 }
 
 <iframe [src]="safeUrl"
-    (load)="onIframeLoad()"
+    (load)="onIframeLoad($event)"
+    (error)="onIframeError()"
     frameborder="0"></iframe>

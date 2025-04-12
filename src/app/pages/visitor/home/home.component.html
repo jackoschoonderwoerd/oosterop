@@ -2,7 +2,6 @@
     class="landing-page">
     <app-logo></app-logo>
 
-
     <div class="content"
         #topContent>
         @if(!uiStore.showNews()) {
@@ -14,12 +13,22 @@
         <app-visitor-news></app-visitor-news>
         }
         <div class="button-container">
-            <button mat-button
-                (click)="onScrollToTop()">top</button>
+            <button mat-icon-button
+                (click)="onScrollToTop()">
+                <mat-icon>arrow_upward</mat-icon>
+            </button>
         </div>
     </div>
 
-    <app-visitor-tour-periods></app-visitor-tour-periods>
+    <!-- <app-visitor-tour-periods></app-visitor-tour-periods> -->
+
     <app-bands-list></app-bands-list>
+    <div class="button-container">
+        <button mat-icon-button
+            (click)="onScrollToTop()">
+            <mat-icon>arrow_upward</mat-icon>
+        </button>
+
+    </div>
 
 </main>

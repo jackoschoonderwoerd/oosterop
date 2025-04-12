@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavigationService } from '../navigation.service';
-import { Router, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon'
 import { UiStore } from '../../services/ui.store';
 import { AuthStore } from '../../auth/auth.store';
@@ -15,6 +15,7 @@ import { Anouncement } from '../../shared/models/anouncement.model';
 import { VisitorBandsMenuComponent } from '../../pages/visitor/visitor-bands-menu/visitor-bands-menu.component';
 import { UiService } from '../../services/ui.service';
 import { Article } from '../../shared/models/article-models/ariticle.model';
+import { NavigationHistoryService } from '../navigation-history.service';
 
 interface BandsByInitiator {
     initiator: string;
@@ -28,8 +29,8 @@ interface BandsByInitiator {
         MatToolbarModule,
         RouterModule,
         MatIconModule,
-        MatMenuModule,
         MatButtonModule,
+        MatMenuModule,
     ],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
@@ -46,14 +47,19 @@ export class HeaderComponent implements OnInit {
     navigationService = inject(NavigationService);
     router = inject(Router);
     uiStore = inject(UiStore)
+    uiSercie = inject(UiService)
     authStore = inject(AuthStore);
     location = inject(Location);
-    uiService = inject(UiService)
+    uiService = inject(UiService);
+    // navigationHistoryService = inject(NavigationHistoryService)
+
+    private history: string[] = [];
+    private future: string[] = [];
 
 
     subMenuItems: string[] = []
     bandsByInitiatorArray: BandsByInitiator[] = [];
-    // bands$: Observable<Band[]>
+
 
     @Output() sidenavToggle = new EventEmitter<void>();
 
@@ -67,66 +73,51 @@ export class HeaderComponent implements OnInit {
                 this.bandsByInitiatorArray = bandsByInitiatorArray
             })
             .catch((err: any) => {
-                console.log(err);
+                // console.log(err);
             })
+        // this.uiSercie.navigationHistoryChanged.subscribe((currentUrl: string) => {
+
+        // this.navigationHistoryService.updateNavigationHistory(currentUrl)
+
+        // })
 
     }
-
-
 
 
     onToggleSidenav() {
-        console.log('toggle')
+        // console.log('toggle')
         this.sidenavToggle.emit();
     }
-    onLogout() {
-        this.authStore.logout();
-    }
+    // onLogout() {
+    //     this.authStore.logout();
+    // }
+
+
     goToPreviousPage() {
 
-        this.location.back();
+        // const prevUrl = this.navigationHistoryService.back();
+        // if (prevUrl) {
+        //     this.router.navigateByUrl(prevUrl);
+        // }
     }
     goToNextPage() {
-        this.location.forward();
+        // const nextUrl = this.navigationHistoryService.forward();
+        // if (nextUrl) {
+        //     this.router.navigateByUrl(nextUrl);
+        // }
     }
     toggleHidden() {
-        console.log(this.uiStore.showHidden())
+        // console.log(this.uiStore.showHidden())
         this.uiStore.setShowHidden(!this.uiStore.showHidden())
     }
 
     onHome() {
         this.uiStore.setHomeSelected(true)
-        this.fs.sortedCollection(`articles`, 'date', 'asc')
-            .subscribe((sortetArticles: Article[]) => {
-                this.uiStore.setArticle(sortetArticles[0])
-            })
+        // this.fs.sortedCollection(`articles`, 'date', 'asc')
+        //     .subscribe((sortetArticles: Article[]) => {
+        //         this.uiStore.setArticle(sortetArticles[0])
+        //     })
         this.router.navigateByUrl('home')
     }
-    // getBands() {
-    //     this.fs.sortedCollection('bands', 'seqNr', 'asc')
-    //         .pipe(take(1))
-    //         .subscribe((bands: Band[]) => {
-    //             this.bandsSubject.next(bands)
-    //             this.bands$ = this.bandsSubject.asObservable();
-    //         })
-    // }
-    // getAnouncements() {
-    //     this.fs.sortedCollection('anouncements', 'seqNr', 'asc')
-    //         .pipe(take(1))
-    //         .subscribe((anouncements: Anouncement[]) => {
-    //             this.anouncementsSubject.next(anouncements)
-    //             this.anouncements$ = this.anouncementsSubject.asObservable()
-    //         })
-    // }
 
-    // onBandSelected(bandId: string) {
-    //     console.log(bandId);
-    //     // return;
-    //     this.router.navigate(['visitor-band', { bandId }])
-    //     this.uiStore.setBandId(bandId)
-
-    // }
-    // onAnouncementSelected(anouncementId: string) {
-    //     this.router.navigate(['visitor-anouncement', { anouncementId }])
-    // }
 }

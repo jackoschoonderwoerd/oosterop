@@ -5,14 +5,11 @@
     </mat-expansion-panel-header>
     <div class="iframes">
 
-        @for(oAudio of oAudios; track oAudio) {
+        @for(oAudio of uiStore.bandOAudios() ;track oAudio) {
         @if(uiStore.showHidden() && authStore.isLoggedIn()){
 
         <app-visibility-eyes [visible]="oAudio.visible"></app-visibility-eyes>
         }
-
-
-
 
         @if(authStore.isLoggedIn() || oAudio.visble){
         <app-iframe [code]="oAudio.code"></app-iframe>

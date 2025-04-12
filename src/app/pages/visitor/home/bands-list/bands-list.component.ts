@@ -8,6 +8,7 @@ import { NgClass } from '@angular/common';
 import { UiService } from '../../../../services/ui.service';
 import { NewsStore } from '../../../admin/news/news.store';
 import { UiStore } from '../../../../services/ui.store';
+import { Subscription, take } from 'rxjs';
 
 
 
@@ -63,16 +64,22 @@ export class BandsListComponent implements OnInit {
         })
     }
 
-    onBand(bandId: string, index: number) {
-        console.log(bandId, index)
-        this.selectedBandIndex = index;
-
-        // this.lastSelectedBandIndex = index;
-        setTimeout(() => {
-            this.uiService.bandIdSelected.emit(bandId)
-        }, 0);
+    onBand(bandId: string, index: number, bandname: string) {
+        this.uiService.getBand(bandId)
         this.uiStore.setHomeSelected(false)
         this.uiService.scrollToTopContent.emit()
+        console.log('ready')
+        this.selectedBandIndex = index;
+        return
+        console.log(bandId, bandname)
+        // this.uiService.visitorBandComponentReady.subscribe(() => {
+        //     console.log('first time ready')
+        //     this.uiService.bandIdSelected.emit(bandId)
+        // })
+
+        this.uiService.bandIdSelected.emit(bandId)
+
+        // this.lastSelectedBandIndex = index;
         // this.bandSelected.emit()
         // this.router.navigate(['visitor-band', { bandId }])
     }

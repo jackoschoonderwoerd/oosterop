@@ -48,7 +48,7 @@ export class MusiciansComponent implements OnInit {
 
                         })
                         .catch((err: FirebaseError) => {
-                            console.log(err)
+                            // console.log(err)
                             this.sb.openSnackbar(`operation failed due to ${err.message}`)
                         })
                 } else {

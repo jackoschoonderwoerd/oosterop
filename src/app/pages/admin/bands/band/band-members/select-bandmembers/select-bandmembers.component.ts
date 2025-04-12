@@ -34,7 +34,7 @@ export class SelectBandmembersComponent implements OnInit {
         this.bandId = this.route.snapshot.paramMap.get('bandId');
         this.getBandMemberIds()
             .then((bandMemberIds: string[]) => {
-                console.log(bandMemberIds)
+                // console.log(bandMemberIds)
 
             })
         this.getMusicians()
@@ -58,13 +58,13 @@ export class SelectBandmembersComponent implements OnInit {
         return promise
     }
     onCheckboxClicked(e, musicianId) {
-        console.log(e)
+        // console.log(e)
         e.stopPropagation();
-        console.log(musicianId)
+        // console.log(musicianId)
     }
     getChecked(e: any, musicianId: string) {
 
-        // console.log(musicianId)
+        // // console.log(musicianId)
         return this.bandMemberIds.includes(musicianId)
         // return true
     }
@@ -78,12 +78,12 @@ export class SelectBandmembersComponent implements OnInit {
             .filter(checkbox => checkbox.checked)
             .map(checkbox => {
                 checkbox.value
-                console.log(checkbox.value)
+                // console.log(checkbox.value)
                 return checkbox.value
                 // this.selectedValues.push(checkbox.value)
             }))
             .then((data: any) => {
-                console.log(data);
+                // console.log(data);
                 this.selectedValues = data;
 
             })
@@ -91,7 +91,7 @@ export class SelectBandmembersComponent implements OnInit {
 
     }
     getBackgroundColor(musicianId: string) {
-        console.log(musicianId)
+        // console.log(musicianId)
         if (this.selectedValues && this.selectedValues.includes(musicianId)) {
             return "backgroundColor: yellow"
         } else {
@@ -105,9 +105,9 @@ export class SelectBandmembersComponent implements OnInit {
     //         .filter(checkbox => checkbox.checked)
     //         .map(checkbox => {
     //             checkbox.value
-    //             console.log(checkbox.value)
+    //             // console.log(checkbox.value)
     //             this.selectedValues.push(checkbox.value)
-    //             console.log(this.selectedValues)
+    //             // console.log(this.selectedValues)
     //         })
     // }
 }

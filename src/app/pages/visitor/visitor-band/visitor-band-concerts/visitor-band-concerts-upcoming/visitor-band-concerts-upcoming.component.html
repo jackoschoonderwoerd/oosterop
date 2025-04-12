@@ -1,5 +1,4 @@
-{{upcomingConcerts|json}}
-@for(concert of VBCService.upcomingConcerts$|async ;track concert){
+@for(concert of uiStore.upcomingConcerts();track concert){
 @if(concert.visible|| authStore.isLoggedIn()){
 <div class="concert">
     <div class="date_eyes">
@@ -26,3 +25,33 @@
 </div>
 }
 }
+
+
+<!-- {{upcomingConcerts|json}}
+@for(concert of VBCService.upcomingConcerts$|async ;track concert){
+@if(concert.visible|| authStore.isLoggedIn()){
+<div class="concert">
+    <div class="date_eyes">
+        @if(authStore.isLoggedIn() && uiStore.showHidden()){
+        <app-visibility-eyes [visible]="concert.visible"></app-visibility-eyes>
+        }
+        <div class="date">{{concert.date.seconds*1000|date}}</div>
+    </div>
+    @if(concert.venueUrl) {
+    <div class="venue-name-url"
+        style="cursor: poiter;"
+        (click)="onUrl(concert.venueUrl)">{{concert.venueName}}</div>
+    } @else {
+    <div class="venue-name">{{concert.venueName}}</div>
+    }
+    <div class="location">
+        @if(concert.city){
+        <div class="city">{{concert.city}}</div>
+        }
+        @if(concert.country){
+        <div class="coutry">{{concert.country}}</div>
+        }
+    </div>
+</div>
+}
+} -->

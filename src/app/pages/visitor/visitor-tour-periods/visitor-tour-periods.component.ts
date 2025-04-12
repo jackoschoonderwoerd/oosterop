@@ -56,7 +56,7 @@ export class VisitorTourPeriodsComponent implements OnInit {
             })
     }
     onInfo(bandId: string) {
-        console.log(bandId)
+        // console.log(bandId)
         this.router.navigate(['visitor-band', { bandId }])
     }
 }

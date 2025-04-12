@@ -1,57 +1,32 @@
 <main>
     <div #top></div>
-    <!-- <app-logo></app-logo> -->
-    <!-- <div class="name no-display-large">{{band?.name}}</div> -->
     <div class="band">
-        <div class="name no-display-small">{{band?.name}}</div>
+        <div class="name no-display-small">{{uiStore.bandname()}}</div>
 
-        @if(band?.oImages && band?.oImages.length > 0) {
-        <app-visitor-band-o-images [oImages]="band.oImages"></app-visitor-band-o-images>
+        @if(uiStore.oImages() && uiStore.oImages().length > 0) {
+        <app-visitor-band-o-images></app-visitor-band-o-images>
+        }
+        @if(uiStore.bandmembers() && uiStore.bandmembers().length > 0) {
+        <app-visitor-band-bandmembers></app-visitor-band-bandmembers>
+        }
+        @if(uiStore.bandBody() && uiStore.bandBody() !== '') {
+        <app-visitor-band-body></app-visitor-band-body>
         }
 
-        @if(bandMembers && bandMembers.length > 0) {
-        <app-visitor-band-bandmembers [bandMembers]="bandMembers"></app-visitor-band-bandmembers>
+        @if(uiStore.bandOAudios() && uiStore.bandOAudios().length > 0) {
+        <app-visitor-band-audio-video></app-visitor-band-audio-video>
         }
 
-
-
-        @if(band?.body && band?.body !== '') {
-        <app-visitor-band-body [body]="band.body"></app-visitor-band-body>
-
-
+        @if(uiStore.bandLinks() && uiStore.bandLinks().length > 0) {
+        <app-visitor-band-links></app-visitor-band-links>
         }
 
-        <!-- @if(band?.quotes && band.quotes.length > 0) {
-        <app-visitor-band-quotes [quotes]="band.quotes"></app-visitor-band-quotes>
-        } -->
-
-        <!-- {{upcomingConcerts|json}}
-        {{upcomingConcerts.length}} -->
-
-        @if(showVisitorBandConcertsComponent) {
-        <app-visitor-band-concerts [concerts]="band.concerts"
-            [upcomingConcerts]="upcomingConcerts"
-            [band]="band"></app-visitor-band-concerts>
-        }
-        <!--
-        @if(band?.reviews && band.reviews.length > 0){
-        <app-visitor-band-reviews [reviews]="band.reviews"></app-visitor-band-reviews>
-        } -->
-
-        @if(band?.oAudios && band.oAudios.length > 0) {
-        <app-visitor-band-audio-video [oAudios]="band.oAudios"></app-visitor-band-audio-video>
+        @if(uiStore.upcomingConcerts().length > 0) {
+        <app-visitor-band-concerts></app-visitor-band-concerts>
         }
 
-        @if(band?.links && band.links.length > 0) {
-        <app-visitor-band-links [links]="band.links"></app-visitor-band-links>
-        }
-        <!--
-        @if(band?.recordings && band.recordings.length > 0) {
-        <app-visitor-band-recordings [recordings]="band.recordings"></app-visitor-band-recordings>
-        } -->
-
-        @if(band?.tourPeriods && band.tourPeriods?.length > 0) {
-        <app-visitor-band-tour-periods [tourPeriods]="band.tourPeriods"></app-visitor-band-tour-periods>
+        @if(uiStore.bandTourPeriods() && uiStore.bandTourPeriods()?.length > 0) {
+        <app-visitor-band-tour-periods></app-visitor-band-tour-periods>
         }
     </div>
 

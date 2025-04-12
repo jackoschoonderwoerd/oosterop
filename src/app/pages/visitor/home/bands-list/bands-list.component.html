@@ -7,7 +7,7 @@
         @if(band.visible){
         <li class="band"
             [ngClass]="{'selected-list-item': index === selectedBandIndex && !uiStore.showNews()}"
-            (click)="onBand(band.id, index)">
+            (click)="onBand(band.id, index, band.name)">
             <div class="icon-container">
                 <mat-icon>info</mat-icon>
             </div>

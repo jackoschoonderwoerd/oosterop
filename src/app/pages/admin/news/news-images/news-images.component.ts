@@ -11,6 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { OImage } from '../../../../shared/models/o_image.model';
 import { StorageService } from '../../../../services/storage.service';
+import { NewsStore } from '../news.store';
+import { JsonPipe } from '@angular/common';
+import { ConfirmService } from '../../../../shared/confirm/confirm.service';
 
 @Component({
     selector: 'app-news-images',
@@ -19,13 +22,15 @@ import { StorageService } from '../../../../services/storage.service';
         ReactiveFormsModule,
         MatInput,
         MatButtonModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        JsonPipe
     ],
     templateUrl: './news-images.component.html',
     styleUrl: './news-images.component.scss'
 })
 export class NewsImagesComponent implements OnInit {
     @Input() header: string
+    @Input() oImage: OImage
     article: Article
     fs = inject(FirestoreService)
     sb = inject(SnackbarService)
@@ -35,13 +40,19 @@ export class NewsImagesComponent implements OnInit {
     form: FormGroup
     fb = inject(FormBuilder);
     storage = inject(StorageService)
+    newsStore = inject(NewsStore)
+    pathToFolder: string;
+    confirmService = inject(ConfirmService)
 
 
     ngOnInit(): void {
         this.initForm()
-        this.newsService.articleActivated.subscribe((article: Article) => {
+        this.newsService.articleChanged.subscribe((article: Article) => {
             if (article) {
                 this.article = article;
+                this.pathToFolder = `news/${article.id}`
+                console.log(article);
+                this.patchForm(article)
             }
             if (article && article.oImage) {
                 this.imagePath = article.oImage.imagePath
@@ -49,10 +60,22 @@ export class NewsImagesComponent implements OnInit {
         })
     }
 
-    filePathChanged(e) {
-        console.log(e)
-        this.imagePath = e.filePath;
-        this.filename = e.filename;
+    patchForm(article) {
+        if (article.oImage && article.oImage.photographerName) {
+            this.form.patchValue({
+                photographerName: article.oImage.photographerName
+            })
+        }
+    }
+
+    filePathChanged(imageData: any) {
+        const oImage: OImage = {
+            imagePath: imageData.filePath,
+            filename: imageData.filename
+        }
+        console.log(oImage)
+
+        this.onSubmitImage(oImage)
     }
 
     initForm() {
@@ -60,53 +83,68 @@ export class NewsImagesComponent implements OnInit {
             photographerName: new FormControl(null, [Validators.required])
         })
     }
-    onSubmitImage() {
-        const oImage: OImage = {
-            imagePath: this.imagePath,
-            photographerName: this.form.value.photographerName,
-            filename: this.filename
-        }
+
+    onSubmitImage(oImage: OImage) {
+        console.log(oImage)
         this.fs.updateField(`articles/${this.article.id}`, 'oImage', oImage)
             .then((res: any) => {
                 this.form.reset();
                 this.sb.openSnackbar(`oImage updated`)
+                this.newsService.getArticle(this.article.id)
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
 
-    onRemoveImage() {
-        console.log(this.article.oImage)
-
-        // return;
-        this.removeFromStorage()
+    onUpdatePhotographerName() {
+        const photographerName = this.form.value.photographerName;
+        const oImage: OImage = {
+            ...this.article.oImage,
+            photographerName
+        }
+        this.fs.updateField(`articles/${this.article.id}`, 'oImage', oImage)
             .then((res: any) => {
-                this.sb.openSnackbar(`imagefile removed from storage`)
-                this.imagePath = null;
-                return this.removeFromFirestore()
+                this.sb.openSnackbar(`photographer name updated`)
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
-        // .then((res: any) => {
-        //     this.sb.openSnackbar(`oImage removed from firestore`)
-        // })
-        // .catch((err: FirebaseError) => {
-        //     console.log(err);
-        //     this.sb.openSnackbar(`operation failed due to: ${err.message}`)
-        // })
     }
 
-    removeFromStorage() {
-        const path = `news/${this.article.oImage.filename}`
+    onRemoveImage(filename: string) {
+        this.confirmService.getConfirmation(filename)
+            .then((confirmation: boolean) => {
+                if (confirmation) {
+                    this.removeFromStorage()
+                        .then((res: any) => {
+                            this.sb.openSnackbar(`imagefile removed from storage`)
+                            this.imagePath = null;
+                            return this.removeFromFirestore()
+                        })
+                        .then(() => {
+
+                        })
+                        .catch((err: FirebaseError) => {
+                            // console.log(err);
+                            this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+                        })
+
+                } else {
+                    this.sb.openSnackbar(`operation aborted by user`)
+                }
+            })
+    }
+
+    private removeFromStorage() {
+        const path = `news/${this.article.id}/${this.article.oImage.filename}`
         return this.storage.deleteFile(path)
     }
 
-    removeFromFirestore() {
-        console.log('removing from firestore')
+    private removeFromFirestore() {
+        // console.log('removing from firestore')
         return this.fs.updateField(`articles/${this.article.id}`, 'oImage', null)
     }
 }

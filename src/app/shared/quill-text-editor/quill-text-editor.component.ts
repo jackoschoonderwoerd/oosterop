@@ -19,22 +19,23 @@ export class QuillTextEditorComponent implements OnInit, AfterViewInit {
     quillModules = {
         toolbar: [
             ['bold', 'italic', 'underline'],
-            ['blockquote', 'code-block'],
+            // ['blockquote', 'code-block'],
             [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            ['link', 'image', 'video', 'formula'],
+            ['link', 'image', 'video'],
             [{ list: 'ordered' }, { list: 'bullet' }],
             ['clean']
         ],
+
 
     };
 
     ngOnInit(): void {
         this.textEditorService.bodyChanged.subscribe((html: string) => {
-            // console.log(html)
+            // // console.log(html)
             const editorInstance = this.quillEditor.quillEditor;
             // const editorInstance = this.quillEditor.quillEditor;
             if (editorInstance) {
-                // console.log('editorInstance found')
+                // // console.log('editorInstance found')
                 editorInstance.clipboard.dangerouslyPasteHTML(html);
             }
         })
@@ -57,5 +58,21 @@ export class QuillTextEditorComponent implements OnInit, AfterViewInit {
             const html = ampersandedHtml.replaceAll('&nbsp;', ' ')
             this.htmlChanged.emit(html)
         }
+    }
+    onEditorCreated(quill: any) {
+        console.log(quill.keyboard.bindings[13])
+        quill.keyboard.bindings[13] = []; // Remove default Enter behavior
+
+        console.log(quill.keyboard.bindings[13])
+
+        quill.keyboard.addBinding({ key: 13 }, {
+            handler: (range: any) => {
+                const currentPosition = range.index;
+                quill.insertText(currentPosition, '\n'); // Inserts a soft break
+                quill.setSelection(currentPosition + 1, 0);
+            }
+        });
+        console.log(quill.keyboard.bindings[13])
+
     }
 }

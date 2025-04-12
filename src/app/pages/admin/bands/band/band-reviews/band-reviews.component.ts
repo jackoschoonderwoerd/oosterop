@@ -96,7 +96,7 @@ export class BandReviewsComponent implements OnInit {
             ...this.reviewForm.value,
             body: this.body
         }
-        console.log(review)
+        // console.log(review)
         const arrayName = review.type
         if (!this.editmode) {
             this.addReview(review)
@@ -109,13 +109,13 @@ export class BandReviewsComponent implements OnInit {
 
         this.fs.addElementToArray(this.path, 'reviews', review)
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.textEditorService.passBodyToEditor('')
                 this.getReviews();
                 this.reviewForm.reset();
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
@@ -132,11 +132,11 @@ export class BandReviewsComponent implements OnInit {
             if (res) {
                 this.fs.removeElementFromArray(this.path, 'reviews', this.reviews[index])
                     .then((res: any) => {
-                        console.log(res);
+                        // console.log(res);
                         this.getReviews();
                     })
                     .catch((err: FirebaseError) => {
-                        console.log(err)
+                        // console.log(err)
                         this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                     })
             } else {
@@ -162,14 +162,14 @@ export class BandReviewsComponent implements OnInit {
         this.reviews[this.activeIndex] = review;
         this.fs.updateField(this.path, 'reviews', this.reviews)
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.getReviews();
                 this.reviewForm.reset();
                 this.textEditorService.passBodyToEditor('');
                 this.editmode = false;
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }

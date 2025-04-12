@@ -39,7 +39,7 @@ export class VisitorBandsMenuComponent implements AfterViewInit {
                 this.bandsByInitiatorArray = bandsByInitiatorArray
             })
             .catch((err: any) => {
-                console.log(err);
+                // console.log(err);
             })
 
     }
@@ -48,14 +48,14 @@ export class VisitorBandsMenuComponent implements AfterViewInit {
     ngAfterViewInit(): void {
         this.cdr.detectChanges();
         // const menuButton = this.menuButton()
-        // console.log(this.menuButton)
-        // console.log(this.paragraph.nativeElement)
+        // // console.log(this.menuButton)
+        // // console.log(this.paragraph.nativeElement)
 
         if (this.menuButton) {
 
-            // console.log(typeof this.menuButton)
-            // console.log(this.menuButton._elementRef)
-            // console.log(this.menuButton._elementRef.nativeElement)
+            // // console.log(typeof this.menuButton)
+            // // console.log(this.menuButton._elementRef)
+            // // console.log(this.menuButton._elementRef.nativeElement)
             // this.menuButton._elementRef.nativeElement.click()
             // this.menuButton.nativeElement.click()
         }
@@ -64,10 +64,10 @@ export class VisitorBandsMenuComponent implements AfterViewInit {
 
 
     onButtonClick() {
-        console.log('clicked')
+        // console.log('clicked')
     }
     onMyButtnClick() {
-        console.log('my button clicked')
+        // console.log('my button clicked')
     }
 
     onBandSelected(bandId: string) {

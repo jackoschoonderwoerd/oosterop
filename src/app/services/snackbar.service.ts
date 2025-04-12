@@ -12,7 +12,7 @@ export class SnackbarService {
 
     openSnackbar(message: string) {
         this._snackBar.open(message, 'Close', {
-            duration: 3000,
+
             panelClass: ['mat-warn']
         })
     }

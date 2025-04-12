@@ -35,22 +35,32 @@ export class NewsComponent implements OnInit {
 
     newsStore = inject(NewsStore);
     newsService = inject(NewsService)
-
+    article: Article
     articles: Article[]
     fs = inject(FirestoreService);
+    editmode: boolean = false;
 
 
 
     ngOnInit(): void {
-        this.fs.collection(`articles`)
-            .subscribe((articles: Article[]) => {
-                this.articles = articles
-            })
+        this.newsService.articleChanged.subscribe((article: Article) => {
+            if (article) {
+                this.article = article;
+                this.editmode = true
+            } else {
+                this.editmode = false
+            }
+        })
+        // this.newsService.getArticle
+        // this.fs.collection(`articles`)
+        //     .subscribe((articles: Article[]) => {
+        //         this.articles = articles
+        //     })
     }
 
 
     onClearForms() {
-        console.log('onClearForm()')
+        // console.log('onClearForm()')
         this.newsStore.setArticle(null);
         this.newsService.activateArticle(null)
     }

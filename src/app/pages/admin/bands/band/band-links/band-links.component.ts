@@ -57,8 +57,8 @@ export class BandLinksComponent implements OnInit {
                 this.links = links
             })
             .catch((err: FirebaseError) => {
-                console.log(err),
-                    this.sb.openSnackbar(`operatio failed due to: ${err.message}`)
+                // console.log(err),
+                this.sb.openSnackbar(`operatio failed due to: ${err.message}`)
             })
     }
     initForm() {
@@ -88,7 +88,7 @@ export class BandLinksComponent implements OnInit {
     addLink(link) {
         this.fs.addElementToArray(this.path, 'links', link)
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.linkForm.reset();
                 this.getLinks();
             })
@@ -102,14 +102,14 @@ export class BandLinksComponent implements OnInit {
                 this.linkForm.reset();
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
 
     }
 
     onDelete(index) {
-        console.log(this.links)
+        // console.log(this.links)
         const dialogRef = this.dialog.open(ConfirmComponent, {
             data: {
                 doomedElement: this.links[index].title
@@ -118,13 +118,13 @@ export class BandLinksComponent implements OnInit {
         dialogRef.afterClosed().subscribe((res: boolean) => {
             if (res) {
                 this.links.splice(index, 1);
-                console.log(this.links)
+                // console.log(this.links)
                 this.fs.updateField(this.path, 'links', this.links)
                     .then((res: any) => {
                         this.getLinks()
                     })
                     .catch((err: FirebaseError) => {
-                        console.log(err)
+                        // console.log(err)
                         this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                     })
 

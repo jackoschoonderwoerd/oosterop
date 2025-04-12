@@ -1,7 +1,7 @@
 <div class="news-section">
     <div class="news-section-header">{{header}}</div>
     <app-quill-text-editor (htmlChanged)="htmlChanged($event)"
-        [initialHtml]="body"></app-quill-text-editor>
+        [initialHtml]="newsStore.newsBody()"></app-quill-text-editor>
     <button mat-raised-button
         color="primary"
         (click)="onSubmitText()">submit text</button>

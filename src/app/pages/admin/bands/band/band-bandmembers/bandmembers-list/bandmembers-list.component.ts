@@ -51,7 +51,7 @@ export class BandmembersListComponent implements OnInit {
                 this.getBandmembersAsync(bandmemberIds)
             })
         this.bMService.bandMemberIdsChanged.subscribe(() => {
-            console.log('bandmemberChanged')
+            // console.log('bandmemberChanged')
             this.getBandmemberIds()
                 .then((bandmemberIds: string[]) => {
                     this.getBandmembersAsync(bandmemberIds)
@@ -59,7 +59,7 @@ export class BandmembersListComponent implements OnInit {
         })
         this.bMService.musiciansChanged.subscribe(() => {
             setTimeout(() => {
-                console.log('bandmemberChanged')
+                // console.log('bandmemberChanged')
                 this.getBandmemberIds()
                     .then((bandmemberIds: string[]) => {
                         this.getBandmembersAsync(bandmemberIds)
@@ -76,16 +76,16 @@ export class BandmembersListComponent implements OnInit {
             const bandName = await this.bMService.getBandName(this.bandId);
             this.bandNameSubject.next(bandName)
         } catch (error) {
-            console.log(`error getting band name:, ${error}`)
+            // console.log(`error getting band name:, ${error}`)
         }
         // this.bMService.getBandName(this.bandId)
     }
     async getBandmembersAsync(bandmemberIds: string[]) {
         if (bandmemberIds) {
-            // console.log(bandmemberIds)
+            // // console.log(bandmemberIds)
             try {
                 const bandmembers = await this.bMService.getBandMembers(bandmemberIds);
-                // console.log(bandmembers);
+                // // console.log(bandmembers);
                 this.bandmembersSubject.next(bandmembers)
                 this.updatingBandmembers = false;
             } catch (error) {
@@ -95,11 +95,11 @@ export class BandmembersListComponent implements OnInit {
     }
 
     onEdit(bandmember: Musician) {
-        console.log(bandmember)
+        // console.log(bandmember)
         this.bMService.changingBandmember.emit(bandmember)
     }
     onDelete(bandmember: Musician) {
-        console.log(bandmember)
+        // console.log(bandmember)
         const dialogRef = this.dialog.open(ConfirmComponent, {
             data: {
                 doomedElement: bandmember.name
@@ -116,7 +116,7 @@ export class BandmembersListComponent implements OnInit {
                             })
                     })
                     .catch((err: FirebaseError) => {
-                        console.log(err)
+                        // console.log(err)
                         this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                     })
             } else {
@@ -130,7 +130,7 @@ export class BandmembersListComponent implements OnInit {
         const promise = new Promise((resolve, reject) => {
             this.fs.getFieldInDocument(`bands/${this.bandId}`, 'bandMemberIds')
                 .then((bandMemberIds: string[]) => {
-                    // console.log(bandMemberIds)
+                    // // console.log(bandMemberIds)
                     resolve(bandMemberIds)
                 })
         })
@@ -143,11 +143,11 @@ export class BandmembersListComponent implements OnInit {
     onMove(index: number, direction: string) {
         this.getBandmemberIds()
             .then((ids: string[]) => {
-                console.log(ids);
+                // console.log(ids);
                 // return;
                 if (direction === 'up') {
                     const newIds = this.arrayService.move(ids, index, index - 1)
-                    console.log(newIds);
+                    // console.log(newIds);
                     // return
                     this.updateBandMemberIds(newIds)
                         .then((res: any) => {
@@ -155,7 +155,7 @@ export class BandmembersListComponent implements OnInit {
                             this.updatingBandmembers = false;
                         })
                         .catch((err: FirebaseError) => {
-                            console.log(err);
+                            // console.log(err);
                             this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                             setTimeout(() => {
                                 this.updatingBandmembers = false;
@@ -169,7 +169,7 @@ export class BandmembersListComponent implements OnInit {
                             this.updatingBandmembers = false;
                         })
                         .catch((err: FirebaseError) => {
-                            console.log(err);
+                            // console.log(err);
                             this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                             setTimeout(() => {
                                 this.updatingBandmembers = false;
@@ -190,7 +190,7 @@ export class BandmembersListComponent implements OnInit {
                     resolve('')
                 })
                 .catch((err: FirebaseError) => {
-                    console.log(err);
+                    // console.log(err);
                     this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                     reject(err.message)
                 })

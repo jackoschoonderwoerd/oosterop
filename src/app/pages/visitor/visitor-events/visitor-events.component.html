@@ -1,15 +1,14 @@
 <div class="visitor-component-container">
     <div class="top">
-        <div class="buttons">
+        <div class="period-buttons">
 
             <button [ngClass]="{ 'active-period': seeFutureEvents }"
                 (click)="onPeriodSeleceted('upcoming')">upcoming</button>
-        </div>
-        <div class="visitor-header">events</div>
-        <div class="buttons">
-            <button [ngClass]="{'active-period': !seeFutureEvents }"
-                (click)="onPeriodSeleceted('past')">past</button>
-
+            <button class="active-period">
+                events
+            </button>
+            <!-- <button [ngClass]="{'active-period': !seeFutureEvents }"
+                (click)="onPeriodSeleceted('past')">past</button> -->
         </div>
     </div>
 

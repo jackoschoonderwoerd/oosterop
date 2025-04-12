@@ -11,6 +11,6 @@ export class VisibilityEyesComponent implements OnInit {
     @Input() public visible: boolean
 
     ngOnInit(): void {
-        console.log(this.visible)
+        // console.log(this.visible)
     }
 }

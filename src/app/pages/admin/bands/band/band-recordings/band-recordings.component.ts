@@ -58,7 +58,7 @@ export class BandRecordingsComponent implements OnInit {
                 this.recordings = recordings
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
@@ -80,11 +80,11 @@ export class BandRecordingsComponent implements OnInit {
                 this.recordings.splice(index, 1)
                 this.fs.updateField(this.path, 'recordings', this.recordings)
                     .then((res: any) => {
-                        console.log(res);
+                        // console.log(res);
                         this.getRecordings()
                     })
                     .catch((err: FirebaseError) => {
-                        console.log(err)
+                        // console.log(err)
                         this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                     })
             } else {
@@ -106,12 +106,12 @@ export class BandRecordingsComponent implements OnInit {
     addRecording(recording: Recording) {
         this.fs.addElementToArray(this.path, 'recordings', recording)
             .then((res: any) => {
-                console.log(res)
+                // console.log(res)
                 this.getRecordings();
                 this.recordingForm.reset();
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
@@ -119,13 +119,13 @@ export class BandRecordingsComponent implements OnInit {
         this.recordings[this.activeIndex] = recording;
         this.fs.updateField(this.path, 'recordings', this.recordings)
             .then((res: any) => {
-                console.log(res)
+                // console.log(res)
                 this.getRecordings();
                 this.editmode = false;
                 this.recordingForm.reset()
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }

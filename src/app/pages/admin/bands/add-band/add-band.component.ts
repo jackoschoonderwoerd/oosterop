@@ -86,7 +86,7 @@ export class AddBandComponent implements OnInit {
             initiator: (formValue.initiator).trim().toLowerCase(),
             visible: formValue.visible
         }
-        console.log(band)
+        // console.log(band)
 
         if (!this.editmode) {
             this.addBand(band)
@@ -100,7 +100,7 @@ export class AddBandComponent implements OnInit {
         const path = `bands`
         this.fs.addDoc(path, band)
             .then((docRef: DocumentReference) => {
-                console.log(docRef.id);
+                // console.log(docRef.id);
                 this.navigationService.getBandsByInitiatorArray()
                 // const bandMenuItem: BandMenuItem = {
                 //     name: band.name,
@@ -110,17 +110,17 @@ export class AddBandComponent implements OnInit {
                 this.onCancel();
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
     updateBand(band: Band) {
-        console.log(band)
+        // console.log(band)
         const path = `bands/${this.bandId}`
         this.fs.updateField(path, 'name', band.name)
             .then((res: any) => console.log(res))
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`);
             })
             .then(() => {
@@ -130,7 +130,7 @@ export class AddBandComponent implements OnInit {
                 return this.fs.updateField(path, 'visible', band.visible);
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
             .then(() => {
@@ -139,7 +139,7 @@ export class AddBandComponent implements OnInit {
         this.fs.updateField(path, 'initiator', band.initiator)
             .then((res: any) => console.log(res))
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`);
             })
             .then(() => {
@@ -149,7 +149,7 @@ export class AddBandComponent implements OnInit {
                 return this.fs.updateField(path, 'visible', band.visible);
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
             .then(() => {
@@ -160,7 +160,7 @@ export class AddBandComponent implements OnInit {
                 this.sb.openSnackbar(`visibility updated`)
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
@@ -178,10 +178,10 @@ export class AddBandComponent implements OnInit {
     //     const path = `bandMenuItems`;
     //     this.fs.addDoc(path, bandMenuItem)
     //         .then((docRef: DocumentReference) => {
-    //             console.log(docRef.id)
+    //             // console.log(docRef.id)
     //         })
     //         .catch((err: FirebaseError) => {
-    //             console.log(err);
+    //             // console.log(err);
     //             this.sb.openSnackbar(`operation failed due to: ${err.message}`)
     //         })
     // }

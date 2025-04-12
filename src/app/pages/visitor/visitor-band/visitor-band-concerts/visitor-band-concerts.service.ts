@@ -33,7 +33,7 @@ export class VisitorBandConcertsService {
         const pastConcerts: Concert[] = [];
         const upcomingConcerts: Concert[] = []
         concerts.forEach((concert: Concert) => {
-            console.log(concert)
+            // console.log(concert)
             if (concert.date.seconds * 1000 < new Date().getTime()) {
                 pastConcerts.push(concert)
             } else {
@@ -43,7 +43,7 @@ export class VisitorBandConcertsService {
 
         this.pastConcertsSubject.next(pastConcerts)
         this.upcomingConcertsSubject.next(upcomingConcerts)
-        // console.log('pastConcerts: ', pastConcerts)
+        // // console.log('pastConcerts: ', pastConcerts)
 
     }
 

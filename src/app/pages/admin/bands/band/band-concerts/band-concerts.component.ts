@@ -63,7 +63,7 @@ export class BandConcertsComponent implements OnInit {
         this.fs.getFieldInDocument(this.path, 'concerts')
             .then((concerts: Concert[]) => {
 
-                console.log(concerts)
+                // console.log(concerts)
                 this.concerts = concerts
                 // this.concerts = concerts.sort((a: Concert, b: Concert) => a.date.seconds - b.date.seconds)
             })
@@ -80,7 +80,7 @@ export class BandConcertsComponent implements OnInit {
     }
     onAddOrUpdateConcert() {
         const concert: Concert = this.concertForm.value;
-        console.log(concert)
+        // console.log(concert)
         if (!this.editmode) {
             this.addConcert(concert)
         } else {
@@ -88,18 +88,18 @@ export class BandConcertsComponent implements OnInit {
         }
     }
     addConcert(concert: Concert) {
-        console.log(concert);
+        // console.log(concert);
         // return;
         this.fs.addElementToArray(this.path, 'concerts', concert)
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.concertForm.reset();
-                console.log(this.concertForm.controls['date'])
+                // console.log(this.concertForm.controls['date'])
                 this.getConcerts()
                 this.router.navigate(['band', { bandId: this.bandId }])
             })
             .catch((err: FirebaseError) => {
-                console.log(err)
+                // console.log(err)
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
@@ -107,7 +107,7 @@ export class BandConcertsComponent implements OnInit {
         this.editmode = true;
         this.activeIndex = index;
 
-        console.log(this.concerts[index].visible)
+        // console.log(this.concerts[index].visible)
 
         this.concertForm.patchValue({
             date: new Date(this.concerts[index].date.seconds * 1000),
@@ -129,13 +129,13 @@ export class BandConcertsComponent implements OnInit {
         this.concerts[this.activeIndex] = concert;
         this.fs.updateField(this.path, 'concerts', this.concerts)
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.concertForm.reset();
                 this.editmode = false;
                 this.getConcerts()
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`opertation failed due to: ${err.message}`)
             })
     }
@@ -151,11 +151,11 @@ export class BandConcertsComponent implements OnInit {
                 this.concerts.splice(index, 1)
                 this.fs.updateField(this.path, 'concerts', this.concerts)
                     .then((res: any) => {
-                        console.log(res);
+                        // console.log(res);
                         this.getConcerts()
                     })
                     .catch((err: FirebaseError) => {
-                        console.log(err);
+                        // console.log(err);
                         this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                     })
             } else {

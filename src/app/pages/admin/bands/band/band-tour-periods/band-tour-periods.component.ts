@@ -96,7 +96,7 @@ export class BandTourPeriodsComponent implements OnInit {
                 }
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`opertion failde due to: ${err.message}`)
             })
     }
@@ -116,13 +116,13 @@ export class BandTourPeriodsComponent implements OnInit {
             .pipe(take(1))
             .subscribe((band: Band) => {
                 if (band) {
-                    console.log(band)
+                    // console.log(band)
                 }
             })
     }
 
     onAddOrUpdateTourPeriod() {
-        console.log(this.form.value)
+        // console.log(this.form.value)
         const tourPeriod: TourPeriod = {
             ...this.form.value,
             bandId: this.bandId
@@ -138,7 +138,7 @@ export class BandTourPeriodsComponent implements OnInit {
         this.fs.addElementToArray(this.pathToBand, 'tourPeriods', tourPeriod)
             // this.fs.addDoc('tour-periods/', { ...tourPeriod })
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.form.patchValue({
                     startDate: null,
                     endDate: null,
@@ -150,13 +150,13 @@ export class BandTourPeriodsComponent implements OnInit {
 
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
     onEdit(index: number) {
         this.activeIndex = index;
-        console.log()
+        // console.log()
         this.editmode = true;
         this.form.patchValue({
             startDate: new Date(this.tourPeriods[index].startDate.seconds * 1000),
@@ -178,7 +178,7 @@ export class BandTourPeriodsComponent implements OnInit {
                         this.getTourPeriods()
                     })
                     .catch((err: FirebaseError) => {
-                        console.log(err);
+                        // console.log(err);
                         this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                     })
             } else {
@@ -188,11 +188,11 @@ export class BandTourPeriodsComponent implements OnInit {
     }
 
     updateTourPeriod(tourPeriod: TourPeriod) {
-        console.log(tourPeriod)
+        // console.log(tourPeriod)
         this.tourPeriods[this.activeIndex] = tourPeriod;
         this.fs.updateField(this.pathToBand, 'tourPeriods', this.tourPeriods)
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.getTourPeriods();
                 this.form.patchValue({
                     startDate: null,
@@ -202,7 +202,7 @@ export class BandTourPeriodsComponent implements OnInit {
                 this.editmode = false
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
 

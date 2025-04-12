@@ -92,14 +92,14 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.bandId = this.route.snapshot.paramMap.get('bandId');
         this.bMService.filterChanged.subscribe((bandmemberName: string) => {
-            console.log('filterChanged')
+            // console.log('filterChanged')
             this.populateFilter(bandmemberName);
         })
         this.bMService.musicianUpdated.subscribe(() => {
             setTimeout(() => {
 
-                console.log('hi there')
-                console.log(this.sort)
+                // console.log('hi there')
+                // console.log(this.sort)
                 this.dataSource.sort = this.sort;
             }, 1000);
         })
@@ -107,8 +107,8 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
         this.bMService.musiciansChanged.subscribe(() => {
             setTimeout(() => {
 
-                console.log('hi there')
-                console.log(this.sort)
+                // console.log('hi there')
+                // console.log(this.sort)
                 this.dataSource.sort = this.sort;
             }, 1000);
         })
@@ -117,7 +117,7 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
     ngAfterViewInit(): void {
 
         setTimeout(() => {
-            // console.log(this.sort)
+            // // console.log(this.sort)
             this.dataSource.sort = this.sort;
             // this.dataSource.sort.active = 'name'; // Default sorted column
             // this.dataSource.sort.direction = 'desc'; // Default sort direction (asc/desc)
@@ -126,16 +126,16 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
     }
 
     initDatasource() {
-        console.log(this.sort)
+        // console.log(this.sort)
         this.dataSource.sort = this.sort;
     }
 
     getMusicians() {
-        // console.log('getMusicians()')
+        // // console.log('getMusicians()')
         this.fs.collection(`musicians`)
             // .pipe(take(1))
             .subscribe((musicians: Musician[]) => {
-                // console.log(musicians)
+                // // console.log(musicians)
                 this.musicians = musicians;
                 this.dataSource = new MatTableDataSource(musicians)
             })
@@ -154,15 +154,15 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
 
     applyFilter(event: Event) {
         this.filterValue = (event.target as HTMLInputElement).value;
-        console.log(event)
+        // console.log(event)
         this.dataSource.filter = this.filterValue.trim().toLowerCase();
     }
     onEdit(musician: Musician) {
-        console.log(musician)
+        // console.log(musician)
         this.bMService.changingMusician.emit(musician);
     }
     onDelete(musicianId: string) {
-        // console.log(musicianId)
+        // // console.log(musicianId)
         this.checkEligibility(musicianId)
         return
 
@@ -171,7 +171,7 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
             this.getBandIdsMusicianActive(musicianId, bandIdsBandMemberIds)
                 .then((bandIdsMusisianActive: string[]) => {
                     if (bandIdsMusisianActive.length > 0) {
-                        console.log(bandIdsMusisianActive)
+                        // console.log(bandIdsMusisianActive)
                         this.getBandnamesById(bandIdsMusisianActive).then((bands: Band[]) => {
                             const bandNames = [];
                             let bandnamesString = ''
@@ -193,16 +193,16 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
                         this.confirmService.getConfirmation('this will permanently delete the musician form the db')
                             .then((res: boolean) => {
                                 if (res) {
-                                    console.log('DELETE MUSICIAN')
+                                    // console.log('DELETE MUSICIAN')
                                     this.fs.deleteDoc(`musicians/${musicianId}`)
                                         .then((res: any) => {
                                             this.sb.openSnackbar(`musician ${musicianId} succesfully deleted`)
                                             this.dataSource._updateChangeSubscription();
-                                            console.log(this.sort)
+                                            // console.log(this.sort)
                                             this.dataSource.sort = this.sort;
                                         })
                                         .catch((err: FirebaseError) => {
-                                            console.log(err)
+                                            // console.log(err)
                                             this.sb.openSnackbar(`operation failed due to: ${err.message}`);
                                         })
                                 }
@@ -223,7 +223,7 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
                     resolve(bandmemberIds)
                 })
                 .catch((err: FirebaseError) => {
-                    console.log(err)
+                    // console.log(err)
                     this.sb.openSnackbar(`operation failed due to: ${err.message}`)
                 })
         })
@@ -239,11 +239,11 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
                     bandIdsMusicianActive.push(bandIdsBandMemberId.bandId)
                 }
             })
-            console.log(bandIdsMusicianActive)
+            // console.log(bandIdsMusicianActive)
             resolve(bandIdsMusicianActive)
         })
         return promise;
-        // console.log(bandIdsBandMemberIds, musicianId)
+        // // console.log(bandIdsBandMemberIds, musicianId)
 
         // const promise = new Promise((resolve, reject) => {
 
@@ -252,10 +252,10 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
                 .pipe(take(1))
                 .subscribe((band: Band) => {
                     if (band) {
-                        console.log('musician active in: ', band.name)
+                        // console.log('musician active in: ', band.name)
                         // resolve(band.name)
                     } else {
-                        console.log('musician not participating in any band')
+                        // console.log('musician not participating in any band')
                         // resolve('musician not participating in any band')
                     }
 
@@ -286,20 +286,20 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
 
     // async getBandnamesFromBandId(musicianId: string, bandIdsBandMemberIds: BandIdBandMemberId[]) {
     //     const bandIdsMusicianActive: string[] = []
-    //     // console.log(bandIdsBandMemberIds, musicianId)
+    //     // // console.log(bandIdsBandMemberIds, musicianId)
     //     bandIdsBandMemberIds.forEach((bandIdsBandMemberId: BandIdBandMemberId) => {
     //         if (bandIdsBandMemberId.bandMemberId === musicianId) {
     //             bandIdsMusicianActive.push(bandIdsBandMemberId.bandId)
     //         }
     //     })
-    //     console.log(bandIdsMusicianActive)
+    //     // console.log(bandIdsMusicianActive)
 
     //     const promises = bandIdsBandMemberIds.map(async (bandId) => {
     //         const response = await (this.fs.getDoc(`bands/${bandId}`))
     //         return response
     //     })
     //     const results = await Promise.all(promises)
-    //     console.log(results)
+    //     // console.log(results)
     // }
 
 
@@ -315,9 +315,9 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
 
                             band.bandMemberIds.forEach((bandMemberId: string) => {
                                 // this.getBandMember(bandMemberId).then((bandMember: Musician) => {
-                                // console.log('member name: ', bandMember.name)
-                                // console.log('band name: ', band.name)
-                                // console.log('-----')
+                                // // console.log('member name: ', bandMember.name)
+                                // // console.log('band name: ', band.name)
+                                // // console.log('-----')
                                 // })
                                 const bandIdBandMemberId: BandIdBandMemberId = {
                                     bandId: band.id,
@@ -373,9 +373,9 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
                             bandIdsMusicianIds.push(bandIdMusicianId)
                             resolve(bandIdMusicianId)
                         })
-                        // console.log(bandIdsMusicianIds)
+                        // // console.log(bandIdsMusicianIds)
                     }
-                    // console.log(bandIdsMusicianIds)
+                    // // console.log(bandIdsMusicianIds)
                     // resolve(bandIdsMusicianIds)
                 })
 
@@ -396,7 +396,7 @@ export class BandmembersTableComponent implements OnInit, AfterViewInit {
         this.dataSource.filter = null;
     }
     updatingBandmemberIds() {
-        console.log('updating')
+        // console.log('updating')
         this.updatingBandmembers = true;
     }
 

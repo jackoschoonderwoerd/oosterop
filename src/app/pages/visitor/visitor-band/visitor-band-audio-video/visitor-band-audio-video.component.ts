@@ -22,7 +22,7 @@ import { AuthStore } from '../../../../auth/auth.store';
 })
 export class VisitorBandAudioVideoComponent {
 
-    @Input() public oAudios: OAudio[];
+
     hrefs: string[] = [];
     sanitizer = inject(DomSanitizer);
     isLoading: boolean = true
@@ -38,7 +38,7 @@ export class VisitorBandAudioVideoComponent {
 
     countVisibleOAudios() {
         let counter: number = 0;
-        this.oAudios.forEach((oAudio: OAudio) => {
+        this.uiStore.bandOAudios().forEach((oAudio: OAudio) => {
             if (oAudio.visible) {
                 this.visibleOAudios++
             }

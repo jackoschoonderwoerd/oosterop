@@ -47,7 +47,7 @@ export class VisitorComponent implements OnInit {
         this.router.navigateByUrl('login')
     }
     onBandSelected(bandId: string) {
-        console.log(bandId)
+        // console.log(bandId)
         this.router.navigate(['visitor/visitor-band', bandId])
     }
 }

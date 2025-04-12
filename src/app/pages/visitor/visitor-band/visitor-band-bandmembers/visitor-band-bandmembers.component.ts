@@ -1,6 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Musician } from '../../../../shared/models/musician.model';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { FirestoreService } from '../../../../services/firestore.service';
+import { take } from 'rxjs';
+import { UiStore } from '../../../../services/ui.store';
 
 @Component({
     selector: 'app-visitor-band-bandmembers',
@@ -9,5 +12,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     styleUrl: './visitor-band-bandmembers.component.scss'
 })
 export class VisitorBandBandmembersComponent {
-    @Input() bandMembers: Musician[]
+    @Input() bandMemberIds: string[]
+    bandMembers: Musician[];
+    fs = inject(FirestoreService)
+    uiStore = inject(UiStore)
+
+
 }

@@ -51,11 +51,11 @@ export class BandBodyComponent implements OnInit {
     onUpdateBody() {
         this.fs.updateField(this.path, 'body', this.body)
             .then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 this.onCancel()
             })
             .catch((err: FirebaseError) => {
-                console.log(err);
+                // console.log(err);
                 this.sb.openSnackbar(`operation failed due to: ${err.message}`)
             })
     }
