@@ -47,27 +47,15 @@ export class SidenavComponent implements OnInit {
         this.closeSidenav.emit();
     }
     onBandSelected(bandId: string) {
+        this.router.navigateByUrl('home')
         this.uiService.getBand(bandId)
         this.uiStore.setHomeSelected(false)
         this.uiService.scrollToTopContent.emit()
-        // this.uiService.visitorBandComponentReady.subscribe(() => {
-        //     console.log(`visitorBandComponentReady`)
-        //     this.uiService.bandIdSelected.emit(bandId);
-        // })
-        // this.uiService.scrollToTopContent.emit();
-        // this.uiService.bandIdSelected.emit(bandId);
-        // this.router.navigateByUrl('home');
-        // this.uiService.bandsVisible.emit();
-        // this.uiStore.setHomeSelected(false);
         this.onClose()
     }
 
     onHome() {
         this.uiStore.setHomeSelected(true)
-        // this.fs.sortedCollection(`articles`, 'date', 'asc')
-        //     .subscribe((sortetArticles: Article[]) => {
-        //         this.uiStore.setArticle(sortetArticles[0])
-        //     })
         this.router.navigateByUrl('home')
         this.onClose()
     }
