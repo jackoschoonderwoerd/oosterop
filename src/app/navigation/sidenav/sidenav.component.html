@@ -3,7 +3,7 @@
         <button mat-button
             [matMenuTriggerFor]="bandsMenu">bands</button>
         <mat-menu #bandsMenu="matMenu">
-            @for(bandsByInitiator of bandsByInitiatorArray; track bandsByInitiator){
+            @for(bandsByInitiator of bandsByInitiatorArray; track $index){
             <!-- FOR INITIATORS WITH MORE THAN ONE BAND -->
             @if(bandsByInitiator.bands.length > 1){
             <button mat-menu-item

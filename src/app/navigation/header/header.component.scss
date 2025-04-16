@@ -81,6 +81,7 @@
             display: none;
         }
         .admin-menu-items {
+            margin-top: 7px;
             display: flex;
             gap: 1rem;
             .menu-item {
@@ -88,14 +89,7 @@
                     text-transform: uppercase;
                     font-size: 0.9rem;
                     color: yellow;
-                }
-            }
-        }
-        .logout,
-        .login {
-            button {
-                mat-icon {
-                    color: var(--o-coal);
+                    cursor: pointer;
                 }
             }
         }

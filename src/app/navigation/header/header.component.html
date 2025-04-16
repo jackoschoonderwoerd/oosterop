@@ -32,23 +32,7 @@
             (click)="goToNextPage()">arrow_forward</mat-icon>
         } -->
 
-        <!-- @if(authStore.isLoggedIn()){
-        <div (click)="onLogout()"
-            class="logout">
-            <button mat-icon-button>
-                <mat-icon>logout</mat-icon>
-            </button>
-        </div>
-        }
-        @if(!authStore.isLoggedIn()) {
-        <div routerLink="login"
-            class="login">
-            <button mat-icon-button>
 
-                <mat-icon>login</mat-icon>
-            </button>
-        </div>
-        } -->
     </div>
 
     <div class="admin-menu">
@@ -59,9 +43,10 @@
             <div class="menu-item"><a routerLink="create-url">create url</a></div>
             <div class="menu-item"><a routerLink="news">news</a></div>
             <div class="menu-item"><a routerLink="bands">bands</a></div>
+            <div mat-div
+                class="menu-item"
+                (click)="toggleHidden()"><a>{{uiStore.showHidden() ? 'no eyes' : 'eyes '}}</a> </div>
         </div>
-        <button mat-button
-            (click)="toggleHidden()">{{uiStore.showHidden() ? 'no eyes' : 'eyes '}}</button>
         }
 
 

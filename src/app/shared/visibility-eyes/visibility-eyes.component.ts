@@ -7,10 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
     templateUrl: './visibility-eyes.component.html',
     styleUrl: './visibility-eyes.component.scss'
 })
-export class VisibilityEyesComponent implements OnInit {
+export class VisibilityEyesComponent {
     @Input() public visible: boolean
-
-    ngOnInit(): void {
-        // console.log(this.visible)
-    }
 }

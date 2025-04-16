@@ -12,6 +12,7 @@ import { AuthStore } from './auth/auth.store';
 import { FirestoreService } from './services/firestore.service';
 import { Article } from './shared/models/article-models/ariticle.model';
 import { UiService } from './services/ui.service';
+import { VisibilityEyesComponent } from './shared/visibility-eyes/visibility-eyes.component';
 
 @Component({
     selector: 'app-root',
@@ -21,6 +22,7 @@ import { UiService } from './services/ui.service';
         SidenavComponent,
         HeaderComponent,
         FooterComponent,
+        VisibilityEyesComponent
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'

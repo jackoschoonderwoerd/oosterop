@@ -9,12 +9,14 @@ import { UiService } from '../../../../services/ui.service';
 import { NewsStore } from '../../../admin/news/news.store';
 import { UiStore } from '../../../../services/ui.store';
 import { Subscription, take } from 'rxjs';
+import { VisibilityEyesComponent } from '../../../../shared/visibility-eyes/visibility-eyes.component';
+import { AuthStore } from '../../../../auth/auth.store';
 
 
 
 @Component({
     selector: 'app-bands-list',
-    imports: [MatButtonModule, MatIconModule, NgClass],
+    imports: [MatButtonModule, MatIconModule, NgClass, VisibilityEyesComponent],
     templateUrl: './bands-list.component.html',
     styleUrl: './bands-list.component.scss'
 })
@@ -25,6 +27,7 @@ export class BandsListComponent implements OnInit {
 
     newStore = inject(NewsStore)
     uiStore = inject(UiStore);
+    authStore = inject(AuthStore)
 
     bands: Band[];
     articles: Article[];
@@ -68,20 +71,8 @@ export class BandsListComponent implements OnInit {
         this.uiService.getBand(bandId)
         this.uiStore.setHomeSelected(false)
         this.uiService.scrollToTopContent.emit()
-        console.log('ready')
         this.selectedBandIndex = index;
-        return
-        console.log(bandId, bandname)
-        // this.uiService.visitorBandComponentReady.subscribe(() => {
-        //     console.log('first time ready')
-        //     this.uiService.bandIdSelected.emit(bandId)
-        // })
 
-        this.uiService.bandIdSelected.emit(bandId)
-
-        // this.lastSelectedBandIndex = index;
-        // this.bandSelected.emit()
-        // this.router.navigate(['visitor-band', { bandId }])
     }
 
     onArticle(articleId: string, index: number) {

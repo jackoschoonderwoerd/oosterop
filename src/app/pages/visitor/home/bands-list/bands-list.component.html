@@ -1,13 +1,18 @@
 <div class="list-container">
 
-
-    @if(showBands|| uiStore.showHidden()) {
+    @if(showBands) {
     <ul class="bands">
         @for(band of bands; track band.id; let index = $index) {
-        @if(band.visible){
+
+        @if(band.visible || authStore.isLoggedIn()){
         <li class="band"
             [ngClass]="{'selected-list-item': index === selectedBandIndex && !uiStore.showNews()}"
             (click)="onBand(band.id, index, band.name)">
+            @if(authStore.isLoggedIn()){
+            <app-visibility-eyes [visible]="band.visible"></app-visibility-eyes>
+            }
+
+
             <div class="icon-container">
                 <mat-icon>info</mat-icon>
             </div>
