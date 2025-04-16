@@ -1,3 +1,5 @@
+login strato
+
 Host: ssh.strato.com
 username: 570624325.swh.strato-hosting.eu
 Password: Danielle@123456
