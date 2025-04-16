@@ -9,8 +9,7 @@ import { VisitorBandConcertsService } from '../visitor-band-concerts.service';
 @Component({
     selector: 'app-visitor-band-concerts-upcoming',
     imports: [
-        AsyncPipe,
-        JsonPipe,
+
         DatePipe,
         VisibilityEyesComponent
     ],

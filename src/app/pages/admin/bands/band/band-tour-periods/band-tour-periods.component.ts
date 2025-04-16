@@ -43,7 +43,6 @@ interface FormValue {
         MatIconModule,
         DatePipe,
         MatInput,
-        ConfirmComponent,
         MatCheckboxModule,
         VisibilityEyesComponent
     ],

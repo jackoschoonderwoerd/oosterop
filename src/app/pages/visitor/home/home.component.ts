@@ -33,7 +33,7 @@ import { VisitorEventsComponent } from '../visitor-events/visitor-events.compone
         RouterModule,
         VisitorBandComponent,
         VisitorNewsComponent,
-        VisitorTourPeriodsComponent,
+
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'

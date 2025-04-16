@@ -23,7 +23,6 @@ import { VisibilityEyesComponent } from '../../../../../shared/visibility-eyes/v
     selector: 'app-band-quotes',
     imports: [
         QuillTextEditorComponent,
-        ConfirmComponent,
         ReactiveFormsModule,
         MatButtonModule,
         MatFormFieldModule,

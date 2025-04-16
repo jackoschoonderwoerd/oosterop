@@ -21,8 +21,7 @@ import { ConfirmComponent } from '../../../../../../shared/confirm/confirm.compo
         MatIconModule,
         MatProgressSpinnerModule,
         MatButtonModule,
-        JsonPipe,
-        ConfirmComponent
+
     ],
     templateUrl: './bandmembers-list.component.html',
     styleUrl: './bandmembers-list.component.scss'

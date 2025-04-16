@@ -31,7 +31,6 @@ interface FormValue {
     selector: 'app-band-reviews',
     imports: [
         QuillTextEditorComponent,
-        ConfirmComponent,
         ReactiveFormsModule,
         MatButtonModule,
         MatFormFieldModule,

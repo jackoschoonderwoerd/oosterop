@@ -15,7 +15,6 @@ import { MatIconModule } from '@angular/material/icon';
         MatButtonModule,
         MusicianComponent,
         DatePipe,
-        JsonPipe,
         MatIconModule
     ],
     templateUrl: './band.component.html',

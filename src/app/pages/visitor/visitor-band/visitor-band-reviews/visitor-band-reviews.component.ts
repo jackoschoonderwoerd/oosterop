@@ -12,8 +12,7 @@ import { UiStore } from '../../../../services/ui.store';
 @Component({
     selector: 'app-visitor-band-reviews',
     imports: [
-        IconSubmenuComponent,
-        JsonPipe,
+
         MatExpansionModule,
         DatePipe,
         VisibilityEyesComponent

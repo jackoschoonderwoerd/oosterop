@@ -22,7 +22,6 @@ import { VisibilityEyesComponent } from './shared/visibility-eyes/visibility-eye
         SidenavComponent,
         HeaderComponent,
         FooterComponent,
-        VisibilityEyesComponent
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'

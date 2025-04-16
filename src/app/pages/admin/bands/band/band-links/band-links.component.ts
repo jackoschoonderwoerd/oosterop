@@ -26,7 +26,6 @@ interface LinksFormValue {
         MatInput,
         MatFormFieldModule,
         MatIconModule,
-        ConfirmComponent
     ],
     templateUrl: './band-links.component.html',
     styleUrl: './band-links.component.scss'

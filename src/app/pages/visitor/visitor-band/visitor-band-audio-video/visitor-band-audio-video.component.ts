@@ -15,7 +15,7 @@ import { AuthStore } from '../../../../auth/auth.store';
         IframeComponent,
         MatExpansionModule,
         VisibilityEyesComponent,
-        JsonPipe
+
     ],
     templateUrl: './visitor-band-audio-video.component.html',
     styleUrl: './visitor-band-audio-video.component.scss'

@@ -27,7 +27,6 @@ import { ArrayService } from '../../../../../services/array.service';
         MatInput,
         MatIconModule,
         MatCheckboxModule,
-        ConfirmComponent,
         VisibilityEyesComponent
     ],
     templateUrl: './band-audio.component.html',

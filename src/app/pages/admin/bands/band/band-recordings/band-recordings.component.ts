@@ -20,7 +20,6 @@ import { FirebaseError } from '@angular/fire/app';
         MatButtonModule,
         MatInput,
         MatIconModule,
-        ConfirmComponent
     ],
     templateUrl: './band-recordings.component.html',
     styleUrl: './band-recordings.component.scss'

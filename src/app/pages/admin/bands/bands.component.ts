@@ -16,7 +16,7 @@ import { WarningComponent } from '../../../shared/warning/warning.component';
 
 @Component({
     selector: 'app-bands',
-    imports: [MatButtonModule, MatIconModule, JsonPipe, ConfirmComponent, WarningComponent],
+    imports: [MatButtonModule, MatIconModule],
     templateUrl: './bands.component.html',
     styleUrl: './bands.component.scss'
 })

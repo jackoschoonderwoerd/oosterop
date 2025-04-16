@@ -23,7 +23,7 @@ import { ConfirmService } from '../../../../shared/confirm/confirm.service';
         MatInput,
         MatButtonModule,
         MatFormFieldModule,
-        JsonPipe
+
     ],
     templateUrl: './news-images.component.html',
     styleUrl: './news-images.component.scss'

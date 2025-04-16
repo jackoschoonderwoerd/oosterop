@@ -33,13 +33,12 @@ interface BandIdBandMemberId {
 @Component({
     selector: 'app-bandmembers-table',
     imports: [
-        AddMusicianComponent,
-        AsyncPipe,
+
+
         BandmemberCheckboxComponent,
-        BandmembersListComponent,
-        ConfirmComponent,
+
         FormsModule,
-        JsonPipe,
+
         MatButtonModule,
         MatCheckboxModule,
         MatFormFieldModule,
@@ -48,7 +47,6 @@ interface BandIdBandMemberId {
         MatProgressSpinnerModule,
         MatSortModule,
         MatTableModule,
-        WarningComponent
     ],
     templateUrl: './bandmembers-table.component.html',
     styleUrl: './bandmembers-table.component.scss'

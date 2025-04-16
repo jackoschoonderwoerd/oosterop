@@ -1,0 +1,5 @@
+Host: ssh.strato.com
+username: 570624325.swh.strato-hosting.eu
+Password: Danielle@123456
+Port: 22
+Quickconnect

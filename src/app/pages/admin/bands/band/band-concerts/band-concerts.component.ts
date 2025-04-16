@@ -28,11 +28,9 @@ import { VisibilityEyesComponent } from '../../../../../shared/visibility-eyes/v
         MatInput,
         MatDatepickerModule,
         MatNativeDateModule,
-        IconSubmenuComponent,
         DatePipe,
         MatCheckboxModule,
-        ConfirmComponent,
-        VisibilityEyesComponent
+
     ],
     templateUrl: './band-concerts.component.html',
     styleUrl: './band-concerts.component.scss'

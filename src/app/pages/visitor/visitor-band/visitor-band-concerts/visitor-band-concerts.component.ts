@@ -23,18 +23,16 @@ import { UiService } from '../../../../services/ui.service';
 @Component({
     selector: 'app-visitor-band-concerts',
     imports: [
-        IconSubmenuComponent,
         DatePipe,
-        JsonPipe,
+
         MatIconModule,
         MatButtonModule,
         DatePipe,
         MatExpansionModule,
         MatButtonToggleModule,
-        NgClass,
+
         VisibilityEyesComponent,
-        VisitorBandConcertsPastComponent,
-        VisitorBandConcertsUpcomingComponent,
+
         MatTabsModule
     ],
     templateUrl: './visitor-band-concerts.component.html',

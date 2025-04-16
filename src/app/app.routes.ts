@@ -156,6 +156,8 @@ export const routes: Routes = [
                 .then(c => c.CreateUrlComponent)
     },
     {
-        path: '**', redirectTo: 'home', pathMatch: 'full'
+        path: '**', loadComponent:
+            () => import('./pages/visitor/home/home.component')
+                .then(c => c.HomeComponent)
     }
 ];
