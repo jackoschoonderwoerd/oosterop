@@ -155,9 +155,10 @@ export const routes: Routes = [
             () => import('./pages/admin/create-url/create-url.component')
                 .then(c => c.CreateUrlComponent)
     },
-    {
-        path: '**', loadComponent:
-            () => import('./pages/visitor/home/home.component')
-                .then(c => c.HomeComponent)
-    }
+    // {
+    //     path: '**', loadComponent:
+    //         () => import('./pages/visitor/home/home.component')
+    //             .then(c => c.HomeComponent)
+    // },
+    { path: '**', redirectTo: 'home' }
 ];

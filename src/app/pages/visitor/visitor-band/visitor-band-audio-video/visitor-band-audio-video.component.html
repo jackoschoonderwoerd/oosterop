@@ -1,4 +1,4 @@
-@if(visibleOAudios > 0 || authStore.isLoggedIn()) {
+@if(visibleOAudios != 0 || authStore.isLoggedIn()) {
 <mat-expansion-panel>
     <mat-expansion-panel-header>
         <mat-panel-title>audio video </mat-panel-title>
@@ -11,8 +11,11 @@
         <app-visibility-eyes [visible]="oAudio.visible"></app-visibility-eyes>
         }
 
-        @if(authStore.isLoggedIn() || oAudio.visble){
-        <app-iframe [code]="oAudio.code"></app-iframe>
+        @if(oAudio.visible){
+        <div class="iframe-container">
+
+            <app-iframe [code]="oAudio.code"></app-iframe>
+        </div>
         }
 
         }

@@ -3,19 +3,17 @@ mat-expansion-panel {
     mat-expansion-panel-header {
         text-transform: uppercase;
     }
-    .concerts {
+    .iframes {
         display: flex;
         flex-direction: column;
-        gap: 0.2rem;
-        .concert {
-            padding: 0.2rem 0.5rem;
-            border: 1px solid var(--o-black);
-            .date {
-                font-weight: bold;
-            }
-            .location {
-                display: flex;
-                gap: 1rem;
+        gap: 0.5rem;
+        .iframe-container {
+            // border: 3px solid green;
+            display: flex;
+            justify-content: center;
+            app-iframe {
+                width: 100%;
+                margin: auto;
             }
         }
     }

@@ -13,6 +13,7 @@ import { FirestoreService } from './services/firestore.service';
 import { Article } from './shared/models/article-models/ariticle.model';
 import { UiService } from './services/ui.service';
 import { VisibilityEyesComponent } from './shared/visibility-eyes/visibility-eyes.component';
+import { filter } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -59,6 +60,17 @@ export class AppComponent implements OnInit {
                 // this.uiService.navigationHistoryChanged.emit(url)
             }
         })
+        this.router.events
+            .pipe(
+                filter(event => event instanceof NavigationEnd)
+            )
+            .subscribe((event: NavigationEnd) => {
+                console.log('Original url:', event.url);
+                console.log('Navigation ended at:', event.urlAfterRedirects);
+                // Do something with the URL
+            });
+        console.log(this.router.config)
+
     }
 
 
