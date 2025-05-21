@@ -27,9 +27,15 @@
                     }
                 </div>
                 }
-                <div class="date_venue-name">
+                <div class="date_venue-name-link">
                     <div class="date">{{concert.date.seconds*1000|date}}</div>
-                    <div class="venue-name">{{concert.venueName}}</div>
+                    <!-- <div class="venue-name"></div> -->
+                    <div class="venue-name-link">
+                        <a [href]="concert.venueUrl"
+                            target="_blank">
+                            <mat-icon class="link">link</mat-icon>&nbsp;<div class="venue-name"> {{concert.venueName}}</div>
+                        </a>
+                    </div>
                 </div>
                 <div class="location">
                     <div class="city">{{concert.city}}</div>

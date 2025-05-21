@@ -14,9 +14,14 @@
                 <div class="date">{{concert.date.seconds*1000|date}}</div>
             </div>
             @if(concert.venueUrl) {
-            <div class="venue-name-url"
-                style="cursor: poiter;"
-                (click)="onUrl(concert.venueUrl)">{{concert.venueName}}</div>
+            <div class="link_venue-name">
+                <a [href]="concert.venueUrl"
+                    target="_blank">
+                    <mat-icon class="link">link</mat-icon>
+                    <div class="venue-name">{{concert.venueName}}</div>
+                </a>
+                <!-- <div class="venue-name">{{concert.venueName}}</div> -->
+            </div>
             } @else {
             <div class="venue-name">{{concert.venueName}}</div>
             }

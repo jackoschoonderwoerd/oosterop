@@ -46,6 +46,21 @@
                     // flex-direction: column;
                     // gap: 0;
                 }
+                .date_venue-name-link {
+                    // border: 1px solid white;
+                    .venue-name-link {
+                        a {
+                            // border: 1px solid green;
+                            display: flex;
+                            justify-items: center;
+                            .link {
+                            }
+                            .venue-name {
+                                margin-top: 2px;
+                            }
+                        }
+                    }
+                }
                 .location {
                     display: flex;
                     gap: 1rem;

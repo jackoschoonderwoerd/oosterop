@@ -114,6 +114,10 @@ export class VisitorBandConcertsComponent implements OnInit {
         // // console.log('this.upcomingConcerts: ', this.upcomingConcerts)
         // // console.log('this.pastConcerts: ', this.pastConcerts)
     }
+    onUrl(url: string) {
+        console.log(url);
+        this.router.navigateByUrl(url)
+    }
 
 
 

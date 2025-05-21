@@ -8,12 +8,13 @@
         @if(uiStore.article() !==null) {
         <div class="article-header">{{uiStore.article().header}}</div>
         }
-        @if(uiStore.article() && uiStore.article().body) {
+        <!-- @if(uiStore.article() && uiStore.article().body) { -->
+
         <div class="article-body"
-            [innerHTML]="uiStore.article().body">
+            [innerHTML]="uiStore.article()?.body">
 
         </div>
-        }
+        <!-- } -->
 
         @if(uiStore.article() && uiStore.article().oImage){
         <div class="o-image">

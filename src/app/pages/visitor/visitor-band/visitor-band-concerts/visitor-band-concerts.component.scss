@@ -28,6 +28,16 @@
                     font-weight: bold;
                 }
             }
+            .link_venue-name {
+                a {
+                    display: flex;
+                    gap: 1rem;
+                    // border: 1px solid white;
+                    .venue-name {
+                        margin-top: 2px;
+                    }
+                }
+            }
             .location {
                 display: flex;
                 gap: 1rem;
