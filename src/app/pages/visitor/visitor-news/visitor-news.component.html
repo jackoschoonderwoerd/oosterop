@@ -1,28 +1,31 @@
 <div class="visitor-component">
     <div class="article">
-        @if(uiStore.article() && uiStore.article().date) {
-        <div class="article-date">
-            {{uiStore.article().date.seconds*1000|date}}
-        </div>
-        }
-        @if(uiStore.article() !==null) {
-        <div class="article-header">{{uiStore.article().header}}</div>
-        }
-        <!-- @if(uiStore.article() && uiStore.article().body) { -->
-
-        <div class="article-body"
-            [innerHTML]="uiStore.article()?.body">
-
-        </div>
-        <!-- } -->
-
         @if(uiStore.article() && uiStore.article().oImage){
         <div class="o-image">
             <img [src]="uiStore.article().oImage.imagePath"
                 alt="">
-            <div class="photographer-name">&copy;{{uiStore.article().oImage.photographerName}}</div>
+            <!-- <div class="photographer-name">&copy;{{uiStore.article().oImage.photographerName}}</div> -->
         </div>
         }
+        <div class="text">
+            @if(uiStore.article() && uiStore.article().date) {
+            <div class="article-date">
+                {{uiStore.article().date.seconds*1000|date}}
+            </div>
+            }
+            @if(uiStore.article() !==null) {
+            <div class="article-header">{{uiStore.article().header}}</div>
+            }
+            <!-- @if(uiStore.article() && uiStore.article().body) { -->
+
+            <div class="article-body"
+                [innerHTML]="uiStore.article()?.body">
+
+            </div>
+        </div>
+        <!-- } -->
+
+
 
     </div>
 
